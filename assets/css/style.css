@@ -251,14 +251,14 @@ h6 {
   animation: fadeIn 1.2s ease-out;
 }
 .nav_background {
-  background: #5833dc;
-  background: linear-gradient(90deg, #5833dc 0%, #5833dc 54%, #5833dc 100%);
+  background: #333edc;
+  background: linear-gradient(90deg, #3e33dc 0%, #3633dc 54%, #5833dc 100%);
 }
 .landing_background {
   min-height: 100vh;
   background: 
-    radial-gradient(at 20% 30%, rgba(138, 43, 226, 0.6) 0%, transparent 60%),
-    radial-gradient(at 80% 20%, rgba(255, 0, 128, 0.5) 0%, transparent 60%),
+    radial-gradient(at 20% 30%, rgba(43, 76, 226, 0.6) 0%, transparent 60%),
+    radial-gradient(at 80% 20%, rgba(92, 114, 236, 0.5) 0%, transparent 60%),
     radial-gradient(at 50% 80%, rgba(0, 128, 255, 0.5) 0%, transparent 70%),
     linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
   background-repeat: no-repeat;
