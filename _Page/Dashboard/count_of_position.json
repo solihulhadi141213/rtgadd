@@ -1,0 +1,12 @@
+[
+    { "jabatan": "Guru Bahasa Indonesia", "jumlah": 1600 },
+    { "jabatan": "Guru Agama Islam", "jumlah": 1500 },
+    { "jabatan": "Guru Agama Budha", "jumlah": 1200 },
+    { "jabatan": "Guru IPA", "jumlah": 1100 },
+    { "jabatan": "Guru Matematika", "jumlah": 1000 },
+    { "jabatan": "Guru IPS", "jumlah": 800 },
+    { "jabatan": "Guru Seni Rupa", "jumlah": 700 },
+    { "jabatan": "Guru Kimia", "jumlah": 500 },
+    { "jabatan": "Guru Bahasa Inggris", "jumlah": 400 },
+    { "jabatan": "Guru Biologi", "jumlah": 300 }
+]
