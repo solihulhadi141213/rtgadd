@@ -143,6 +143,9 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="card-footer">
+                            <small class="text text-grayis">Update : <?php echo date('d F Y'); ?></small>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -173,6 +176,9 @@
                                     </table>
                                 </div>
                             </div>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text text-grayis">Update : <?php echo date('d F Y'); ?></small>
                         </div>
                     </div>
                 </div>

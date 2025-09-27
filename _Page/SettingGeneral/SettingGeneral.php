@@ -185,7 +185,7 @@
                     <div class="card">
                         <div class="card-header">
                             <b class="card-title">
-                                <i class="bi bi-building"></i> Profil Sekolah
+                                <i class="bi bi-building"></i> Profil Lembaga
                             </b>
                         </div>
                         <div class="card-body">

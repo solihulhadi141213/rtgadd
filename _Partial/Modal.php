@@ -10,6 +10,7 @@
             "AksesEntitas"          => "_Page/AksesEntitas/ModalAksesEntitas.php",
             "Akses"                 => "_Page/Akses/ModalAkses.php",
             "SettingEmail"          => "_Page/SettingEmail/ModalSettingEmail.php",
+            "JabatanPerWilayah"     => "_Page/JabatanPerWilayah/ModalJabatanPerWilayah.php",
             "Aktivitas"             => "_Page/Aktivitas/ModalAktivitas.php",
             "Help"                  => "_Page/Help/ModalHelp.php"
         ];

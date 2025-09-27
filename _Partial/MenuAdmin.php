@@ -71,6 +71,24 @@
         </li>
         <li class="nav-heading">Fitur Lainnya</li>
         <li class="nav-item">
+            <a class="nav-link <?php if($PageMenu=="JabatanPerWilayah"||$PageMenu=="AbkPerSekolah"){echo "";}else{echo "collapsed";} ?>" data-bs-target="#components22-nav" data-bs-toggle="collapse" href="javascript:void(0);">
+                <i class="bi bi-database"></i>
+                <span>Database</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="components22-nav" class="nav-content collapse <?php if($PageMenu=="JabatanPerWilayah"||$PageMenu=="AbkPerSekolah"){echo "show";} ?>" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="index.php?Page=JabatanPerWilayah" class="<?php if($PageMenu=="JabatanPerWilayah"){echo "active";} ?>">
+                        <i class="bi bi-circle"></i><span>Jabatan Per Wilayah</span>
+                    </a>
+                </li> 
+                <li>
+                    <a href="index.php?Page=AbkPerSekolah" class="<?php if($PageMenu=="AbkPerSekolah"){echo "active";} ?>">
+                        <i class="bi bi-circle"></i><span>AKB Per Sekolah</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item">
             <a class="nav-link <?php if($PageMenu!=="Aktivitas"){echo "collapsed";} ?>" href="index.php?Page=Aktivitas">
                 <i class="bi bi-circle"></i>
                 <span>Log Aktivitas</span>

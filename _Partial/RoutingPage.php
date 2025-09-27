@@ -11,6 +11,7 @@
             "Akses"             =>  "_Page/Akses/Akses.php",
             "SettingGeneral"    =>  "_Page/SettingGeneral/SettingGeneral.php",
             "SettingEmail"      =>  "_Page/SettingEmail/SettingEmail.php",
+            "JabatanPerWilayah" =>  "_Page/JabatanPerWilayah/JabatanPerWilayah.php",
             "Aktivitas"         =>  "_Page/Aktivitas/Aktivitas.php",
             "Help"              =>  "_Page/Help/Help.php",
         ];
