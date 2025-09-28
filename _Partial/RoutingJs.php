@@ -13,6 +13,7 @@
             "Akses"             => "_Page/Akses/Akses.js",
             "SettingGeneral"    => "_Page/SettingGeneral/SettingGeneral.js",
             "SettingEmail"      => "_Page/SettingEmail/SettingEmail.js",
+            "Wilayah"           => "_Page/Wilayah/Wilayah.js",
             "JabatanPerWilayah" => "_Page/JabatanPerWilayah/JabatanPerWilayah.js",
             "Aktivitas"         => "_Page/Aktivitas/Aktivitas.js",
             "Help"              => "_Page/Help/Help.js"

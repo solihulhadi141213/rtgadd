@@ -1,0 +1,248 @@
+{
+  "data": [
+    {
+      "province": "Aceh",
+      "kode_provinsi": "id-ac",
+      "kebutuhan_guru": 1250,
+      "guru_tersedia": 980,
+      "kekurangan": 270
+    },
+    {
+      "province": "Sumatera Utara",
+      "kode_provinsi": "id-su",
+      "kebutuhan_guru": 3200,
+      "guru_tersedia": 2850,
+      "kekurangan": 350
+    },
+    {
+      "province": "Sumatera Barat",
+      "kode_provinsi": "id-sb",
+      "kebutuhan_guru": 1500,
+      "guru_tersedia": 1320,
+      "kekurangan": 180
+    },
+    {
+      "province": "Riau",
+      "kode_provinsi": "id-ri",
+      "kebutuhan_guru": 1800,
+      "guru_tersedia": 1560,
+      "kekurangan": 240
+    },
+    {
+      "province": "Jambi",
+      "kode_provinsi": "id-ja",
+      "kebutuhan_guru": 950,
+      "guru_tersedia": 820,
+      "kekurangan": 130
+    },
+    {
+      "province": "Sumatera Selatan",
+      "kode_provinsi": "id-sl",
+      "kebutuhan_guru": 2100,
+      "guru_tersedia": 1850,
+      "kekurangan": 250
+    },
+    {
+      "province": "Bengkulu",
+      "kode_provinsi": "id-be",
+      "kebutuhan_guru": 600,
+      "guru_tersedia": 520,
+      "kekurangan": 80
+    },
+    {
+      "province": "Lampung",
+      "kode_provinsi": "id-la",
+      "kebutuhan_guru": 1700,
+      "guru_tersedia": 1480,
+      "kekurangan": 220
+    },
+    {
+      "province": "Bangka Belitung",
+      "kode_provinsi": "id-bb",
+      "kebutuhan_guru": 400,
+      "guru_tersedia": 350,
+      "kekurangan": 50
+    },
+    {
+      "province": "Kepulauan Riau",
+      "kode_provinsi": "id-kr",
+      "kebutuhan_guru": 550,
+      "guru_tersedia": 480,
+      "kekurangan": 70
+    },
+    {
+      "province": "DKI Jakarta",
+      "kode_provinsi": "id-jk",
+      "kebutuhan_guru": 2800,
+      "guru_tersedia": 2750,
+      "kekurangan": 50
+    },
+    {
+      "province": "Jawa Barat",
+      "kode_provinsi": "id-jr",
+      "kebutuhan_guru": 8500,
+      "guru_tersedia": 7950,
+      "kekurangan": 550
+    },
+    {
+      "province": "Jawa Tengah",
+      "kode_provinsi": "id-jt",
+      "kebutuhan_guru": 7200,
+      "guru_tersedia": 6850,
+      "kekurangan": 350
+    },
+    {
+      "province": "DI Yogyakarta",
+      "kode_provinsi": "id-yo",
+      "kebutuhan_guru": 1200,
+      "guru_tersedia": 1150,
+      "kekurangan": 50
+    },
+    {
+      "province": "Jawa Timur",
+      "kode_provinsi": "id-ji",
+      "kebutuhan_guru": 7800,
+      "guru_tersedia": 7350,
+      "kekurangan": 450
+    },
+    {
+      "province": "Banten",
+      "kode_provinsi": "id-bt",
+      "kebutuhan_guru": 1900,
+      "guru_tersedia": 1720,
+      "kekurangan": 180
+    },
+    {
+      "province": "Bali",
+      "kode_provinsi": "id-ba",
+      "kebutuhan_guru": 1300,
+      "guru_tersedia": 1200,
+      "kekurangan": 100
+    },
+    {
+      "province": "Nusa Tenggara Barat",
+      "kode_provinsi": "id-nb",
+      "kebutuhan_guru": 1100,
+      "guru_tersedia": 950,
+      "kekurangan": 150
+    },
+    {
+      "province": "Nusa Tenggara Timur",
+      "kode_provinsi": "id-nt",
+      "kebutuhan_guru": 1400,
+      "guru_tersedia": 1150,
+      "kekurangan": 250
+    },
+    {
+      "province": "Kalimantan Barat",
+      "kode_provinsi": "id-kb",
+      "kebutuhan_guru": 1200,
+      "guru_tersedia": 980,
+      "kekurangan": 220
+    },
+    {
+      "province": "Kalimantan Tengah",
+      "kode_provinsi": "id-kt",
+      "kebutuhan_guru": 800,
+      "guru_tersedia": 650,
+      "kekurangan": 150
+    },
+    {
+      "province": "Kalimantan Selatan",
+      "kode_provinsi": "id-ks",
+      "kebutuhan_guru": 950,
+      "guru_tersedia": 820,
+      "kekurangan": 130
+    },
+    {
+      "province": "Kalimantan Timur",
+      "kode_provinsi": "id-ki",
+      "kebutuhan_guru": 1100,
+      "guru_tersedia": 950,
+      "kekurangan": 150
+    },
+    {
+      "province": "Kalimantan Utara",
+      "kode_provinsi": "id-ku",
+      "kebutuhan_guru": 300,
+      "guru_tersedia": 220,
+      "kekurangan": 80
+    },
+    {
+      "province": "Sulawesi Utara",
+      "kode_provinsi": "id-sw",
+      "kebutuhan_guru": 750,
+      "guru_tersedia": 650,
+      "kekurangan": 100
+    },
+    {
+      "province": "Sulawesi Tengah",
+      "kode_provinsi": "id-st",
+      "kebutuhan_guru": 850,
+      "guru_tersedia": 720,
+      "kekurangan": 130
+    },
+    {
+      "province": "Sulawesi Selatan",
+      "kode_provinsi": "id-sn",
+      "kebutuhan_guru": 2000,
+      "guru_tersedia": 1750,
+      "kekurangan": 250
+    },
+    {
+      "province": "Sulawesi Tenggara",
+      "kode_provinsi": "id-sg",
+      "kebutuhan_guru": 700,
+      "guru_tersedia": 580,
+      "kekurangan": 120
+    },
+    {
+      "province": "Gorontalo",
+      "kode_provinsi": "id-go",
+      "kebutuhan_guru": 450,
+      "guru_tersedia": 380,
+      "kekurangan": 70
+    },
+    {
+      "province": "Sulawesi Barat",
+      "kode_provinsi": "id-sr",
+      "kebutuhan_guru": 500,
+      "guru_tersedia": 420,
+      "kekurangan": 80
+    },
+    {
+      "province": "Maluku",
+      "kode_provinsi": "id-ma",
+      "kebutuhan_guru": 600,
+      "guru_tersedia": 480,
+      "kekurangan": 120
+    },
+    {
+      "province": "Maluku Utara",
+      "kode_provinsi": "id-mu",
+      "kebutuhan_guru": 400,
+      "guru_tersedia": 320,
+      "kekurangan": 80
+    },
+    {
+      "province": "Papua Barat",
+      "kode_provinsi": "id-pb",
+      "kebutuhan_guru": 350,
+      "guru_tersedia": 250,
+      "kekurangan": 100
+    },
+    {
+      "province": "Papua",
+      "kode_provinsi": "id-pa",
+      "kebutuhan_guru": 800,
+      "guru_tersedia": 550,
+      "kekurangan": 250
+    }
+  ],
+  "metadata": {
+    "tahun_data": 2024,
+    "sumber": "Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi",
+    "update_terakhir": "2024-01-15",
+    "keterangan": "Data kebutuhan guru berdasarkan analisis posisi dan rombongan belajar"
+  }
+}

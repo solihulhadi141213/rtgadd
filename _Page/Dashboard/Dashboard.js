@@ -94,6 +94,8 @@ function top_guru_kabupaten() {
     });
 }
 
+
+
 $(document).ready(function () {
     //Menampilkan Grafik
     loadPieOfPosition();
@@ -141,6 +143,8 @@ $(document).ready(function () {
             }]
         });
     });
+
+
 
 
     ShowDashboard();

@@ -102,6 +102,7 @@
                     <div id="indonesia-map">
                         <!-- Menampilkan Peta Disini -->
                     </div>
+                    <!-- <div id="container" style="height: 600px; min-width: 400px"></div> -->
                 </div>
                 <div class="card-footer">
                     <small class="text text-grayis">Update : <?php echo date('d F Y'); ?></small>
