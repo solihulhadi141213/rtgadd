@@ -9,6 +9,7 @@
             "AksesFitur"            => "_Page/AksesFitur/ModalAksesFitur.php",
             "AksesEntitas"          => "_Page/AksesEntitas/ModalAksesEntitas.php",
             "Akses"                 => "_Page/Akses/ModalAkses.php",
+            "Client"                => "_Page/Client/ModalClient.php",
             "SettingEmail"          => "_Page/SettingEmail/ModalSettingEmail.php",
             "Wilayah"               => "_Page/Wilayah/ModalWilayah.php",
             "JabatanPerWilayah"     => "_Page/JabatanPerWilayah/ModalJabatanPerWilayah.php",

@@ -9,6 +9,7 @@
             "AksesFitur"        =>  "_Page/AksesFitur/AksesFitur.php",
             "AksesEntitas"      =>  "_Page/AksesEntitas/AksesEntitas.php",
             "Akses"             =>  "_Page/Akses/Akses.php",
+            "Client"            =>  "_Page/Client/Client.php",
             "SettingGeneral"    =>  "_Page/SettingGeneral/SettingGeneral.php",
             "SettingEmail"      =>  "_Page/SettingEmail/SettingEmail.php",
             "Wilayah"           =>  "_Page/Wilayah/Wilayah.php",

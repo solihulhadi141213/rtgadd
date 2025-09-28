@@ -25,12 +25,12 @@
             </ul>
         </li>
         <li class="nav-item">
-            <a class="nav-link <?php if($PageMenu=="AksesFitur"||$PageMenu=="AksesEntitas"||$PageMenu=="Akses"){echo "";}else{echo "collapsed";} ?>" data-bs-target="#components2-nav" data-bs-toggle="collapse" href="javascript:void(0);">
+            <a class="nav-link <?php if($PageMenu=="AksesFitur"||$PageMenu=="AksesEntitas"||$PageMenu=="Akses"||$PageMenu=="Client"){echo "";}else{echo "collapsed";} ?>" data-bs-target="#components2-nav" data-bs-toggle="collapse" href="javascript:void(0);">
                 <i class="bi bi-key"></i>
                     <span>Aksesibilitas</span><i class="bi bi-chevron-down ms-auto">
                 </i>
             </a>
-            <ul id="components2-nav" class="nav-content collapse <?php if($PageMenu=="AksesFitur"||$PageMenu=="AksesEntitas"||$PageMenu=="Akses"){echo "show";} ?>" data-bs-parent="#sidebar-nav">
+            <ul id="components2-nav" class="nav-content collapse <?php if($PageMenu=="AksesFitur"||$PageMenu=="AksesEntitas"||$PageMenu=="Akses"||$PageMenu=="Client"){echo "show";} ?>" data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="index.php?Page=AksesFitur" class="<?php if($PageMenu=="AksesFitur"){echo "active";} ?>">
                         <i class="bi bi-circle"></i><span>Fitur Aplikasi</span>
@@ -43,7 +43,12 @@
                 </li>
                 <li>
                     <a href="index.php?Page=Akses" class="<?php if($PageMenu=="Akses"){echo "active";} ?>">
-                        <i class="bi bi-circle"></i><span>Akses Pengguna</span>
+                        <i class="bi bi-circle"></i><span>Akses Admin</span>
+                    </a>
+                </li> 
+                <li>
+                    <a href="index.php?Page=Client" class="<?php if($PageMenu=="Client"){echo "active";} ?>">
+                        <i class="bi bi-circle"></i><span>Akses Client</span>
                     </a>
                 </li> 
             </ul>

@@ -11,6 +11,7 @@
             "AksesFitur"        => "_Page/AksesFitur/AksesFitur.js",
             "AksesEntitas"      => "_Page/AksesEntitas/AksesEntitas.js",
             "Akses"             => "_Page/Akses/Akses.js",
+            "Client"            => "_Page/Client/Client.js",
             "SettingGeneral"    => "_Page/SettingGeneral/SettingGeneral.js",
             "SettingEmail"      => "_Page/SettingEmail/SettingEmail.js",
             "Wilayah"           => "_Page/Wilayah/Wilayah.js",
