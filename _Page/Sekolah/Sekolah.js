@@ -296,6 +296,7 @@ $(document).ready(function() {
     });
 
     //Proses Import
+    //Proses Import
     $('#ProsesImport').submit(function(){
         $('#NotifikasiImport').html('<tr><td colspan="6" class="text-center"><small class="text-danger">Loading...</small></td></tr>');
         $('#progressSection').show();
@@ -303,6 +304,8 @@ $(document).ready(function() {
         
         var form = $('#ProsesImport')[0];
         var data = new FormData(form);
+        
+        console.log('Mengirim request import...');
         
         $.ajax({
             type: 'POST',
@@ -313,14 +316,19 @@ $(document).ready(function() {
             contentType: false,
             enctype: 'multipart/form-data',
             success: function(response){
+                console.log('Response received:', response);
+                
                 try {
                     var result = JSON.parse(response);
+                    console.log('Parsed result:', result);
                     
                     if (result.status === 'success') {
                         if (result.total_batches > 1) {
+                            console.log('Memulai proses batch...');
                             // Jika data besar, proses secara batch
                             processBatchImport(result.file_token, 1, result.total_batches, result.total_rows);
                         } else {
+                            console.log('Proses single batch selesai');
                             // Jika data kecil, langsung tampilkan hasil
                             $('#NotifikasiImport').html(result.html);
                             $('#ResetFormImport').prop('disabled', false);
@@ -330,11 +338,14 @@ $(document).ready(function() {
                             filterAndLoadTable();
                         }
                     } else {
+                        console.log('Error:', result.message);
                         $('#NotifikasiImport').html('<tr><td colspan="6" class="text-center"><small class="text-danger">' + result.message + '</small></td></tr>');
                         $('#btnImport').prop('disabled', false);
                         $('#progressSection').hide();
                     }
                 } catch (e) {
+                    console.log('Error parsing JSON:', e);
+                    console.log('Raw response:', response);
                     // Fallback untuk response non-JSON (error)
                     $('#NotifikasiImport').html(response);
                     $('#btnImport').prop('disabled', false);
@@ -342,6 +353,7 @@ $(document).ready(function() {
                 }
             },
             error: function(xhr, status, error) {
+                console.log('AJAX Error:', error);
                 $('#NotifikasiImport').html('<tr><td colspan="6" class="text-center"><small class="text-danger">Error: ' + error + '</small></td></tr>');
                 $('#btnImport').prop('disabled', false);
                 $('#progressSection').hide();
@@ -351,6 +363,9 @@ $(document).ready(function() {
 
     // Fungsi untuk proses batch
     function processBatchImport(fileToken, currentBatch, totalBatches, totalRows) {
+        console.log('Processing batch:', currentBatch, 'of', totalBatches);
+        console.log('File token:', fileToken);
+        
         var progressPercentage = Math.round((currentBatch / totalBatches) * 100);
         $('#progressBar').css('width', progressPercentage + '%');
         $('#progressText').text(progressPercentage + '%');
@@ -365,6 +380,8 @@ $(document).ready(function() {
                 total_batches: totalBatches
             },
             success: function(response) {
+                console.log('Batch response:', response);
+                
                 try {
                     var result = JSON.parse(response);
                     
@@ -392,12 +409,14 @@ $(document).ready(function() {
                         $('#progressSection').hide();
                     }
                 } catch (e) {
+                    console.log('Error parsing batch response:', e);
                     $('#NotifikasiImport').html('<tr><td colspan="6" class="text-center"><small class="text-danger">Error parsing response batch ' + currentBatch + '</small></td></tr>');
                     $('#btnImport').prop('disabled', false);
                     $('#progressSection').hide();
                 }
             },
             error: function(xhr, status, error) {
+                console.log('Batch AJAX Error:', error);
                 $('#NotifikasiImport').html('<tr><td colspan="6" class="text-center"><small class="text-danger">Error pada batch ' + currentBatch + ': ' + error + '</small></td></tr>');
                 $('#btnImport').prop('disabled', false);
                 $('#progressSection').hide();

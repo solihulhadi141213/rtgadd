@@ -330,7 +330,7 @@
                                         <th><b>No</b></th>
                                         <th><b>Provinsi</b></th>
                                         <th><b>Kab/Kota</b></th>
-                                        <th><b>Kode Sekolah</b></th>
+                                        <th><b>Kode Sekolah (NPSN)</b></th>
                                         <th><b>Nama Sekolah</b></th>
                                         <th><b>Keterangan</b></th>
                                     </tr>
