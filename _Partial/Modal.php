@@ -13,6 +13,7 @@
             "SettingEmail"          => "_Page/SettingEmail/ModalSettingEmail.php",
             "Wilayah"               => "_Page/Wilayah/ModalWilayah.php",
             "JabatanPerWilayah"     => "_Page/JabatanPerWilayah/ModalJabatanPerWilayah.php",
+            "AbkPerSekolah"         => "_Page/AbkPerSekolah/ModalAbkPerSekolah.php",
             "Aktivitas"             => "_Page/Aktivitas/ModalAktivitas.php",
             "Help"                  => "_Page/Help/ModalHelp.php"
         ];

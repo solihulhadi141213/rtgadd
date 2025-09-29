@@ -16,6 +16,7 @@
             "SettingEmail"      => "_Page/SettingEmail/SettingEmail.js",
             "Wilayah"           => "_Page/Wilayah/Wilayah.js",
             "JabatanPerWilayah" => "_Page/JabatanPerWilayah/JabatanPerWilayah.js",
+            "AbkPerSekolah"     => "_Page/AbkPerSekolah/AbkPerSekolah.js",
             "Aktivitas"         => "_Page/Aktivitas/Aktivitas.js",
             "Help"              => "_Page/Help/Help.js"
         ];
