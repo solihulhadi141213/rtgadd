@@ -94,6 +94,12 @@
             </ul>
         </li>
         <li class="nav-item">
+            <a class="nav-link <?php if($PageMenu!=="GeoJson"){echo "collapsed";} ?>" href="index.php?Page=GeoJson">
+                <i class="bi bi-globe"></i>
+                <span>Geo Json</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link <?php if($PageMenu!=="Aktivitas"){echo "collapsed";} ?>" href="index.php?Page=Aktivitas">
                 <i class="bi bi-circle"></i>
                 <span>Log Aktivitas</span>

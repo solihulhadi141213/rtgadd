@@ -1,0 +1,48 @@
+{
+    "type":"FeatureCollection", 
+    "features": [
+        {
+            "type":"Feature",
+            "geometry":{
+                "type":"MultiPolygon",
+                "coordinates":[
+                    [
+                        [
+                            [121.40721875500003,-1.836951544999977],
+                            [121.38471112600007,-1.836281024999948]
+                        ],
+                        [
+                            [
+                                [120.39683823400003,1.032684981000045],
+                                [120.40224528700003,1.055928590000065],
+                                [120.38830968600007,1.07749786200003]
+                            ]
+                        ]
+                    ]
+                ]
+            },
+            "properties":{
+                "KODE_PROV":"72",
+                "PROVINSI":"Sulawesi Tengah"
+            },
+            "id":"72"
+        },
+        {
+            "type":"Feature",
+            "geometry":{
+                "type":"Polygon",
+                "coordinates":[
+                    [
+                        [119.56117843800007,-0.849504180999929],
+                        [119.53765834500007,-0.878799564999952]
+                    ]
+                ]
+            },
+            "properties":{
+                "KODE_PROV":"76",
+                "PROVINSI":"Sulawesi Barat"
+            },
+            "id":"76"
+        }
+    ]
+}

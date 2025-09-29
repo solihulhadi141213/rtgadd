@@ -16,6 +16,7 @@
             "Jabatan"               => "_Page/Jabatan/ModalJabatan.php",
             "JabatanPerWilayah"     => "_Page/JabatanPerWilayah/ModalJabatanPerWilayah.php",
             "AbkPerSekolah"         => "_Page/AbkPerSekolah/ModalAbkPerSekolah.php",
+            "GeoJson"               => "_Page/GeoJson/ModalGeoJson.php",
             "Aktivitas"             => "_Page/Aktivitas/ModalAktivitas.php",
             "Help"                  => "_Page/Help/ModalHelp.php"
         ];

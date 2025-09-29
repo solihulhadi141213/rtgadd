@@ -33,6 +33,11 @@
 <script src="https://code.highcharts.com/maps/modules/offline-exporting.js"></script>
 <script src="https://code.highcharts.com/mapdata/countries/id/id-all.js"></script>
 
+<!-- leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+
 <!-- Template Main JS File -->
 <script src="assets/js/main.js"></script>
 <script type="text/javascript">

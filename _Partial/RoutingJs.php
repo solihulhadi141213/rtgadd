@@ -19,6 +19,7 @@
             "Jabatan"           => "_Page/Jabatan/Jabatan.js",
             "JabatanPerWilayah" => "_Page/JabatanPerWilayah/JabatanPerWilayah.js",
             "AbkPerSekolah"     => "_Page/AbkPerSekolah/AbkPerSekolah.js",
+            "GeoJson"           => "_Page/GeoJson/GeoJson.js",
             "Aktivitas"         => "_Page/Aktivitas/Aktivitas.js",
             "Help"              => "_Page/Help/Help.js"
         ];

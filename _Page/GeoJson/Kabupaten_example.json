@@ -1,0 +1,89 @@
+{
+    "type":"FeatureCollection", 
+    "features": [
+        {
+            "type":"Feature",
+            "geometry":{
+                "type":"Polygon",
+                "coordinates":[
+                    [
+                        [99.05142777900005,1.700902778000057],
+                        [99.07819222000006,1.698601944000075],
+                        [99.11621250000007,1.649178333000066]
+                    ]
+                ]
+            },
+            "properties":{
+                "OBJECTID":56877,
+                "NAMOBJ":"Huta Barat",
+                "FCODE":"BA03070040",
+                "REMARK":null,
+                "METADATA":"TASWIL1000020221227_DATA_BATAS_DESAKELURAHAN",
+                "SRS_ID":"4326",
+                "KDBBPS":null,
+                "KDCBPS":null,
+                "KDCPUM":"12.02.05",
+                "KDEBPS":null,
+                "KDEPUM":"12.02.05.2012",
+                "KDPBPS":null,
+                "KDPKAB":"12.02",
+                "KDPPUM":"12",
+                "LUASWH":0,
+                "TIPADM":1,
+                "WADMKC":"Pahae Julu",
+                "WADMKD":"Huta Barat",
+                "WADMKK":"Tapanuli Utara",
+                "WADMPR":"Sumatera Utara",
+                "WIADKC":null,
+                "WIADKK":null,
+                "WIADPR":null,
+                "WIADKD":null,
+                "UUPP":"Hasil Delineasi Batas Desa 2018",
+                "LUAS":9.2687973
+            }
+        },
+        {
+            "type":"Feature",
+            "geometry":{
+                "type":"MultiPolygon",
+                "coordinates":[
+                    [
+                        [
+                            [123.52801007200003,-10.211653134999949],
+                            [123.48878999300007,-10.224100006999947],
+                            [123.50032046600006,-10.273859284999958]
+                        ]
+                    ]
+                ]
+            },
+            "properties":{
+                "OBJECTID":38515,
+                "NAMOBJ":"Sillu",
+                "FCODE":"BA03070040",
+                "REMARK":null,
+                "METADATA":"TASWIL1000020221227_DATA_BATAS_DESAKELURAHAN",
+                "SRS_ID":"SRGI 2013",
+                "KDBBPS":null,
+                "KDCBPS":null,
+                "KDCPUM":"53.01.10",
+                "KDEBPS":null,
+                "KDEPUM":"53.01.10.2010",
+                "KDPBPS":null,
+                "KDPKAB":"53.01",
+                "KDPPUM":"53",
+                "LUASWH":0,
+                "TIPADM":1,
+                "WADMKC":"Fatuleu",
+                "WADMKD":"Sillu",
+                "WADMKK":"Kupang",
+                "WADMPR":"Nusa Tenggara Timur",
+                "WIADKC":null,
+                "WIADKK":null,
+                "WIADPR":null,
+                "WIADKD":null,
+                "UUPP":"Hasil Delineasi Batas Desa 2016",
+                "LUAS":89.87234572
+            }
+        }    
+    ]
+}
