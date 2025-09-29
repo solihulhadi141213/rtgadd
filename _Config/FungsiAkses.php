@@ -23,12 +23,16 @@
         $id_access_group=$DataAccessSession['id_access_group'];
 
         //Buka Akses Group
-        $QryAccessGroupSession = mysqli_query($Conn,"SELECT group_name FROM access_group WHERE id_access_group='$id_access_group'")or die(mysqli_error($Conn));
-        $DataAccessGroupSession = mysqli_fetch_array($QryAccessGroupSession);
-        if(empty($DataAccessGroupSession['group_name'])){
-            $access_group="None";
+        if($access_client==0){
+            $QryAccessGroupSession = mysqli_query($Conn,"SELECT group_name FROM access_group WHERE id_access_group='$id_access_group'")or die(mysqli_error($Conn));
+            $DataAccessGroupSession = mysqli_fetch_array($QryAccessGroupSession);
+            if(empty($DataAccessGroupSession['group_name'])){
+                $access_group="None";
+            }else{
+                $access_group=$DataAccessGroupSession['group_name'];
+            }
         }else{
-            $access_group=$DataAccessGroupSession['group_name'];
+            $access_group="Client";
         }
     }
 ?>
