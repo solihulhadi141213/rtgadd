@@ -15,6 +15,7 @@
             "SettingGeneral"    => "_Page/SettingGeneral/SettingGeneral.js",
             "SettingEmail"      => "_Page/SettingEmail/SettingEmail.js",
             "Wilayah"           => "_Page/Wilayah/Wilayah.js",
+            "Sekolah"           => "_Page/Sekolah/Sekolah.js",
             "JabatanPerWilayah" => "_Page/JabatanPerWilayah/JabatanPerWilayah.js",
             "AbkPerSekolah"     => "_Page/AbkPerSekolah/AbkPerSekolah.js",
             "Aktivitas"         => "_Page/Aktivitas/Aktivitas.js",

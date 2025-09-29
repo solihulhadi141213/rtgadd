@@ -12,6 +12,7 @@
             "Client"                => "_Page/Client/ModalClient.php",
             "SettingEmail"          => "_Page/SettingEmail/ModalSettingEmail.php",
             "Wilayah"               => "_Page/Wilayah/ModalWilayah.php",
+            "Sekolah"               => "_Page/Sekolah/ModalSekolah.php",
             "JabatanPerWilayah"     => "_Page/JabatanPerWilayah/ModalJabatanPerWilayah.php",
             "AbkPerSekolah"         => "_Page/AbkPerSekolah/ModalAbkPerSekolah.php",
             "Aktivitas"             => "_Page/Aktivitas/ModalAktivitas.php",
