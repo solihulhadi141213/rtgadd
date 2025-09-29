@@ -14,6 +14,7 @@
             "SettingEmail"      =>  "_Page/SettingEmail/SettingEmail.php",
             "Wilayah"           =>  "_Page/Wilayah/Wilayah.php",
             "Sekolah"           =>  "_Page/Sekolah/Sekolah.php",
+            "Jabatan"           =>  "_Page/Jabatan/Jabatan.php",
             "JabatanPerWilayah" =>  "_Page/JabatanPerWilayah/JabatanPerWilayah.php",
             "AbkPerSekolah"     =>  "_Page/AbkPerSekolah/AbkPerSekolah.php",
             "Aktivitas"         =>  "_Page/Aktivitas/Aktivitas.php",

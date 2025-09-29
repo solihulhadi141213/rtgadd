@@ -70,8 +70,8 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link <?php if($PageMenu=="Guru"){echo "";}else{echo "collapsed";} ?>" href="index.php?Page=Guru">
-                <i class="bi bi-people"></i> <span>Guru</span>
+            <a class="nav-link <?php if($PageMenu=="Instansi"){echo "";}else{echo "collapsed";} ?>" href="index.php?Page=Instansi">
+                <i class="bi bi-bank"></i> <span>Instansi</span>
             </a>
         </li>
         <li class="nav-heading">Fitur Lainnya</li>
