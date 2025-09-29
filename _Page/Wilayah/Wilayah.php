@@ -58,20 +58,28 @@
                 </div>
                 <div class="card-body">
                     <div class="table table-responsive">
-                        <table class="table table-striped table-hover">
+                        <table class="table table-striped table-hover table-bordered">
                             <thead>
                                 <tr>
-                                    <th><b>No</b></th>
-                                    <th><b>Kategori</b></th>
-                                    <th><b>Provinsi</b></th>
-                                    <th><b>Kabupaten</b></th>
-                                    <th><b>Kode-Map</b></th>
-                                    <th><b>Opsi</b></th>
+                                    <th rowspan="2" class="text-center" valign="middle"><b>No</b></th>
+                                    <th rowspan="2" class="text-center" valign="middle"><b>Kategori <br>(Level)</b></th>
+                                    <th colspan="2" class="text-center"><b>Kode Provinsi</b></th>
+                                    <th rowspan="2" class="text-center" valign="middle"><b>Nama Provinsi</b></th>
+                                    <th colspan="2" class="text-center"><b>Kode Kab/Kota</b></th>
+                                    <th rowspan="2" class="text-center" valign="middle"><b>Nama Kab/Kota</b></th>
+                                    <th rowspan="2" class="text-center" valign="middle"><b>Kode-Map</b></th>
+                                    <th rowspan="2" class="text-center" valign="middle"><b>Opsi</b></th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center"><b>BPS</b></th>
+                                    <th class="text-center"><b>DAPODIK</b></th>
+                                    <th class="text-center"><b>BPS</b></th>
+                                    <th class="text-center"><b>DAPODIK</b></th>
                                 </tr>
                             </thead>
                             <tbody id="TabelWilayah">
                                 <tr>
-                                    <td class="text-center" colspan="6">
+                                    <td class="text-center" colspan="10">
                                         <small>Loading..</small>
                                     </td>
                                 </tr>

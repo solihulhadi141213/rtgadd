@@ -101,7 +101,7 @@
                         <tr>
                             <td>'.$i.'</td>
                             <td colspan="4" class="text-center">
-                                <small class="text-danger">Kode provinsi tidak boleh kosong</small>
+                                <small class="text-danger">Kode provinsi (BPS) tidak boleh kosong</small>
                             </td>
                         </tr>
                     ';
@@ -113,20 +113,19 @@
                         <tr>
                             <td>'.$i.'</td>
                             <td colspan="4" class="text-center">
-                                <small class="text-danger">Nama provinsi tidak boleh kosong</small>
+                                <small class="text-danger">Kode provinsi (Dapodik) tidak boleh kosong</small>
                             </td>
                         </tr>
                     ';
                     continue;
                 }
-                
+
                 if(empty($sheetData[$i][2])) {
                     echo '
                         <tr>
                             <td>'.$i.'</td>
-                            <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'</td>
-                            <td colspan="3" class="text-center">
-                                <small class="text-danger">Kode Kab/Kota tidak boleh kosong</small>
+                            <td colspan="4" class="text-center">
+                                <small class="text-danger">Nama provinsi tidak boleh kosong</small>
                             </td>
                         </tr>
                     ';
@@ -137,7 +136,33 @@
                     echo '
                         <tr>
                             <td>'.$i.'</td>
-                            <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'</td>
+                            <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'-'.$sheetData[$i][2].'</td>
+                            <td colspan="3" class="text-center">
+                                <small class="text-danger">Kode Kab/Kota (BPS) tidak boleh kosong</small>
+                            </td>
+                        </tr>
+                    ';
+                    continue;
+                }
+
+                if(empty($sheetData[$i][4])) {
+                    echo '
+                        <tr>
+                            <td>'.$i.'</td>
+                            <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'-'.$sheetData[$i][2].'</td>
+                            <td colspan="3" class="text-center">
+                                <small class="text-danger">Kode Kab/Kota (DAPODIK) tidak boleh kosong</small>
+                            </td>
+                        </tr>
+                    ';
+                    continue;
+                }
+                
+                if(empty($sheetData[$i][5])) {
+                    echo '
+                        <tr>
+                            <td>'.$i.'</td>
+                            <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'-'.$sheetData[$i][2].'</td>
                             <td colspan="3" class="text-center">
                                 <small class="text-danger">Nama Kab/Kota tidak boleh kosong</small>
                             </td>
@@ -146,12 +171,14 @@
                     continue;
                 }
                 
-                $province_code      = mysqli_real_escape_string($Conn, $sheetData[$i][0]);
-                $province_name      = mysqli_real_escape_string($Conn, $sheetData[$i][1]);
-                $district_code      = mysqli_real_escape_string($Conn, $sheetData[$i][2]);
-                $district_name      = mysqli_real_escape_string($Conn, $sheetData[$i][3]);
+                $province_code          = mysqli_real_escape_string($Conn, $sheetData[$i][0]);
+                $province_code_dapodik  = mysqli_real_escape_string($Conn, $sheetData[$i][1]);
+                $province_name          = mysqli_real_escape_string($Conn, $sheetData[$i][2]);
+                $district_code          = mysqli_real_escape_string($Conn, $sheetData[$i][3]);
+                $district_code_dapodik  = mysqli_real_escape_string($Conn, $sheetData[$i][4]);
+                $district_name          = mysqli_real_escape_string($Conn, $sheetData[$i][5]);
                 
-                if(empty($sheetData[$i][4])) {
+                if(empty($sheetData[$i][6])) {
                     $code_map = "";
                 } else {
                     $code_map = mysqli_real_escape_string($Conn, $sheetData[$i][4]);
@@ -159,22 +186,27 @@
                 
                 // Cek apakah kode provinsi sudah ada
                 $id_region = GetDetailData($Conn, 'region', 'province_code', $province_code, 'id_region');
+                $id_region2 = GetDetailData($Conn, 'region', 'province_code_dapodik', $province_code_dapodik, 'id_region');
 
                 //Apabila id_region belum ada maka insert sebagai Province
-                if(empty($id_region)) {
+                if(empty($id_region)||empty($id_region2)) {
                     // Insert Data Province
                     $category="Province";
                     $EntryProvince = "INSERT INTO region (
                         category,
                         province_code,
+                        province_code_dapodik,
                         province_name,
                         district_code,
+                        district_code_dapodik,
                         district_name,
                         code_map
                     ) VALUES (
                         '$category',
                         '$province_code',
+                        '$province_code_dapodik',
                         '$province_name',
+                        '',
                         '',
                         '',
                         '$code_map'
@@ -185,7 +217,7 @@
                         echo '
                             <tr>
                                 <td>'.$i.'</td>
-                                <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'</td>
+                                <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'-'.$sheetData[$i][2].'</td>
                                 <td colspan="3" class="text-center">
                                     <small class="text-success">Data Provinsi Baru Berhasil Disimpan</small>
                                 </td>
@@ -195,7 +227,7 @@
                         echo '
                             <tr>
                                 <td>'.$i.'</td>
-                                <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'</td>
+                                <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'-'.$sheetData[$i][2].'</td>
                                 <td colspan="3" class="text-center">
                                     <small class="text-danger">Data Provinsi Baru Gagal Disimpan</small>
                                 </td>
@@ -217,9 +249,9 @@
                         echo '
                             <tr>
                                 <td>'.$i.'</td>
-                                <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'</td>
-                                <td>'.$sheetData[$i][2].'-'.$sheetData[$i][3].'</td>
-                                <td>'.$sheetData[$i][4].'</td>
+                                <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'-'.$sheetData[$i][2].'</td>
+                                <td>'.$sheetData[$i][3].'-'.$sheetData[$i][4].'-'.$sheetData[$i][5].'</td>
+                                <td>'.$sheetData[$i][6].'</td>
                                 <td colspan="3" class="text-center">
                                     <small class="text-danger">Prepare gagal: '.htmlspecialchars($Conn->error).'</small>
                                 </td>
@@ -242,9 +274,9 @@
                         echo '
                             <tr>
                                 <td>'.$i.'</td>
-                                <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'</td>
-                                <td>'.$sheetData[$i][2].'-'.$sheetData[$i][3].'</td>
-                                <td>'.$sheetData[$i][4].'</td>
+                                <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'-'.$sheetData[$i][2].'</td>
+                                <td>'.$sheetData[$i][3].'-'.$sheetData[$i][4].'-'.$sheetData[$i][5].'</td>
+                                <td>'.$sheetData[$i][6].'</td>
                                 <td class="text-center">
                                     <small class="text-success">Update Berhasil</small>
                                 </td>
@@ -254,9 +286,9 @@
                         echo '
                             <tr>
                                 <td>'.$i.'</td>
-                                <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'</td>
-                                <td>'.$sheetData[$i][2].'-'.$sheetData[$i][3].'</td>
-                                <td>'.$sheetData[$i][4].'</td>
+                                <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'-'.$sheetData[$i][2].'</td>
+                                <td>'.$sheetData[$i][3].'-'.$sheetData[$i][4].'-'.$sheetData[$i][5].'</td>
+                                <td>'.$sheetData[$i][6].'</td>
                                 <td class="text-center">
                                     <small class="text-danger">Update Gagal</small>
                                 </td>
@@ -268,15 +300,19 @@
                     $EntryDistrict = "INSERT INTO region (
                         category,
                         province_code,
+                        province_code_dapodik,
                         province_name,
                         district_code,
+                        district_code_dapodik,
                         district_name,
                         code_map
                     ) VALUES (
                         '$category',
                         '$province_code',
+                        '$province_code_dapodik',
                         '$province_name',
                         '$district_code',
+                        '$district_code_dapodik',
                         '$district_name',
                         '$code_map'
                     )";
@@ -286,9 +322,9 @@
                         echo '
                             <tr>
                                 <td>'.$i.'</td>
-                                <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'</td>
-                                <td>'.$sheetData[$i][2].'-'.$sheetData[$i][3].'</td>
-                                <td>'.$sheetData[$i][4].'</td>
+                                <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'-'.$sheetData[$i][2].'</td>
+                                <td>'.$sheetData[$i][3].'-'.$sheetData[$i][4].'-'.$sheetData[$i][5].'</td>
+                                <td>'.$sheetData[$i][6].'</td>
                                 <td class="text-center">
                                     <small class="text-primary">Insert Berhasil</small>
                                 </td>
@@ -298,9 +334,9 @@
                         echo '
                             <tr>
                                 <td>'.$i.'</td>
-                                <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'</td>
-                                <td>'.$sheetData[$i][2].'-'.$sheetData[$i][3].'</td>
-                                <td>'.$sheetData[$i][4].'</td>
+                                <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'-'.$sheetData[$i][2].'</td>
+                                <td>'.$sheetData[$i][3].'-'.$sheetData[$i][4].'-'.$sheetData[$i][5].'</td>
+                                <td>'.$sheetData[$i][6].'</td>
                                 <td class="text-center">
                                     <small class="text-danger">Insert Gagal</small>
                                 </td>

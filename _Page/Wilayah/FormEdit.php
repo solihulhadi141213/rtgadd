@@ -54,12 +54,14 @@
         $Qry->close();
 
        //Buat Variabel 
-       $category        = $Data['category']; 
-       $province_code   = $Data['province_code']; 
-       $province_name   = $Data['province_name']; 
-       $district_code   = $Data['district_code']; 
-       $district_name   = $Data['district_name']; 
-       $code_map        = $Data['code_map'];
+       $category                = $Data['category']; 
+       $province_code           = $Data['province_code']; 
+       $province_code_dapodik   = $Data['province_code_dapodik']; 
+       $province_name           = $Data['province_name']; 
+       $district_code           = $Data['district_code']; 
+       $district_code_dapodik   = $Data['district_code_dapodik']; 
+       $district_name           = $Data['district_name']; 
+       $code_map                = $Data['code_map'];
 
         //Tampilkan Form
         echo '
@@ -95,11 +97,21 @@
                 <div class="row mb-3">
                     <div class="col-4">
                         <label for="edit_district_code">
-                            <small>Kode Kab/Kota <i class="bi bi-exclamation-circle" title="Wajib Diisi"></i></small>
+                            <small>Kode Kab/Kota (BPS) <i class="bi bi-exclamation-circle" title="Wajib Diisi"></i></small>
                         </label>
                     </div>
                     <div class="col-8">
                         <input type="text" name="district_code" id="edit_district_code" class="form-control" value="'.$district_code.'" required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-4">
+                        <label for="edit_district_code_dapodik">
+                            <small>Kode Kab/Kota (DAPODIK) <i class="bi bi-exclamation-circle" title="Wajib Diisi"></i></small>
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <input type="text" name="district_code_dapodik" id="edit_district_code_dapodik" class="form-control" value="'.$district_code_dapodik.'" required>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -128,11 +140,21 @@
                 <div class="row mb-3">
                     <div class="col-4">
                         <label for="edit_province_code">
-                            <small>Kode Provinsi <i class="bi bi-exclamation-circle" title="Wajib Diisi"></i></small>
+                            <small>Kode Provinsi (BPS) <i class="bi bi-exclamation-circle" title="Wajib Diisi"></i></small>
                         </label>
                     </div>
                     <div class="col-8">
                         <input type="text" name="province_code" id="edit_province_code" class="form-control" value="'.$province_code.'" required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-4">
+                        <label for="edit_province_code_dapodik">
+                            <small>Kode Provinsi (DAPODIK) <i class="bi bi-exclamation-circle" title="Wajib Diisi"></i></small>
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <input type="text" name="province_code_dapodik" id="edit_province_code_dapodik" class="form-control" value="'.$province_code_dapodik.'" required>
                     </div>
                 </div>
                 <div class="row mb-3">

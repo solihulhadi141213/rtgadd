@@ -35,7 +35,7 @@
     $sheet->setTitle("Data Wilayah");
 
     // Header
-    $headers = ['No', 'Kategori', 'Kode Provinsi', 'Nama Provinsi', 'Kode Kab/Kota', 'Nama Kab/Kota', 'Kode Map', 'ID Region'];
+    $headers = ['No', 'Kategori', 'Kode Provinsi (BPS)', 'Kode Provinsi (DAPODIK)', 'Nama Provinsi', 'Kode Kab/Kota (BPS)', 'Kode Kab/Kota (DAPODIK)', 'Nama Kab/Kota', 'Kode Map', 'ID Region'];
     $col = 'A';
     foreach ($headers as $header) {
         $sheet->setCellValue($col.'1', $header);
@@ -52,17 +52,19 @@
         $sheet->setCellValue('A'.$row, $no);
         $sheet->setCellValue('B'.$row, $data['category']);
         $sheet->setCellValue('C'.$row, $data['province_code']);
-        $sheet->setCellValue('D'.$row, $data['province_name']);
-        $sheet->setCellValue('E'.$row, $data['district_code']);
-        $sheet->setCellValue('F'.$row, $data['district_name']);
-        $sheet->setCellValue('G'.$row, $data['code_map']);
-        $sheet->setCellValue('H'.$row, $data['id_region']);
+        $sheet->setCellValue('D'.$row, $data['province_code_dapodik']);
+        $sheet->setCellValue('E'.$row, $data['province_name']);
+        $sheet->setCellValue('F'.$row, $data['district_code']);
+        $sheet->setCellValue('G'.$row, $data['district_code_dapodik']);
+        $sheet->setCellValue('H'.$row, $data['district_name']);
+        $sheet->setCellValue('I'.$row, $data['code_map']);
+        $sheet->setCellValue('J'.$row, $data['id_region']);
         $no++;
         $row++;
     }
 
     // Auto size kolom
-    foreach (range('A', 'H') as $columnID) {
+    foreach (range('A', 'J') as $columnID) {
         $sheet->getColumnDimension($columnID)->setAutoSize(true);
     }
 

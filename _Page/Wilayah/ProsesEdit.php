@@ -38,14 +38,24 @@
     $category=$_POST['category'];
 
     //Buka Data Lama
-    $province_code_old = GetDetailData($Conn, 'region','id_region', $id_region, 'province_code');
-    $district_code_old = GetDetailData($Conn, 'region','id_region', $id_region, 'district_code');
+    $province_code_old          = GetDetailData($Conn, 'region','id_region', $id_region, 'province_code');
+    $province_code_dapodik_old  = GetDetailData($Conn, 'region','id_region', $id_region, 'province_code_dapodik');
+    $district_code_old          = GetDetailData($Conn, 'region','id_region', $id_region, 'district_code');
+    $district_code_dapodik_old  = GetDetailData($Conn, 'region','id_region', $id_region, 'district_code_dapodik');
 
     //Penanganan data untuk categori=='Province'
     if($category=="Province"){
 
         //Validasi Kode Provinsi Tidak Boleh kosong
         if(empty($_POST['province_code'])){
+            echo '
+                <div class="alert alert-danger">
+                    <small>Kode provinsi tidak boleh kosong!</small>
+                </div>
+            ';
+            exit;
+        }
+        if(empty($_POST['province_code_dapodik'])){
             echo '
                 <div class="alert alert-danger">
                     <small>Kode provinsi tidak boleh kosong!</small>
@@ -66,8 +76,10 @@
 
         //Buat Variabel
         $province_code=validateAndSanitizeInput($_POST['province_code']);
+        $province_code_dapodik=validateAndSanitizeInput($_POST['province_code_dapodik']);
         $province_name=validateAndSanitizeInput($_POST['province_name']);
         $district_code="";
+        $district_code_dapodik="";
         $district_name="";
 
         //validasi duplikasi $province_code
@@ -80,7 +92,23 @@
         if(!empty($validasi_duplikat)){
             echo '
                 <div class="alert alert-danger">
-                    <small>Kode Provinsi Tersebut Sudah Ada</small>
+                    <small>Kode Provinsi (BPS) Tersebut Sudah Ada</small>
+                </div>
+            ';
+            exit;
+        }
+
+        //validasi duplikasi $province_code_dapodik
+        if($province_code_dapodik==$province_code_dapodik_old){
+            $validasi_duplikat="";
+        }else{
+            $validasi_duplikat=GetDetailData($Conn, 'region','province_code_dapodik', $province_code_dapodik, 'id_region');
+        }
+        
+        if(!empty($validasi_duplikat)){
+            echo '
+                <div class="alert alert-danger">
+                    <small>Kode Provinsi (DAPODIK) Tersebut Sudah Ada</small>
                 </div>
             ';
             exit;
@@ -103,7 +131,15 @@
         if(empty($_POST['district_code'])){
             echo '
                 <div class="alert alert-danger">
-                    <small>Kode Kab/Kota tidak boleh kosong!</small>
+                    <small>Kode Kab/Kota (BPS) tidak boleh kosong!</small>
+                </div>
+            ';
+            exit;
+        }
+         if(empty($_POST['district_code_dapodik'])){
+            echo '
+                <div class="alert alert-danger">
+                    <small>Kode Kab/Kota (DAPODIK) tidak boleh kosong!</small>
                 </div>
             ';
             exit;
@@ -120,10 +156,11 @@
         }
 
         //Buat Variabel
-        $province_code=validateAndSanitizeInput($_POST['province_code']);
-        $province_name=GetDetailData($Conn, 'region','province_code', $province_code, 'province_name');
-        $district_code=validateAndSanitizeInput($_POST['district_code']);
-        $district_name=validateAndSanitizeInput($_POST['district_name']);
+        $province_code          = validateAndSanitizeInput($_POST['province_code']);
+        $province_name          = GetDetailData($Conn, 'region','province_code', $province_code, 'province_name');
+        $district_code          = validateAndSanitizeInput($_POST['district_code']);
+        $district_code_dapodik  = validateAndSanitizeInput($_POST['district_code_dapodik']);
+        $district_name          = validateAndSanitizeInput($_POST['district_name']);
 
         //validasi jika $province_name tidak ada
         if(empty($province_name)){
@@ -145,7 +182,23 @@
         if(!empty($validasi_duplikat)){
             echo '
                 <div class="alert alert-danger">
-                    <small>Kode Kab/Kota Tersebut Sudah Ada</small>
+                    <small>Kode Kab/Kota (BPS) Tersebut Sudah Ada</small>
+                </div>
+            ';
+            exit;
+        }
+
+        //validasi duplikasi $district_code_dapodik
+        if($district_code_dapodik==$district_code_dapodik_old){
+            $validasi_duplikat = "";
+        }else{
+            $validasi_duplikat = GetDetailData($Conn, 'region','district_code_dapodik', $district_code_dapodik, 'id_region');
+        }
+        
+        if(!empty($validasi_duplikat)){
+            echo '
+                <div class="alert alert-danger">
+                    <small>Kode Kab/Kota (DAPODIK) Tersebut Sudah Ada</small>
                 </div>
             ';
             exit;
@@ -162,8 +215,8 @@
     if($category=="Province"){
         
         //Update provinsi
-        $QryUpdate = $Conn->prepare("UPDATE region SET province_code=?, province_name=? WHERE province_code=?");
-        $QryUpdate->bind_param("sss", $province_code, $province_name, $province_code_old);
+        $QryUpdate = $Conn->prepare("UPDATE region SET province_code=?, province_code_dapodik=?, province_name=? WHERE province_code=?");
+        $QryUpdate->bind_param("ssss", $province_code, $province_code_dapodik, $province_name, $province_code_old);
         if($QryUpdate->execute()){
             echo '
                 <div class="alert alert-success">
@@ -180,8 +233,8 @@
     }else{
         
         //Update District
-        $QryUpdate = $Conn->prepare("UPDATE region SET province_code=?, province_name=?, district_code=?, district_name=?, code_map=? WHERE id_region=?");
-        $QryUpdate->bind_param("sssssi", $province_code, $province_name, $district_code, $district_name, $code_map, $id_region);
+        $QryUpdate = $Conn->prepare("UPDATE region SET province_code=?, province_name=?, district_code=?, district_code_dapodik=?, district_name=?, code_map=? WHERE id_region=?");
+        $QryUpdate->bind_param("ssssssi", $province_code, $province_name, $district_code, $district_code_dapodik, $district_name, $code_map, $id_region);
         if($QryUpdate->execute()){
             echo '
                 <div class="alert alert-success">

@@ -32,7 +32,15 @@
         if(empty($_POST['province_code'])){
             echo '
                 <div class="alert alert-danger">
-                    <small>Kode provinsi tidak boleh kosong!</small>
+                    <small>Kode provinsi (BPS) tidak boleh kosong!</small>
+                </div>
+            ';
+            exit;
+        }
+        if(empty($_POST['province_code_dapodik'])){
+            echo '
+                <div class="alert alert-danger">
+                    <small>Kode provinsi (DAPODIK) tidak boleh kosong!</small>
                 </div>
             ';
             exit;
@@ -49,17 +57,30 @@
         }
 
         //Buat Variabel
-        $province_code=validateAndSanitizeInput($_POST['province_code']);
-        $province_name=validateAndSanitizeInput($_POST['province_name']);
-        $district_code="";
-        $district_name="";
+        $province_code          = validateAndSanitizeInput($_POST['province_code']);
+        $province_code_dapodik  = validateAndSanitizeInput($_POST['province_code_dapodik']);
+        $province_name          = validateAndSanitizeInput($_POST['province_name']);
+        $district_code          = "";
+        $district_code_dapodik  = "";
+        $district_name          = "";
 
         //validasi duplikasi $province_code
         $id_region=GetDetailData($Conn, 'region','province_code', $province_code, 'id_region');
         if(!empty($id_region)){
             echo '
                 <div class="alert alert-danger">
-                    <small>Kode Provinsi Tersebut Sudah Ada</small>
+                    <small>Kode Provinsi (BPS) Tersebut Sudah Ada</small>
+                </div>
+            ';
+            exit;
+        }
+
+        //validasi duplikasi $province_code_dapodik
+        $id_region=GetDetailData($Conn, 'region','province_code_dapodik', $province_code_dapodik, 'id_region');
+        if(!empty($id_region)){
+            echo '
+                <div class="alert alert-danger">
+                    <small>Kode Provinsi (DAPODIK) Tersebut Sudah Ada</small>
                 </div>
             ';
             exit;
@@ -87,6 +108,14 @@
             ';
             exit;
         }
+        if(empty($_POST['district_code_dapodik'])){
+            echo '
+                <div class="alert alert-danger">
+                    <small>Kode Kab/Kota tidak boleh kosong!</small>
+                </div>
+            ';
+            exit;
+        }
 
         //Validasi Nama District Tidak Boleh kosong
         if(empty($_POST['district_name'])){
@@ -99,10 +128,12 @@
         }
 
         //Buat Variabel
-        $province_code=validateAndSanitizeInput($_POST['province_code']);
-        $province_name=GetDetailData($Conn, 'region','province_code', $province_code, 'province_name');
-        $district_code=validateAndSanitizeInput($_POST['district_code']);
-        $district_name=validateAndSanitizeInput($_POST['district_name']);
+        $province_code          = validateAndSanitizeInput($_POST['province_code']);
+        $province_name          = GetDetailData($Conn, 'region','province_code', $province_code, 'province_name');
+        $province_code_dapodik  = GetDetailData($Conn, 'region','province_code', $province_code, 'province_code_dapodik');
+        $district_code          = validateAndSanitizeInput($_POST['district_code']);
+        $district_code_dapodik  = validateAndSanitizeInput($_POST['district_code_dapodik']);
+        $district_name          = validateAndSanitizeInput($_POST['district_name']);
 
         //validasi jika $province_name tidak ada
         if(empty($province_name)){
@@ -119,7 +150,18 @@
         if(!empty($id_region)){
             echo '
                 <div class="alert alert-danger">
-                    <small>Kode Kab/Kota Tersebut Sudah Ada</small>
+                    <small>Kode Kab/Kota (BPS) Tersebut Sudah Ada</small>
+                </div>
+            ';
+            exit;
+        }
+
+        //validasi duplikasi $district_code_dapodik
+        $id_region=GetDetailData($Conn, 'region','district_code_dapodik', $district_code_dapodik, 'id_region');
+        if(!empty($id_region)){
+            echo '
+                <div class="alert alert-danger">
+                    <small>Kode Kab/Kota (DAPODIK) Tersebut Sudah Ada</small>
                 </div>
             ';
             exit;
@@ -137,15 +179,19 @@
     $EntryRegion = "INSERT INTO region (
         category,
         province_code,
+        province_code_dapodik,
         province_name,
         district_code,
+        district_code_dapodik,
         district_name,
         code_map
     ) VALUES (
         '$category',
         '$province_code',
+        '$province_code_dapodik',
         '$province_name',
         '$district_code',
+        '$district_code_dapodik',
         '$district_name',
         '$code_map'
     )";

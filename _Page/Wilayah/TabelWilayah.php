@@ -10,7 +10,7 @@
     if(empty($SessionIdAccess)){
         echo '
             <tr>
-                <td colspan="6" class="text-center">
+                <td colspan="10" class="text-center">
                     <small class="text-danger">Sesi Akses Sudah Berakhir! Silahkan Login Ulang!</small>
                 </td>
             </tr>
@@ -95,7 +95,7 @@
         if(empty($jml_data)){
             echo '
                 <tr>
-                    <td colspan="6" class="text-center">
+                    <td colspan="10" class="text-center">
                         <small class="text-danger">Tidak Ada Data Yang Ditampilkan!</small>
                     </td>
                 </tr>
@@ -133,16 +133,19 @@
                 }
             }
             while ($data = mysqli_fetch_array($query)) {
-                $id_region      = $data['id_region'];
-                $category_list  = $data['category'];
-                $province_code  = $data['province_code'];
-                $province_name  = $data['province_name'];
+                $id_region              = $data['id_region'];
+                $category_list          = $data['category'];
+                $province_code          = $data['province_code'];
+                $province_code_dapodik  = $data['province_code_dapodik'];
+                $province_name          = $data['province_name'];
                 if(empty($data['district_name'])){
-                    $district_name  = "-";
-                    $district_code  = "-";
+                    $district_name          = "-";
+                    $district_code          = "-";
+                    $district_code_dapodik  = "-";
                 }else{
-                    $district_name  = $data['district_name'];
-                    $district_code  = $data['district_code'];
+                    $district_name          = $data['district_name'];
+                    $district_code          = $data['district_code'];
+                    $district_code_dapodik  = $data['district_code_dapodik'];
                 }
                 if(empty($data['code_map'])){
                     $code_map  = "-";
@@ -151,18 +154,22 @@
                 }
                 //Routing category
                 if($category_list=="District"){
-                    $text_color="text-success";
+                    $category_label='<span class="badge badge-success">Kab/Kota</span>';
                 }else{
-                    $text_color="text-primary";
+                    $category_label='<span class="badge badge-primary">Provinsi</span>';
                 }
                 echo '
                     <tr>
                         <td><small>'.$no.'</small></td>
-                        <td class="'.$text_color.'"><small>'.$category_list.'</small></td>
-                        <td><small title="Kode Provinsi : '.$province_code.'">'.$province_name.'</small></td>
-                        <td><small title="Kode Kab/Kot: '.$district_code.'">'.$district_name.'</small></td>
+                        <td>'.$category_label.'</td>
+                        <td><small>'.$province_code.'</small></td>
+                        <td><small>'.$province_code_dapodik.'</small></td>
+                        <td><small>'.$province_name.'</small></td>
+                        <td><small>'.$district_code.'</small></td>
+                        <td><small>'.$district_code_dapodik.'</small></td>
+                        <td><small>'.$district_name.'</small></td>
                         <td><small>'.$code_map.'</small></td>
-                        <td>
+                        <td class="text-center">
                             <button type="button" class="btn btn-sm btn-outline-dark btn-floating"  data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-three-dots-vertical"></i>
                             </button>

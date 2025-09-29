@@ -61,8 +61,10 @@
         //Buat Variabel dengan fallback "-"
         $category       = showOrDash($Data['category']);
         $province_code  = showOrDash($Data['province_code']);
+        $province_code_dapodik  = showOrDash($Data['province_code_dapodik']);
         $province_name  = showOrDash($Data['province_name']);
         $district_code  = showOrDash($Data['district_code']);
+        $district_code_dapodik  = showOrDash($Data['district_code_dapodik']);
         $district_name  = showOrDash($Data['district_name']);
         $code_map       = showOrDash($Data['code_map']);
 
@@ -76,10 +78,17 @@
                 </div>
             </div>
             <div class="row mb-2">
-                <div class="col-4"><small>Kode Provinsi</small></div>
+                <div class="col-4"><small>Kode Provinsi (BPS)</small></div>
                 <div class="col-1"><small>:</small></div>
                 <div class="col-7">
                     <small class="text text-grayish">'.$province_code.'</small>
+                </div>
+            </div>
+             <div class="row mb-2">
+                <div class="col-4"><small>Kode Provinsi (DAPODIK)</small></div>
+                <div class="col-1"><small>:</small></div>
+                <div class="col-7">
+                    <small class="text text-grayish">'.$province_code_dapodik.'</small>
                 </div>
             </div>
             <div class="row mb-2">
@@ -90,10 +99,17 @@
                 </div>
             </div>
             <div class="row mb-2">
-                <div class="col-4"><small>Kode Kab/Kota</small></div>
+                <div class="col-4"><small>Kode Kab/Kota (BPS)</small></div>
                 <div class="col-1"><small>:</small></div>
                 <div class="col-7">
                     <small class="text text-grayish">'.$district_code.'</small>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-4"><small>Kode Kab/Kota (DAPODIK)</small></div>
+                <div class="col-1"><small>:</small></div>
+                <div class="col-7">
+                    <small class="text text-grayish">'.$district_code_dapodik.'</small>
                 </div>
             </div>
             <div class="row mb-2">

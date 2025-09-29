@@ -36,9 +36,11 @@
                             <select name="OrderBy" id="OrderBy" class="form-control">
                                 <option value="">Pilih</option>
                                 <option value="id_region">ID Wilayah</option>
-                                <option value="province_code">Kode Provinsi</option>
+                                <option value="province_code">Kode Provinsi (BPS)</option>
+                                <option value="province_code_dapodik">Kode Provinsi (DAPODIK)</option>
                                 <option value="province_name">Nama Provinsi</option>
-                                <option value="district_code">Kode Kab/Kota</option>
+                                <option value="district_code">Kode Kab/Kota (BPS)</option>
+                                <option value="district_code_dapodik">Kode Kab/Kota (DAPODIK)</option>
                                 <option value="district_name">Nama Kab/Kota</option>
                                 <option value="code_map">Kode Map</option>
                             </select>
@@ -80,8 +82,14 @@
                         <div class="col-8">
                             <select name="keyword_by" id="KeywordBy" class="form-control">
                                 <option value="">Semua</option>
-                                <option value="province_name">Provinsi</option>
-                                <option value="district_name">Kab/Kota</option>
+                                <option value="id_region">ID Wilayah</option>
+                                <option value="province_code">Kode Provinsi (BPS)</option>
+                                <option value="province_code_dapodik">Kode Provinsi (DAPODIK)</option>
+                                <option value="province_name">Nama Provinsi</option>
+                                <option value="district_code">Kode Kab/Kota (BPS)</option>
+                                <option value="district_code_dapodik">Kode Kab/Kota (DAPODIK)</option>
+                                <option value="district_name">Nama Kab/Kota</option>
+                                <option value="code_map">Kode Map</option>
                             </select>
                         </div>
                     </div>
@@ -109,7 +117,7 @@
     </div>
 </div>
 <div class="modal fade" id="ModalTambah" tabindex="-1">
-    <div class="modal-dialog modal-md">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <form action="javascript:void(0);" id="ProsesTambah" autocomplete="off">
                 <div class="modal-header">
@@ -161,7 +169,7 @@
 </div>
 
 <div class="modal fade" id="ModalDetail" tabindex="-1">
-    <div class="modal-dialog modal-md">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title text-dark">
@@ -186,7 +194,7 @@
 </div>
 
 <div class="modal fade" id="ModalEdit" tabindex="-1">
-    <div class="modal-dialog modal-md">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <form action="javascript:void(0);" id="ProsesEdit">
                 <div class="modal-header">

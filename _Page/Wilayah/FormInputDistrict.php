@@ -1,11 +1,21 @@
 <div class="row mb-3">
     <div class="col-4">
         <label for="add_district_code">
-            <small>Kode Kab/Kota <i class="bi bi-exclamation-circle" title="Wajib Diisi"></i></small>
+            <small>Kode Kab/Kota (BPS) <i class="bi bi-exclamation-circle" title="Wajib Diisi"></i></small>
         </label>
     </div>
     <div class="col-8">
         <input type="text" name="district_code" id="add_district_code" class="form-control" required>
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="col-4">
+        <label for="add_district_code_dapodik">
+            <small>Kode Kab/Kota (dapodik) <i class="bi bi-exclamation-circle" title="Wajib Diisi"></i></small>
+        </label>
+    </div>
+    <div class="col-8">
+        <input type="text" name="district_code_dapodik" id="add_district_code_dapodik" class="form-control" required>
     </div>
 </div>
 <div class="row mb-3">

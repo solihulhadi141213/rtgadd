@@ -1,11 +1,21 @@
 <div class="row mb-3">
     <div class="col-4">
         <label for="add_province_code">
-            <small>Kode Provinsi <i class="bi bi-exclamation-circle" title="Wajib Diisi"></i></small>
+            <small>Kode Provinsi (BPS) <i class="bi bi-exclamation-circle" title="Wajib Diisi"></i></small>
         </label>
     </div>
     <div class="col-8">
         <input type="text" name="province_code" id="add_province_code" class="form-control" required>
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="col-4">
+        <label for="add_province_code_dapodik">
+            <small>Kode Provinsi (DAPODIK) <i class="bi bi-exclamation-circle" title="Wajib Diisi"></i></small>
+        </label>
+    </div>
+    <div class="col-8">
+        <input type="text" name="province_code_dapodik" id="add_province_code_dapodik" class="form-control" required>
     </div>
 </div>
 <div class="row mb-3">
