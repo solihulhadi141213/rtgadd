@@ -35,7 +35,7 @@
     $sheet->setTitle("Data Sekolah");
 
     // Header
-    $headers = ['No', 'Kode Provinsi', 'Nama Provinsi', 'Kode Kab/Kota', 'Nama Kab/Kota', 'Kode Sekolah (NPSN)', 'Nama Sekolah'];
+    $headers = ['No', 'Kode Provinsi', 'Nama Provinsi', 'Kode Kab/Kota', 'Nama Kab/Kota', 'Kode Sekolah (NPSN)', 'Nama Sekolah', 'Jenjang'];
     $col = 'A';
     foreach ($headers as $header) {
         $sheet->setCellValue($col.'1', $header);
@@ -66,12 +66,13 @@
         $sheet->setCellValue('E'.$row, $district_name);
         $sheet->setCellValue('F'.$row, $data['npsn']);
         $sheet->setCellValue('G'.$row, $data['school_name']);
+        $sheet->setCellValue('H'.$row, $data['school_level']);
         $no++;
         $row++;
     }
 
     // Auto size kolom
-    foreach (range('A', 'G') as $columnID) {
+    foreach (range('A', 'H') as $columnID) {
         $sheet->getColumnDimension($columnID)->setAutoSize(true);
     }
 

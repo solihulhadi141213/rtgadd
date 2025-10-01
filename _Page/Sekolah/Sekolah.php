@@ -66,12 +66,13 @@
                                     <th><b>Kabupaten</b></th>
                                     <th><b>Kode Sekolah (NPSN)</b></th>
                                     <th><b>Nama Sekolah</b></th>
+                                    <th><b>Jenjang</b></th>
                                     <th><b>Opsi</b></th>
                                 </tr>
                             </thead>
                             <tbody id="TabelSekolah">
                                 <tr>
-                                    <td class="text-center" colspan="6">
+                                    <td class="text-center" colspan="7">
                                         <small>Loading..</small>
                                     </td>
                                 </tr>

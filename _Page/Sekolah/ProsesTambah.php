@@ -48,11 +48,21 @@
         exit;
     }
 
+    if(empty($_POST['school_level'])){
+        echo '
+            <div class="alert alert-danger">
+                <small>Nama Jenjang Tidak Boleh Kosong. Silahkan Isi Terlebih Dulu!</small>
+            </div>
+        ';
+        exit;
+    }
+
     //Buat Variabel Dan Sanitasi
     $province_code  = validateAndSanitizeInput($_POST['province_code']);
     $district_code  = validateAndSanitizeInput($_POST['district_code']);
     $npsn           = validateAndSanitizeInput($_POST['npsn']);
     $school_name    = validateAndSanitizeInput($_POST['school_name']);
+    $school_level   = validateAndSanitizeInput($_POST['school_level']);
 
     //Validasi npsn tidak boleh duplikat
     $id_school= GetDetailData($Conn, 'school','npsn', $npsn, 'id_school');
@@ -69,9 +79,9 @@
     $id_region = GetDetailData($Conn, 'region','district_code', $district_code, 'id_region');
 
     //Prepared Statement Insert Data
-    $stmt = $Conn->prepare("INSERT INTO school (id_region, npsn, school_name) VALUES (?, ?, ?)");
+    $stmt = $Conn->prepare("INSERT INTO school (id_region, npsn, school_name, school_level) VALUES (?, ?, ?, ?)");
     if($stmt){
-        $stmt->bind_param("iss", $id_region, $npsn, $school_name);
+        $stmt->bind_param("isss", $id_region, $npsn, $school_name, $school_level);
         if($stmt->execute()){
             echo '
                 <div class="alert alert-success">

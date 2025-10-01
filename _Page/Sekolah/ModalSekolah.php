@@ -41,6 +41,7 @@
                                 <option value="district_name">Nama Kab/Kota</option>
                                 <option value="npsn">Kode Sekolah (NPSN)</option>
                                 <option value="school_name">Nama Sekolah</option>
+                                <option value="school_level">Jenjang</option>
                             </select>
                         </div>
                     </div>
@@ -72,6 +73,7 @@
                                 <option value="district_name">Nama Kab/Kota</option>
                                 <option value="npsn">Kode Sekolah (NPSN)</option>
                                 <option value="school_name">Nama Sekolah</option>
+                                <option value="school_level">Jenjang</option>
                             </select>
                         </div>
                     </div>
@@ -150,6 +152,14 @@
                         </div>
                         <div class="col-md-8">
                             <input type="text" name="school_name" id="school_name" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="school_level"><small>Jenjang <i class="bi bi-exclamation-circle" title="Wajib Diisi"></i> </small></label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" name="school_level" id="school_level" class="form-control" required>
                         </div>
                     </div>
                     <div class="row mb-3">

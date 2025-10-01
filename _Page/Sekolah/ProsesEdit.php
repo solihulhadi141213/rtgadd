@@ -55,6 +55,14 @@
         ';
         exit;
     }
+    if(empty($_POST['school_level'])){
+        echo '
+            <div class="alert alert-danger">
+                <small>Jenjang Pendidikan Tidak Boleh Kosong. Silahkan Isi Terlebih Dulu!</small>
+            </div>
+        ';
+        exit;
+    }
 
     //Buat Variabel Dan Sanitasi
     $id_school      = validateAndSanitizeInput($_POST['id_school']);
@@ -62,6 +70,7 @@
     $district_code  = validateAndSanitizeInput($_POST['district_code']);
     $npsn           = validateAndSanitizeInput($_POST['npsn']);
     $school_name    = validateAndSanitizeInput($_POST['school_name']);
+    $school_level   = validateAndSanitizeInput($_POST['school_level']);
 
     //Buka Data Lama
     $Qry = $Conn->prepare("SELECT * FROM school WHERE id_school = ?");
@@ -99,8 +108,8 @@
     $id_region = GetDetailData($Conn, 'region','district_code', $district_code, 'id_region');
 
     //Update Data
-    $QryUpdate = $Conn->prepare("UPDATE school SET id_region=?, npsn=?, school_name=? WHERE id_school=?");
-    $QryUpdate->bind_param("issi", $id_region, $npsn, $school_name, $id_school);
+    $QryUpdate = $Conn->prepare("UPDATE school SET id_region=?, npsn=?, school_name=?, school_level=? WHERE id_school=?");
+    $QryUpdate->bind_param("isssi", $id_region, $npsn, $school_name, $school_level, $id_school);
     if($QryUpdate->execute()){
         echo '
             <div class="alert alert-success">

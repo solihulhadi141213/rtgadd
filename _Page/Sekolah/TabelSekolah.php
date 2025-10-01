@@ -14,7 +14,7 @@
     if(empty($SessionIdAccess)){
         echo '
             <tr>
-                <td colspan="6" class="text-center">
+                <td colspan="7" class="text-center">
                     <small class="text-danger">Sesi Akses Sudah Berakhir! Silahkan Login Ulang!</small>
                 </td>
             </tr>
@@ -59,7 +59,7 @@
 
     //Whitelist kolom yang diizinkan
     $allowed_columns = [
-        'id_school','npsn','school_name',
+        'id_school','npsn','school_name','school_level',
         'province_code','province_name','district_code','district_name'
     ];
     if(!in_array($OrderBy,$allowed_columns)){ $OrderBy='id_school'; }
@@ -89,6 +89,7 @@
                 LEFT JOIN region ON school.id_region=region.id_region
                 WHERE npsn LIKE '%$keyword%' 
                    OR school_name LIKE '%$keyword%'
+                   OR school_level LIKE '%$keyword%'
                    OR province_code LIKE '%$keyword%' 
                    OR province_name LIKE '%$keyword%'
                    OR district_code LIKE '%$keyword%' 
@@ -122,7 +123,7 @@
     if(empty($jml_data)){
         echo '
             <tr>
-                <td colspan="6" class="text-center">
+                <td colspan="7" class="text-center">
                     <small class="text-danger">Tidak Ada Data Yang Ditampilkan!</small>
                 </td>
             </tr>
@@ -150,7 +151,8 @@
                 FROM school 
                 LEFT JOIN region ON school.id_region=region.id_region
                 WHERE npsn LIKE '%$keyword%' 
-                   OR school_name LIKE '%$keyword%'
+                   OR school_name LIKE '%$keyword%' 
+                   OR school_level LIKE '%$keyword%' 
                    OR province_code LIKE '%$keyword%' 
                    OR province_name LIKE '%$keyword%'
                    OR district_code LIKE '%$keyword%' 
@@ -186,6 +188,7 @@
         $id_region      = $data['id_region'];
         $npsn           = $data['npsn'];
         $school_name    = $data['school_name'];
+        $school_level   = $data['school_level'];
         $province       = $data['province_name'];
         $district_name  = $data['district_name'];
         
@@ -196,6 +199,7 @@
                 <td><small>'.$district_name.'</small></td>
                 <td><small>'.$npsn.'</small></td>
                 <td><small>'.$school_name.'</small></td>
+                <td><small>'.$school_level.'</small></td>
                 <td>
                     <button type="button" class="btn btn-sm btn-outline-dark btn-floating"  data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-three-dots-vertical"></i>

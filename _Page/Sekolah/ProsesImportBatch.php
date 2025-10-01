@@ -287,12 +287,19 @@
             continue;
         }
 
+        // Ambil school_level dari awalan school_name
+        $school_level = '';
+        if(!empty($school_name)){
+            $parts = explode(" ", trim($school_name));
+            $school_level = strtoupper($parts[0]); // 👈 MODIFIKASI
+        }
+
         // Validasi Sekolah Duplikat berdasarkan npsn
         $id_school = GetDetailData($Conn, 'school', 'npsn', $npsn, 'id_school');
         
         if(!empty($id_school)){
             // Jika Sudah Ada Update sekolah
-            $sql = "UPDATE school SET id_region = ?, npsn = ?, school_name = ? WHERE id_school = ?";
+            $sql = "UPDATE school SET id_region = ?, npsn = ?, school_name = ?, school_level = ? WHERE id_school = ?";
             $stmt = $Conn->prepare($sql);
             
             if (!$stmt) {
@@ -310,7 +317,7 @@
                 continue;
             }
             
-            $stmt->bind_param("issi", $id_region, $npsn, $school_name, $id_school);
+            $stmt->bind_param("isssi", $id_region, $npsn, $school_name, $school_level, $id_school); // 👈 MODIFIKASI
             $Input = $stmt->execute();
             $stmt->close();
             
@@ -342,7 +349,8 @@
             }
         } else {
             // Jika Belum Ada Lakukan Insert
-            $EntrySchool = "INSERT INTO school (id_region, npsn, school_name) VALUES ('$id_region', '$npsn', '$school_name')";
+            $EntrySchool = "INSERT INTO school (id_region, npsn, school_name, school_level) 
+                            VALUES ('$id_region', '$npsn', '$school_name', '$school_level')"; // 👈 MODIFIKASI
             $InputSchool = mysqli_query($Conn, $EntrySchool);
             
             if($InputSchool) {

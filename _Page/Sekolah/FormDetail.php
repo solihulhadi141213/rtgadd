@@ -62,6 +62,7 @@
         $id_region      = showOrDash($Data['id_region']);
         $npsn           = showOrDash($Data['npsn']);
         $school_name    = showOrDash($Data['school_name']);
+        $school_level    = showOrDash($Data['school_level']);
 
         //Buka Region
         $province_code      = GetDetailData($Conn, 'region', 'id_region', $id_region, 'province_code');
@@ -104,6 +105,13 @@
                 <div class="col-1"><small>:</small></div>
                 <div class="col-7">
                     <small class="text text-grayish">'.$npsn.'</small>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-4"><small>Jenjang</small></div>
+                <div class="col-1"><small>:</small></div>
+                <div class="col-7">
+                    <small class="text text-grayish">'.$school_level.'</small>
                 </div>
             </div>
             <div class="row mb-2">

@@ -63,6 +63,7 @@
     $id_region      = $Data['id_region'];
     $npsn           = $Data['npsn'];
     $school_name    = $Data['school_name'];
+    $school_level   = $Data['school_level'];
 
     //Buka Region
     $province_code      = GetDetailData($Conn, 'region', 'id_region', $id_region, 'province_code');
@@ -136,5 +137,13 @@
     </div>
     <div class="col-md-8">
         <input type="text" name="school_name" id="school_name_edit" class="form-control" value="<?php echo $school_name; ?>" required>
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="col-md-4">
+        <label for="school_level_edit"><small>Jenjang <i class="bi bi-exclamation-circle" title="Wajib Diisi"></i> </small></label>
+    </div>
+    <div class="col-md-8">
+        <input type="text" name="school_level" id="school_level_edit" class="form-control" value="<?php echo $school_level; ?>" required>
     </div>
 </div>
