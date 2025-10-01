@@ -6,46 +6,26 @@
     date_default_timezone_set("Asia/Jakarta");
     $JmlHalaman=0;
     $page=0;
-    //Validasi Akses
+
     if(empty($SessionIdAccess)){
         echo '
             <tr>
-                <td colspan="10" class="text-center">
+                <td colspan="16" class="text-center">
                     <small class="text-danger">Sesi Akses Sudah Berakhir! Silahkan Login Ulang!</small>
                 </td>
             </tr>
         ';
     }else{
         //Keyword_by
-        if(!empty($_POST['keyword_by'])){
-            $keyword_by=$_POST['keyword_by'];
-        }else{
-            $keyword_by="";
-        }
+        $keyword_by = !empty($_POST['keyword_by']) ? $_POST['keyword_by'] : "";
         //keyword
-        if(!empty($_POST['keyword'])){
-            $keyword=$_POST['keyword'];
-        }else{
-            $keyword="";
-        }
+        $keyword    = !empty($_POST['keyword']) ? $_POST['keyword'] : "";
         //batas
-        if(!empty($_POST['batas'])){
-            $batas=$_POST['batas'];
-        }else{
-            $batas="10";
-        }
+        $batas      = !empty($_POST['batas']) ? $_POST['batas'] : "10";
         //ShortBy
-        if(!empty($_POST['ShortBy'])){
-            $ShortBy=$_POST['ShortBy'];
-        }else{
-            $ShortBy="DESC";
-        }
+        $ShortBy    = !empty($_POST['ShortBy']) ? $_POST['ShortBy'] : "DESC";
         //OrderBy
-        if(!empty($_POST['OrderBy'])){
-            $OrderBy=$_POST['OrderBy'];
-        }else{
-            $OrderBy="id_position_region";
-        }
+        $OrderBy    = !empty($_POST['OrderBy']) ? $_POST['OrderBy'] : "pr.id_position_region";
         //Atur Page
         if(!empty($_POST['page'])){
             $page=$_POST['page'];
@@ -54,81 +34,109 @@
             $page="1";
             $posisi = 0;
         }
-        if(empty($keyword_by)){
-            if(empty($keyword)){
-                $jml_data = mysqli_num_rows(mysqli_query($Conn, "SELECT id_position_region FROM position_region "));
-            }else{
-                $jml_data = mysqli_num_rows(mysqli_query($Conn, "SELECT id_position_region FROM position_region WHERE province like '%$keyword%' OR regency like '%$keyword%' OR department like '%$keyword%'"));
-            }
+
+        //Mapping kolom agar aman
+        $allowed_columns = [
+            "province_name" => "r.province_name",
+            "district_name" => "r.district_name",
+            "position_name" => "p.position_name",
+            "abk" => "pr.abk",
+            "asn" => "pr.asn",
+            "jumlah_guru" => "pr.jumlah_guru",
+            "kurang_guru" => "pr.kurang_guru",
+            "jumlah_asn" => "pr.jumlah_asn",
+            "kurang_asn" => "pr.kurang_asn",
+            "id_position_region" => "pr.id_position_region"
+        ];
+
+        if(array_key_exists($OrderBy, $allowed_columns)){
+            $OrderBy = $allowed_columns[$OrderBy];
         }else{
-            if(empty($keyword)){
-                $jml_data = mysqli_num_rows(mysqli_query($Conn, "SELECT id_position_region FROM position_region "));
+            $OrderBy = "pr.id_position_region";
+        }
+        if(array_key_exists($keyword_by, $allowed_columns)){
+            $keyword_by = $allowed_columns[$keyword_by];
+        }else{
+            $keyword_by = "";
+        }
+
+        //Query dasar join
+        $baseQuery = "
+            FROM position_region pr
+            LEFT JOIN region r ON pr.id_region = r.id_region
+            LEFT JOIN position p ON pr.id_position = p.id_position
+        ";
+
+        //Filter
+        $where = "";
+        if(!empty($keyword)){
+            if(empty($keyword_by)){
+                $where = "WHERE r.province_name LIKE '%$keyword%' 
+                          OR r.district_name LIKE '%$keyword%' 
+                          OR p.position_name LIKE '%$keyword%'";
             }else{
-                $jml_data = mysqli_num_rows(mysqli_query($Conn, "SELECT id_position_region FROM position_region  WHERE $keyword_by like '%$keyword%'"));
+                $where = "WHERE $keyword_by LIKE '%$keyword%'";
             }
         }
-        
-        //Mengatur Halaman
+
+        //Hitung total
+        $sqlCount = "SELECT COUNT(pr.id_position_region) as jml ".$baseQuery." ".$where;
+        $resCount = mysqli_query($Conn, $sqlCount);
+        $rowCount = mysqli_fetch_assoc($resCount);
+        $jml_data = $rowCount['jml'];
+
         $JmlHalaman = ceil($jml_data/$batas); 
         if(empty($jml_data)){
             echo '
                 <tr>
-                    <td colspan="10" class="text-center">
+                    <td colspan="16" class="text-center">
                         <small class="text-danger">Tidak Ada Data Yang Ditampilkan!</small>
                     </td>
                 </tr>
             ';
         }else{
             $no = 1+$posisi;
-            //KONDISI PENGATURAN MASING FILTER
-            if(empty($keyword_by)){
-                if(empty($keyword)){
-                    $query = mysqli_query($Conn, "SELECT*FROM position_region  ORDER BY $OrderBy $ShortBy LIMIT $posisi, $batas");
-                }else{
-                    $query = mysqli_query($Conn, "SELECT*FROM position_region  WHERE province like '%$keyword%' OR regency like '%$keyword%' OR department like '%$keyword%' ORDER BY $OrderBy $ShortBy LIMIT $posisi, $batas");
-                }
-            }else{
-                if(empty($keyword)){
-                    $query = mysqli_query($Conn, "SELECT*FROM position_region  ORDER BY $OrderBy $ShortBy LIMIT $posisi, $batas");
-                }else{
-                    $query = mysqli_query($Conn, "SELECT*FROM position_region  WHERE $keyword_by like '%$keyword%' ORDER BY $OrderBy $ShortBy LIMIT $posisi, $batas");
-                }
-            }
+            $sqlData = "SELECT pr.*, r.province_name, r.district_name, p.position_name 
+                        ".$baseQuery." 
+                        ".$where." 
+                        ORDER BY $OrderBy $ShortBy 
+                        LIMIT $posisi, $batas";
+            $query = mysqli_query($Conn, $sqlData);
+
             while ($data = mysqli_fetch_array($query)) {
                 $id_position_region = $data['id_position_region'];
-                $province= $data['province'];
-                $regency= $data['regency'];
-                $department= $data['department'];
-                $workload= $data['workload'];
-                $officials_public= $data['officials_public'];
-                $officials_private= $data['officials_private'];
-                $manpower_gap= $data['manpower_gap'];
+                $province_name = $data['province_name'];
+                $district_name = $data['district_name'];
+                $position_name = $data['position_name'];
+                $abk = $data['abk'];
+                $asn = $data['asn'];
+                $asn_di_negeri = $data['asn_di_negeri'];
+                $asn_di_swasta = $data['asn_di_swasta'];
+                $NonASN_sblmOkt2022 = $data['NonASN_sblmOkt2022'];
+                $NonASN_stlhOkt2022 = $data['NonASN_stlhOkt2022'];
+                $pppk2024 = $data['pppk2024'];
+                $jumlah_guru = $data['jumlah_guru'];
+                $kurang_guru = $data['kurang_guru'];
+                $jumlah_asn = $data['jumlah_asn'];
+                $kurang_asn = $data['kurang_asn'];
 
                 echo '
                     <tr>
-                        <td>
-                            <input type="checkbox" name="id_position_region[]" class="form-check-input" value="'.$id_position_region .'">
-                        </td>
                         <td><small>'.$no.'</small></td>
-                        <td>
-                            <a href="javascript:void(0);" class="text text-decoration-underline" data-bs-toggle="modal" data-bs-target="#ModalDetailProvinsi" data-id="'.$province .'">
-                                <small>'.$province.'</small>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="javascript:void(0);" class="text text-decoration-underline" data-bs-toggle="modal" data-bs-target="#ModalDetailKabupaten" data-id="'.$regency .'">
-                                <small>'.$regency.'</small>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="javascript:void(0);" class="text text-decoration-underline" data-bs-toggle="modal" data-bs-target="#ModalDetailJabatan" data-id="'.$department .'">
-                                <small>'.$department.'</small>
-                            </a>
-                        </td>
-                        <td><small>'.$workload.'</small></td>
-                        <td><small>'.$officials_public.'</small></td>
-                        <td><small>'.$officials_private.'</small></td>
-                        <td><small>'.$manpower_gap.'</small></td>
+                        <td><small>'.$province_name.'</small></td>
+                        <td><small>'.$district_name.'</small></td>
+                        <td><small>'.$position_name.'</small></td>
+                        <td><small>'.$abk.'</small></td>
+                        <td><small>'.$asn.'</small></td>
+                        <td><small>'.$asn_di_negeri.'</small></td>
+                        <td><small>'.$asn_di_swasta.'</small></td>
+                        <td><small>'.$pppk2024.'</small></td>
+                        <td><small>'.$NonASN_sblmOkt2022.'</small></td>
+                        <td><small>'.$NonASN_stlhOkt2022.'</small></td>
+                        <td><small>'.$jumlah_guru.'</small></td>
+                        <td><small>'.$kurang_guru.'</small></td>
+                        <td><small>'.$jumlah_asn.'</small></td>
+                        <td><small>'.$kurang_asn.'</small></td>
                         <td>
                             <button type="button" class="btn btn-sm btn-outline-dark btn-floating"  data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-three-dots-vertical"></i>
@@ -162,14 +170,9 @@
     }
 ?>
 <script>
-    //Creat Javascript Variabel
     var page_count=<?php echo $JmlHalaman; ?>;
     var curent_page=<?php echo $page; ?>;
-    
-    //Put Into Pagging Element
     $('#page_info').html('Page '+curent_page+' Of '+page_count+'');
-    
-    //Set Pagging Button
     if(curent_page==1){
         $('#prev_button').prop('disabled', true);
     }else{

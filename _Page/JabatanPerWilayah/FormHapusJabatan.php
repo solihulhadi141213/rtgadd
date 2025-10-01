@@ -53,15 +53,26 @@
         $Qry->close();
 
         //Buat Variabel
-        $province           = $Data['province'];
-        $regency            = $Data['regency'];
-        $department         = $Data['department'];
-        $workload           = $Data['workload'];
-        $officials_public   = $Data['officials_public'];
-        $officials_private  = $Data['officials_private'];
-        $manpower_gap       = $Data['manpower_gap'];
+        $id_region          = $Data['id_region'];
+        $id_position        = $Data['id_position'];
+        $abk                = $Data['abk'];
+        $asn                = $Data['asn'];
+        $asn_di_negeri      = $Data['asn_di_negeri'];
+        $asn_di_swasta      = $Data['asn_di_swasta'];
+        $NonASN_sblmOkt2022 = $Data['NonASN_sblmOkt2022'];
+        $NonASN_stlhOkt2022 = $Data['NonASN_stlhOkt2022'];
+        $pppk2024           = $Data['pppk2024'];
+        $jumlah_guru        = $Data['jumlah_guru'];
+        $kurang_guru        = $Data['kurang_guru'];
+        $jumlah_asn         = $Data['jumlah_asn'];
+        $kurang_asn         = $Data['kurang_asn'];
 
-        
+        //Buka Provinsi dan Kab/Kota
+        $province_name      = GetDetailData($Conn, 'region', 'id_region', $id_region, 'province_name');
+        $district_name      = GetDetailData($Conn, 'region', 'id_region', $id_region, 'district_name');
+
+        //Buka Ddata Jabatan
+        $position_name      = GetDetailData($Conn, 'position', 'id_position', $id_position, 'position_name');
 
         //Tampilkan Data
         echo '
@@ -72,29 +83,104 @@
                 <div class="col-4"><small>Provinsi</small></div>
                 <div class="col-1"><small>:</small></div>
                 <div class="col-7">
-                    <small class="text text-grayish">'.$province.'</small>
+                    <small class="text text-grayish">'.$province_name.'</small>
                 </div>
             </div>
             <div class="row mb-2">
                 <div class="col-4"><small>Kab/Kota</small></div>
                 <div class="col-1"><small>:</small></div>
                 <div class="col-7">
-                    <small class="text text-grayish">'.$regency.'</small>
+                    <small class="text text-grayish">'.$district_name.'</small>
                 </div>
             </div>
             <div class="row mb-2">
                 <div class="col-4"><small>Jabatan</small></div>
                 <div class="col-1"><small>:</small></div>
                 <div class="col-7">
-                    <small class="text text-grayish">'.$department.'</small>
+                    <small class="text text-grayish">'.$position_name.'</small>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12 text-center">
-                    <div class="alert alert-danger">
-                        <small>
-                            Apakah anda yakin akan menghapus data tersebut?
-                        </small>
+            <div class="row mb-2">
+                <div class="col-4"><small>AKB</small></div>
+                <div class="col-1"><small>:</small></div>
+                <div class="col-7">
+                    <small class="text text-grayish">'.$abk.'</small>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-4"><small>ASN</small></div>
+                <div class="col-1"><small>:</small></div>
+                <div class="col-7">
+                    <small class="text text-grayish">'.$asn.'</small>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-4"><small>ASN-Sekolah Negeri</small></div>
+                <div class="col-1"><small>:</small></div>
+                <div class="col-7">
+                    <small class="text text-grayish">'.$asn_di_negeri.'</small>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-4"><small>ASN-Sekolah Swasta</small></div>
+                <div class="col-1"><small>:</small></div>
+                <div class="col-7">
+                    <small class="text text-grayish">'.$asn_di_swasta.'</small>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-4"><small>Non ASN Sebelum Oktober 2022</small></div>
+                <div class="col-1"><small>:</small></div>
+                <div class="col-7">
+                    <small class="text text-grayish">'.$NonASN_sblmOkt2022.'</small>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-4"><small>Non ASN Sesudah Oktober 2022</small></div>
+                <div class="col-1"><small>:</small></div>
+                <div class="col-7">
+                    <small class="text text-grayish">'.$NonASN_stlhOkt2022.'</small>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-4"><small>PPPK 2024</small></div>
+                <div class="col-1"><small>:</small></div>
+                <div class="col-7">
+                    <small class="text text-grayish">'.$pppk2024.'</small>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-4"><small>Jumlah Guru</small></div>
+                <div class="col-1"><small>:</small></div>
+                <div class="col-7">
+                    <small class="text text-grayish">'.$jumlah_guru.'</small>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-4"><small>Kurang Guru</small></div>
+                <div class="col-1"><small>:</small></div>
+                <div class="col-7">
+                    <small class="text text-grayish">'.$kurang_guru.'</small>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-4"><small>Jumlah ASN</small></div>
+                <div class="col-1"><small>:</small></div>
+                <div class="col-7">
+                    <small class="text text-grayish">'.$jumlah_asn.'</small>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-4"><small>Kekurangan ASN</small></div>
+                <div class="col-1"><small>:</small></div>
+                <div class="col-7">
+                    <small class="text text-grayish">'.$kurang_asn.'</small>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-12">
+                    <div class="alert alert-warning">
+                        <small>Apakah anda yakin akan menghapus data tersebut?</small>
                     </div>
                 </div>
             </div>

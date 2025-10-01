@@ -35,13 +35,20 @@
                         <div class="col-8">
                             <select name="OrderBy" id="OrderBy" class="form-control">
                                 <option value="">Pilih</option>
-                                <option value="province">Provinsi</option>
-                                <option value="regency">Kab/Kota</option>
-                                <option value="department">Jabatan</option>
-                                <option value="workload">ABK</option>
-                                <option value="officials_public">ASN Di Negeri</option>
-                                <option value="officials_private">ASN Di Swasta</option>
-                                <option value="manpower_gap">Kekurangan ASN</option>
+                                <option value="province_name">Provinsi</option>
+                                <option value="district_name">Kab/Kota</option>
+                                <option value="position_name">Jabatan</option>
+                                <option value="abk">ABK</option>
+                                <option value="asn">ASN</option>
+                                <option value="asn_di_negeri">ASN Di Negeri</option>
+                                <option value="asn_di_swasta">ASN Di Swasta</option>
+                                <option value="NonASN_sblmOkt2022">Non ASN Sebelum Oktober 2022</option>
+                                <option value="NonASN_stlhOkt2022">Non ASN Setelah Oktober 2022</option>
+                                <option value="pppk2024">PPPK 2024</option>
+                                <option value="jumlah_guru">Jumlah Guru</option>
+                                <option value="kurang_guru">Kurang Guru</option>
+                                <option value="jumlah_asn">Jumlah ASN</option>
+                                <option value="kurang_asn">Kekurangan ASN</option>
                             </select>
                         </div>
                     </div>
@@ -67,9 +74,9 @@
                         <div class="col-8">
                             <select name="keyword_by" id="KeywordBy" class="form-control">
                                 <option value="">Pilih</option>
-                                <option value="province">Provinsi</option>
-                                <option value="regency">Kab/Kota</option>
-                                <option value="department">Jabatan</option>
+                                <option value="province_name">Provinsi</option>
+                                <option value="district_name">Kab/Kota</option>
+                                <option value="position_name">Jabatan</option>
                             </select>
                         </div>
                     </div>
@@ -97,7 +104,7 @@
     </div>
 </div>
 <div class="modal fade" id="ModalTambahJabatan" tabindex="-1">
-    <div class="modal-dialog modal-md">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <form action="javascript:void(0);" id="ProsesTambahJabatan" autocomplete="off">
                 <div class="modal-header">
@@ -107,72 +114,162 @@
                 <div class="modal-body">
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <label for="province">
+                            <label for="province_code">
                                 <small>Provinsi <i class="bi bi-exclamation-circle" title="Wajib Diisi"></i></small>
                             </label>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" name="province" id="province" class="form-control" required>
+                            <select name="province_code" id="province_code" class="form-control" required>
+                                <option value="">Pilih</option>
+                                <?php
+                                    //Menampilkan list provinsi
+                                    $query = mysqli_query($Conn, "SELECT province_code, province_name FROM region WHERE category='Province' ORDER BY province_name ASC");
+                                    while ($data = mysqli_fetch_array($query)) {
+                                        $province_code      = $data['province_code'];
+                                        $province_name      = $data['province_name'];
+                                        echo '<option value="'.$province_code.'">'.$province_name.'</option>';
+                                    }
+                                ?>
+                            </select>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <label for="regency">
+                            <label for="district_code">
                                 <small>Kab/Kota <i class="bi bi-exclamation-circle" title="Wajib Diisi"></i></small>
                             </label>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" name="regency" id="regency" class="form-control" required>
+                            <select name="district_code" id="district_code" class="form-control" required>
+                                <option value="">Pilih</option>
+                            </select>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <label for="department">
+                            <label for="id_position">
                                 <small>Jabatan/Posisi <i class="bi bi-exclamation-circle" title="Wajib Diisi"></i></small>
                             </label>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" name="department" id="department" class="form-control" required>
+                            <select name="id_position" id="id_position" class="form-control" required>
+                                <option value="">Pilih</option>
+                                <?php
+                                    //Menampilkan list provinsi
+                                    $query = mysqli_query($Conn, "SELECT id_position, position_name FROM position ORDER BY position_name ASC");
+                                    while ($data = mysqli_fetch_array($query)) {
+                                        $id_position        = $data['id_position'];
+                                        $position_name      = $data['position_name'];
+                                        echo '<option value="'.$id_position.'">'.$position_name.'</option>';
+                                    }
+                                ?>
+                            </select>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <label for="workload">
-                                <small>ABK</small>
-                            </label>
+                            <label for="abk"><small>ABK</small></label>
                         </div>
                         <div class="col-md-8">
-                            <input type="number" name="workload" id="workload" class="form-control">
+                            <input type="number" name="abk" id="abk" class="form-control">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <label for="officials_public">
-                                <small>ASN Sekolah Negeri</small>
-                            </label>
+                            <label for="asn"><small>ASN</small></label>
                         </div>
                         <div class="col-md-8">
-                            <input type="number" name="officials_public" id="officials_public" class="form-control">
+                            <input type="number" name="asn" id="asn" class="form-control">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <label for="officials_private">
-                                <small>ASN Sekolah Swasta</small>
+                            <label for="asn_di_negeri">
+                                <small>ASN Di Sekolah Negeri</small>
                             </label>
                         </div>
                         <div class="col-md-8">
-                            <input type="number" name="officials_private" id="officials_private" class="form-control">
+                            <input type="number" name="asn_di_negeri" id="asn_di_negeri" class="form-control">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <label for="manpower_gap">
-                                <small>Kekurangan ASN</small>
+                            <label for="asn_di_swasta">
+                                <small>ASN Di Sekolah Swasta</small>
                             </label>
                         </div>
                         <div class="col-md-8">
-                            <input type="number" name="manpower_gap" id="manpower_gap" class="form-control">
+                            <input type="number" name="asn_di_swasta" id="asn_di_swasta" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="NonASN_sblmOkt2022">
+                                <small>Non ASN Sebelum Oktober 2022</small>
+                            </label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="number" name="NonASN_sblmOkt2022" id="NonASN_sblmOkt2022" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="NonASN_stlhOkt2022">
+                                <small>Non ASN Setelah Oktober 2022</small>
+                            </label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="number" name="NonASN_stlhOkt2022" id="NonASN_stlhOkt2022" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="pppk2024">
+                                <small>PPPK 2024</small>
+                            </label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="number" name="pppk2024" id="pppk2024" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="jumlah_guru">
+                                <small>Jumlah Guru</small>
+                            </label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="number" name="jumlah_guru" id="jumlah_guru" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="kurang_guru">
+                                <small>Kurang Guru</small>
+                            </label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="number" name="kurang_guru" id="kurang_guru" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="jumlah_asn">
+                                <small>Jumlah ASN</small>
+                            </label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="number" name="jumlah_asn" id="jumlah_asn" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="kurang_asn">
+                                <small>Kurang ASN</small>
+                            </label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="number" name="kurang_asn" id="kurang_asn" class="form-control">
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -220,7 +317,7 @@
 </div>
 
 <div class="modal fade" id="ModalEditJabatan" tabindex="-1">
-    <div class="modal-dialog modal-md">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <form action="javascript:void(0);" id="ProsesEditJabatan">
                 <div class="modal-header">
@@ -317,7 +414,7 @@
                         <form id="ProsesImportJabatan" action="javascript:void(0);">
                             <div class="input-group">
                                 <input type="file" name="data_jabatan" class="form-control" accept=".xlsx,.xls">
-                                <a href="_Page/JabatanPerWilayah/Template-1.xlsx" class="btn btn-md btn-info" role="button" aria-label="Unduh Template Excel">
+                                <a href="_Page/JabatanPerWilayah/Template-Jabatan-Per-Wilayah.xlsx" class="btn btn-md btn-info" role="button" aria-label="Unduh Template Excel">
                                     <i class="bi bi-download"></i> Template
                                 </a>
                                 <button type="submit" class="btn btn-md btn-primary">
@@ -337,16 +434,12 @@
                                         <th><b>Provinsi</b></th>
                                         <th><b>Kabupaten</b></th>
                                         <th><b>Jabatan</b></th>
-                                        <th><b>ABK</b></th>
-                                        <th><b>ASN-Negeri</b></th>
-                                        <th><b>ASN-Swasta</b></th>
-                                        <th><b>Kurang ASN</b></th>
                                         <th><b>Keterangan</b></th>
                                     </tr>
                                 </thead>
                                 <tbody id="NotifikasiImportJabatan">
                                     <tr>
-                                        <td colspan="9" class="text-center">
+                                        <td colspan="5" class="text-center">
                                             <small class="text-danger">Belum Ada Proses Import</small>
                                         </td>
                                     </tr>

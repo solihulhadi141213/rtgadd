@@ -21,6 +21,22 @@ function filterAndLoadTableJabatan() {
     });
 }
 
+//Fungsi Cek Duplikasi Data
+function CekDuplikasi() {
+    var ProsesTambahJabatan = $('#ProsesTambahJabatan').serialize();
+    $('#NotifikasiTambahJabatan').html('Loading...');
+    
+    //Menampilkan Hasil Pada 'NotifikasiTambahJabatan'
+    $.ajax({
+        type    : 'POST',
+        url     : '_Page/JabatanPerWilayah/CekDuplikasi.php',
+        data    : ProsesTambahJabatan,
+        success : function(data) {
+            $('#NotifikasiTambahJabatan').html(data);
+        }
+    });
+}
+
 //Menampilkan Data Pertama Kali
 $(document).ready(function() {
     filterAndLoadTableJabatan();
@@ -59,22 +75,33 @@ $(document).ready(function() {
         });
     });
 
-    // Check/uncheck semua Data Jabatan Per Wilayah
-    $('input[name="check_all"]').on('change', function() {
-        let isChecked = $(this).is(':checked');
-        $('#TabelJabatanPerWilayah input[name="id_position_region[]"]').prop('checked', isChecked);
-    });
-
-    // Jika semua Data Jabatan Per Wilayah di-check manual, otomatis check_all ikut tercentang
-    $(document).on('change', '#TabelJabatanPerWilayah input[name="id_position_region[]"]', function() {
-        let total = $('#TabelJabatanPerWilayah input[name="id_position_region[]"]').length;
-        let checked = $('#TabelJabatanPerWilayah input[name="id_position_region[]"]:checked').length;
-        $('input[name="check_all"]').prop('checked', total === checked);
-    });
-
     //Ketika Modal Tambah Fitur Muncul
     $('#ModalTambahJabatan').on('show.bs.modal', function (e) {
         $('#NotifikasiTambahJabatan').html('');
+    });
+
+    //Ketika memilih province_code
+    $('#province_code').change(function(){
+        var province_code = $('#province_code').val();
+        
+        //Reload Data Kab/Kota dengan ajax
+        $.ajax({
+            type 	    : 'POST',
+            url 	    : '_Page/JabatanPerWilayah/FormSelectDistrict.php',
+            data        : {province_code: province_code},
+            success     : function(data){
+                $('#district_code').html(data);
+            }
+        });
+
+        CekDuplikasi();
+    });
+
+    $('#district_code').change(function(){
+        CekDuplikasi();
+    });
+    $('#id_position').change(function(){
+        CekDuplikasi();
     });
 
     //Proses Tambah Jabatan
@@ -243,6 +270,7 @@ $(document).ready(function() {
     $('#ProsesImportJabatan').submit(function(){
         var form = $('#ProsesImportJabatan')[0];
         var data = new FormData(form);
+        $('#NotifikasiImportJabatan').html('<tr><td colspan="5" class="text-center">Loading...</td></tr>');
         $.ajax({
             type 	    : 'POST',
             url 	    : '_Page/JabatanPerWilayah/ProsesImportJabatan.php',
@@ -286,6 +314,7 @@ $(document).ready(function() {
 
     //Proses Hapus Jabatan (Multiple)
     $('#ProsesHapusJabatanMultiple').submit(function(){
+        $('#NotifikasiHapusJabatanMultiple').html('Loading...');
         var form = $('#ProsesHapusJabatanMultiple')[0];
         var data = new FormData(form);
         $.ajax({
