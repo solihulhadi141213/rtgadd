@@ -15,6 +15,7 @@
             "Wilayah"           =>  "_Page/Wilayah/Wilayah.php",
             "Sekolah"           =>  "_Page/Sekolah/Sekolah.php",
             "Jabatan"           =>  "_Page/Jabatan/Jabatan.php",
+            "Instansi"          =>  "_Page/Instansi/Instansi.php",
             "JabatanPerWilayah" =>  "_Page/JabatanPerWilayah/JabatanPerWilayah.php",
             "AbkPerSekolah"     =>  "_Page/AbkPerSekolah/AbkPerSekolah.php",
             "GeoJson"           =>  "_Page/GeoJson/GeoJson.php",

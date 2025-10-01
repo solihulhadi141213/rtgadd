@@ -17,6 +17,7 @@
             "Wilayah"           => "_Page/Wilayah/Wilayah.js",
             "Sekolah"           => "_Page/Sekolah/Sekolah.js",
             "Jabatan"           => "_Page/Jabatan/Jabatan.js",
+            "Instansi"          => "_Page/Instansi/Instansi.js",
             "JabatanPerWilayah" => "_Page/JabatanPerWilayah/JabatanPerWilayah.js",
             "AbkPerSekolah"     => "_Page/AbkPerSekolah/AbkPerSekolah.js",
             "GeoJson"           => "_Page/GeoJson/GeoJson.js",
