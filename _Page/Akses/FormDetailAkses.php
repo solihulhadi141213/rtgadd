@@ -67,7 +67,20 @@
         $id_access_group    =$Data['id_access_group'];
         $access_name        =$Data['access_name'];
         $access_email       =$Data['access_email'];
-        $access_contact     =$Data['access_contact'];
+        if (!empty($Data['access_contact'])) {
+            $access_contact = $Data['access_contact'];
+            $length = strlen($access_contact);
+
+            if ($length > 3) {
+                // Kalau lebih dari 3 digit → sembunyikan 3 digit terakhir
+                $access_contact = substr($access_contact, 0, $length - 3) . 'xxx';
+            } else {
+                // Kalau 3 digit atau kurang → sembunyikan semua
+                $access_contact = str_repeat('x', $length);
+            }
+        } else {
+            $access_contact = "-";
+        }
         $access_foto_saya   =$Data['access_foto'];
 
         //Buka Nama Group

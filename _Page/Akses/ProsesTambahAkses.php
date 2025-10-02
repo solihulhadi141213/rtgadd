@@ -40,6 +40,13 @@
         exit;
     }
 
+    //Validasi Email Duplikat
+    $validasi_email_duplikat = mysqli_num_rows(mysqli_query($Conn, "SELECT id_access FROM access WHERE access_email='$email_akses'"));
+    if(!empty($validasi_email_duplikat)){
+        echo '<div class="alert alert-danger"><small>Email yang anda gunakan sudah terdaftar</small></div>';
+        exit;
+    }
+
     // Hash password
     $password = password_hash($password1, PASSWORD_DEFAULT);
 

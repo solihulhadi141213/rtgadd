@@ -98,7 +98,20 @@
                 $id_access_group    = $data['id_access_group'];
                 $access_name        = $data['access_name'];
                 $access_email       = $data['access_email'];
-                $access_contact     = $data['access_contact'];
+                if (!empty($data['access_contact'])) {
+                    $access_contact = $data['access_contact'];
+                    $length = strlen($access_contact);
+
+                    if ($length > 3) {
+                        // Kalau lebih dari 3 digit → sembunyikan 3 digit terakhir
+                        $access_contact = substr($access_contact, 0, $length - 3) . 'xxx';
+                    } else {
+                        // Kalau 3 digit atau kurang → sembunyikan semua
+                        $access_contact = str_repeat('x', $length);
+                    }
+                } else {
+                    $access_contact = "-";
+                }
 
                 //Buka Nama Entitas
                 $group_name     = GetDetailData($Conn, 'access_group', 'id_access_group', $id_access_group, 'group_name');

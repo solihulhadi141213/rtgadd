@@ -30,8 +30,17 @@
     $id_access_group    = intval($_POST['akses']); // integer
 
     // --- Ambil id_access_group lama ---
-    $id_access_group_lama = GetDetailData($Conn, 'access', 'id_access', $id_access, 'id_access_group');
+    $id_access_group_lama   = GetDetailData($Conn, 'access', 'id_access', $id_access, 'id_access_group');
+    $access_email_lama      = GetDetailData($Conn, 'access', 'id_access', $id_access, 'access_email');
 
+    //Validasi duplikat
+    if($access_email!==$access_email_lama){
+        $validasi_email_duplikat = mysqli_num_rows(mysqli_query($Conn, "SELECT id_access FROM access WHERE access_email='$access_email'"));
+        if(!empty($validasi_email_duplikat)){
+            echo '<div class="alert alert-danger"><small>Email yang anda gunakan sudah terdaftar</small></div>';
+            exit;
+        }
+    }
     // --- Update data access ---
     $sql = "UPDATE access SET id_access_group=?, access_name=?, access_email=?, access_contact=? WHERE id_access=?";
     $stmt = $Conn->prepare($sql);
