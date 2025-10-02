@@ -35,17 +35,23 @@
                         <div class="col-8">
                             <select name="OrderBy" id="OrderBy" class="form-control">
                                 <option value="">Pilih</option>
-                                <option value="province">Provinsi</option>
-                                <option value="regency">Kab/Kota</option>
-                                <option value="school_name">Sekolah</option>
-                                <option value="position_name">Jabatan</option>
+                                <option value="province_code">Kode Provinsi</option>
+                                <option value="province_name">Nama Provinsi</option>
+                                <option value="district_code">Kode Kab/Kota</option>
+                                <option value="district_name">Nama Kab/Kota</option>
+                                <option value="npsn">Kode Sekolah</option>
+                                <option value="school_name">Nama Sekolah</option>
+                                <option value="position_code">Kode Jabatan</option>
+                                <option value="position_name">Nama Jabatan</option>
                                 <option value="abk">ABK</option>
                                 <option value="asn">ASN</option>
                                 <option value="PPPK2024">PPPK 2024</option>
-                                <option value="NonASN_sblmOkt2022">Non ASN < Oktober 2022</option>
-                                <option value="NonASN_stlhOkt2022">Non ASN > Oktober 2022</option>
+                                <option value="NonASN_sblmOkt2022">Non ASN Sebelum Oktober 2022</option>
+                                <option value="NonASN_stlhOkt2022">Non ASN Setelah Oktober 2022</option>
                                 <option value="JmlGuru">Jumlah Guru</option>
                                 <option value="KurangGuru">Kurang Guru</option>
+                                <option value="JmlASN">Jumlah ASN</option>
+                                <option value="KrngASN">Kurang ASN</option>
                             </select>
                         </div>
                     </div>
@@ -71,10 +77,14 @@
                         <div class="col-8">
                             <select name="keyword_by" id="KeywordBy" class="form-control">
                                 <option value="">Pilih</option>
-                                <option value="province">Provinsi</option>
-                                <option value="regency">Kab/Kota</option>
-                                <option value="school_name">Sekolah</option>
-                                <option value="position_name">Jabatan</option>
+                                <option value="province_code">Kode Provinsi</option>
+                                <option value="province_name">Nama Provinsi</option>
+                                <option value="district_code">Kode Kab/Kota</option>
+                                <option value="district_name">Nama Kab/Kota</option>
+                                <option value="npsn">Kode Sekolah</option>
+                                <option value="school_name">Nama Sekolah</option>
+                                <option value="position_code">Kode Jabatan</option>
+                                <option value="position_name">Nama Jabatan</option>
                             </select>
                         </div>
                     </div>
@@ -102,87 +112,147 @@
     </div>
 </div>
 <div class="modal fade" id="ModalTambah" tabindex="-1">
-    <div class="modal-dialog modal-md">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form action="javascript:void(0);" id="ProsesTambahJabatan" autocomplete="off">
+            <form action="javascript:void(0);" id="ProsesTambah" autocomplete="off">
                 <div class="modal-header">
-                    <h5 class="modal-title text-dak"><i class="bi bi-plus"></i> Tambah Jabatan Per Wilayah</h5>
+                    <h5 class="modal-title text-dak"><i class="bi bi-plus"></i> Tambah AKB Per Sekolah</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <label for="province">
-                                <small>Provinsi <i class="bi bi-exclamation-circle" title="Wajib Diisi"></i></small>
-                            </label>
+                            <label for="province_code"><small>Provinsi <i class="bi bi-exclamation-circle" title="Wajib Diisi"></i> </small></label>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" name="province" id="province" class="form-control" required>
+                            <select name="province_code" id="province_code" class="form-control" required>
+                                <option value="">Pilih</option>
+                                <?php
+                                    //Menampilkan list provinsi
+                                    $query = mysqli_query($Conn, "SELECT province_code, province_name FROM region WHERE category='Province' ORDER BY province_name ASC");
+                                    while ($data = mysqli_fetch_array($query)) {
+                                        $province_code      = $data['province_code'];
+                                        $province_name      = $data['province_name'];
+                                        echo '<option value="'.$province_code.'">'.$province_name.'</option>';
+                                    }
+                                ?>
+                            </select>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <label for="regency">
-                                <small>Kab/Kota <i class="bi bi-exclamation-circle" title="Wajib Diisi"></i></small>
-                            </label>
+                            <label for="district_code"><small>Kab/Kota <i class="bi bi-exclamation-circle" title="Wajib Diisi"></i> </small></small></label>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" name="regency" id="regency" class="form-control" required>
+                            <select name="district_code" id="district_code" class="form-control" required>
+                                <option value="">Pilih</option>
+                            </select>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <label for="department">
-                                <small>Jabatan/Posisi <i class="bi bi-exclamation-circle" title="Wajib Diisi"></i></small>
-                            </label>
+                            <label for="npsn"><small>Sekolah <i class="bi bi-exclamation-circle" title="Wajib Diisi"></i> </small></small></label>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" name="department" id="department" class="form-control" required>
+                            <select name="npsn" id="npsn" class="form-control" required>
+                                <option value="">Pilih</option>
+                            </select>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <label for="workload">
-                                <small>ABK</small>
-                            </label>
+                            <label for="position_code"><small>Jabatan <i class="bi bi-exclamation-circle" title="Wajib Diisi"></i> </small></small></label>
                         </div>
                         <div class="col-md-8">
-                            <input type="number" name="workload" id="workload" class="form-control">
+                            <select name="position_code" id="position_code" class="form-control" required>
+                                <option value="">Pilih</option>
+                                <?php
+                                    //Menampilkan list jabatan (position)
+                                    $query = mysqli_query($Conn, "SELECT position_code, position_name FROM position ORDER BY position_name ASC");
+                                    while ($data = mysqli_fetch_array($query)) {
+                                        $position_code      = $data['position_code'];
+                                        $position_name      = $data['position_name'];
+                                        echo '<option value="'.$position_code.'">'.$position_name.'</option>';
+                                    }
+                                ?>
+                            </select>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <label for="officials_public">
-                                <small>ASN Sekolah Negeri</small>
-                            </label>
+                            <label for="abk"><small>ABK</small></label>
                         </div>
                         <div class="col-md-8">
-                            <input type="number" name="officials_public" id="officials_public" class="form-control">
+                            <input type="number" name="abk" id="abk" class="form-control">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <label for="officials_private">
-                                <small>ASN Sekolah Swasta</small>
-                            </label>
+                            <label for="asn"><small>ASN</small></label>
                         </div>
                         <div class="col-md-8">
-                            <input type="number" name="officials_private" id="officials_private" class="form-control">
+                            <input type="number" name="asn" id="asn" class="form-control">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <label for="manpower_gap">
-                                <small>Kekurangan ASN</small>
-                            </label>
+                            <label for="PPPK2024"><small>PPPK 2024</small></label>
                         </div>
                         <div class="col-md-8">
-                            <input type="number" name="manpower_gap" id="manpower_gap" class="form-control">
+                            <input type="number" name="PPPK2024" id="PPPK2024" class="form-control">
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-md-12" id="NotifikasiTambahJabatan">
-                            <!-- Notifikasi Tambah Jabatan Akan Muncul Disini -->
+                        <div class="col-md-4">
+                            <label for="NonASN_sblmOkt2022"><small>Non ASN Sebelum Oktober 2022</small></label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="number" name="NonASN_sblmOkt2022" id="NonASN_sblmOkt2022" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="NonASN_stlhOkt2022"><small>Non ASN Setelah Oktober 2022</small></label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="number" name="NonASN_stlhOkt2022" id="NonASN_stlhOkt2022" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="JmlGuru"><small>Jumlah Guru</small></label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="number" name="JmlGuru" id="JmlGuru" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="KurangGuru"><small>Kurang Guru</small></label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="number" name="KurangGuru" id="KurangGuru" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="JmlASN"><small>Jumlah ASN</small></label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="number" name="JmlASN" id="JmlASN" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="KrngASN"><small>Kurang ASN</small></label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="number" name="KrngASN" id="KrngASN" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-12" id="NotifikasiTambah">
+                            <!-- Notifikasi Tambah Sekolah -->
                         </div>
                     </div>
                 </div>
@@ -199,19 +269,19 @@
     </div>
 </div>
 
-<div class="modal fade" id="ModalDetailJabatan" tabindex="-1">
-    <div class="modal-dialog modal-md">
+<div class="modal fade" id="ModalDetail" tabindex="-1">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title text-dark">
-                    <i class="bi bi-info-circle"></i> Detail Jabatan Per Wilayah
+                    <i class="bi bi-info-circle"></i> Detail Instansi
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-12" id="FormDetailJabatan">
-                        <!-- Form Detail Jabatan Per Wilayah -->
+                    <div class="col-md-12" id="FormDetail">
+                        <!-- Form Detail Wilayah -->
                     </div>
                 </div>
             </div>
@@ -224,27 +294,27 @@
     </div>
 </div>
 
-<div class="modal fade" id="ModalEditJabatan" tabindex="-1">
-    <div class="modal-dialog modal-md">
+<div class="modal fade" id="ModalEdit" tabindex="-1">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form action="javascript:void(0);" id="ProsesEditJabatan">
+            <form action="javascript:void(0);" id="ProsesEdit">
                 <div class="modal-header">
-                    <h5 class="modal-title text-dark"><i class="bi bi-pencil"></i> Edit Jabatan Per Wilayah</h5>
+                    <h5 class="modal-title text-dark"><i class="bi bi-pencil"></i> Edit Instansi</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-12" id="FormEditJabatan">
+                        <div class="col-12" id="FormEdit">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12" id="NotifikasiEditJabatan">
+                        <div class="col-12" id="NotifikasiEdit">
                             <!-- Notifikasi Edit Siswa Akan Muncul Disini -->
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" disabled class="btn btn-success btn-rounded" id="ButtonEditJabatan">
+                    <button type="submit" disabled class="btn btn-success btn-rounded" id="ButtonEdit">
                         <i class="bi bi-save"></i> Simpan
                     </button>
                     <button type="button" class="btn btn-secondary btn-rounded" data-bs-dismiss="modal">
@@ -256,30 +326,30 @@
     </div>
 </div>
 
-<div class="modal fade" id="ModalHapusJabatan" tabindex="-1">
+<div class="modal fade" id="ModalHapus" tabindex="-1">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
-            <form action="javascript:void(0);" id="ProsesHapusJabatan">
+            <form action="javascript:void(0);" id="ProsesHapus">
                 <div class="modal-header">
                     <h5 class="modal-title text-dark">
-                        <i class="bi bi-trash"></i> Hapus Jabatan Per Wialayah
+                        <i class="bi bi-trash"></i> Hapus Sekolah
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-12" id="FormHapusJabatan">
-                            <!-- Form Hapus Jabatan Disini -->
+                        <div class="col-md-12" id="FormHapus">
+                            <!-- Form Hapus Disini -->
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12" id="NotifikasiHapusJabatan">
-                            <!-- Notifikasi Hapus Jabatan -->
+                        <div class="col-md-12" id="NotifikasiHapus">
+                            <!-- Notifikasi Hapus -->
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" disabled class="btn btn-success btn-rounded" id="ButtonHapusJabatan">
+                    <button type="submit" disabled class="btn btn-success btn-rounded" id="ButtonHapus">
                         <i class="bi bi-check"></i> Ya, Hapus
                     </button>
                     <button type="button" class="btn btn-secondary btn-rounded" data-bs-dismiss="modal">
@@ -291,12 +361,12 @@
     </div>
 </div>
 
-<div class="modal fade" id="ModalImportJabatan" tabindex="-1">
+<div class="modal fade" id="ModalImport" tabindex="-1">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title text-dark">
-                    <i class="bi bi-upload"></i> Import Jabatan
+                    <i class="bi bi-upload"></i> Import AKB Per Sekolah
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -312,6 +382,7 @@
                                     <li>Isi data pada file Excel sesuai ketentuan kolom yang ada pada file tersebut.</li>
                                     <li>Simpan file dan unggah melalui tombol <strong>Pilih File Excel</strong>, lalu klik <strong>Mulai Import</strong>.</li>
                                     <li>Sistem akan melakukan validasi otomatis dan menampilkan hasil (baris valid / baris error).</li>
+                                    <li>Untuk data besar (>100 baris), sistem akan memproses secara bertahap.</li>
                                 </ol>
                             </small>
                         </div>
@@ -319,17 +390,33 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-12 text-center">
-                        <form id="ProsesImportJabatan" action="javascript:void(0);">
+                        <form id="ProsesImport" action="javascript:void(0);">
                             <div class="input-group">
-                                <input type="file" name="data_jabatan" class="form-control" accept=".xlsx,.xls">
-                                <a href="_Page/JabatanPerWilayah/Template-1.xlsx" class="btn btn-md btn-info" role="button" aria-label="Unduh Template Excel">
+                                <input type="file" name="data_akb_per_sekolah" class="form-control" accept=".xlsx,.xls">
+                                <a href="_Page/AbkPerSekolah/Template_ABK_Per_Sekolah.xlsx" class="btn btn-md btn-info" role="button" aria-label="Unduh Template Excel">
                                     <i class="bi bi-download"></i> Template
                                 </a>
-                                <button type="submit" class="btn btn-md btn-primary">
+                                <button type="submit" class="btn btn-md btn-primary" id="btnImport">
                                     <i class="bi bi-upload"></i> Import
                                 </button>
                             </div>
                         </form>
+                    </div>
+                </div>
+                <!-- Progress Bar -->
+                <div class="row mb-3" id="progressSection" style="display: none;">
+                    <div class="col-md-12">
+                        <div class="progress" style="height: 25px;">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                                 role="progressbar" 
+                                 id="progressBar" 
+                                 style="width: 0%">
+                                <span id="progressText">0%</span>
+                            </div>
+                        </div>
+                        <div class="mt-2 text-center">
+                            <small id="progressDetail">Memproses data...</small>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -338,20 +425,17 @@
                             <table class="table table-striped table-hover">
                                 <thead>
                                     <tr>
-                                        <th><b>Baris</b></th>
+                                        <th><b>No</b></th>
                                         <th><b>Provinsi</b></th>
-                                        <th><b>Kabupaten</b></th>
+                                        <th><b>Kab/Kota</b></th>
+                                        <th><b>Sekolah</b></th>
                                         <th><b>Jabatan</b></th>
-                                        <th><b>ABK</b></th>
-                                        <th><b>ASN-Negeri</b></th>
-                                        <th><b>ASN-Swasta</b></th>
-                                        <th><b>Kurang ASN</b></th>
                                         <th><b>Keterangan</b></th>
                                     </tr>
                                 </thead>
-                                <tbody id="NotifikasiImportJabatan">
+                                <tbody id="NotifikasiImport">
                                     <tr>
-                                        <td colspan="9" class="text-center">
+                                        <td colspan="6" class="text-center">
                                             <small class="text-danger">Belum Ada Proses Import</small>
                                         </td>
                                     </tr>
@@ -362,7 +446,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" disabled class="btn btn-warning btn-rounded" id="ResetFormImportJabatan">
+                <button type="button" disabled class="btn btn-warning btn-rounded" id="ResetFormImport">
                     <i class="bi bi-arrow-repeat"></i> Reset Form
                 </button>
                 <button type="button" class="btn btn-secondary btn-rounded" data-bs-dismiss="modal">
@@ -373,76 +457,23 @@
     </div>
 </div>
 
-<div class="modal fade" id="ModalExportJabatan" tabindex="-1">
+<div class="modal fade" id="ModalExport" tabindex="-1">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
-            <form action="_Page/JabatanPerWilayah/ProsesExportJabatan.php" method="GET">
+            <form action="_Page/AbkPerSekolah/ProsesExport.php" method="GET" target="_blank">
                 <div class="modal-header">
                     <h5 class="modal-title text-dark"><i class="bi bi-download"></i> Export Data</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-12" id="FormExportJabatan">
+                        <div class="col-12" id="FormExport">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" disabled class="btn btn-success btn-rounded" id="ButtonExportJabatan">
+                    <button type="submit" disabled class="btn btn-success btn-rounded" id="ButtonExport">
                         <i class="bi bi-download"></i> Export
-                    </button>
-                    <button type="button" class="btn btn-secondary btn-rounded" data-bs-dismiss="modal">
-                        <i class="bi bi-x-circle"></i> Tutup
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="ModalHapusJabatanMultiple" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <form action="javascript:void(0);" id="ProsesHapusJabatanMultiple">
-                <div class="modal-header">
-                    <h5 class="modal-title text-dark">
-                        <i class="bi bi-building"></i> Hapus Jabatan Per Wilayah (Multiple)
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row mb-3">
-                        <div class="col-md-12">
-                            <div class="table table-responsive">
-                                <table class="table table-hover table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th><b>No</b></th>
-                                            <th><b>Provinsi</b></th>
-                                            <th><b>Kab/Kota</b></th>
-                                            <th><b>Jabatan</b></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="FormHapusJabatanMultiple">
-                                        <tr>
-                                            <td class="text-center" colspan="4">
-                                                <small>Tidak Ada Data Yang Dipilih</small>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12" id="NotifikasiHapusJabatanMultiple">
-                            <!-- Notifikasi Update Kelas -->
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" disabled class="btn btn-success btn-rounded" id="ButtonHapusJabatanMultiple">
-                        <i class="bi bi-check"></i> Ya, Hapus
                     </button>
                     <button type="button" class="btn btn-secondary btn-rounded" data-bs-dismiss="modal">
                         <i class="bi bi-x-circle"></i> Tutup

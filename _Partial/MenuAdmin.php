@@ -74,7 +74,7 @@
                 <i class="bi bi-bank"></i> <span>Instansi</span>
             </a>
         </li>
-        <li class="nav-heading">Data Terhubung</li>
+        <li class="nav-heading">Distribusi Data</li>
         <li class="nav-item">
             <a class="nav-link <?php if($PageMenu=="JabatanPerWilayah"){echo "";}else{echo "collapsed";} ?>" href="index.php?Page=JabatanPerWilayah">
                 <i class="bi bi-table"></i> <span>Jabatan Per Wilayah</span>
