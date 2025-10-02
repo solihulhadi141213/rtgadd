@@ -1,6 +1,19 @@
 <?php
     include "_Page/Logout/ModalLogout.php";
-    if(!empty($_GET['Page'])){
+    if(empty($_GET['Page'])){
+        //Jika Tidak Ada Get 'Page' maka modal diarahkan ke dashboard
+        //Routing modal berdasarkan Level akses
+        //Tangkap 'access_client'
+        $access_client = GetDetailData($Conn, 'access', 'id_access', $SessionIdAccess, 'access_client');
+        if(empty($access_client)){
+
+            //Jika Kosong maka dia Seorang Admin
+            include "_Page/Dashboard/ModalDashboard.php";
+        }else{
+            //Jika bukan admin
+            include "_Page/DashboardClient/ModalDashboardClient.php";
+        }
+    }else{
         $Page=$_GET['Page'];
         
         // Daftar halaman dan modal yang terkait
@@ -18,6 +31,7 @@
             "JabatanPerWilayah"     => "_Page/JabatanPerWilayah/ModalJabatanPerWilayah.php",
             "AbkPerSekolah"         => "_Page/AbkPerSekolah/ModalAbkPerSekolah.php",
             "GeoJson"               => "_Page/GeoJson/ModalGeoJson.php",
+            "CornJob"               => "_Page/CornJob/ModalCornJob.php",
             "Aktivitas"             => "_Page/Aktivitas/ModalAktivitas.php",
             "Help"                  => "_Page/Help/ModalHelp.php"
         ];

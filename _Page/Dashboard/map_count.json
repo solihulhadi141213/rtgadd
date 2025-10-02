@@ -1,0 +1,306 @@
+[
+    {
+        "KODE_PROV": "72",
+        "PROVINSI": "Sulawesi Tengah",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "76",
+        "PROVINSI": "Sulawesi Barat",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "73",
+        "PROVINSI": "Sulawesi Selatan",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "91",
+        "PROVINSI": "Papua Tengah",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "92",
+        "PROVINSI": "Papua Barat",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "75",
+        "PROVINSI": "Gorontalo",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "14",
+        "PROVINSI": "Riau",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "91",
+        "PROVINSI": "Papua Selatan",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "34",
+        "PROVINSI": "Daerah Istimewa Yogyakarta",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "13",
+        "PROVINSI": "Sumatera Barat",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "31",
+        "PROVINSI": "DKI Jakarta",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "81",
+        "PROVINSI": "Maluku",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "17",
+        "PROVINSI": "Bengkulu",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "18",
+        "PROVINSI": "Lampung",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "91",
+        "PROVINSI": "Papua",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "21",
+        "PROVINSI": "Kepulauan Riau",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "52",
+        "PROVINSI": "Nusa Tenggara Barat",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "15",
+        "PROVINSI": "Jambi",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "51",
+        "PROVINSI": "Bali",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "35",
+        "PROVINSI": "Jawa Timur",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "92",
+        "PROVINSI": "Papua Barat Daya",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "12",
+        "PROVINSI": "Sumatera Utara",
+        "ABK": 3826,
+        "jumlah_guru": 3302,
+        "kurang_guru": 616,
+        "kurang_asn": 686
+    },
+    {
+        "KODE_PROV": "74",
+        "PROVINSI": "Sulawesi Tenggara",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "53",
+        "PROVINSI": "Nusa Tenggara Timur",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "63",
+        "PROVINSI": "Kalimantan Selatan",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "11",
+        "PROVINSI": "Aceh",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "62",
+        "PROVINSI": "Kalimantan Tengah",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "91",
+        "PROVINSI": "Papua Pegunungan",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "19",
+        "PROVINSI": "Kepulauan Bangka Belitung",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "16",
+        "PROVINSI": "Sumatera Selatan",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "36",
+        "PROVINSI": "Banten",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "71",
+        "PROVINSI": "Sulawesi Utara",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "65",
+        "PROVINSI": "Kalimantan Utara",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "64",
+        "PROVINSI": "Kalimantan Timur",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "33",
+        "PROVINSI": "Jawa Tengah",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "82",
+        "PROVINSI": "Maluku Utara",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "61",
+        "PROVINSI": "Kalimantan Barat",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    },
+    {
+        "KODE_PROV": "32",
+        "PROVINSI": "Jawa Barat",
+        "ABK": 0,
+        "jumlah_guru": 0,
+        "kurang_guru": 0,
+        "kurang_asn": 0
+    }
+]

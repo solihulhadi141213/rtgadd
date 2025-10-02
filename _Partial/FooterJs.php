@@ -27,6 +27,7 @@
 <!-- <script src="https://code.highcharts.com/maps/highmaps.js"></script>
 <script src="https://code.highcharts.com/mapdata/countries/id/id-all.js"></script> -->
 
+<!-- highcharts -->
 <script src="https://code.highcharts.com/maps/highmaps.js"></script>
 <script src="https://code.highcharts.com/maps/modules/drilldown.js"></script>
 <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>

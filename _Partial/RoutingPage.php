@@ -1,6 +1,18 @@
 <?php
     if(empty($_GET['Page'])){
-        include "_Page/Dashboard/Dashboard.php";
+        //Routing Dashboard berdasarkan Level akses
+
+        //Tangkap 'access_client'
+        $access_client = GetDetailData($Conn, 'access', 'id_access', $SessionIdAccess, 'access_client');
+        if(empty($access_client)){
+
+            //Jika Kosong maka dia Seorang Admin
+            include "_Page/Dashboard/Dashboard.php";
+        }else{
+            //Jika bukan admin
+            include "_Page/DashboardClient/DashboardClient.php";
+        }
+        
     }else{
         $Page=$_GET['Page'];
         //Index Halaman
@@ -18,6 +30,7 @@
             "Instansi"          =>  "_Page/Instansi/Instansi.php",
             "JabatanPerWilayah" =>  "_Page/JabatanPerWilayah/JabatanPerWilayah.php",
             "AbkPerSekolah"     =>  "_Page/AbkPerSekolah/AbkPerSekolah.php",
+            "CornJob"           =>  "_Page/CornJob/CornJob.php",
             "GeoJson"           =>  "_Page/GeoJson/GeoJson.php",
             "Aktivitas"         =>  "_Page/Aktivitas/Aktivitas.php",
             "Help"              =>  "_Page/Help/Help.php",

@@ -6,6 +6,17 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link <?php if($PageMenu=="DashboardProvince"){echo "";}else{echo "collapsed";} ?>" href="index.php?Page=DashboardProvince">
+                 <i class="bi bi-grid-1x2"></i> <span>Level Provinsi</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link <?php if($PageMenu=="DashboardDistrict"){echo "";}else{echo "collapsed";} ?>" href="index.php?Page=DashboardDistrict">
+                <i class="bi bi-grid-3x3-gap"></i> <span>Level Kab/Kota</span>
+            </a>
+        </li>
+        <li class="nav-heading">Sistem</li>
+        <li class="nav-item">
             <a class="nav-link <?php if($PageMenu=="SettingGeneral"||$PageMenu=="SettingEmail"||$PageMenu=="PaymentGateway"){echo "";}else{echo "collapsed";} ?>" data-bs-target="#components-nav" data-bs-toggle="collapse" href="javascript:void(0);">
                 <i class="bi bi-gear"></i>
                     <span>Pengaturan</span><i class="bi bi-chevron-down ms-auto">
@@ -95,6 +106,12 @@
             <a class="nav-link <?php if($PageMenu!=="GeoJson"){echo "collapsed";} ?>" href="index.php?Page=GeoJson">
                 <i class="bi bi-globe"></i>
                 <span>Geo Json</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link <?php if($PageMenu!=="CornJob"){echo "collapsed";} ?>" href="index.php?Page=CornJob">
+                <i class="bi bi-clock"></i>
+                <span>Corn Job</span>
             </a>
         </li>
         <li class="nav-item">

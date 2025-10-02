@@ -125,6 +125,36 @@
         return $Response;
     }
     
+    //Corn Job
+    function CornJob($Conn, $process_datetime, $process_name, $process_status) {
+        // Siapkan query dengan placeholder
+        $sql = "INSERT INTO log_corn_job 
+                (process_datetime, process_name, process_status) 
+                VALUES (?, ?, ?)";
+
+        // Prepare statement
+        if ($stmt = mysqli_prepare($Conn, $sql)) {
+            // Binding parameter (semua string => "sss")
+            mysqli_stmt_bind_param($stmt, "sss", $process_datetime, $process_name, $process_status);
+
+            // Eksekusi
+            if (mysqli_stmt_execute($stmt)) {
+                $response = "Success";
+            } else {
+                // Debug error eksekusi
+                $response = "Execute failed: " . mysqli_stmt_error($stmt);
+            }
+
+            // Tutup statement
+            mysqli_stmt_close($stmt);
+        } else {
+            // Debug error prepare
+            $response = "Prepare failed: " . mysqli_error($Conn);
+        }
+
+        return $response;
+    }
+    
     //Membuat Randome Number
     function generateRandomNumber($length) {
         $characters = '0123456789';
