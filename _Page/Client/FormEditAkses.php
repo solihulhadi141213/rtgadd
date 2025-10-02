@@ -54,6 +54,9 @@
         $access_email       =$Data['access_email'];
         $access_contact     =$Data['access_contact'];
 
+        //Buka Keterangan
+        $keterangan     = GetDetailData($Conn, 'access_client', 'id_access', $id_access, 'keterangan');
+
         //Menampilkan Form
         echo '
             <input type="hidden" name="id_access" value="'.$id_access.'">
@@ -79,6 +82,14 @@
                 </div>
                 <div class="col-md-8">
                     <input type="email" name="email_akses" id="email_akses_edit" class="form-control" value="'.$access_email.'">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="keterangan_edit">Keterangan</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" name="keterangan" id="keterangan_edit" class="form-control" value="'.$keterangan.'">
                 </div>
             </div>
         ';

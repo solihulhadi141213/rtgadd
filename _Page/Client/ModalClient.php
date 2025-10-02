@@ -184,6 +184,16 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-4">
+                            <label for="keterangan">
+                                <small>Keterangan</small>
+                            </label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" name="keterangan" id="keterangan" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
                             <label for="level">
                                 <small>Level Akses <i class="bi bi-exclamation-circle" title="Wajib Diisi"></i></small>
                             </label>

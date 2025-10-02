@@ -84,6 +84,10 @@
         //Buka access_client
         $level          = GetDetailData($Conn, 'access_client', 'id_access', $id_access, 'level');
         $id_region      = GetDetailData($Conn, 'access_client', 'id_access', $id_access, 'id_region');
+        $keterangan     = GetDetailData($Conn, 'access_client', 'id_access', $id_access, 'keterangan');
+        if(empty($keterangan)){
+            $keterangan="-";
+        }
 
         //Buka region
         if(!empty($id_region)){
@@ -167,6 +171,13 @@
                 <div class="col-1"><small>:</small></div>
                 <div class="col-7">
                     <small class="text text-grayish">'.$district_name.'</small>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-4"><small>Keterangan</small></div>
+                <div class="col-1"><small>:</small></div>
+                <div class="col-7">
+                    <small class="text text-grayish">'.$keterangan.'</small>
                 </div>
             </div>
         ';

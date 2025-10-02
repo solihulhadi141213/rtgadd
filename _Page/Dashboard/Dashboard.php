@@ -9,9 +9,11 @@
     <div class="row">
         <div class="col-md-12">
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <b>Selamat Datang!</b>
+                Selamat Datang!
                 <p>
-                    <?php echo $app_description; ?>
+                    RTGAdd adalah aplikasi berbasis web yang dirancang untuk memadukan RTG dan pengembangan dasbor untuk memudahkan pemerintah pusat dan daerah 
+                    dalam melakukan perencanaan dan pengawasan kebutuhan guru di satuan pendidiakn berbasis data. RTGAdd akan diujicobakanp penggunaannya di lima kabupaten/kota, 
+                    yaitu: Kabupaten Karo - Sumatera Utara, Kota Dumai - Riau, Kabupaten Muoaro Jambi - Jambi, Kota Semarang - Jawa Tengah, dan Kabupaten Kutai Kartanegara - Kalimantan Timur
                 </p>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>

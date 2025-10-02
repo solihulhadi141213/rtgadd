@@ -31,6 +31,7 @@
     $id_access          = validateAndSanitizeInput($_POST['id_access']);
     $nama_akses         = validateAndSanitizeInput($_POST['nama_akses']);
     $kontak_akses       = !empty($_POST['kontak_akses']) ? validateAndSanitizeInput($_POST['kontak_akses']) : "";
+    $keterangan         = !empty($_POST['keterangan']) ? validateAndSanitizeInput($_POST['keterangan']) : "";
     $email_akses         = validateAndSanitizeInput($_POST['email_akses']);
 
     //Buka Data Lama
@@ -80,15 +81,27 @@
     $QryUpdate = $Conn->prepare("UPDATE access SET access_name=?, access_email=?, access_contact=? WHERE id_access=?");
     $QryUpdate->bind_param("sssi", $nama_akses, $email_akses, $kontak_akses, $id_access);
     if($QryUpdate->execute()){
-        echo '
-            <div class="alert alert-success">
-                <small>Update data ke database <b id="NotifikasiEditAksesBerhasil">Berhasil</b></small>
-            </div>
-        ';
+
+        //Jika Berhasil lakukan update pada access_client
+        $QryUpdate2 = $Conn->prepare("UPDATE access_client SET keterangan=? WHERE id_access=?");
+        $QryUpdate2->bind_param("si", $keterangan, $id_access);
+        if($QryUpdate2->execute()){
+            echo '
+                <div class="alert alert-success">
+                    <small>Update data ke database <b id="NotifikasiEditAksesBerhasil">Berhasil</b></small>
+                </div>
+            ';
+        }else{
+            echo '
+                <div class="alert alert-danger">
+                    <small>Terjadi Kesalahan Pada Saat Update Data Ke Database Access Client!</small>
+                </div>
+            ';
+        }
     }else{
         echo '
             <div class="alert alert-danger">
-                <small>Terjadi Kesalahan Pada Saat Update Data Ke Database!</small>
+                <small>Terjadi Kesalahan Pada Saat Update Data Ke Database Access!</small>
             </div>
         ';
     }
