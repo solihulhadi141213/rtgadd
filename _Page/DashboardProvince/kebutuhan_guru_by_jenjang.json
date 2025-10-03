@@ -1,0 +1,60 @@
+[
+    {
+        "province_code": "12",
+        "province_name": "SUMATERA UTARA",
+        "kebutuhan_guru_by_jenjang": [
+            {
+                "jenjang": "SD",
+                "kebutuhan": 7
+            }
+        ]
+    },
+    {
+        "province_code": "14",
+        "province_name": "RIAU",
+        "kebutuhan_guru_by_jenjang": [
+            {
+                "jenjang": "SD",
+                "kebutuhan": 7
+            }
+        ]
+    },
+    {
+        "province_code": "15",
+        "province_name": "JAMBI",
+        "kebutuhan_guru_by_jenjang": [
+            {
+                "jenjang": "SD",
+                "kebutuhan": 8
+            },
+            {
+                "jenjang": "SMP",
+                "kebutuhan": 1
+            },
+            {
+                "jenjang": "TK",
+                "kebutuhan": 3
+            }
+        ]
+    },
+    {
+        "province_code": "33",
+        "province_name": "JAWA TENGAH",
+        "kebutuhan_guru_by_jenjang": [
+            {
+                "jenjang": "SD",
+                "kebutuhan": 7
+            }
+        ]
+    },
+    {
+        "province_code": "64",
+        "province_name": "KALIMANTAN TIMUR",
+        "kebutuhan_guru_by_jenjang": [
+            {
+                "jenjang": "SD",
+                "kebutuhan": 0
+            }
+        ]
+    }
+]

@@ -19,6 +19,7 @@
         // Daftar halaman dan modal yang terkait
         $modals = [
             "MyProfile"             => "_Page/MyProfile/ModalMyProfile.php",
+            "DashboardProvince"     => "_Page/DashboardProvince/ModalDashboardProvince.php",
             "AksesFitur"            => "_Page/AksesFitur/ModalAksesFitur.php",
             "AksesEntitas"          => "_Page/AksesEntitas/ModalAksesEntitas.php",
             "Akses"                 => "_Page/Akses/ModalAkses.php",

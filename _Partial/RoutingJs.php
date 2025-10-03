@@ -21,6 +21,7 @@
         // Routing Javascript Berdasarkan Halaman
         $scripts = [
             "MyProfile"         => "_Page/MyProfile/MyProfile.js",
+            "DashboardProvince" => "_Page/DashboardProvince/DashboardProvince.js",
             "AksesFitur"        => "_Page/AksesFitur/AksesFitur.js",
             "AksesEntitas"      => "_Page/AksesEntitas/AksesEntitas.js",
             "Akses"             => "_Page/Akses/Akses.js",

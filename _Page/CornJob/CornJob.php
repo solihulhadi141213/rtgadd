@@ -48,8 +48,22 @@
                                 <tr>
                                     <td><small>1</small></td>
                                     <td><small>Update map_count.json</small></td>
-                                    <td><small>Update data map_count.json</small></td>
+                                    <td><small>Update data peta pada tingkat nasional</small></td>
                                     <td><small><a href="_Page/CornJob/update_map_count.php" target="_blank">_Page/CornJob/update_map_count.php</a></small></td>
+                                    <td><small>1 Jam</small></td>
+                                </tr>
+                                <tr>
+                                    <td><small>2</small></td>
+                                    <td><small>Update map_count.json</small></td>
+                                    <td><small>Update peta pada tingkat provinsi</small></td>
+                                    <td><small><a href="_Page/CornJob/update_map_count_province.php" target="_blank">_Page/CornJob/update_map_count_province.php</a></small></td>
+                                    <td><small>1 Jam</small></td>
+                                </tr>
+                                 <tr>
+                                    <td><small>2</small></td>
+                                    <td><small>Update kebutuhan_guru_by_jenjang.json</small></td>
+                                    <td><small>Update kebutuhan guru berdasarkan jengjang pada provinsi</small></td>
+                                    <td><small><a href="_Page/CornJob/update_kbutuhan_guru_by_jenjang.php" target="_blank">_Page/CornJob/update_kbutuhan_guru_by_jenjang.php</a></small></td>
                                     <td><small>1 Jam</small></td>
                                 </tr>
                             </tbody>

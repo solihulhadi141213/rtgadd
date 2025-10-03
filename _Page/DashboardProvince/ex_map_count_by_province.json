@@ -1,0 +1,54 @@
+[
+    {
+        "KODE_PROV":"15",
+        "province_code":"15",
+        "province_code_dapodik":"100000",
+        "province_name":"JAMBI",
+        "abk":100,
+        "asn":14,
+        "jumlah_guru":14,
+        "kurang_guru":14,
+        "jumlah_asn":14,
+        "kurang_asn":14,
+        "district":[
+            {
+                "OBJECTID":"56877",
+                "district_code":"1505",
+                "district_code_dapodik":"100700",
+                "district_name":"MUARO JAMBI",
+                "abk":100,
+                "asn":14,
+                "jumlah_guru":14,
+                "kurang_guru":14,
+                "jumlah_asn":14,
+                "kurang_asn":14
+            }
+        ]
+    },
+    {
+        "KODE_PROV":"64",
+        "province_code":"64",
+        "province_code_dapodik":"160000",
+        "province_name":"KALIMANTAN TIMUR",
+        "abk":100,
+        "asn":14,
+        "jumlah_guru":14,
+        "kurang_guru":14,
+        "jumlah_asn":14,
+        "kurang_asn":14,
+        "district":[
+            {
+                "OBJECTID":"56877",
+                "district_code":"6403",
+                "district_code_dapodik":"160200",
+                "district_name":"KUTAI KARTANEGARA",
+                "abk":100,
+                "asn":14,
+                "jumlah_guru":14,
+                "kurang_guru":14,
+                "jumlah_asn":14,
+                "kurang_asn":14
+            }
+        ]
+    }
+]

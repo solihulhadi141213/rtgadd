@@ -12,8 +12,8 @@
                 Selamat Datang!
                 <p>
                     RTGAdd adalah aplikasi berbasis web yang dirancang untuk memadukan RTG dan pengembangan dasbor untuk memudahkan pemerintah pusat dan daerah 
-                    dalam melakukan perencanaan dan pengawasan kebutuhan guru di satuan pendidiakn berbasis data. RTGAdd akan diujicobakanp penggunaannya di lima kabupaten/kota, 
-                    yaitu: Kabupaten Karo - Sumatera Utara, Kota Dumai - Riau, Kabupaten Muoaro Jambi - Jambi, Kota Semarang - Jawa Tengah, dan Kabupaten Kutai Kartanegara - Kalimantan Timur
+                    dalam melakukan perencanaan dan pengawasan kebutuhan guru di satuan pendidikan berbasis data. RTGAdd akan diujicobakan penggunaannya di lima kabupaten/kota, 
+                    yaitu: Kabupaten Karo - Sumatera Utara, Kota Dumai - Riau, Kabupaten Muaro Jambi - Jambi, Kota Semarang - Jawa Tengah, dan Kabupaten Kutai Kartanegara - Kalimantan Timur
                 </p>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>

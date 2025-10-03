@@ -1,0 +1,135 @@
+[
+    {
+        "KODE_PROV": "15",
+        "province_code": "15",
+        "province_code_dapodik": "100000",
+        "province_name": "JAMBI",
+        "abk": 0,
+        "asn": 0,
+        "district": [
+            {
+                "OBJECTID": "54517",
+                "district_code": "1505",
+                "district_code_dapodik": "100700",
+                "district_name": "MUARO JAMBI",
+                "abk": 0,
+                "asn": 0
+            }
+        ]
+    },
+    {
+        "KODE_PROV": "33",
+        "province_code": "33",
+        "province_code_dapodik": "030000",
+        "province_name": "JAWA TENGAH",
+        "abk": 0,
+        "asn": 0,
+        "district": [
+            {
+                "OBJECTID": "6292",
+                "district_code": "3322",
+                "district_code_dapodik": "032200",
+                "district_name": "SEMARANG",
+                "abk": 0,
+                "asn": 0
+            }
+        ]
+    },
+    {
+        "KODE_PROV": "64",
+        "province_code": "64",
+        "province_code_dapodik": "160000",
+        "province_name": "KALIMANTAN TIMUR",
+        "abk": 0,
+        "asn": 0,
+        "district": [
+            {
+                "OBJECTID": "62534",
+                "district_code": "6403",
+                "district_code_dapodik": "160200",
+                "district_name": "KUTAI KARTANEGARA",
+                "abk": 0,
+                "asn": 0
+            }
+        ]
+    },
+    {
+        "KODE_PROV": "14",
+        "province_code": "14",
+        "province_code_dapodik": "090000",
+        "province_name": "RIAU",
+        "abk": 0,
+        "asn": 0,
+        "district": [
+            {
+                "OBJECTID": "51458",
+                "district_code": "1473",
+                "district_code_dapodik": "096200",
+                "district_name": "KOTA D U M A I",
+                "abk": 0,
+                "asn": 0
+            }
+        ]
+    },
+    {
+        "KODE_PROV": "12",
+        "province_code": "12",
+        "province_code_dapodik": "070000",
+        "province_name": "SUMATERA UTARA",
+        "abk": 0,
+        "asn": 0,
+        "district": [
+            {
+                "OBJECTID": "71562",
+                "district_code": "1211",
+                "district_code_dapodik": "070300",
+                "district_name": "KARO",
+                "abk": 0,
+                "asn": 0
+            }
+        ]
+    },
+    {
+        "KODE_PROV": "31",
+        "province_code": "31",
+        "province_code_dapodik": "201001",
+        "province_name": "DKI JAKARTA",
+        "abk": 0,
+        "asn": 0,
+        "district": []
+    },
+    {
+        "KODE_PROV": "32",
+        "province_code": "32",
+        "province_code_dapodik": "202",
+        "province_name": "JAWA BARAT",
+        "abk": 0,
+        "asn": 0,
+        "district": [
+            {
+                "OBJECTID": "27771",
+                "district_code": "3201",
+                "district_code_dapodik": "202001",
+                "district_name": "KABUPATEN BOGOR",
+                "abk": 0,
+                "asn": 0
+            },
+            {
+                "OBJECTID": "1718",
+                "district_code": "3202",
+                "district_code_dapodik": "202002",
+                "district_name": "KABUPATEN SUKABUMI",
+                "abk": 0,
+                "asn": 0
+            },
+            {
+                "OBJECTID": "3272",
+                "district_code": "3204",
+                "district_code_dapodik": "202004",
+                "district_name": "KABUPATEN BANDUNG",
+                "abk": 0,
+                "asn": 0
+            }
+        ]
+    }
+]
