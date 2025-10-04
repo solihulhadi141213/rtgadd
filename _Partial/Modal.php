@@ -33,6 +33,8 @@
             "JabatanPerInstansi"        => "_Page/JabatanPerInstansi/ModalJabatanPerInstansi.php",
             "AbkPerSekolah"             => "_Page/AbkPerSekolah/ModalAbkPerSekolah.php",
             "GeoJson"                   => "_Page/GeoJson/ModalGeoJson.php",
+            "GeoJsonBps"                => "_Page/GeoJsonBps/ModalGeoJsonBps.php",
+            "MapViewer"                 => "_Page/MapViewer/ModalMapViewer.php",
             "CornJob"                   => "_Page/CornJob/ModalCornJob.php",
             "Aktivitas"                 => "_Page/Aktivitas/ModalAktivitas.php",
             "Help"                      => "_Page/Help/ModalHelp.php"

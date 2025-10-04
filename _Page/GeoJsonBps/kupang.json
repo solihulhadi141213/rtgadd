@@ -1,0 +1,34 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.52833793200016,
+              -10.209876114999942
+            ],
+            [
+              123.53099000000012,
+              -10.21118999999994
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "Kind": "City",
+        "Code": 5371,
+        "Name": "KUPANG",
+        "Year": 2015,
+        "Source": "BPS",
+        "Parent": 53,
+        "Province": "NUSA TENGGARA TIMUR",
+        "Country": "INDONESIA"
+      },
+      "id": 0
+    }
+  ]
+}

@@ -37,6 +37,8 @@
             "AbkPerSekolah"         => "_Page/AbkPerSekolah/AbkPerSekolah.js",
             "CornJob"               => "_Page/CornJob/CornJob.js",
             "GeoJson"               => "_Page/GeoJson/GeoJson.js",
+            "GeoJsonBps"            => "_Page/GeoJsonBps/GeoJsonBps.js",
+            "MapViewer"             => "_Page/MapViewer/MapViewer.js",
             "Aktivitas"             => "_Page/Aktivitas/Aktivitas.js",
             "Help"                  => "_Page/Help/Help.js"
         ];

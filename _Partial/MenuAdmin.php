@@ -109,6 +109,18 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link <?php if($PageMenu!=="GeoJsonBps"){echo "collapsed";} ?>" href="index.php?Page=GeoJsonBps">
+                <i class="bi bi-globe"></i>
+                <span>Geo Json (BPS)</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link <?php if($PageMenu!=="MapViewer"){echo "collapsed";} ?>" href="index.php?Page=MapViewer">
+                <i class="bi bi-map-fill"></i>
+                <span>Map Viewer</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link <?php if($PageMenu!=="CornJob"){echo "collapsed";} ?>" href="index.php?Page=CornJob">
                 <i class="bi bi-clock"></i>
                 <span>Corn Job</span>

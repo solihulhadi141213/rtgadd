@@ -34,6 +34,8 @@
             "AbkPerSekolah"         =>  "_Page/AbkPerSekolah/AbkPerSekolah.php",
             "CornJob"               =>  "_Page/CornJob/CornJob.php",
             "GeoJson"               =>  "_Page/GeoJson/GeoJson.php",
+            "GeoJsonBps"            =>  "_Page/GeoJsonBps/GeoJsonBps.php",
+            "MapViewer"             =>  "_Page/MapViewer/MapViewer.php",
             "Aktivitas"             =>  "_Page/Aktivitas/Aktivitas.php",
             "Help"                  =>  "_Page/Help/Help.php",
         ];

@@ -1515,3 +1515,12 @@ body .title_page_app {
     height: 350px; /* atur sesuai kebutuhan */
     min-height: 400px;
 }
+
+.custom-tooltip {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: bold;
+}
