@@ -50,10 +50,10 @@
     {
         "KODE_PROV": "14",
         "PROVINSI": "Riau",
-        "ABK": 0,
-        "jumlah_guru": 0,
-        "kurang_guru": 0,
-        "kurang_asn": 0
+        "ABK": 2678,
+        "jumlah_guru": 2752,
+        "kurang_guru": 14,
+        "kurang_asn": 124
     },
     {
         "KODE_PROV": "91",
@@ -138,10 +138,10 @@
     {
         "KODE_PROV": "15",
         "PROVINSI": "Jambi",
-        "ABK": 0,
-        "jumlah_guru": 0,
-        "kurang_guru": 0,
-        "kurang_asn": 0
+        "ABK": 4081,
+        "jumlah_guru": 3615,
+        "kurang_guru": 691,
+        "kurang_asn": 868
     },
     {
         "KODE_PROV": "51",
@@ -266,18 +266,18 @@
     {
         "KODE_PROV": "64",
         "PROVINSI": "Kalimantan Timur",
-        "ABK": 0,
-        "jumlah_guru": 0,
-        "kurang_guru": 0,
-        "kurang_asn": 0
+        "ABK": 7710,
+        "jumlah_guru": 6848,
+        "kurang_guru": 1143,
+        "kurang_asn": 1299
     },
     {
         "KODE_PROV": "33",
         "PROVINSI": "Jawa Tengah",
-        "ABK": 0,
-        "jumlah_guru": 0,
-        "kurang_guru": 0,
-        "kurang_asn": 0
+        "ABK": 7095,
+        "jumlah_guru": 6261,
+        "kurang_guru": 874,
+        "kurang_asn": 888
     },
     {
         "KODE_PROV": "82",

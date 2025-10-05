@@ -19,6 +19,7 @@
         $page_arry=[
             "MyProfile"             =>  "_Page/MyProfile/MyProfile.php",
             "DashboardProvince"     =>  "_Page/DashboardProvince/DashboardProvince.php",
+            "DashboardDistrict"     =>  "_Page/DashboardDistrict/DashboardDistrict.php",
             "AksesFitur"            =>  "_Page/AksesFitur/AksesFitur.php",
             "AksesEntitas"          =>  "_Page/AksesEntitas/AksesEntitas.php",
             "Akses"                 =>  "_Page/Akses/Akses.php",

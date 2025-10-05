@@ -1,3 +1,4 @@
+let timestamp = new Date().getTime();
 $(document).ready(function() {
     // Inisialisasi peta
     var map = L.map('indonesia-map').setView([-2.5489, 118.0149], 5);
@@ -12,7 +13,7 @@ $(document).ready(function() {
     var geoJsonLayer;
 
     // Load data dari map_count.json
-    $.getJSON('_Page/Dashboard/map_count.json', function(data) {
+    $.getJSON('_Page/Dashboard/map_count.json?v=1'+ timestamp, function(data) {
         // Konversi array menjadi object dengan KODE_PROV sebagai key
         data.forEach(function(province) {
             provinceData[province.KODE_PROV] = province;
