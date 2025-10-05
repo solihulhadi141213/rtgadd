@@ -92,7 +92,7 @@
     {
         "KODE_PROV": "31",
         "province_code": "31",
-        "province_code_dapodik": "201001",
+        "province_code_dapodik": "201",
         "province_name": "DKI JAKARTA",
         "abk": 0,
         "asn": 0,
@@ -127,6 +127,86 @@
                 "district_code": "3204",
                 "district_code_dapodik": "202004",
                 "district_name": "KABUPATEN BANDUNG",
+                "abk": 0,
+                "asn": 0
+            },
+            {
+                "OBJECTID": "",
+                "district_code": "3210",
+                "district_code_dapodik": "202010",
+                "district_name": "MAJALENGKA",
+                "abk": 0,
+                "asn": 0
+            },
+            {
+                "OBJECTID": "",
+                "district_code": "3214",
+                "district_code_dapodik": "202014",
+                "district_name": "PURWAKARTA",
+                "abk": 0,
+                "asn": 0
+            },
+            {
+                "OBJECTID": "",
+                "district_code": "3215",
+                "district_code_dapodik": "202015",
+                "district_name": "KARAWANG",
+                "abk": 0,
+                "asn": 0
+            },
+            {
+                "OBJECTID": "",
+                "district_code": "3216",
+                "district_code_dapodik": "202016",
+                "district_name": "BEKASI",
+                "abk": 0,
+                "asn": 0
+            },
+            {
+                "OBJECTID": "",
+                "district_code": "3217",
+                "district_code_dapodik": "202026",
+                "district_name": "BANDUNG BARAT",
+                "abk": 0,
+                "asn": 0
+            },
+            {
+                "OBJECTID": "",
+                "district_code": "3271",
+                "district_code_dapodik": "202018",
+                "district_name": "KOTA BOGOR",
+                "abk": 0,
+                "asn": 0
+            },
+            {
+                "OBJECTID": "",
+                "district_code": "3274",
+                "district_code_dapodik": "202020",
+                "district_name": "KOTA CIREBON",
+                "abk": 0,
+                "asn": 0
+            },
+            {
+                "OBJECTID": "",
+                "district_code": "3275",
+                "district_code_dapodik": "202021",
+                "district_name": "KOTA BEKASI",
+                "abk": 0,
+                "asn": 0
+            },
+            {
+                "OBJECTID": "",
+                "district_code": "3277",
+                "district_code_dapodik": "202023",
+                "district_name": "KOTA CIMAHI",
+                "abk": 0,
+                "asn": 0
+            },
+            {
+                "OBJECTID": "",
+                "district_code": "3279",
+                "district_code_dapodik": "202025",
+                "district_name": "KOTA BANJAR",
                 "abk": 0,
                 "asn": 0
             }
