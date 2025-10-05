@@ -4,7 +4,7 @@
         "province_code": "15",
         "province_code_dapodik": "100000",
         "province_name": "JAMBI",
-        "abk": 0,
+        "abk": 1,
         "asn": 0,
         "district": [
             {
@@ -12,7 +12,7 @@
                 "district_code": "1505",
                 "district_code_dapodik": "100700",
                 "district_name": "MUARO JAMBI",
-                "abk": 0,
+                "abk": 1,
                 "asn": 0
             }
         ]
@@ -23,7 +23,7 @@
         "province_code_dapodik": "030000",
         "province_name": "JAWA TENGAH",
         "abk": 0,
-        "asn": 0,
+        "asn": 1,
         "district": [
             {
                 "OBJECTID": "6292",
@@ -31,7 +31,7 @@
                 "district_code_dapodik": "032200",
                 "district_name": "SEMARANG",
                 "abk": 0,
-                "asn": 0
+                "asn": 1
             }
         ]
     },
@@ -58,7 +58,7 @@
         "province_code": "14",
         "province_code_dapodik": "090000",
         "province_name": "RIAU",
-        "abk": 0,
+        "abk": 9,
         "asn": 0,
         "district": [
             {
@@ -66,7 +66,7 @@
                 "district_code": "1473",
                 "district_code_dapodik": "096200",
                 "district_name": "KOTA D U M A I",
-                "abk": 0,
+                "abk": 9,
                 "asn": 0
             }
         ]

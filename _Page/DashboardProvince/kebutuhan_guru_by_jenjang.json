@@ -5,11 +5,11 @@
         "kebutuhan_guru_by_jenjang": [
             {
                 "jenjang": "SD",
-                "kebutuhan": 135
+                "kebutuhan": 470
             },
             {
                 "jenjang": "SMP",
-                "kebutuhan": 113
+                "kebutuhan": 132
             },
             {
                 "jenjang": "TK",
@@ -65,7 +65,15 @@
         "kebutuhan_guru_by_jenjang": [
             {
                 "jenjang": "SD",
-                "kebutuhan": 0
+                "kebutuhan": 667
+            },
+            {
+                "jenjang": "SMP",
+                "kebutuhan": 465
+            },
+            {
+                "jenjang": "TK",
+                "kebutuhan": 11
             }
         ]
     }

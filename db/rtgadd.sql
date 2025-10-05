@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 29, 2025 at 02:21 PM
+-- Generation Time: Oct 05, 2025 at 08:29 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.0.30
 
@@ -194,6 +194,24 @@ CREATE TABLE IF NOT EXISTS `captcha` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `geo_region`
+--
+
+DROP TABLE IF EXISTS `geo_region`;
+CREATE TABLE IF NOT EXISTS `geo_region` (
+  `id_geo_region` int NOT NULL AUTO_INCREMENT,
+  `level_region` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Province, District',
+  `province_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'BPS',
+  `province_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `district_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'BPS',
+  `district_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `coordinates` json DEFAULT NULL,
+  PRIMARY KEY (`id_geo_region`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `help`
 --
 
@@ -213,6 +231,38 @@ CREATE TABLE IF NOT EXISTS `help` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `log_corn_job`
+--
+
+DROP TABLE IF EXISTS `log_corn_job`;
+CREATE TABLE IF NOT EXISTS `log_corn_job` (
+  `id_log_corn_job` int NOT NULL AUTO_INCREMENT,
+  `process_datetime` datetime NOT NULL,
+  `process_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `process_status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id_log_corn_job`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `organization`
+--
+
+DROP TABLE IF EXISTS `organization`;
+CREATE TABLE IF NOT EXISTS `organization` (
+  `id_organization` int NOT NULL AUTO_INCREMENT,
+  `id_region` int NOT NULL,
+  `organization_level` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Province, District',
+  `organization_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `organization_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id_organization`),
+  KEY `organization_to_region` (`id_region`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `position`
 --
 
@@ -227,20 +277,45 @@ CREATE TABLE IF NOT EXISTS `position` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `position_organization`
+--
+
+DROP TABLE IF EXISTS `position_organization`;
+CREATE TABLE IF NOT EXISTS `position_organization` (
+  `id_position_organization` int NOT NULL AUTO_INCREMENT,
+  `id_region` int NOT NULL,
+  `id_position` int NOT NULL,
+  `id_organization` int NOT NULL,
+  `category` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Province, District',
+  `formasi_ppg` int NOT NULL,
+  PRIMARY KEY (`id_position_organization`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `position_region`
 --
 
 DROP TABLE IF EXISTS `position_region`;
 CREATE TABLE IF NOT EXISTS `position_region` (
   `id_position_region` int NOT NULL AUTO_INCREMENT,
-  `province` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Provinsi',
-  `regency` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Kabupaten/Kota',
-  `department` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Jabatan',
-  `workload` int DEFAULT NULL COMMENT 'ABK',
-  `officials_public` int DEFAULT NULL COMMENT 'ASN di Sekolah negeri',
-  `officials_private` int DEFAULT NULL COMMENT 'ASN di Sekolah swasta',
-  `manpower_gap` int DEFAULT NULL COMMENT 'Kekurangan ASN',
-  PRIMARY KEY (`id_position_region`)
+  `id_position` int NOT NULL COMMENT 'ID Jabatan',
+  `id_region` int NOT NULL COMMENT 'ID Wilayah',
+  `abk` int DEFAULT NULL COMMENT 'Angka Beban Kerja',
+  `asn` int DEFAULT NULL COMMENT 'Aparatur Sipil Negara',
+  `asn_di_negeri` int DEFAULT NULL COMMENT 'Jumlah ASN di Sekolah Negeri',
+  `asn_di_swasta` int DEFAULT NULL COMMENT 'Jumlah ASN di Sekolah Swasta',
+  `NonASN_sblmOkt2022` int DEFAULT NULL,
+  `NonASN_stlhOkt2022` int DEFAULT NULL,
+  `pppk2024` int DEFAULT NULL,
+  `jumlah_guru` int DEFAULT NULL,
+  `kurang_guru` int DEFAULT NULL,
+  `jumlah_asn` int DEFAULT NULL,
+  `kurang_asn` int DEFAULT NULL,
+  PRIMARY KEY (`id_position_region`),
+  KEY `id_position` (`id_position`),
+  KEY `id_region` (`id_region`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -261,6 +336,8 @@ CREATE TABLE IF NOT EXISTS `position_school` (
   `NonASN_stlhOkt2022` int DEFAULT NULL,
   `JmlGuru` int DEFAULT NULL,
   `KurangGuru` int DEFAULT NULL,
+  `JmlASN` int DEFAULT NULL,
+  `KrngASN` int DEFAULT NULL,
   PRIMARY KEY (`id_position_school`),
   KEY `id_school` (`id_school`),
   KEY `id_position` (`id_position`)
@@ -276,9 +353,11 @@ DROP TABLE IF EXISTS `region`;
 CREATE TABLE IF NOT EXISTS `region` (
   `id_region` int NOT NULL AUTO_INCREMENT,
   `category` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT 'Province OR District',
-  `province_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT 'Kode Provinsi',
+  `province_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT 'Kode Provinsi BPS',
+  `province_code_dapodik` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Kode Provinsi DAPODIK',
   `province_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Nama Provinsi',
-  `district_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT 'Kode Kab/Kot',
+  `district_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT 'Kode Kab/Kot BPS',
+  `district_code_dapodik` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Kode Kab/Kot DAPODIK',
   `district_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Nama Kab/Kot',
   `code_map` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT 'Kode Peta',
   PRIMARY KEY (`id_region`)
@@ -296,6 +375,7 @@ CREATE TABLE IF NOT EXISTS `school` (
   `id_region` int NOT NULL,
   `npsn` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `school_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `school_level` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id_school`),
   KEY `id_region` (`id_region`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -363,6 +443,19 @@ ALTER TABLE `access_permission`
 ALTER TABLE `access_reference`
   ADD CONSTRAINT `reference_to_feature` FOREIGN KEY (`id_access_feature`) REFERENCES `access_feature` (`id_access_feature`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `reference_to_group` FOREIGN KEY (`id_access_group`) REFERENCES `access_group` (`id_access_group`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `organization`
+--
+ALTER TABLE `organization`
+  ADD CONSTRAINT `organization_to_region` FOREIGN KEY (`id_region`) REFERENCES `region` (`id_region`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `position_region`
+--
+ALTER TABLE `position_region`
+  ADD CONSTRAINT `position_to_ref_position` FOREIGN KEY (`id_position`) REFERENCES `position` (`id_position`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `position_to_region` FOREIGN KEY (`id_region`) REFERENCES `region` (`id_region`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `position_school`

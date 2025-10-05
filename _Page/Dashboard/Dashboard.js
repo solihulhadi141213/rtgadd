@@ -32,12 +32,13 @@ $(document).ready(function() {
     function renderMap(geoJsonData) {
         // Fungsi untuk menentukan warna berdasarkan jumlah guru yang kurang
         function getColor(kurangGuru) {
-            return kurangGuru > 300 ? '#d73027' :
-                   kurangGuru > 250 ? '#fc8d59' :
-                   kurangGuru > 200 ? '#fee08b' :
-                   kurangGuru > 150 ? '#d9ef8b' :
-                   kurangGuru > 100 ? '#91cf60' :
-                                      '#1a9850';
+            return kurangGuru > 300 ? '#020a79ff' :
+                   kurangGuru > 250 ? '#201cffff' :
+                   kurangGuru > 200 ? '#5d5bffff' :
+                   kurangGuru > 150 ? '#7f7dffff' :
+                   kurangGuru > 100 ? '#8e99faff' :
+                   kurangGuru > 10 ? '#ccccf5ff' :
+                                      '#f8f8f8ff';
         }
 
         // Fungsi style untuk setiap feature
@@ -49,7 +50,7 @@ $(document).ready(function() {
                 fillColor: data ? getColor(data.kurang_guru) : '#ccc',
                 weight: 2,
                 opacity: 1,
-                color: 'white',
+                color: '#9e8ff0ff',
                 dashArray: '3',
                 fillOpacity: 0.7
             };
@@ -126,11 +127,14 @@ $(document).ready(function() {
                                 <td><strong class="text-warning">${data.kurang_asn.toLocaleString()}</strong></td>
                             </tr>
                         </table>
-                        <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#ModalDetailMap" data-id="${kodeProv}">
-                            <small class="text-primary">
-                                Klik untuk detail lebih lanjut
-                            </small>
-                        </a>
+
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <a href="javascript:void(0);" class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#ModalDetailMap" data-id="${kodeProv}">
+                                    Selengkapnya
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 `;
                 layer.bindPopup(popupContent);
@@ -154,7 +158,7 @@ $(document).ready(function() {
 
         legend.onAdd = function(map) {
             var div = L.DomUtil.create('div', 'info legend');
-            var grades = [0, 100, 150, 200, 250, 300];
+            var grades = [0, 10, 100, 150, 200, 250, 300];
             var labels = ['<strong>Kekurangan Guru</strong>'];
             var from, to;
 

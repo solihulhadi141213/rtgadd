@@ -130,6 +130,11 @@
 
                 //Hitung jumlah kabupaten
                 $JumlahKabupaten = mysqli_num_rows(mysqli_query($Conn, "SELECT id_geo_region FROM geo_region WHERE (level_region='District') AND province_code='$province_code'"));
+
+                //Jumlah Kabupaten Punya Coordinates
+                $JumlahKabupatenCoordinates = mysqli_num_rows(mysqli_query($Conn, "SELECT id_geo_region FROM geo_region WHERE level_region='District' AND province_code='$province_code' AND coordinates!=''"));
+                
+                //Buat labelJumlahKab
                 if(empty($JumlahKabupaten)){
                     $labelJumlahKab='
                         <a href="javascript:void(0);" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#ModalGetKabKot" data-id="'.$id_geo_region .'">
@@ -137,11 +142,20 @@
                         </a>
                     ';
                 }else{
-                    $labelJumlahKab='
-                        <a href="javascript:void(0);" class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#ModalDetail" data-id="'.$id_geo_region .'">
-                            '.$JumlahKabupaten.'
-                        </a>
-                    ';
+                    if(empty($JumlahKabupatenCoordinates)){
+                        $labelJumlahKab='
+                            <a href="javascript:void(0);" class="btn btn-sm btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ModalDetail" data-id="'.$id_geo_region .'">
+                                '.$JumlahKabupaten.' / '.$JumlahKabupatenCoordinates.'
+                            </a>
+                        ';
+                    }else{
+                        $labelJumlahKab='
+                            <a href="javascript:void(0);" class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#ModalDetail" data-id="'.$id_geo_region .'">
+                                '.$JumlahKabupaten.' / '.$JumlahKabupatenCoordinates.'
+                            </a>
+                        ';
+                    }
+                    
                 }
                 echo '
                     <tr>
