@@ -36,4 +36,62 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-12 text-end">
+                            <button type="button" class="btn btn-md btn-secondary btn-floating" data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter Data">
+                                <i class="bi bi-filter"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th><b>No</b></th>
+                                    <th><b>Provinsi</b></th>
+                                    <th><b>Analisis Beban Kerja (ABK)</b></th>
+                                    <th><b>ASN</b></th>
+                                    <th><b>Kebutuhan Guru</b></th>
+                                    <th><b>Opt</b></th>
+                                </tr>
+                            </thead>
+                            <tbody id="TabelKebutuhanGuru">
+                                <tr>
+                                    <td colspan="6" class="text-center">
+                                        <small>Loading...</small>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-6">
+                            <small id="data_count">
+                                Count : 100 Record
+                            </small>
+                        </div>
+                        <div class="col-6 text-end">
+                            <button type="button" class="btn btn-sm btn-outline-info btn-floating" id="prev_button">
+                                <i class="bi bi-chevron-left"></i>
+                            </button>
+                            <button type="button" disabled class="btn btn-sm btn-outline-info btn-rounded" id="page_info">
+                                Page 1 / 100
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-info btn-floating" id="next_button">
+                                <i class="bi bi-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

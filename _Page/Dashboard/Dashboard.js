@@ -1,5 +1,63 @@
+// Fungsi Menampilkan Tabel dengan transisi halus & posisi scroll tetap
+function filterAndLoadTable() {
+    var ProsesFilter = $('#ProsesFilter').serialize();
+
+    // Simpan posisi scroll saat ini
+    var currentScroll = $(window).scrollTop();
+
+    // Efek transisi: fadeOut lembut
+    $('#TabelKebutuhanGuru').fadeTo(400, 0.3, function () {
+        $.ajax({
+            type    : 'POST',
+            url     : '_Page/Dashboard/TabelKebutuhanGuru.php',
+            data    : ProsesFilter,
+            success : function(data) {
+                // Ganti konten
+                $('#TabelKebutuhanGuru').html(data);
+
+                // Efek transisi fadeIn lembut
+                $('#TabelKebutuhanGuru').fadeTo(400, 1);
+
+                // Kembalikan posisi scroll agar layar tidak bergerak
+                $(window).scrollTop(currentScroll);
+            }
+        });
+    });
+}
+
 let timestamp = new Date().getTime();
+
 $(document).ready(function() {
+    //Menampilkan Tabel Pertama Kali
+    filterAndLoadTable();
+
+    //Pagging
+    $(document).on('click', '#next_button', function() {
+        var page_now = parseInt($('#page').val(), 10); // Pastikan nilai diambil sebagai angka
+        var next_page = page_now + 1;
+        $('#page').val(next_page);
+        filterAndLoadTable(0);
+    });
+    $(document).on('click', '#prev_button', function() {
+        var page_now = parseInt($('#page').val(), 10); // Pastikan nilai diambil sebagai angka
+        var next_page = page_now - 1;
+        $('#page').val(next_page);
+        filterAndLoadTable(0);
+    });
+
+    //Submit Filter Data
+    $('#ProsesFilter').submit(function(){
+
+        //Reset Halaman Ke halaman 1
+        $('#page').val("1");
+
+        //Tampilkan Ulang Data
+        filterAndLoadTable();
+
+        //Tutup Modal Filter
+        $('#ModalFilter').modal('hide');
+    });
+
     // Inisialisasi peta
     var map = L.map('indonesia-map').setView([-2.5489, 118.0149], 5);
 
@@ -12,31 +70,37 @@ $(document).ready(function() {
     var provinceData = {};
     var geoJsonLayer;
 
-    // Load data dari map_count.json
-    $.getJSON('_Page/Dashboard/map_count.json?v=1'+ timestamp, function(data) {
-        // Konversi array menjadi object dengan KODE_PROV sebagai key
-        data.forEach(function(province) {
+    // Load data dari map_count.php
+    $.getJSON('_Page/Dashboard/map_count.php?v=1' + timestamp, function(res) {
+        if (res.code !== 200) {
+            console.error(res.message);
+            return;
+        }
+
+        // Simpan ke object provinceData
+        res.metadata.forEach(function(province) {
             provinceData[province.KODE_PROV] = province;
         });
 
-        // Load GeoJSON dan render peta
+        // Load GeoJSON
         $.getJSON('GeoJson/provinsi.json', function(geoJsonData) {
             renderMap(geoJsonData);
         }).fail(function() {
             console.error('Gagal memuat file GeoJSON');
         });
     }).fail(function() {
-        console.error('Gagal memuat file map_count.json');
+        console.error('Gagal memuat map_count.php');
     });
 
     function renderMap(geoJsonData) {
         // Fungsi untuk menentukan warna berdasarkan jumlah guru yang kurang
         function getColor(kurangGuru) {
-            return kurangGuru > 300 ? '#020a79ff' :
-                   kurangGuru > 250 ? '#201cffff' :
-                   kurangGuru > 200 ? '#5d5bffff' :
-                   kurangGuru > 150 ? '#7f7dffff' :
+            return kurangGuru > 1000 ? '#020a79ff' :
+                   kurangGuru > 750 ? '#201cffff' :
+                   kurangGuru > 500 ? '#5d5bffff' :
+                   kurangGuru > 200 ? '#7f7dffff' :
                    kurangGuru > 100 ? '#8e99faff' :
+                   kurangGuru > 50 ? '#a7aff5ff' :
                    kurangGuru > 10 ? '#ccccf5ff' :
                                       '#f8f8f8ff';
         }
@@ -158,7 +222,7 @@ $(document).ready(function() {
 
         legend.onAdd = function(map) {
             var div = L.DomUtil.create('div', 'info legend');
-            var grades = [0, 10, 100, 150, 200, 250, 300];
+            var grades = [0, 10, 50, 100, 200, 500, 750, 1000];
             var labels = ['<strong>Kekurangan Guru</strong>'];
             var from, to;
 
@@ -187,11 +251,23 @@ $(document).ready(function() {
         };
 
         info.update = function(props) {
-            this._div.innerHTML = '<h6>Informasi Provinsi</h6>' + 
-                (props ? 
-                    '<b>' + props.PROVINSI + '</b><br>' +
-                    'Kode: ' + props.KODE_PROV
-                    : 'Arahkan kursor ke provinsi');
+            if (props) {
+                var data = provinceData[props.KODE_PROV];
+                if (data) {
+                    this._div.innerHTML = `
+                        <h6>${data.PROVINSI}</h6>
+                        <small>Kode: ${props.KODE_PROV}</small><br>
+                        ABK: <b>${data.ABK.toLocaleString()}</b><br>
+                        Jumlah Guru: <b>${data.jumlah_guru.toLocaleString()}</b><br>
+                        Kurang Guru: <b class="text-danger">${data.kurang_guru.toLocaleString()}</b><br>
+                        Kurang ASN: <b class="text-warning">${data.kurang_asn.toLocaleString()}</b>
+                    `;
+                } else {
+                    this._div.innerHTML = "<small>Data tidak tersedia</small>";
+                }
+            } else {
+                this._div.innerHTML = "<h6>Informasi Provinsi</h6>Arahkan kursor ke provinsi";
+            }
         };
 
         info.addTo(map);

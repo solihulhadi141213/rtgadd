@@ -33,102 +33,84 @@
     }
 
     //Buat variabel
-    $province_code = validateAndSanitizeInput($_POST['province_code']);
+    $province_code          = validateAndSanitizeInput($_POST['province_code']);
 
-    //Query ke database
-    $sql = "
-        SELECT 
-            r.province_code,
-            r.province_code_dapodik,
-            r.province_name,
-            r.district_code,
-            r.district_code_dapodik,
-            r.district_name,
-            r.code_map,
-            SUM(pr.abk) AS abk,
-            SUM(pr.asn) AS asn,
-            SUM(pr.jumlah_guru) AS jumlah_guru,
-            SUM(pr.kurang_guru) AS kurang_guru,
-            SUM(pr.kurang_asn) AS kurang_asn
-        FROM region r
-        LEFT JOIN position_region pr ON r.id_region = pr.id_region
-        WHERE r.province_code = ?
-        GROUP BY r.province_code
-    ";
-    $stmt = $Conn->prepare($sql);
-    $stmt->bind_param("s", $province_code);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    //Buka Data pada tabel region
+    $province_code_dapodik  = GetDetailData($Conn, 'region', 'province_code', $province_code, 'province_code_dapodik');
+    $province_name          = GetDetailData($Conn, 'region', 'province_code', $province_code, 'province_name');
 
-    if($result->num_rows > 0){
-        $row = $result->fetch_assoc();
-        $province_code          = htmlspecialchars($row['province_code']);
-        $province_code_dapodik  = htmlspecialchars($row['province_code_dapodik']);
-        $province_name          = htmlspecialchars($row['province_name']);
-        $abk                    = htmlspecialchars($row['abk']);
-        $asn                    = htmlspecialchars($row['asn']);
-        $jumlah_guru            = htmlspecialchars($row['jumlah_guru']);
-        $kurang_guru            = htmlspecialchars($row['kurang_guru']);
-        $kurang_asn             = htmlspecialchars($row['kurang_asn']);
-        
-        //Tampilkan data
-        echo '
-            <input type="hidden" name="Page" value="DashboardProvince">
-            <input type="hidden" name="province_code" value="'.$province_code.'">
-            <div class="row mb-2">
-                <div class="col-5"><small>Kode Provinsi (BPS)</small></div>
-                <div class="col-1"><small>:</small></div>
-                <div class="col-6 text-left"><small>'.$province_code.'</small></div>
-            </div>
-            <div class="row mb-2">
-                <div class="col-5"><small>Kode Provinsi (DAPODIK)</small></div>
-                <div class="col-1"><small>:</small></div>
-                <div class="col-6 text-left"><small>'.$province_code_dapodik.'</small></div>
-            </div>
-            <div class="row mb-2">
-                <div class="col-5"><small>Nama Provinsi</small></div>
-                <div class="col-1"><small>:</small></div>
-                <div class="col-6 text-left"><small>'.$province_name.'</small></div>
-            </div>
-            <div class="row mb-2">
-                <div class="col-5"><small>ABK</small></div>
-                <div class="col-1"><small>:</small></div>
-                <div class="col-6 text-left"><small>'.$abk.'</small></div>
-            </div>
-            <div class="row mb-2">
-                <div class="col-5"><small>ASN</small></div>
-                <div class="col-1"><small>:</small></div>
-                <div class="col-6 text-left"><small>'.$asn.'</small></div>
-            </div>
-            <div class="row mb-2">
-                <div class="col-5"><small>Jumlah Guru</small></div>
-                <div class="col-1"><small>:</small></div>
-                <div class="col-6 text-left"><small>'.$jumlah_guru.'</small></div>
-            </div>
-            <div class="row mb-2">
-                <div class="col-5"><small>Kurang Guru</small></div>
-                <div class="col-1"><small>:</small></div>
-                <div class="col-6 text-left"><small>'.$kurang_guru.'</small></div>
-            </div>
-            <div class="row mb-2">
-                <div class="col-5"><small>Kurang ASN</small></div>
-                <div class="col-1"><small>:</small></div>
-                <div class="col-6 text-left"><small>'.$kurang_asn.'</small></div>
-            </div>
-            <script>
-                $(document).ready(function(){
-                    $("#ButtonSelengkapnya").prop("disabled", false);
-                });
-            </script>
-        ';
-    } else {
-        $province_code  = "";
-        echo '
-            <div class="alert alert-warning">
-                <small>Data provinsi tidak ditemukan!</small>
-            </div>
-        ';
+    if(empty($province_name)){
+        //Jika Belum Terdaftar Pada Tabel region maka buka Data pada tabel geo_region
+        $province_name          = GetDetailData($Conn, 'geo_region', 'province_code', $province_code, 'province_name');
     }
 
-    $stmt->close();
+    //Menghitung abk, asn, jumlah_guru, kurang_guru, kurang_asn
+    
+    // Inisialisasi akumulasi
+    $abk = $asn = $jumlah_guru = $kurang_guru = $kurang_asn = 0;
+
+    // Loop semua district di provinsi
+    $query_region = mysqli_query($Conn, "SELECT id_region FROM region WHERE category='District' AND province_code='$province_code'");
+    while ($data_region = mysqli_fetch_assoc($query_region)) {
+        $id_region = $data_region['id_region'];
+
+        // Loop posisi guru di district
+        $query_position_region = mysqli_query($Conn, "SELECT abk, asn, jumlah_guru, kurang_guru, kurang_asn FROM position_region WHERE id_region='$id_region'");
+        while ($data_position_region = mysqli_fetch_assoc($query_position_region)) {
+            $abk            += (int)$data_position_region['abk'];
+            $asn            += (int)$data_position_region['asn'];
+            $jumlah_guru    += (int)$data_position_region['jumlah_guru'];
+            $kurang_guru    += (int)$data_position_region['kurang_guru'];
+            $kurang_asn     += (int)$data_position_region['kurang_asn'];
+        }
+    }
+    echo '
+        <input type="hidden" name="Page" value="DashboardProvince">
+        <input type="hidden" name="province_code" value="'.$province_code.'">
+        <div class="row mb-2">
+            <div class="col-5"><small>Kode Provinsi (BPS)</small></div>
+            <div class="col-1"><small>:</small></div>
+            <div class="col-6 text-left"><small>'.$province_code.'</small></div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-5"><small>Kode Provinsi (DAPODIK)</small></div>
+            <div class="col-1"><small>:</small></div>
+            <div class="col-6 text-left"><small>'.$province_code_dapodik.'</small></div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-5"><small>Nama Provinsi</small></div>
+            <div class="col-1"><small>:</small></div>
+            <div class="col-6 text-left"><small>'.$province_name.'</small></div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-5"><small>ABK</small></div>
+            <div class="col-1"><small>:</small></div>
+            <div class="col-6 text-left"><small>'.$abk.'</small></div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-5"><small>ASN</small></div>
+            <div class="col-1"><small>:</small></div>
+            <div class="col-6 text-left"><small>'.$asn.'</small></div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-5"><small>Jumlah Guru</small></div>
+            <div class="col-1"><small>:</small></div>
+            <div class="col-6 text-left"><small>'.$jumlah_guru.'</small></div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-5"><small>Kurang Guru</small></div>
+            <div class="col-1"><small>:</small></div>
+            <div class="col-6 text-left"><small>'.$kurang_guru.'</small></div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-5"><small>Kurang ASN</small></div>
+            <div class="col-1"><small>:</small></div>
+            <div class="col-6 text-left"><small>'.$kurang_asn.'</small></div>
+        </div>
+        <script>
+            $(document).ready(function(){
+                $("#ButtonSelengkapnya").prop("disabled", false);
+            });
+        </script>
+    ';
 ?>
