@@ -1,13 +1,13 @@
 <div class="pagetitle">
     <h1>
         <a href="">
-            <i class="bi bi-database"></i> AKB Per Sekolah</a>
+            <i class="bi bi-database"></i> ABK Per Sekolah</a>
         </a>
     </h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-            <li class="breadcrumb-item active">AKB Per Sekolah</li>
+            <li class="breadcrumb-item active">ABK Per Sekolah</li>
         </ol>
     </nav>
 </div>
@@ -16,7 +16,7 @@
         <div class="col-md-12">
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <small>
-                    Berikut ini adalah halaman untuk pengelolaan database AKB Per Sekolah. 
+                    Berikut ini adalah halaman untuk pengelolaan database ABK Per Sekolah. 
                     Anda bisa mengelola dataset yang ada dengan lebih cepat menggunakan fitur export dan import.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </small>

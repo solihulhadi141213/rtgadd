@@ -14,6 +14,12 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link <?php if($PageMenu!=="Dokumentasi"){echo "collapsed";} ?>" href="index.php?Page=Dokumentasi">
+                <i class="bi bi-question-circle"></i>
+                <span>Dokumentasi</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#ModalLogout">
                 <i class="bi bi-box-arrow-in-left"></i>
                 <span>Keluar</span>

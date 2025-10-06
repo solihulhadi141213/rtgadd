@@ -39,6 +39,7 @@
             "MapViewer"             =>  "_Page/MapViewer/MapViewer.php",
             "Aktivitas"             =>  "_Page/Aktivitas/Aktivitas.php",
             "Help"                  =>  "_Page/Help/Help.php",
+            "Dokumentasi"           =>  "_Page/Dokumentasi/Dokumentasi.php",
         ];
 
         //Tangkap 'Page'

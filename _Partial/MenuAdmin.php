@@ -98,7 +98,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link <?php if($PageMenu=="AbkPerSekolah"){echo "";}else{echo "collapsed";} ?>" href="index.php?Page=AbkPerSekolah">
-                <i class="bi bi-table"></i> <span>AKB Per Sekolah</span>
+                <i class="bi bi-table"></i> <span>ABK Per Sekolah</span>
             </a>
         </li>
         <li class="nav-heading">Fitur Lainnya</li>
@@ -116,7 +116,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link <?php if($PageMenu!=="MapViewer"){echo "collapsed";} ?>" href="index.php?Page=MapViewer">
-                <i class="bi bi-map-fill"></i>
+                <i class="bi bi-pin-map"></i>
                 <span>Map Viewer</span>
             </a>
         </li>
@@ -134,7 +134,13 @@
         </li>
         <li class="nav-item">
             <a class="nav-link <?php if($PageMenu!=="Help"){echo "collapsed";} ?>" href="index.php?Page=Help&Sub=HelpData">
-                <i class="bi bi-question"></i>
+                <i class="bi bi-list"></i>
+                <span>Dokumentasi (Konten)</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link <?php if($PageMenu!=="Dokumentasi"){echo "collapsed";} ?>" href="index.php?Page=Dokumentasi">
+                <i class="bi bi-question-circle"></i>
                 <span>Dokumentasi</span>
             </a>
         </li>

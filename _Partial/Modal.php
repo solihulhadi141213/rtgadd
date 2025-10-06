@@ -38,7 +38,8 @@
             "MapViewer"                 => "_Page/MapViewer/ModalMapViewer.php",
             "CornJob"                   => "_Page/CornJob/ModalCornJob.php",
             "Aktivitas"                 => "_Page/Aktivitas/ModalAktivitas.php",
-            "Help"                      => "_Page/Help/ModalHelp.php"
+            "Help"                      => "_Page/Help/ModalHelp.php",
+            "Dokumentasi"               => "_Page/Dokumentasi/ModalDokumentasi.php"
         ];
 
         // Cek apakah halaman memiliki modal terkait dan sertakan file modalnya

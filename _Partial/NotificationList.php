@@ -3,58 +3,93 @@
     include "../_Config/Connection.php";
     include "../_Config/GlobalFunction.php";
     include "../_Config/Session.php";
-    
-    //Menghitung Jumlah Pinjaman Yang Menunggak
-    $JumlahNotifikasi=0;
-    $query_pinjaman_berjalan = mysqli_query($Conn, "SELECT id_pinjaman, tanggal, periode_angsuran FROM pinjaman WHERE status='Berjalan'");
-    while ($data = mysqli_fetch_array($query_pinjaman_berjalan)) {
-        $id_pinjaman= $data['id_pinjaman'];
-        $tanggal= $data['tanggal'];
-        $periode_angsuran= $data['periode_angsuran'];
-        
-        //Tanggal Sekarang
-        $TanggalSekarang=date('Y-m-d');
-        $JumlahPeriodeTagihan=0;
-        for ( $i=1; $i<=$periode_angsuran; $i++ ){
-            $GetPeriodePinjaman=date('d/m/Y', strtotime('+'.$i.' month', strtotime($tanggal))); 
-            //Ubah Format Tangga
-            $GetPeriodePinjaman2=date('Y-m-d', strtotime('+'.$i.' month', strtotime($tanggal))); 
-            if($TanggalSekarang>$GetPeriodePinjaman2){
-                //Cek Apakah Sudah Ada Angsuran
-                $QryAngsuran = mysqli_query($Conn,"SELECT id_pinjaman_angsuran FROM pinjaman_angsuran WHERE id_pinjaman='$id_pinjaman' AND tanggal_angsuran='$GetPeriodePinjaman2'")or die(mysqli_error($Conn));
-                $DataAngsuran = mysqli_fetch_array($QryAngsuran);
-                if(empty($DataAngsuran['id_pinjaman_angsuran'])){
-                    $JumlahPeriodeTagihan=$JumlahPeriodeTagihan+1;
-                }else{
-                    $JumlahPeriodeTagihan=$JumlahPeriodeTagihan+0;
-                }
-            }else{
-                $JumlahPeriodeTagihan=$JumlahPeriodeTagihan+0;
-            }
-        }
-        if(!empty($JumlahPeriodeTagihan)){
-            $JumlahNotifikasi=$JumlahNotifikasi+1;
+
+    //Fungsi Durasi
+    function timeAgo($datetime_creat){
+        $now = new DateTime(); // waktu sekarang
+        $created = new DateTime($datetime_creat);
+        $diff = $now->diff($created);
+
+        // Total detik
+        $seconds = time() - strtotime($datetime_creat);
+
+        if ($seconds < 60) {
+            return "Barusan";
+        } elseif ($seconds < 3600) {
+            return $diff->i . " Menit Yang Lalu";
+        } elseif ($seconds < 86400) {
+            return $diff->h . " Jam Yang Lalu";
+        } elseif ($seconds < 604800) {
+            return $diff->d . " Hari Yang Lalu";
+        } elseif ($seconds < 2592000) {
+            $weeks = floor($diff->days / 7);
+            return $weeks . " Minggu Yang Lalu";
+        } elseif ($seconds < 31536000) {
+            return $diff->m . " Bulan Yang Lalu";
+        } else {
+            return $diff->y . " Tahun Yang Lalu";
         }
     }
-    //Apabila Tidak ada notifgikasi
-    if(empty($JumlahNotifikasi)){
-        echo '<li class="dropdown-header">';
-        echo '  Tidak Ada Data Piinjaman Yang Belum Dibayar';
-        echo '</li>';
-    }else{
-        //Apabila Ada
-        echo '<li class="dropdown-header">';
-        echo '  Ada '.$JumlahNotifikasi.' pinjaman yang belum dibayar';
-        echo '</li>';
-        if(!empty($JumlahNotifikasi)){
-            echo '<li><hr class="dropdown-divider"></li>';
-            echo '<li class="notification-item">';
-            echo '  <i class="bi bi-exclamation-circle text-danger"></i>';
-            echo '  <div>';
-            echo '      <h4><a href="index.php?Page=Tagihan">Tagihan Pinjaman Belum Dibayar</a></h4>';
-            echo '      <p>Ada '.$JumlahNotifikasi.' tagihan pinjaman belum dibayar</p>';
-            echo '  </div>';
-            echo '</li>';
-        }
+
+    //Validasi Sesi Akses
+    if(empty($SessionIdAccess)){
+        echo '
+            <li class="dropdown-header">
+                <div class="alert alert-danger">
+                    <small>No Access</small>
+                </div>
+            </li>
+        ';
+        exit;
+    }
+
+    //Jika Tidak Ada Notifikasi
+    $jumlah_notifikasi = mysqli_num_rows(
+        mysqli_query(
+            $Conn,
+            "SELECT id_help_notification 
+            FROM help_notification 
+            WHERE id_access='$SessionIdAccess' 
+            AND read_status IS NULL"
+        )
+    );
+    if(empty($jumlah_notifikasi)){
+        echo '
+            <li class="dropdown-header">
+                <i class="bi bi-check-circle text-success"></i> Anda Sudah Membaca Semua Notifikasi
+            </li>
+        ';
+        exit;
+    }
+
+    //Jika Ada Notifikasi
+    $qry_notifikasi = mysqli_query($Conn, "SELECT * FROM help_notification WHERE id_access='$SessionIdAccess' AND read_status IS NULL");
+    while ($data_notifikasi = mysqli_fetch_array($qry_notifikasi)) {
+        $id_help_notification   = $data_notifikasi['id_help_notification'];
+        $id_help                = $data_notifikasi['id_help'];
+
+        //Buka Rincian Dokumentasi
+        $judul  = GetDetailData($Conn, 'help', 'id_help', $id_help, 'judul');
+        $author  = GetDetailData($Conn, 'help', 'id_help', $id_help, 'author');
+        $datetime_creat  = GetDetailData($Conn, 'help', 'id_help', $id_help, 'datetime_creat');
+
+        //Label Durasi
+        $label_durasi = timeAgo($datetime_creat);
+        echo '
+            <li class="dropdown-header">
+                Anda memiliki '.$jumlah_notifikasi.' Pemberitahuan
+            </li>
+        ';
+        echo '
+            <li class="notification-item">
+                <i class="bi bi-info-circle text-primary"></i>
+                <div>
+                    <h4>
+                        <a href="index.php?Page=Dokumentasi&Sub=Detail&id='.$id_help.'">'.$judul.'</a>
+                    </h4>
+                    <p>'.$label_durasi.'</p>
+                </div>
+            </li>
+        ';
     }
 ?>

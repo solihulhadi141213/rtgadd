@@ -41,7 +41,8 @@
             "GeoJsonBps"            => "_Page/GeoJsonBps/GeoJsonBps.js",
             "MapViewer"             => "_Page/MapViewer/MapViewer.js",
             "Aktivitas"             => "_Page/Aktivitas/Aktivitas.js",
-            "Help"                  => "_Page/Help/Help.js"
+            "Help"                  => "_Page/Help/Help.js",
+            "Dokumentasi"           => "_Page/Dokumentasi/Dokumentasi.js"
         ];
 
         // Cek apakah halaman ada dalam daftar dan sertakan file JS yang sesuai
