@@ -1,28 +1,216 @@
-//Fungsi Menampilkan Data
-function filterAndLoadTable() {
-    var ProsesFilter = $('#ProsesFilter').serialize();
 
-    // Efek transisi: fadeOut dulu
-    $('#TabelKebutuhanGuruByKabKot').fadeOut(200, function () {
+//Fungsi Menampilkan Nominal Kebutuhan Guru
+function ShowNominalKebutuhanGuruProvinsi(kode_provinsi) {
+    $.ajax({
+        type    : 'POST',
+        url     : '_Page/DashboardProvince/ShowNominalKebutuhanGuruProvinsi.php',
+        data    : {province_code: kode_provinsi},
+        dataType: 'json',
+        success : function(response) {
+            if (response.code === 200) {
+                // Hapus alert lama, ganti ke tempat angka
+                $('#show_nominal_kebutuhan_guru').html(
+                    '<div>' + 
+                        '<b id="counter">0</b>' +
+                    '</div>'
+                );
+
+                // Animasi hitungan
+                let target = response.kebutuhan_guru;
+                let counterElement = $('#counter');
+                let current = 0;
+                let increment = Math.ceil(target / 100); // jumlah kenaikan per step
+                let interval = setInterval(function() {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(interval);
+                    }
+                    counterElement.text(current.toLocaleString('id-ID'));
+                }, 20); // kecepatan transisi (20ms per step)
+                
+            } else {
+                $('#show_nominal_kebutuhan_guru').html(
+                    '<div class="alert alert-danger p-2 mb-2">' + 
+                        response.message + 
+                    '</div>'
+                );
+            }
+        },
+        error: function(xhr, status, error) {
+            $('#show_nominal_kebutuhan_guru').html(
+                '<div class="alert alert-danger p-2 mb-2">' + 
+                    'Terjadi kesalahan: ' + error + 
+                '</div>'
+            );
+        }
+    });
+}
+
+//Fungsi Menampilkan Nominal Lulusan PPG yang Belum Diangkat
+function ShowNominalLulusanPpg(kode_provinsi) {
+    $.ajax({
+        type    : 'POST',
+        url     : '_Page/DashboardProvince/ShowNominalLulusanPpg.php',
+        data    : {province_code: kode_provinsi},
+        dataType: 'json',
+        success : function(response) {
+            if (response.code === 200) {
+                // Hapus alert lama, ganti ke tempat angka
+                $('#show_lulusan_ppg_pending').html(
+                    '<div>' + 
+                        '<b id="counter_2">0</b>' +
+                    '</div>'
+                );
+
+                // Animasi hitungan
+                let target = response.lulusan_ppg;
+                let counterElement = $('#counter_2');
+                let current = 0;
+                let increment = Math.ceil(target / 100); // jumlah kenaikan per step
+                let interval = setInterval(function() {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(interval);
+                    }
+                    counterElement.text(current.toLocaleString('id-ID'));
+                }, 20); // kecepatan transisi (20ms per step)
+                
+            } else {
+                $('#show_lulusan_ppg_pending').html(
+                    '<div class="alert alert-danger p-2 mb-2">' + 
+                        response.message + 
+                    '</div>'
+                );
+            }
+        },
+        error: function(xhr, status, error) {
+            $('#show_lulusan_ppg_pending').html(
+                '<div class="alert alert-danger p-2 mb-2">' + 
+                    'Terjadi kesalahan: ' + error + 
+                '</div>'
+            );
+        }
+    });
+}
+
+//Fungsi Menampilkan Data Kebutuhan Guru Menurut Kab/Kota
+function ShowTableKebutuhanGuruByKabKot() {
+    var DataFilter = $('#ProsesFilterKebutuhanGuruByKabKot').serialize();
+
+    // Simpan posisi scroll saat ini
+    var currentScroll = $(window).scrollTop();
+
+    // Efek transisi: fadeOut lembut
+    $('#TabelKebutuhanGuruByKabKot').fadeTo(400, 0.3, function () {
         $.ajax({
             type    : 'POST',
             url     : '_Page/DashboardProvince/TabelKebutuhanGuruByKabKot.php',
-            data    : ProsesFilter,
+            data    : DataFilter,
             success : function(data) {
+                // Ganti konten
                 $('#TabelKebutuhanGuruByKabKot').html(data);
 
-                // Setelah ganti konten → fadeIn lagi
-                $('#TabelKebutuhanGuruByKabKot').fadeIn(200);
+                // Efek transisi fadeIn lembut
+                $('#TabelKebutuhanGuruByKabKot').fadeTo(400, 1);
+
+                // Kembalikan posisi scroll agar layar tidak bergerak
+                $(window).scrollTop(currentScroll);
             }
         });
     });
 }
 
+//Fungsi Menampilkan Data Kebutuhan Guru Menurut Jabatan
+function ShowTableKebutuhanGuruByJabatan() {
+    var DataFilterJabatan = $('#ProsesFilterKebutuhanGuruByJabatan').serialize();
+
+    // Simpan posisi scroll saat ini
+    var currentScroll = $(window).scrollTop();
+
+    // Efek transisi: fadeOut lembut
+    $('#TabelKebutuhanGuruByJabatan').fadeTo(400, 0.3, function () {
+        $.ajax({
+            type    : 'POST',
+            url     : '_Page/DashboardProvince/TabelKebutuhanGuruByJabatan.php',
+            data    : DataFilterJabatan,
+            success : function(data) {
+                // Ganti konten
+                $('#TabelKebutuhanGuruByJabatan').html(data);
+
+                // Efek transisi fadeIn lembut
+                $('#TabelKebutuhanGuruByJabatan').fadeTo(400, 1);
+
+                // Kembalikan posisi scroll agar layar tidak bergerak
+                $(window).scrollTop(currentScroll);
+            }
+        });
+    });
+}
+
+
+
 $(document).ready(function () {
     var kode_provinsi = $("#kode_provinsi").val();
 
-    //Load Data Kebutuhan Guru menurut kabupaten/Kota
-    filterAndLoadTable();
+    //Menampilkan Jumlah Angka Kebutuhan Guru Level Provinsi
+    ShowNominalKebutuhanGuruProvinsi(kode_provinsi);
+
+    //Menampilkan Lulusan PPG Belum Diangkat
+    ShowNominalLulusanPpg(kode_provinsi);
+
+    //Load Data Kebutuhan Guru menurut kabupaten/Kota (Pertama Kali)
+    ShowTableKebutuhanGuruByKabKot();
+
+    //Event Ketika Filter Kebutuhan Guru Menurut Kab/Kot Disubmit
+    $('#ProsesFilterKebutuhanGuruByKabKot').submit(function(){
+
+        //Reset Posisi Halaman
+        $('#page_kebutuhan_guru_by_kabkot').val("1");
+
+        //Tampilkan Ulang Data
+        ShowTableKebutuhanGuruByKabKot();
+
+        //Tutup Modal
+        $('#ModalFilterKebutuhanGuruByKabKot').modal('hide');
+    });
+
+    //PAGGING Kebutuhan Guru Menurut Kab/Kot
+    $(document).on('click', '#next_button', function() {
+        var page_now = parseInt($('#page_kebutuhan_guru_by_kabkot').val(), 10); // Pastikan nilai diambil sebagai angka
+        var next_page = page_now + 1;
+        $('#page_kebutuhan_guru_by_kabkot').val(next_page);
+        ShowTableKebutuhanGuruByKabKot(0);
+    });
+    $(document).on('click', '#prev_button', function() {
+        var page_now = parseInt($('#page_kebutuhan_guru_by_kabkot').val(), 10); // Pastikan nilai diambil sebagai angka
+        var next_page = page_now - 1;
+        $('#page_kebutuhan_guru_by_kabkot').val(next_page);
+        ShowTableKebutuhanGuruByKabKot(0);
+    });
+
+    //Load Data Kebutuhan Guru menurut Jabatan (Pertama Kali)
+    ShowTableKebutuhanGuruByJabatan();
+
+    //Event ketika school_level_2 change
+    $('#school_level_2').change(function(){
+       ShowTableKebutuhanGuruByJabatan();
+    });
+
+    //PAGGING Kebutuhan Guru Menurut Position (Jabatan)
+    $(document).on('click', '#next_button_2', function() {
+        var page_now = parseInt($('#page_kebutuhan_guru_by_jabatan').val(), 10); // Pastikan nilai diambil sebagai angka
+        var next_page = page_now + 1;
+        $('#page_kebutuhan_guru_by_jabatan').val(next_page);
+        ShowTableKebutuhanGuruByJabatan(0);
+    });
+    $(document).on('click', '#prev_button_2', function() {
+        var page_now = parseInt($('#page_kebutuhan_guru_by_jabatan').val(), 10); // Pastikan nilai diambil sebagai angka
+        var next_page = page_now - 1;
+        $('#page_kebutuhan_guru_by_jabatan').val(next_page);
+        ShowTableKebutuhanGuruByJabatan(0);
+    });
 
     let timestamp = new Date().getTime();
     // ===================== PIE CHART APEXCHART =====================
