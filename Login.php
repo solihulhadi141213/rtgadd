@@ -26,8 +26,16 @@
                                             if($Page=="LupaPassword"){
                                                 include "_Page/ResetPassword/FormLupaPassword.php";
                                             }else{
-                                                if($Page=="ResetPassword"){
-                                                    include "_Page/ResetPassword/FormResetPassword.php";
+                                                if($Page=="UbahPassword"){
+                                                    include "_Page/ResetPassword/FormUbahPassword.php";
+                                                }else{
+                                                    if($Page=="VerifikasiKode"){
+                                                        include "_Page/ResetPassword/VerifikasiKode.php";
+                                                    }else{
+                                                         if($Page=="UpdatePassword"){
+                                                            include "_Page/ResetPassword/UpdatePassword.php";
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
@@ -62,8 +70,12 @@
             $('#TampilkanPassword2').click(function(){
                 if($(this).is(':checked')){
                     $('#password').attr('type','text');
+                    $('#password1').attr('type','text');
+                    $('#password2').attr('type','text');
                 }else{
                     $('#password').attr('type','password');
+                    $('#password1').attr('type','password');
+                    $('#password2').attr('type','password');
                 }
             });
 
@@ -99,6 +111,123 @@
                     $('#PasswordBaru1').attr('type','password');
                     $('#PasswordBaru2').attr('type','password');
                 }
+            });
+
+            //Submit ProsesLupaPassword
+            $('#ProsesLupaPassword').submit(function(){
+
+                //Tangkap Data Dir Form
+                var ProsesLupaPassword = $('#ProsesLupaPassword').serialize();
+
+                //Loading Tombol
+                var Loading='<div class="spinner-border text-info" role="status"><span class="visually-hidden">Loading...</span></div>';
+                $('#TombolLupaPassword').html(Loading);
+
+                //Kirim Data Melalui AJAX
+                $.ajax({
+                    type 	    : 'POST',
+                    url 	    : '_Page/ResetPassword/ProsesLupaPassword.php',
+                    data 	    :  ProsesLupaPassword,
+                    dataType    : 'json',
+                    success     : function(response){
+
+                        //Pulihkan Tombol
+                        $('#TombolLupaPassword').html('<i class="bi bi-send"></i> Kirim Kode');
+
+                        //Jika Berhasil
+                        if (response.status === 'success') {
+
+                            //Tangkap Email
+                            var my_email = response.email;
+
+                            // Redirect jika Proses lupa password berhasil
+                            window.location.href = 'Login.php?Page=VerifikasiKode&email='+my_email+'';
+                        } else {
+                            // Tampilkan notifikasi error jika gagal
+                            $('#NotifikasiLupaPassword').html('<div class="alert alert-danger">' + response.message + '</div>');
+                        }
+                    }
+                });
+            });
+
+            //Submit ProsesVerifikasiPemulihanAkun
+            $('#ProsesVerifikasiPemulihanAkun').submit(function(){
+
+                //Tangkap Data Dir Form
+                var ProsesVerifikasiPemulihanAkun = $('#ProsesVerifikasiPemulihanAkun').serialize();
+
+                //Loading Tombol
+                var Loading='<div class="spinner-border text-info" role="status"><span class="visually-hidden">Loading...</span></div>';
+                $('#TombolVerifikasiPemulihanAkun').html(Loading);
+
+                //Kirim Data Melalui AJAX
+                $.ajax({
+                    type 	    : 'POST',
+                    url 	    : '_Page/ResetPassword/ProsesVerifikasiPemulihanAkun.php',
+                    data 	    :  ProsesVerifikasiPemulihanAkun,
+                    dataType    : 'json',
+                    success     : function(response){
+
+                        //Pulihkan Tombol
+                        $('#TombolVerifikasiPemulihanAkun').html('<i class="bi bi-send"></i> Verifikasi Kode');
+
+                        //Jika Berhasil
+                        if (response.status === 'success') {
+
+                            //Tangkap Email
+                            var my_email = response.email;
+                            var my_code = response.kode_pemulihan;
+
+                            // Redirect jika Proses lupa password berhasil
+                            window.location.href = 'Login.php?Page=UpdatePassword&email='+my_email+'&code='+my_code+'';
+                        } else {
+                            // Tampilkan notifikasi error jika gagal
+                            $('#NotifikasiVerifikasiPemulihanAkun').html('<div class="alert alert-danger">' + response.message + '</div>');
+                        }
+                    }
+                });
+            });
+
+            //Submit ProsesUpdatePassword
+            $('#ProsesUpdatePassword').submit(function(){
+
+                //Tangkap Data Dir Form
+                var ProsesUpdatePassword = $('#ProsesUpdatePassword').serialize();
+
+                //Loading Tombol
+                var Loading='<div class="spinner-border text-info" role="status"><span class="visually-hidden">Loading...</span></div>';
+                $('#TombolUpdatePassword').html(Loading);
+
+                //Kirim Data Melalui AJAX
+                $.ajax({
+                    type 	    : 'POST',
+                    url 	    : '_Page/ResetPassword/ProsesUpdatePassword.php',
+                    data 	    :  ProsesUpdatePassword,
+                    dataType    : 'json',
+                    success     : function(response){
+
+                        //Pulihkan Tombol
+                        $('#TombolUpdatePassword').html('<i class="bi bi-save"></i> Simpan Password');
+
+                        //Jika Berhasil
+                        if (response.status === 'success') {
+
+                            Swal.fire({
+                                title: 'Success!',
+                                text: 'Password Baru Berhasil Disimpan',
+                                icon: 'success',
+                                confirmButtonText: 'OK'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = 'Login.php';
+                                }
+                            });
+                        } else {
+                            // Tampilkan notifikasi error jika gagal
+                            $('#NotifikasiUpdatePassword').html('<div class="alert alert-danger">' + response.message + '</div>');
+                        }
+                    }
+                });
             });
 
             // Jalankan reloadCaptcha setiap 1 menit (60.000 ms)
