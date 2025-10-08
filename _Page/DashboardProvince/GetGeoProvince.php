@@ -43,6 +43,7 @@
                 $f['properties']['id_region'] = $row['id_region'];
                 $f['properties']['province_name'] = $row['province_name'];
                 $f['properties']['district_name'] = $row['district_name'];
+                $f['properties']['district_code'] = $row['district_code'];
                 $f['properties']['kurang_guru'] = (int)$row['kurang_guru'];
             }
             $features = array_merge($features, $geo['features']);

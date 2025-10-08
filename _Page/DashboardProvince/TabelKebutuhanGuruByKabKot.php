@@ -175,7 +175,7 @@
             <tr>
                 <td><small>'.$no.'</small></td>
                 <td>
-                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#ModalDetailKabKot" data-id="'.$id_region.'">
+                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#ModalDetailKabKot" data-id="'.$district_code.'">
                         <small class="text text-decoration-underline">'.$district_name.'</small>
                     </a>
                 </td>

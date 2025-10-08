@@ -1,7 +1,7 @@
 <div class="pagetitle">
     <h1>
         <a href="">
-            Level Provinsi
+            <i class="bi bi-grid-1x2"></i> Level Provinsi
         </a>
     </h1>
     <nav>

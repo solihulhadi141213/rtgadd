@@ -49,7 +49,12 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-12">
-                        <img src="_Page/Login/Captcha.php" class="mb-2" id="captchaImage" alt="No Image" width="100%" style="border: 1px solid #ddd; margin-right: 10px;"/>
+                        <?php
+                            $random_string = generateRandomString(4);
+                            $time_stamp = date('Ymdhis');
+                            $version="$random_string-$time_stamp";
+                        ?>
+                        <img src="_Page/Login/Captcha.php?v=<?php echo $version; ?>" class="mb-2" id="captchaImage" alt="No Image" width="100%" style="border: 1px solid #ddd; margin-right: 10px;"/>
                         <a href="javascript:void(0);" onclick="reloadCaptcha()" title="Buat kode captcha baru">
                             <small>
                                 <i class="bi bi-repeat"></i> Muat ulang kode captcha

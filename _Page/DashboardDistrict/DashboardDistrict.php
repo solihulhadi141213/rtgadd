@@ -1,48 +1,30 @@
 <?php
     if(empty($_GET['district_code'])){
-        echo '
-            <section class="section dashboard">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            Anda Belum Memilih Kabupaten/Kota Manapun!
-                        </div>
-                    </div>
-                </div>
-            </section>
-        ';
-        exit;
-    }
-    $district_code      = $_GET['district_code'];
-    $id_region          = GetDetailData($Conn, 'region', 'district_code', $district_code, 'id_region');
-    $district_name      = GetDetailData($Conn, 'region', 'district_code', $district_code, 'district_name');
+       $district_code       = "";
+       $district_name       = "";
+       $province_code       = "";
+       $province_name       = "";
+       $id_region           = "";
+    }else{
+        $district_code      = $_GET['district_code'];
+        $district_name      = GetDetailData($Conn, 'region', 'district_code', $district_code, 'district_name');
+        $province_code      = GetDetailData($Conn, 'region', 'district_code', $district_code, 'province_code');
+        $province_name      = GetDetailData($Conn, 'region', 'district_code', $district_code, 'province_name');
+        $id_region          = GetDetailData($Conn, 'region', 'district_code', $district_code, 'id_region');
 
-    //Buka Provinsi
-    $province_name      = GetDetailData($Conn, 'region', 'district_code', $district_code, 'province_name');
-    $province_code      = GetDetailData($Conn, 'region', 'district_code', $district_code, 'province_code');
-    
-    //Validasi Apakah Kode Kabupaten/Kota Ada
-    if(empty($id_region)){
-        echo '
-            <section class="section dashboard">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            Kode Kabupaten/Kota Yang Anda Pilih Tidak Terdaftar
-                        </div>
-                    </div>
-                </div>
-            </section>
-        ';
-        exit;
+        //Apabila Tidak Ditemukan Pada Tabel Region Maka Buka Dari Geo Region
+        if(empty($district_name)){
+            $district_name      = GetDetailData($Conn, 'geo_region', 'district_code', $district_code, 'district_name');
+            $province_code      = GetDetailData($Conn, 'geo_region', 'district_code', $district_code, 'province_code');
+            $province_name      = GetDetailData($Conn, 'geo_region', 'district_code', $district_code, 'province_name');
+        }
     }
-
 ?>
 <input type="hidden" id="district_code" value="<?php echo $district_code; ?>">
 <div class="pagetitle">
     <h1>
         <a href="">
-            RTG - KABUPATEN/KOTA <?php echo "$district_name "; ?>
+            <i class="bi bi-grid-3x3-gap"></i> Level Kabupaten
         </a>
     </h1>
     <nav>
@@ -53,87 +35,228 @@
                 </a>
             </li>
             <li class="breadcrumb-item">
-                <a href="index.php?Page=DashboardProvince&province_code=<?php echo $province_code; ?>"><?php echo $province_name; ?></a>
+                <a href="index.php?Page=DashboardProvince&province_code=<?php echo $province_code; ?>">
+                    Level Provinsi
+                </a>
             </li>
-            <li class="breadcrumb-item active"><?php echo $district_name ?></li>
+            <li class="breadcrumb-item active">Level Kabupaten</li>
         </ol>
     </nav>
 </div>
 <section class="section dashboard">
-    <div class="row mb-3">
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body text-center">
-                    <b class="card-title">Jumlah Kebutuhan Guru</b>
-                    <h2><b class="text-primary">616</b></h2>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body text-center">
-                    <b class="card-title">Lulusan PPG yang Belum Diangkat </b>
-                    <h2><b class="text-primary">54</b></h2>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-body text-center">
-                    <div class="row mb-3">
-                        <div class="col-12">
-                            <h4 class="card-title">Kebutuhan Guru menurut Jenjang Sekolah</h4>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-12" id="ShowChartPie">
-                            <!-- Menampilkan Chart Pie -->
+    <?php
+        //Apabila Belum Memilih Kab/Kota
+        if(empty($district_code)){
+            echo '
+                <div class="row mb-2">
+                    <div class="col-12 text-center">
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <h1><i class="bi bi-exclamation-triangle"></i></h1>
+                            Anda Belum Memilih Kab/Kota Untuk Ditampilkan.
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-8">
-                            <b class="card-title">Guru menurut Jabatan</b>
-                        </div>
-                        <div class="col-4 text-end">
-                            <button type="button" class="btn btn-md btn-secondary btn-floating" data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter Data">
-                                <i class="bi bi-filter"></i>
-                            </button>
+                <div class="row mb-2">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <b class="card-title">
+                                            # Pilih Wilayah Kab/Kota
+                                        </b>
+                                    </div>
+                                    <div class="col-4 text-end">
+                                        <button type="button" class="btn btn-md btn-secondary btn-floating" data-bs-toggle="modal" data-bs-target="#ModalFilterKabKot" title="Pencarian">
+                                            <i class="bi bi-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="table table-responsive">
+                                            <table class="table table-striped table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th><b>No</b></th>
+                                                        <th><b>Provinsi</b></th>
+                                                        <th><b>Kab/Kota</b></th>
+                                                        <th><b>Opt</b></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="TabelKabKota">
+                                                    <tr>
+                                                        <td colspan="4" class="text-center">
+                                                            <small>Loading...</small>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <small id="data_count_kabkot">
+                                            Count : 0 Record
+                                        </small>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <button type="button" disabled class="btn btn-sm btn-outline-info btn-floating" id="prev_button_kabkot">
+                                            <i class="bi bi-chevron-left"></i>
+                                        </button>
+                                        <button type="button" disabled class="btn btn-sm btn-outline-info btn-rounded" id="page_info_kabkot">
+                                            Page 1 / 0
+                                        </button>
+                                        <button type="button" disabled class="btn btn-sm btn-outline-info btn-floating" id="next_button_kabkot">
+                                            <i class="bi bi-chevron-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="table table-responsive" style="max-height: 400px; overflow-y: auto;">
-                        <table class="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th><b>No</b></th>
-                                    <th><b>Jabatan</b></th>
-                                    <th><b>Analisa Beban Kerja (ABK)</b></th>
-                                    <th><b>ASN</b></th>
-                                    <th><b>PPPK 2024</b></th>
-                                    <th><b>Kebutuhan Guru</b></th>
-                                </tr>
-                            </thead>
-                            <tbody id="TabelGuruByJabatan">
-                                <tr>
-                                    <td colspan="6" class="text-center">
-                                        Loading...
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+            ';
+        }else{
+            //Mulai Menampilkan Dashboard Tingkat Kab/Kota
+            $district_name_low = ucwords(strtolower($district_name));
+            $province_name_low = ucwords(strtolower($province_name));
+            echo '
+                <div class="row mb-3">
+                    <div class="col-md-4 d-flex">
+                        <div class="card w-100 h-100">
+                            <div class="card-header text-center">
+                                <h3>'.$district_name_low.'</h3>
+                                <small>Provinsi '.$province_name_low.'</small>
+                            </div>
+                            <div class="card-body">
+                                <div class="rom mb-3 border-bottom border-1">
+                                    <div class="col-12 mb-3">
+                                        <div class="row mb-2">
+                                            <div class="col-6"><small>ABK</small></div>
+                                            <div class="col-6 text-end">
+                                                <small class="text-info" id="show_abk">'.$district_code.'</small>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-6"><small>ASN</small></div>
+                                            <div class="col-6 text-end">
+                                                <small class="text-info" id="show_asn">'.$district_code.'</small>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-6"><small>PPPK 2024</small></div>
+                                            <div class="col-6 text-end">
+                                                <small class="text-info" id="show_pppk2024">'.$district_code.'</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="rom mb-3 border-bottom border-1">
+                                    <div class="col-12 mb-3  text-center">
+                                        <span class="text text-grayish">Jumlah Kebutuhan Guru</span>
+                                        <h2>
+                                            <b class="text-primary" id="jumlah_kebutuhan_guru">Loading...</b>
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div class="rom mb-3 border-bottom border-1">
+                                    <div class="col-12 mb-3 text-center">
+                                        <span class="text text-grayish">Lulusan PPG yang Belum Diangkat</span>
+                                        <h2>
+                                            <b class="text-primary" id="jumlah_ppg_belum_diangkat">Loading...</b>
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 d-flex">
+                        <div class="card  w-100 h-100">
+                            <div class="card-body text-center">
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <h4 class="card-title">Kebutuhan Guru menurut Jenjang Sekolah</h4>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-12" id="ShowChartPie">
+                                        <!-- Menampilkan Chart Pie -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="card-footer">
-                    <small id="data_count">Count : 0 Record</small>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <b class="card-title"># Guru menurut Jabatan</b>
+                                    </div>
+                                    <div class="col-4 text-end">
+                                        <button type="button" class="btn btn-md btn-secondary btn-floating" data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter Data">
+                                            <i class="bi bi-filter"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table table-responsive" style="max-height: 400px; overflow-y: auto;">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th><b>No</b></th>
+                                                <th><b>Jabatan</b></th>
+                                                <th><b><small>Analisa Beban Kerja</small><br>(ABK)</b></th>
+                                                <th><b>ASN</b></th>
+                                                <th><b>PPPK 2024</b></th>
+                                                <th><b>Kebutuhan <br>Guru</b></th>
+                                                <th><b>Opsi</b></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="TabelGuruByJabatan">
+                                            <tr>
+                                                <td colspan="7" class="text-center">
+                                                    Loading...
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <small id="data_count">
+                                            Count : 0 Record
+                                        </small>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <button type="button" disabled class="btn btn-sm btn-outline-info btn-floating" id="prev_button">
+                                            <i class="bi bi-chevron-left"></i>
+                                        </button>
+                                        <button type="button" disabled class="btn btn-sm btn-outline-info btn-rounded" id="page_info">
+                                            Page 1 / 0
+                                        </button>
+                                        <button type="button" disabled class="btn btn-sm btn-outline-info btn-floating" id="next_button">
+                                            <i class="bi bi-chevron-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
+            ';
+        }
+    ?>
 </section>

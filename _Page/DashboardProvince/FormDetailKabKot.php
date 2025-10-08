@@ -20,8 +20,8 @@
         exit;
     }
 
-    //Validasi id_region
-    if(empty($_POST['id_region'])){
+    //Validasi district_code
+    if(empty($_POST['district_code'])){
         echo '
             <div class="alert alert-danger">
                 <small>
@@ -33,17 +33,18 @@
     }
 
     //Buat variabel
-    $id_region = validateAndSanitizeInput($_POST['id_region']);
+    $district_code = validateAndSanitizeInput($_POST['district_code']);
 
     //Query ke database
-    $sql = "SELECT * FROM region WHERE id_region = ?";
+    $sql = "SELECT * FROM region WHERE district_code = ?";
     $stmt = $Conn->prepare($sql);
-    $stmt->bind_param("i", $id_region);
+    $stmt->bind_param("s", $district_code);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if($result->num_rows > 0){
         $row = $result->fetch_assoc();
+        $id_region          = htmlspecialchars($row['id_region']);
         $province_code          = htmlspecialchars($row['province_code']);
         $province_code_dapodik  = htmlspecialchars($row['province_code_dapodik']);
         $province_name          = htmlspecialchars($row['province_name']);
@@ -156,11 +157,39 @@
             </script>
         ';
     } else {
+        //Buka Detail dari tabel geo_region berdasarkan district_code
+        $province_code           = GetDetailData($Conn, 'geo_region', 'district_code', $district_code,'province_code');
+        $province_name           = GetDetailData($Conn, 'geo_region', 'district_code', $district_code,'province_name');
+        $district_name           = GetDetailData($Conn, 'geo_region', 'district_code', $district_code,'district_name');
         $province_code  = "";
         echo '
-            <div class="alert alert-warning">
-                <small>Data provinsi tidak ditemukan!</small>
+            <input type="hidden" name="Page" value="DashboardDistrict">
+            <input type="hidden" name="district_code" value="'.$district_code.'">
+            <div class="row mb-2">
+                <div class="col-5"><small>Kode Provinsi (BPS)</small></div>
+                <div class="col-1"><small>:</small></div>
+                <div class="col-6 text-left"><small>'.$province_code.'</small></div>
             </div>
+            <div class="row mb-2">
+                <div class="col-5"><small>Nama Provinsi</small></div>
+                <div class="col-1"><small>:</small></div>
+                <div class="col-6 text-left"><small>'.$province_name.'</small></div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-5"><small>Kode Kab/Kota (BPS)</small></div>
+                <div class="col-1"><small>:</small></div>
+                <div class="col-6 text-left"><small>'.$district_code.'</small></div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-5"><small>Nama Kab/Kota</small></div>
+                <div class="col-1"><small>:</small></div>
+                <div class="col-6 text-left"><small>'.$district_name.'</small></div>
+            </div>
+            <script>
+                $(document).ready(function(){
+                    $("#ButtonSelengkapnya").prop("disabled", false);
+                });
+            </script>
         ';
     }
 

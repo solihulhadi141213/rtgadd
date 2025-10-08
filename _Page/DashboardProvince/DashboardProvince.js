@@ -272,13 +272,14 @@ $(document).ready(function () {
             onEachFeature: function(feature, layer){
                 let id_region = feature.properties.id_region || "-";
                 let prov = feature.properties.province_name || "-";
+                let kabkota_code = feature.properties.district_code || "-";
                 let kabkota = feature.properties.district_name || "-";
                 let kurangGuru = feature.properties.kurang_guru || 0;
                 let popupContent = `
                     <b>${kabkota}</b><br>
                     Provinsi: ${prov}<br>
                     Kurang Guru: <span class="text-danger">${kurangGuru}</span><br>
-                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#ModalDetailKabKot" data-id="${id_region}">Lihat Selengkapnya</a>
+                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#ModalDetailKabKot" data-id="${kabkota_code}">Lihat Selengkapnya</a>
                 `;
                 layer.bindPopup(popupContent);
             }
@@ -293,12 +294,12 @@ $(document).ready(function () {
 
     //Modal Detail Kab/Kota
     $('#ModalDetailKabKot').on('show.bs.modal', function (e) {
-        var id_region = $(e.relatedTarget).data('id');
+        var district_code = $(e.relatedTarget).data('id');
         $('#FormDetailKabKot').html("Loading...");
         $.ajax({
             type 	    : 'POST',
             url 	    : '_Page/DashboardProvince/FormDetailKabKot.php',
-            data        : {id_region: id_region},
+            data        : {district_code: district_code},
             success     : function(data){
                 $('#FormDetailKabKot').html(data);
             }

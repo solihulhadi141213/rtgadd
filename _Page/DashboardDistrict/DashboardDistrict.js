@@ -1,5 +1,79 @@
 let district_code = $("#district_code").val();
 
+// Fungsi Animasi Count Up (dinamis menyesuaikan angka)
+function animateCountUp(element, start, end, duration) {
+    let startTime = null;
+
+    function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        let progress = Math.min((timestamp - startTime) / duration, 1);
+        let value = Math.floor(progress * (end - start) + start);
+        element.innerHTML = value.toLocaleString('id-ID'); // Format ribuan
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        }
+    }
+
+    window.requestAnimationFrame(step);
+}
+
+// Fungsi Untuk Menampilkan Jumlah Kebutuhan Guru
+function ShowDistrictInformation(district_code) {
+    
+    //Loading Pertama kali
+    $('#show_abk').html('Loading...');
+    $('#show_asn').html('Loading...');
+    $('#show_pppk2024').html('Loading...');
+    $('#jumlah_kebutuhan_guru').html('Loading...');
+    $('#jumlah_ppg_belum_diangkat').html('Loading...');
+
+    //Tampilkan Data Dengan Ajax
+    $.ajax({
+        type    : 'POST',
+        url     : '_Page/DashboardDistrict/ProsesHitungDistrict.php',
+        data    : {district_code: district_code},
+        dataType: 'json',
+        success : function(response) {
+
+            var status = response.code;
+            
+            if(status==200){
+                //Tangkap Nilai
+                let abk = parseInt(response.abk) || 0;
+                let asn = parseInt(response.asn) || 0;
+                let pppk2024 = parseInt(response.pppk2024) || 0;
+                let kurang_guru = parseInt(response.kurang_guru) || 0;
+                let ppg_belum_diangkat = parseInt(response.ppg_belum_diangkat) || 0;
+
+                //Tangkap Element
+                let show_abk = document.getElementById("show_abk");
+                let show_asn = document.getElementById("show_asn");
+                let show_pppk2024 = document.getElementById("show_pppk2024");
+                let jumlah_kebutuhan_guru = document.getElementById("jumlah_kebutuhan_guru");
+                let jumlah_ppg_belum_diangkat = document.getElementById("jumlah_ppg_belum_diangkat");
+
+                // Durasi animasi disesuaikan (maksimal 2 detik)
+                let duration = 2000; 
+
+                animateCountUp(show_abk, 0, abk, duration);
+                animateCountUp(show_asn, 0, asn, duration);
+                animateCountUp(show_pppk2024, 0, pppk2024, duration);
+                animateCountUp(jumlah_kebutuhan_guru, 0, kurang_guru, duration);
+                animateCountUp(jumlah_ppg_belum_diangkat, 0, ppg_belum_diangkat, duration);
+            }
+
+            if(status!==200){
+                $('#show_abk').html(response.message);
+                $('#show_asn').html(response.message);
+                $('#show_pppk2024').html(response.message);
+                $('#jumlah_kebutuhan_guru').html(response.message);
+                $('#jumlah_ppg_belum_diangkat').html(response.message);
+            }
+
+        }
+    });
+}
+
 // Fungsi Menampilkan Chart Pie
 function ShowChartPie() {
     var district_code = $("#district_code").val() || "";
@@ -55,7 +129,7 @@ function ShowChartPie() {
             }
 
             // Buat container chart
-            $('#ShowChartPie').html('<div id="chartPie" style="height:360px;"></div>');
+            $('#ShowChartPie').html('<div id="chartPie" style="height:300px;"></div>');
 
             // Clean up chart instance sebelumnya jika ada
             if (window._chartPieInstance) {
@@ -65,7 +139,7 @@ function ShowChartPie() {
             var options = {
                 chart: {
                     type: 'pie',
-                    height: 360
+                    height: 300
                 },
                 series: series,
                 labels: labels,
@@ -103,20 +177,93 @@ function ShowTabelGuruByJabatan() {
        $('#district_code_filter').val(district_code);
         
         var ProsesFilter = $('#ProsesFilter').serialize();
-        //Buka Data Dengan AJAX
-        $('#TabelGuruByJabatan').html('<tr><td colspan="6" class="text-center">Loading...</td></tr>');
-        $.ajax({
-            type    : 'POST',
-            url     : '_Page/DashboardDistrict/TabelGuruByJabatan.php',
-            data    : ProsesFilter,
-            success : function(data) {
-                $('#TabelGuruByJabatan').html(data);
-            }
+
+        // Simpan posisi scroll saat ini
+        var currentScroll = $(window).scrollTop();
+
+        // Efek transisi: fadeOut lembut
+        $('#TabelGuruByJabatan').fadeTo(400, 0.3, function () {
+            $.ajax({
+                type    : 'POST',
+                url     : '_Page/DashboardDistrict/TabelGuruByJabatan.php',
+                data    : ProsesFilter,
+                success : function(data) {
+                    // Ganti konten
+                    $('#TabelGuruByJabatan').html(data);
+
+                    // Efek transisi fadeIn lembut
+                    $('#TabelGuruByJabatan').fadeTo(400, 1);
+
+                    // Kembalikan posisi scroll agar layar tidak bergerak
+                    $(window).scrollTop(currentScroll);
+                }
+            });
         });
     }
 }
 
+//Fungsi Menampilkan Tabel Kab/Kota
+function ShowTableKabKota() {
+
+    //Tangkap Data Filter
+    var ProsesFilterKabKot = $('#ProsesFilterKabKot').serialize();
+
+    // Simpan posisi scroll saat ini
+    var currentScroll = $(window).scrollTop();
+
+    // Efek transisi: fadeOut lembut
+    $('#TabelKabKota').fadeTo(400, 0.3, function () {
+        $.ajax({
+            type    : 'POST',
+            url     : '_Page/DashboardDistrict/TabelKabKota.php',
+            data    : ProsesFilterKabKot,
+            success : function(data) {
+                // Ganti konten
+                $('#TabelKabKota').html(data);
+
+                // Efek transisi fadeIn lembut
+                $('#TabelKabKota').fadeTo(400, 1);
+
+                // Kembalikan posisi scroll agar layar tidak bergerak
+                $(window).scrollTop(currentScroll);
+            }
+        });
+    });
+}
+
+//Fungsi Menampilkan Tabel Jabatan
+function ShowTabelDetailJabatan() {
+
+    //Tangkap Data Filter
+    var FilterTabelJabatan = $('#FilterTabelJabatan').serialize();
+
+    // Simpan posisi scroll saat ini
+    var currentScroll = $(window).scrollTop();
+
+    // Efek transisi: fadeOut lembut
+    $('#TabelDetailJabatan').fadeTo(400, 0.3, function () {
+        $.ajax({
+            type    : 'POST',
+            url     : '_Page/DashboardDistrict/TabelDetailJabatan.php',
+            data    : FilterTabelJabatan,
+            success : function(data) {
+                // Ganti konten
+                $('#TabelDetailJabatan').html(data);
+
+                // Efek transisi fadeIn lembut
+                $('#TabelDetailJabatan').fadeTo(400, 1);
+
+                // Kembalikan posisi scroll agar layar tidak bergerak
+                $(window).scrollTop(currentScroll);
+            }
+        });
+    });
+}
+
 $(document).ready(function () {
+
+    //Menampilkan Informasi District
+    ShowDistrictInformation(district_code);
 
     // Muat chart saat dokumen siap
     ShowChartPie();
@@ -126,6 +273,102 @@ $(document).ready(function () {
         ShowChartPie();
     });
 
-    //Menampilkan Tabel
+    //Menampilkan Tabel Pertama Kali
     ShowTabelGuruByJabatan();
+
+    //Pagging
+    $(document).on('click', '#next_button', function() {
+        var page_now = parseInt($('#page').val(), 10); // Pastikan nilai diambil sebagai angka
+        var next_page = page_now + 1;
+        $('#page').val(next_page);
+        ShowTabelGuruByJabatan(0);
+    });
+    $(document).on('click', '#prev_button', function() {
+        var page_now = parseInt($('#page').val(), 10); // Pastikan nilai diambil sebagai angka
+        var next_page = page_now - 1;
+        $('#page').val(next_page);
+        ShowTabelGuruByJabatan(0);
+    });
+
+
+    //INISIALISASI TABEL KAB/KOTA
+     if ($('#TabelKabKota').length > 0) {
+        ShowTableKabKota();
+    }
+    
+    //Ketika Modal Pencarian Kab/Kota
+    $('#ModalFilterKabKot').on('shown.bs.modal', function() {
+        $('#keyword_kabkot').focus().select();
+    });
+
+    //Ketika Proses Pencarian Kab/Kota
+    $('#ProsesFilterKabKot').submit(function(){
+
+        //Default Halaman
+        $('#page_kabkot').val("1");
+
+        //Tampilkan Ulang Data
+        ShowTableKabKota();
+
+        //Tutup Modal
+        $('#ModalFilterKabKot').modal('hide');
+    });
+
+    //Pagging Kab/Kot
+    $(document).on('click', '#next_button_kabkot', function() {
+        var page_now = parseInt($('#page_kabkot').val(), 10); // Pastikan nilai diambil sebagai angka
+        var next_page = page_now + 1;
+        $('#page_kabkot').val(next_page);
+        ShowTableKabKota(0);
+    });
+    $(document).on('click', '#prev_button_kabkot', function() {
+        var page_now = parseInt($('#page_kabkot').val(), 10); // Pastikan nilai diambil sebagai angka
+        var next_page = page_now - 1;
+        $('#page_kabkot').val(next_page);
+        ShowTableKabKota(0);
+    });
+
+    //Modal Detail Kab/Kota
+    $('#ModalDetailKabKot').on('show.bs.modal', function (e) {
+        var district_code = $(e.relatedTarget).data('id');
+        $('#FormDetailKabKot').html("Loading...");
+        $.ajax({
+            type 	    : 'POST',
+            url 	    : '_Page/DashboardProvince/FormDetailKabKot.php',
+            data        : {district_code: district_code},
+            success     : function(data){
+                $('#FormDetailKabKot').html(data);
+            }
+        });
+    });
+
+    //Modal Detail Jabatan
+    $('#ModalDetailJabatan').on('show.bs.modal', function (e) {
+        var id_region = $(e.relatedTarget).data('id_region');
+        var id_position = $(e.relatedTarget).data('id_position');
+
+        //Reset halaman menjadi 1
+        $('#page_detail_jabatan').val('1');
+
+        //Tempelkan id_region dan id_position ke form filter
+        $('#put_id_region').val(id_region);
+        $('#put_id_positiom').val(id_position);
+
+        //Panggil Function
+        ShowTabelDetailJabatan();
+    });
+
+    //Pagging
+    $(document).on('click', '#next_button_school', function() {
+        var page_now = parseInt($('#page_detail_jabatan').val(), 10); // Pastikan nilai diambil sebagai angka
+        var next_page = page_now + 1;
+        $('#page_detail_jabatan').val(next_page);
+        ShowTabelDetailJabatan(0);
+    });
+    $(document).on('click', '#prev_button_school', function() {
+        var page_now = parseInt($('#page_detail_jabatan').val(), 10); // Pastikan nilai diambil sebagai angka
+        var next_page = page_now - 1;
+        $('#page_detail_jabatan').val(next_page);
+        ShowTabelDetailJabatan(0);
+    });
 });
