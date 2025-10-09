@@ -361,7 +361,8 @@
     </div>
 </div>
 
-<div class="modal fade" id="ModalImport" tabindex="-1">
+<!-- Modal Import ABK Per Sekolah -->
+<div class="modal fade" id="ModalImport" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -370,6 +371,7 @@
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+
             <div class="modal-body">
                 <div class="row mb-3">
                     <div class="col-md-12">
@@ -379,21 +381,22 @@
                                 <ol>
                                     <li>Unduh <strong>Template</strong> yang telah disediakan agar format kolom sesuai dengan sistem.</li>
                                     <li>Jangan mengubah <em>urutan</em> atau <em>nama kolom</em> pada template. Perubahan menyebabkan kegagalan proses import.</li>
-                                    <li>Isi data pada file Excel sesuai ketentuan kolom yang ada pada file tersebut.</li>
-                                    <li>Simpan file dan unggah melalui tombol <strong>Pilih File Excel</strong>, lalu klik <strong>Mulai Import</strong>.</li>
+                                    <li>Isi data pada file CSV sesuai ketentuan kolom yang ada pada file tersebut.</li>
+                                    <li>Simpan file dan unggah melalui tombol <strong>Pilih File CSV</strong>, lalu klik <strong>Import</strong>.</li>
                                     <li>Sistem akan melakukan validasi otomatis dan menampilkan hasil (baris valid / baris error).</li>
-                                    <li>Untuk data besar (>100 baris), sistem akan memproses secara bertahap.</li>
+                                    <li>Untuk data besar (>100 baris), sistem akan memproses secara bertahap (batch).</li>
                                 </ol>
                             </small>
                         </div>
                     </div>
                 </div>
+
                 <div class="row mb-3">
                     <div class="col-12 text-center">
-                        <form id="ProsesImport" action="javascript:void(0);">
+                        <form id="ProsesImport" action="javascript:void(0);" enctype="multipart/form-data">
                             <div class="input-group">
-                                <input type="file" name="data_akb_per_sekolah" class="form-control" accept=".xlsx,.xls">
-                                <a href="_Page/AbkPerSekolah/Template_ABK_Per_Sekolah.xlsx" class="btn btn-md btn-info" role="button" aria-label="Unduh Template Excel">
+                                <input type="file" name="data_akb_per_sekolah" id="data_akb_per_sekolah" class="form-control" accept=".csv,text/csv" required>
+                                <a href="_Page/AbkPerSekolah/Template_ABK_Per_Sekolah.csv" class="btn btn-md btn-info" role="button" aria-label="Unduh Template CSV">
                                     <i class="bi bi-download"></i> Template
                                 </a>
                                 <button type="submit" class="btn btn-md btn-primary" id="btnImport">
@@ -403,22 +406,9 @@
                         </form>
                     </div>
                 </div>
-                <!-- Progress Bar -->
-                <div class="row mb-3" id="progressSection" style="display: none;">
-                    <div class="col-md-12">
-                        <div class="progress" style="height: 25px;">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated" 
-                                 role="progressbar" 
-                                 id="progressBar" 
-                                 style="width: 0%">
-                                <span id="progressText">0%</span>
-                            </div>
-                        </div>
-                        <div class="mt-2 text-center">
-                            <small id="progressDetail">Memproses data...</small>
-                        </div>
-                    </div>
-                </div>
+
+                
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table table-responsive">
@@ -445,11 +435,128 @@
                     </div>
                 </div>
             </div>
+
             <div class="modal-footer">
                 <button type="button" disabled class="btn btn-warning btn-rounded" id="ResetFormImport">
                     <i class="bi bi-arrow-repeat"></i> Reset Form
                 </button>
                 <button type="button" class="btn btn-secondary btn-rounded" data-bs-dismiss="modal">
+                    <i class="bi bi-x-circle"></i> Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Import CSV -->
+<!-- Modal Import CSV -->
+<div class="modal fade" id="ModalImportCsv" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-dark">
+                    <i class="bi bi-upload"></i> Import AKB Per Sekolah (CSV)
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <small>
+                            Download template file CSV <a href="_Page/AbkPerSekolah/Template_ABK_Per_Sekolah.csv">berikut ini</a>
+                        </small>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12 text-center">
+                        <form id="ProsesImportCsv" action="javascript:void(0);" enctype="multipart/form-data">
+                            <div class="input-group">
+                                <input type="file" name="data_akb_per_sekolah_csv" id="data_akb_per_sekolah_csv" class="form-control" accept=".csv,text/csv" required>
+                                <button type="submit" class="btn btn-md btn-primary" id="btnImportCsv">
+                                    <i class="bi bi-upload"></i> Import
+                                </button>
+                                <button type="button" disabled class="btn btn-md btn-danger" id="BtnStoProccess">
+                                    <i class="bi bi-stop"></i> Stop
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Progress Bar -->
+                <div class="row mb-3" id="progressSection" style="display: none;">
+                    <div class="col-md-12">
+                        <div class="progress" style="height: 25px;">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                                 role="progressbar" 
+                                 id="progressBar" 
+                                 style="width: 0%">
+                                <span id="progressText">0%</span>
+                            </div>
+                        </div>
+                        <div class="mt-2 text-center">
+                            <small id="progressDetail">Memproses data...</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Laporan -->
+                <!-- Laporan Detail dalam Tabel -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <h6 class="text-dark mb-3">Rekapitulasi Proses Import</h6>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-sm">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th width="5%">No</th>
+                                        <th width="45%">Jenis Proses</th>
+                                        <th width="25%">Status</th>
+                                        <th width="25%">Jumlah</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="reportTableBody">
+                                    <!-- Data akan diisi oleh JavaScript -->
+                                </tbody>
+                                <tfoot>
+                                    <tr class="table-info">
+                                        <td colspan="3" class="text-end"><strong>Total Data Diproses</strong></td>
+                                        <td><strong id="totalProcessed">0</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detail Error -->
+                <div class="row mt-3" id="errorDetailsSection" style="display: none;">
+                    <div class="col-12">
+                        <h6 class="text-danger mb-3">Detail Kesalahan</h6>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-sm">
+                                <thead class="table-danger">
+                                    <tr>
+                                        <th width="10%">No</th>
+                                        <th width="30%">Jenis Error</th>
+                                        <th width="60%">Keterangan</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="errorDetailsBody">
+                                    <!-- Detail error akan diisi oleh JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" disabled class="btn btn-warning" id="ResetFormImportCsv">
+                    <i class="bi bi-arrow-repeat"></i> Reset Form
+                </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                     <i class="bi bi-x-circle"></i> Tutup
                 </button>
             </div>

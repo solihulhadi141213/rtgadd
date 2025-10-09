@@ -19,6 +19,8 @@ function filterAndLoadTable() {
 }
 
 
+
+
 //Menampilkan Data Pertama Kali
 $(document).ready(function() {
     filterAndLoadTable();
@@ -273,153 +275,366 @@ $(document).ready(function() {
         });
     });
 
-    //Jika Reset Form Import
-    $('#ResetFormImport').click(function(){
 
-        //Reset Form Import
-        $("#ProsesImport")[0].reset();
 
-        //Kosongkan Table
-        $('#NotifikasiImport').html('<tr><td colspan="4" class="text-center"><small class="text-danger">Belum Ada Proses Import</small></td></tr>');
 
-        //Disable Button
-        $('#ResetFormImport').prop('disabled', true);
-    });
 
-    //Proses Import
-    $('#ProsesImport').submit(function(){
-        $('#NotifikasiImport').html('<tr><td colspan="6" class="text-center"><small class="text-danger">Loading...</small></td></tr>');
-        $('#progressSection').show();
-        $('#btnImport').prop('disabled', true);
+    // INIT VAR
+    // INIT VAR
+    let stopProcess = false;
+    let totalData = 0;
+    let processedData = 0;
+    let currentParser = null;
+
+    // Object untuk menyimpan semua statistik
+    let stats = {
+        // Data validation
+        empty_province_data: 0,
+        empty_school_data: 0,
+        empty_position_data: 0,
         
-        var form = $('#ProsesImport')[0];
-        var data = new FormData(form);
+        // Insert operations
+        insert_province_success: 0,
+        insert_province_failed: 0,
+        insert_district_success: 0,
+        insert_district_failed: 0,
+        insert_school_success: 0,
+        insert_school_failed: 0,
+        insert_position_success: 0,
+        insert_position_failed: 0,
         
-        console.log('Mengirim request import...');
+        // Main data operations
+        registered_data: 0,
+        update_success: 0,
+        update_failed: 0,
+        insert_success: 0,
+        insert_failed: 0,
         
-        $.ajax({
-            type: 'POST',
-            url: '_Page/AbkPerSekolah/ProsesImport.php',
-            data: data,
-            cache: false,
-            processData: false,
-            contentType: false,
-            enctype: 'multipart/form-data',
-            success: function(response){
-                console.log('Response received:', response);
-                
-                try {
-                    var result = JSON.parse(response);
-                    console.log('Parsed result:', result);
-                    
-                    if (result.status === 'success') {
-                        if (result.total_batches > 1) {
-                            console.log('Memulai proses batch...');
-                            // Jika data besar, proses secara batch
-                            processBatchImport(result.file_token, 1, result.total_batches, result.total_rows);
-                        } else {
-                            console.log('Proses single batch selesai');
-                            // Jika data kecil, langsung tampilkan hasil
-                            $('#NotifikasiImport').html(result.html);
-                            $('#ResetFormImport').prop('disabled', false);
-                            $('#btnImport').prop('disabled', false);
-                            $('#progressSection').hide();
-                            $("#ProsesFilter")[0].reset();
-                            filterAndLoadTable();
-                        }
-                    } else {
-                        console.log('Error:', result.message);
-                        $('#NotifikasiImport').html('<tr><td colspan="6" class="text-center"><small class="text-danger">' + result.message + '</small></td></tr>');
-                        $('#btnImport').prop('disabled', false);
-                        $('#progressSection').hide();
-                    }
-                } catch (e) {
-                    console.log('Error parsing JSON:', e);
-                    console.log('Raw response:', response);
-                    // Fallback untuk response non-JSON (error)
-                    $('#NotifikasiImport').html(response);
-                    $('#btnImport').prop('disabled', false);
-                    $('#progressSection').hide();
-                }
-            },
-            error: function(xhr, status, error) {
-                console.log('AJAX Error:', error);
-                $('#NotifikasiImport').html('<tr><td colspan="6" class="text-center"><small class="text-danger">Error: ' + error + '</small></td></tr>');
-                $('#btnImport').prop('disabled', false);
-                $('#progressSection').hide();
-            }
+        // Error details
+        error_details: []
+    };
+
+    $("#ProsesImportCsv").on("submit", function(e) {
+        e.preventDefault();
+        let file = $("#data_akb_per_sekolah_csv")[0].files[0];
+        if (!file) return alert("Pilih file CSV terlebih dahulu!");
+
+        resetCounter();
+        $("#progressSection").show();
+        $("#BtnStoProccess").prop("disabled", false);
+        $("#btnImportCsv").prop("disabled", true);
+        $("#ResetFormImportCsv").prop("disabled", true);
+
+        // HITUNG TOTAL DATA DENGAN CARA LAIN
+        countTotalRows(file).then(totalRows => {
+            totalData = totalRows;
+            console.log("Total data yang akan diproses:", totalData);
+            updateUI();
+            
+            // Mulai parsing setelah mengetahui total data
+            startParsing(file);
+        }).catch(error => {
+            console.error("Error counting rows:", error);
+            // Fallback: gunakan estimasi
+            totalData = 1000; // Nilai default
+            updateUI();
+            startParsing(file);
         });
     });
 
-    // Fungsi untuk proses batch
-    function processBatchImport(fileToken, currentBatch, totalBatches, totalRows) {
-        console.log('Processing batch:', currentBatch, 'of', totalBatches);
-        console.log('File token:', fileToken);
-        
-        var progressPercentage = Math.round((currentBatch / totalBatches) * 100);
-        $('#progressBar').css('width', progressPercentage + '%');
-        $('#progressText').text(progressPercentage + '%');
-        $('#progressDetail').text('Memproses batch ' + currentBatch + ' dari ' + totalBatches + ' (' + totalRows + ' total data)');
-        
-        $.ajax({
-            type: 'POST',
-            url: '_Page/AbkPerSekolah/ProsesImportBatch.php',
-            data: {
-                file_token: fileToken,
-                batch: currentBatch,
-                total_batches: totalBatches
-            },
-            success: function(response) {
-                console.log('Batch response:', response);
-                
-                try {
-                    var result = JSON.parse(response);
-                    
-                    if (result.status === 'success') {
-                        // Tampilkan hasil batch saat ini
-                        $('#NotifikasiImport').html(result.html);
-                        
-                        if (currentBatch < totalBatches) {
-                            // Lanjut ke batch berikutnya
-                            setTimeout(function() {
-                                processBatchImport(fileToken, currentBatch + 1, totalBatches, totalRows);
-                            }, 500); // Delay 0.5 detik antara batch
-                        } else {
-                            // Semua batch selesai
-                            $('#NotifikasiImport').append('<tr><td colspan="6" class="text-center"><small class="text-success"><b>✅ SEMUA DATA BERHASIL DIPROSES</b></small></td></tr>');
-                            $('#ResetFormImport').prop('disabled', false);
-                            $('#btnImport').prop('disabled', false);
-                            $('#progressSection').hide();
-                            $("#ProsesFilter")[0].reset();
-                            filterAndLoadTable();
-                        }
-                    } else {
-                        $('#NotifikasiImport').html('<tr><td colspan="6" class="text-center"><small class="text-danger">Error pada batch ' + currentBatch + ': ' + result.message + '</small></td></tr>');
-                        $('#btnImport').prop('disabled', false);
-                        $('#progressSection').hide();
-                    }
-                } catch (e) {
-                    console.log('Error parsing batch response:', e);
-                    $('#NotifikasiImport').html('<tr><td colspan="6" class="text-center"><small class="text-danger">Error parsing response batch ' + currentBatch + '</small></td></tr>');
-                    $('#btnImport').prop('disabled', false);
-                    $('#progressSection').hide();
+    // Fungsi untuk menghitung total baris dalam file CSV
+    function countTotalRows(file) {
+        return new Promise((resolve, reject) => {
+            let rowCount = 0;
+            
+            Papa.parse(file, {
+                header: true,
+                skipEmptyLines: true,
+                chunkSize: 1000,
+                step: function(results, parser) {
+                    rowCount++;
+                },
+                complete: function() {
+                    resolve(rowCount);
+                },
+                error: function(error) {
+                    reject(error);
                 }
+            });
+        });
+    }
+
+    // Fungsi untuk memulai parsing yang sebenarnya
+    function startParsing(file) {
+        Papa.parse(file, {
+            header: true,
+            skipEmptyLines: true,
+            chunkSize: 200, // proses per 200 baris
+            chunk: function(results, parser) {
+                if (stopProcess) {
+                    parser.abort();
+                    $("#progressDetail").text("Proses dihentikan!");
+                    return;
+                }
+
+                currentParser = parser;
+                let batch = results.data;
+                
+                // Pause parser sementara menunggu AJAX selesai
+                parser.pause();
+
+                // Proses batch secara synchronous
+                processBatch(batch).then(() => {
+                    if (!stopProcess) {
+                        // Lanjutkan parsing setelah batch selesai
+                        parser.resume();
+                    }
+                }).catch((error) => {
+                    console.error("Error in batch processing:", error);
+                    if (!stopProcess) {
+                        parser.resume();
+                    }
+                });
             },
-            error: function(xhr, status, error) {
-                console.log('Batch AJAX Error:', error);
-                $('#NotifikasiImport').html('<tr><td colspan="6" class="text-center"><small class="text-danger">Error pada batch ' + currentBatch + ': ' + error + '</small></td></tr>');
-                $('#btnImport').prop('disabled', false);
-                $('#progressSection').hide();
+            complete: function() {
+                $("#progressDetail").text("Proses selesai.");
+                $("#BtnStoProccess").prop("disabled", true);
+                $("#btnImportCsv").prop("disabled", false);
+                $("#ResetFormImportCsv").prop("disabled", false);
+                currentParser = null;
+                
+                // Final update - pastikan 100%
+                processedData = totalData;
+                updateUI();
+                updateReportTable();
+            },
+            error: function(error) {
+                console.error("Error parsing CSV:", error);
+                $("#progressDetail").text("Error parsing file CSV!");
+                $("#BtnStoProccess").prop("disabled", true);
+                $("#btnImportCsv").prop("disabled", false);
+                $("#ResetFormImportCsv").prop("disabled", false);
             }
         });
     }
 
-    // Reset form
-    $('#ResetFormImport').click(function(){
-        $('#ProsesImport')[0].reset();
-        $('#NotifikasiImport').html('<tr><td colspan="6" class="text-center"><small class="text-danger">Belum Ada Proses Import</small></td></tr>');
-        $('#progressSection').hide();
-        $(this).prop('disabled', true);
+    // Fungsi untuk memproses batch dengan async/await
+    async function processBatch(batch) {
+        try {
+            const response = await $.ajax({
+                url: "_Page/AbkPerSekolah/ProsesImportCsv.php",
+                type: "POST",
+                data: { 
+                    batch: JSON.stringify(batch) 
+                },
+                dataType: "json"
+            });
+
+            // Update data setelah AJAX selesai
+            processedData += batch.length;
+            
+            // Update semua statistik dari response
+            for (const key in response) {
+                if (stats.hasOwnProperty(key)) {
+                    if (Array.isArray(stats[key])) {
+                        // Untuk array (error_details), gabungkan
+                        stats[key] = stats[key].concat(response[key] || []);
+                    } else {
+                        stats[key] += response[key] || 0;
+                    }
+                }
+            }
+            
+            updateUI();
+            updateReportTable();
+            
+        } catch (error) {
+            console.error("Error processing batch:", error);
+            processedData += batch.length;
+            stats.insert_failed += batch.length;
+            stats.error_details.push(`Error AJAX: ${error.message}`);
+            updateUI();
+            updateReportTable();
+        }
+    }
+
+    // UPDATE UI Progress
+    function updateUI() {
+        let percent = 0;
+        
+        if (totalData > 0) {
+            percent = Math.round((processedData / totalData) * 100);
+            // Pastikan tidak melebihi 100% selama proses berjalan
+            if (percent > 100 && currentParser) {
+                percent = 99; // Tetap 99% sampai complete
+            }
+        }
+        
+        percent = Math.min(100, Math.max(0, percent));
+        
+        $("#progressBar").css("width", percent + "%").attr("aria-valuenow", percent);
+        $("#progressText").text(percent + "%");
+        $("#progressDetail").text(processedData + " / " + totalData + " data diproses");
+    }
+
+    // UPDATE REPORT TABLE
+    function updateReportTable() {
+        const reportData = [
+            // Data Validation
+            { no: 1, process: "Data Provinsi Kosong", status: "Validasi Gagal", count: stats.empty_province_data, type: "validation" },
+            { no: 2, process: "Data Sekolah Kosong", status: "Validasi Gagal", count: stats.empty_school_data, type: "validation" },
+            { no: 3, process: "Data Jabatan Kosong", status: "Validasi Gagal", count: stats.empty_position_data, type: "validation" },
+            
+            // Insert Province
+            { no: 4, process: "Insert Data Provinsi", status: "Berhasil", count: stats.insert_province_success, type: "success" },
+            { no: 5, process: "Insert Data Provinsi", status: "Gagal", count: stats.insert_province_failed, type: "failed" },
+            
+            // Insert District
+            { no: 6, process: "Insert Data Kab/Kota", status: "Berhasil", count: stats.insert_district_success, type: "success" },
+            { no: 7, process: "Insert Data Kab/Kota", status: "Gagal", count: stats.insert_district_failed, type: "failed" },
+            
+            // Insert School
+            { no: 8, process: "Insert Data Sekolah", status: "Berhasil", count: stats.insert_school_success, type: "success" },
+            { no: 9, process: "Insert Data Sekolah", status: "Gagal", count: stats.insert_school_failed, type: "failed" },
+            
+            // Insert Position
+            { no: 10, process: "Insert Data Jabatan", status: "Berhasil", count: stats.insert_position_success, type: "success" },
+            { no: 11, process: "Insert Data Jabatan", status: "Gagal", count: stats.insert_position_failed, type: "failed" },
+            
+            // Main Data Operations
+            { no: 12, process: "Update Data Utama", status: "Berhasil", count: stats.update_success, type: "success" },
+            { no: 13, process: "Update Data Utama", status: "Gagal", count: stats.update_failed, type: "failed" },
+            { no: 14, process: "Insert Data Utama", status: "Berhasil", count: stats.insert_success, type: "success" },
+            { no: 15, process: "Insert Data Utama", status: "Gagal", count: stats.insert_failed, type: "failed" },
+            
+            // Already Registered
+            { no: 16, process: "Data Sudah Terdaftar", status: "Update", count: stats.registered_data, type: "warning" }
+        ];
+
+        let tableBody = "";
+        let hasData = false;
+        
+        reportData.forEach(item => {
+            if (item.count > 0) {
+                hasData = true;
+                let rowClass = "";
+                let statusClass = "";
+                
+                switch(item.type) {
+                    case "success":
+                        rowClass = "table-success";
+                        statusClass = "text-success";
+                        break;
+                    case "failed":
+                        rowClass = "table-danger";
+                        statusClass = "text-danger";
+                        break;
+                    case "warning":
+                        rowClass = "table-warning";
+                        statusClass = "text-warning";
+                        break;
+                    case "validation":
+                        rowClass = "table-secondary";
+                        statusClass = "text-secondary";
+                        break;
+                }
+                
+                tableBody += `
+                    <tr class="${rowClass}">
+                        <td>${item.no}</td>
+                        <td>${item.process}</td>
+                        <td class="${statusClass} fw-bold">${item.status}</td>
+                        <td class="text-center">${item.count}</td>
+                    </tr>
+                `;
+            }
+        });
+
+        // Jika belum ada data, tampilkan pesan
+        if (!hasData) {
+            tableBody = `
+                <tr>
+                    <td colspan="4" class="text-center text-muted">
+                        <i>Belum ada data yang diproses</i>
+                    </td>
+                </tr>
+            `;
+        }
+
+        $("#reportTableBody").html(tableBody);
+        $("#totalProcessed").text(processedData);
+
+        // Tampilkan detail error jika ada
+        if (stats.error_details.length > 0) {
+            $("#errorDetailsSection").show();
+            let errorBody = "";
+            stats.error_details.forEach((error, index) => {
+                errorBody += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>Error Proses</td>
+                        <td class="text-danger">${error}</td>
+                    </tr>
+                `;
+            });
+            $("#errorDetailsBody").html(errorBody);
+        } else {
+            $("#errorDetailsSection").hide();
+        }
+    }
+
+    // RESET COUNTER
+    function resetCounter() {
+        stopProcess = false;
+        totalData = 0;
+        processedData = 0;
+        
+        // Reset semua statistik
+        for (const key in stats) {
+            if (Array.isArray(stats[key])) {
+                stats[key] = [];
+            } else {
+                stats[key] = 0;
+            }
+        }
+        
+        // Reset UI
+        $("#progressBar").css("width", "0%").attr("aria-valuenow", 0);
+        $("#progressText").text("0%");
+        $("#progressDetail").text("Memproses data...");
+        $("#reportTableBody").html(`
+            <tr>
+                <td colspan="4" class="text-center text-muted">
+                    <i>Belum ada data yang diproses</i>
+                </td>
+            </tr>
+        `);
+        $("#totalProcessed").text("0");
+        $("#errorDetailsSection").hide();
+    }
+
+    $("#BtnStoProccess").on("click", function() {
+        stopProcess = true;
+        $(this).prop("disabled", true);
+        
+        if (currentParser) {
+            currentParser.abort();
+        }
+        
+        $("#progressDetail").text("Proses dihentikan!");
+        $("#btnImportCsv").prop("disabled", false);
+        $("#ResetFormImportCsv").prop("disabled", false);
     });
+
+    $("#ResetFormImportCsv").on("click", function() {
+        resetCounter();
+        $("#progressSection").hide();
+        $("#btnImportCsv").prop("disabled", false);
+        $("#BtnStoProccess").prop("disabled", true);
+        $(this).prop("disabled", true);
+        $("#data_akb_per_sekolah_csv").val("");
+    });
+
+    
     
 });

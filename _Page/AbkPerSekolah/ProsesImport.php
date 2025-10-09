@@ -1,133 +1,149 @@
 <?php
-    require '../../vendor/autoload.php';
-    use PhpOffice\PhpSpreadsheet\Spreadsheet;
-    use PhpOffice\PhpSpreadsheet\Reader\Csv;
-    use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+    // ProsesImport.php
+    // Menerima upload CSV, hitung baris, simpan file ke _Temp, simpan metadata ke session
 
+    // Inklusi konfigurasi
     include_once "../../_Config/Connection.php";
     include_once "../../_Config/GlobalFunction.php";
-    include_once "../../_Config/Session.php";
+    include_once "../../_Config/Session.php"; // pastikan ini mengatur $SessionIdAccess
 
     // Time Zone
     date_default_timezone_set('Asia/Jakarta');
 
-    // Validasi Akses
+    // Supaya error tidak merusak JSON output — log saja
+    ini_set('display_errors', 0);
+    ini_set('log_errors', 1);
+    ini_set('error_log', '../../php_errors.log');
+
+    // Header
+    header('Content-Type: application/json; charset=utf-8');
+
+    // Pastikan session aktif
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    // Tingkatkan resource sementara (sesuaikan server)
+    @ini_set('memory_limit', '1024M');
+    @ini_set('max_execution_time', 300);
+
+    // Validasi akses
     if (empty($SessionIdAccess)) {
-        echo json_encode([
-            'status' => 'error',
-            'message' => 'Sesi Akses Sudah Berakhir! Silahkan Login Ulang.'
-        ]);
+        echo json_encode(['status' => 'error', 'message' => 'Sesi Akses Sudah Berakhir! Silahkan Login Ulang.']);
         exit;
     }
 
-    // Validasi File
-    if(empty($_FILES['data_akb_per_sekolah']['name'])) {
-        echo json_encode([
-            'status' => 'error',
-            'message' => 'Silahkan pilih file untuk di upload'
-        ]);
+    // Validasi file
+    if (empty($_FILES['data_akb_per_sekolah']['name'])) {
+        echo json_encode(['status' => 'error', 'message' => 'Silahkan pilih file untuk di upload']);
         exit;
     }
 
     $nama_file = $_FILES['data_akb_per_sekolah']['name'];
-    $file_mimes = array(
-        'application/octet-stream',
-        'application/vnd.ms-excel',
-        'application/x-csv',
-        'text/x-csv',
-        'text/csv',
-        'application/csv',
-        'application/excel',
-        'application/vnd.msexcel',
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        'application/vnd.oasis.opendocument.spreadsheet'
-    );
+    $file_extension = strtolower(pathinfo($nama_file, PATHINFO_EXTENSION));
 
-    if(isset($_FILES['data_akb_per_sekolah']['name']) && in_array($_FILES['data_akb_per_sekolah']['type'], $file_mimes)) {
-        $arr_file = explode('.', $_FILES['data_akb_per_sekolah']['name']);
-        $extension = end($arr_file);
-        
-        if('csv' == $extension) {
-            $reader = new Csv();
-        } else {
-            $reader = new Xlsx();
-        }
-
-        // Mengatasi deprecated function dengan menonaktifkan entity loader secara kondisional
-        if (PHP_VERSION_ID < 80000) {
-            $entityLoaderDisabled = libxml_disable_entity_loader(true);
-        }
-
-        try {
-            $spreadsheet = $reader->load($_FILES['data_akb_per_sekolah']['tmp_name']);
-            
-            // Mengembalikan entity loader ke keadaan semula untuk PHP < 8.0
-            if (PHP_VERSION_ID < 80000) {
-                libxml_disable_entity_loader($entityLoaderDisabled);
-            }
-
-            $sheetData = $spreadsheet->getActiveSheet()->toArray();
-            $JumlahBaris = count($sheetData);
-            $JumlahValidator = $JumlahBaris - 1;
-
-            if(empty($JumlahValidator)) {
-                echo json_encode([
-                    'status' => 'error',
-                    'message' => 'Tidak ada data pada file excel yang anda upload'
-                ]);
-                exit;
-            }
-
-            // Generate unique token untuk file
-            $file_token = uniqid('import_', true);
-            
-            // Simpan data ke session atau temporary file
-            $_SESSION['import_data_' . $file_token] = $sheetData;
-            $_SESSION['import_total_rows_' . $file_token] = $JumlahValidator;
-            
-            // Hitung jumlah batch yang diperlukan
-            $batch_size = 100;
-            $total_batches = ceil($JumlahValidator / $batch_size);
-
-            // DEBUG: Cek parameter yang akan dikirim
-            error_log("File Token: " . $file_token);
-            error_log("Total Batches: " . $total_batches);
-            error_log("Total Rows: " . $JumlahValidator);
-
-            if ($total_batches == 1) {
-                // Jika data kecil, proses langsung dengan meng-include file batch
-                $_POST['file_token'] = $file_token;
-                $_POST['batch'] = 1;
-                $_POST['total_batches'] = 1;
-                
-                // Include file batch processing
-                include 'ProsesImportBatch.php';
-            } else {
-                // Jika data besar, return info untuk proses batch
-                echo json_encode([
-                    'status' => 'success',
-                    'file_token' => $file_token,
-                    'total_batches' => $total_batches,
-                    'total_rows' => $JumlahValidator,
-                    'message' => 'Data besar terdeteksi. Akan diproses dalam ' . $total_batches . ' batch.'
-                ]);
-            }
-
-        } catch (Exception $e) {
-            // Mengembalikan entity loader ke keadaan semula untuk PHP < 8.0 jika terjadi error
-            if (PHP_VERSION_ID < 80000) {
-                libxml_disable_entity_loader($entityLoaderDisabled);
-            }
-            
-            echo json_encode([
-                'status' => 'error',
-                'message' => 'Error membaca file: ' . $e->getMessage()
-            ]);
-        }
-    } else {
-        echo json_encode([
-            'status' => 'error',
-            'message' => 'File tidak valid. Silahkan upload file Excel atau CSV.'
-        ]);
+    // hanya csv
+    if ($file_extension !== 'csv') {
+        echo json_encode(['status' => 'error', 'message' => 'Hanya file CSV yang diizinkan']);
+        exit;
     }
-?>
+
+    // tmp file
+    $tmp_file = $_FILES['data_akb_per_sekolah']['tmp_name'];
+    if (!file_exists($tmp_file)) {
+        echo json_encode(['status' => 'error', 'message' => 'File tidak ditemukan (temporary)']);
+        exit;
+    }
+
+    // Hitung total baris menggunakan SplFileObject (fast)
+    try {
+        $spl = new SplFileObject($tmp_file);
+        $spl->setFlags(SplFileObject::READ_CSV);
+        // pindah ke akhir dan ambil index baris terakhir
+        $spl->seek(PHP_INT_MAX);
+        $lastIndex = $spl->key(); // ini index baris terakhir (0-based)
+        // Jika file hanya header, lastIndex mungkin 0 -> berarti 1 baris (header) -> tanpa data
+        $totalRows = 0;
+        if ($lastIndex > 0) {
+            // total data = lastIndex (karena index 0 header)
+            $totalRows = $lastIndex;
+        } else {
+            // check manual fallback
+            $totalRows = 0;
+        }
+    } catch (Exception $e) {
+        // fallback ke counting manual (lebih lambat)
+        $totalRows = 0;
+        if (($handle = fopen($tmp_file, "r")) !== false) {
+            // skip header
+            fgetcsv($handle);
+            while (($row = fgetcsv($handle)) !== false) {
+                $totalRows++;
+            }
+            fclose($handle);
+        }
+    }
+
+    // validasi ada data
+    if ($totalRows < 1) {
+        echo json_encode(['status' => 'error', 'message' => 'Tidak ada data pada file CSV yang anda upload']);
+        exit;
+    }
+
+    // generate token & simpan file ke _Temp
+    $file_token = uniqid('import_', true);
+    $temp_dir = "../../_Temp";
+    if (!is_dir($temp_dir)) {
+        if (!mkdir($temp_dir, 0755, true)) {
+            echo json_encode(['status' => 'error', 'message' => 'Gagal membuat folder temporary']);
+            exit;
+        }
+    }
+
+    $temp_csv_path = $temp_dir . "/" . $file_token . ".csv";
+
+    // gunakan move_uploaded_file untuk keamanan
+    if (!move_uploaded_file($tmp_file, $temp_csv_path)) {
+        // fallback copy jika move gagal
+        if (!copy($tmp_file, $temp_csv_path)) {
+            echo json_encode(['status' => 'error', 'message' => 'Gagal menyimpan file temporary']);
+            exit;
+        }
+    }
+
+    // simpan metadata ke session (jangan simpan seluruh isi file)
+    $_SESSION['import_metadata_' . $file_token] = [
+        'file_path' => $temp_csv_path,
+        'total_rows' => $totalRows,
+        'original_name' => $nama_file,
+        'created_at' => date('Y-m-d H:i:s')
+    ];
+
+    // Tuliskan session ke disk agar tidak terkunci
+    session_write_close();
+
+    // tentukan batch size adaptif
+    $batch_size_default = 100; // bawaan
+    // jika sangat besar, naikkan sedikit (sesuaikan memory server)
+    if ($totalRows > 200000) {
+        $batch_size = 1000;
+    } elseif ($totalRows > 50000) {
+        $batch_size = 500;
+    } elseif ($totalRows > 10000) {
+        $batch_size = 200;
+    } else {
+        $batch_size = $batch_size_default;
+    }
+
+    $total_batches = (int)ceil($totalRows / $batch_size);
+
+    // kirimkan response
+    echo json_encode([
+        'status' => 'success',
+        'file_token' => $file_token,
+        'total_batches' => $total_batches,
+        'total_rows' => $totalRows,
+        'batch_size' => $batch_size,
+        'message' => 'Data terdeteksi: ' . number_format($totalRows) . ' baris. Akan diproses dalam ' . $total_batches . ' batch.'
+    ], JSON_UNESCAPED_UNICODE);
+    exit;

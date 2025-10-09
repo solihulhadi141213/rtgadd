@@ -42,6 +42,11 @@
                                     </a>
                                 </li>
                                 <li>
+                                    <a class="dropdown-item" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#ModalImportCsv" title="Import Data">
+                                        <i class="bi bi-upload"></i> Import (Csv)
+                                    </a>
+                                </li>
+                                <li>
                                     <a class="dropdown-item" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#ModalExport" title="Export Data">
                                         <i class="bi bi-download"></i> Export
                                     </a>
