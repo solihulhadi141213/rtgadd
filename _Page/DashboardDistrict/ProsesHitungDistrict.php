@@ -43,25 +43,31 @@
     while ($data_region = mysqli_fetch_assoc($query_region)) {
         $id_region = $data_region['id_region'];
 
-        // Loop posisi guru di district
-        $query_position_region = mysqli_query($Conn, "SELECT abk, asn, pppk2024, kurang_guru FROM position_region WHERE id_region='$id_region'");
-        while ($data_position_region = mysqli_fetch_assoc($query_position_region)) {
-            $abk                = (int)$data_position_region['abk'];
-            $asn                = (int)$data_position_region['asn'];
-            $pppk2024           = (int)$data_position_region['pppk2024'];
-            $kurang_guru_list   = (int)$data_position_region['kurang_guru'];
+        //Looping School
+        $query_school = mysqli_query($Conn, "SELECT id_school FROM school WHERE id_region='$id_region'");
+        while ($data_school = mysqli_fetch_assoc($query_school)) {
+            $id_school = (int)$data_school['id_school'];
 
-            //Menghitung asn, abk dan pppk2024
-            $jumlah_abk         = $jumlah_abk+$abk;
-            $jumlah_asn         = $jumlah_asn+$asn;
-            $jumlah_pppk2024    = $jumlah_pppk2024+$pppk2024;
+            // Loop posisi guru di district
+            $query_position_region = mysqli_query($Conn, "SELECT abk, JmlASN, PPPK2024, KurangGuru FROM position_school WHERE id_school='$id_school'");
+            while ($data_position_region = mysqli_fetch_assoc($query_position_region)) {
+                $abk                = (int)$data_position_region['abk'];
+                $asn                = (int)$data_position_region['JmlASN'];
+                $pppk2024           = (int)$data_position_region['PPPK2024'];
+                $kurang_guru_list   = (int)$data_position_region['KurangGuru'];
 
-            //Menghitung Kurang Guru
-            $kurang_guru        = $kurang_guru+$kurang_guru_list;
+                //Menghitung asn, abk dan pppk2024
+                $jumlah_abk         = $jumlah_abk+$abk;
+                $jumlah_asn         = $jumlah_asn+$asn;
+                $jumlah_pppk2024    = $jumlah_pppk2024+$pppk2024;
 
-            //Menghitung PPG Belum Diangkat
-            if($asn==0){
-                $ppg_belum_diangkat = $ppg_belum_diangkat+1;
+                //Menghitung Kurang Guru
+                $kurang_guru        = $kurang_guru+$kurang_guru_list;
+
+                //Menghitung PPG Belum Diangkat
+                if($asn==0){
+                    $ppg_belum_diangkat = $ppg_belum_diangkat+1;
+                }
             }
         }
     }

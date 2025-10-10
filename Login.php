@@ -92,8 +92,24 @@
                     success     : function(response){
                         $('#TombolLogin').html('Login');
                         if (response.status === 'success') {
+                            //Tangkap Parameter Client
+                            var access_client = response.access_client;
+                            var level_client = response.level_client;
+                            var id_region_client = response.id_region_client;
+                            
                             // Redirect jika login berhasil
-                            window.location.href = 'index.php';
+                            if(level_client==""){
+                                window.location.href = 'index.php';
+                            }
+                            if(level_client=="National"){
+                                window.location.href = 'index.php';
+                            }
+                            if(level_client=="Province"){
+                                window.location.href = 'index.php?Page=DashboardProvince';
+                            }
+                            if(level_client=="District"){
+                                window.location.href = 'index.php?Page=DashboardDistrict';
+                            }
                         } else {
                             // Tampilkan notifikasi error jika gagal
                             $('#NotifikasiLogin').html('<div class="alert alert-danger">' + response.message + '</div>');

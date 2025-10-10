@@ -9,8 +9,27 @@
             //Jika Kosong maka dia Seorang Admin
             include "_Page/Dashboard/Dashboard.php";
         }else{
-            //Jika bukan admin
-            include "_Page/DashboardClient/DashboardClient.php";
+            
+            //Jika bukan admin buka level client
+            $level_client = GetDetailData($Conn, 'access_client', 'id_access', $SessionIdAccess, 'level');
+
+            //Routin Berdasarkan level_client
+            // if($level_client=="National"){
+            //     include "_Page/Dashboard/Dashboard.php";
+            // }else{
+            //     if($level_client=="Province"){
+            //         include "_Page/DashboardProvince/DashboardProvince.php";
+            //     }else{
+            //         if($level_client=="District"){
+            //             include "_Page/DashboardDistrict/DashboardDistrict.php";
+            //         }else{
+            //             include "_Page/DashboardDistrict/DashboardDistrict.php";
+            //         }
+            //     }
+            // }
+            
+            //Default
+            include "_Page/Dashboard/Dashboard.php";
         }
         
     }else{

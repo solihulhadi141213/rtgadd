@@ -72,6 +72,7 @@
             //Validasi Password
             if ($DataAkses && password_verify($password, $DataAkses['access_password'])) {
                 $id_access = $DataAkses["id_access"];
+                $access_client = $DataAkses["access_client"];
 
                 // Hapus token lama
                 $deleteTokenStmt = $Conn->prepare("DELETE FROM access_login WHERE id_access = ?");
@@ -92,12 +93,29 @@
                     $deskripsi_log="Login Berhasil";
                     $InputLog=addLog($Conn,$id_access,$now,$kategori_log,$deskripsi_log);
                     if($InputLog=="Success"){
+
+                       //Buat Session
                         $_SESSION["id_access"] = $id_access;
                         $_SESSION["login_token"] = $token;
                         $_SESSION["NotifikasiSwal"] = "Login Berhasil";
 
                         $response['status'] = 'success';
                         $response['message'] = 'Login berhasil.';
+
+                         //Apabila access_client kosongg
+                        if(empty($access_client)){
+                            $response['access_client'] = '';
+                            $response['level_client'] = '';
+                            $response['id_region_client'] = '';
+                        }else{
+                            //Buka Level
+                            $level_client = GetDetailData($Conn, 'access_client', 'id_access', $id_access, 'level');
+                            $id_region_client = GetDetailData($Conn, 'access_client', 'id_access', $id_access, 'id_region');
+
+                            $response['access_client'] = $access_client;
+                            $response['level_client'] = $level_client;
+                            $response['id_region_client'] = $id_region_client;
+                        }
 
                         //Hapus Captcha Lama
                         $deleteExpiredCaptchas = $Conn->prepare("DELETE FROM captcha WHERE captcha = ?");

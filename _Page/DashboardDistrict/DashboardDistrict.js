@@ -1,5 +1,17 @@
 let district_code = $("#district_code").val();
 
+// Fungsi Menampilkan Select Option pada element id school_level_by_kab_kot
+function ShowOptionSchoolLevel(school_level) {
+    $.ajax({
+        type    : 'POST',
+        url     : '_Page/DashboardDistrict/OptionSchoolLevel.php',
+        data    : { school_level: school_level},
+        success : function(data) {
+            // Tampilkan Option
+            $('#school_level_by_kab_kot').html(data);
+        }
+    });
+}
 // Fungsi Animasi Count Up (dinamis menyesuaikan angka)
 function animateCountUp(element, start, end, duration) {
     let startTime = null;
@@ -17,6 +29,23 @@ function animateCountUp(element, start, end, duration) {
     window.requestAnimationFrame(step);
 }
 
+//Menampilkan Detail School Level
+function ShowDetailSchoolLevel(district_code,school_level) {
+    $('#FormDetailSchoolLevel').fadeTo(400, 0.3, function () {
+        $.ajax({
+            type    : 'POST',
+            url     : '_Page/DashboardDistrict/FormDetailSchoolLevel.php',
+            data    : {district_code: district_code, school_level: school_level},
+            success : function(data) {
+                // Ganti konten
+                $('#FormDetailSchoolLevel').html(data);
+
+                // Efek transisi fadeIn lembut
+                $('#FormDetailSchoolLevel').fadeTo(400, 1);
+            }
+        });
+    });
+}
 // Fungsi Untuk Menampilkan Jumlah Kebutuhan Guru
 function ShowDistrictInformation(district_code) {
     
@@ -139,7 +168,21 @@ function ShowChartPie() {
             var options = {
                 chart: {
                     type: 'pie',
-                    height: 300
+                    height: 400,
+                    events: {
+                        dataPointSelection: function(event, chartContext, config) {
+                            // Dapatkan school_level dari slice yang diklik
+                            var clickedSchoolLevel = labels[config.dataPointIndex];
+                            
+                            // Tampilkan modal
+                            $('#ModalDetailSchoolLevel').modal('show');
+                            
+                            // Panggil fungsi ShowDetailSchoolLevel setelah modal ditampilkan
+                            $('#ModalDetailSchoolLevel').on('shown.bs.modal', function () {
+                                ShowDetailSchoolLevel(district_code, clickedSchoolLevel);
+                            });
+                        }
+                    }
                 },
                 series: series,
                 labels: labels,
@@ -153,6 +196,26 @@ function ShowChartPie() {
                 },
                 noData: {
                     text: 'No data to display'
+                },
+                plotOptions: {
+                    pie: {
+                        donut: {
+                            size: '50%'
+                        },
+                        customScale: 1,
+                        dataLabels: {
+                            offset: -5,
+                            minAngleToShowLabel: 10
+                        }
+                    }
+                },
+                states: {
+                    hover: {
+                        filter: {
+                            type: 'darken',
+                            value: 0.1
+                        }
+                    }
                 }
             };
 
@@ -178,9 +241,6 @@ function ShowTabelGuruByJabatan() {
         
         var ProsesFilter = $('#ProsesFilter').serialize();
 
-        // Simpan posisi scroll saat ini
-        var currentScroll = $(window).scrollTop();
-
         // Efek transisi: fadeOut lembut
         $('#TabelGuruByJabatan').fadeTo(400, 0.3, function () {
             $.ajax({
@@ -193,9 +253,6 @@ function ShowTabelGuruByJabatan() {
 
                     // Efek transisi fadeIn lembut
                     $('#TabelGuruByJabatan').fadeTo(400, 1);
-
-                    // Kembalikan posisi scroll agar layar tidak bergerak
-                    $(window).scrollTop(currentScroll);
                 }
             });
         });
@@ -207,9 +264,6 @@ function ShowTableKabKota() {
 
     //Tangkap Data Filter
     var ProsesFilterKabKot = $('#ProsesFilterKabKot').serialize();
-
-    // Simpan posisi scroll saat ini
-    var currentScroll = $(window).scrollTop();
 
     // Efek transisi: fadeOut lembut
     $('#TabelKabKota').fadeTo(400, 0.3, function () {
@@ -223,9 +277,6 @@ function ShowTableKabKota() {
 
                 // Efek transisi fadeIn lembut
                 $('#TabelKabKota').fadeTo(400, 1);
-
-                // Kembalikan posisi scroll agar layar tidak bergerak
-                $(window).scrollTop(currentScroll);
             }
         });
     });
@@ -236,9 +287,6 @@ function ShowTabelDetailJabatan() {
 
     //Tangkap Data Filter
     var FilterTabelJabatan = $('#FilterTabelJabatan').serialize();
-
-    // Simpan posisi scroll saat ini
-    var currentScroll = $(window).scrollTop();
 
     // Efek transisi: fadeOut lembut
     $('#TabelDetailJabatan').fadeTo(400, 0.3, function () {
@@ -253,8 +301,6 @@ function ShowTabelDetailJabatan() {
                 // Efek transisi fadeIn lembut
                 $('#TabelDetailJabatan').fadeTo(400, 1);
 
-                // Kembalikan posisi scroll agar layar tidak bergerak
-                $(window).scrollTop(currentScroll);
             }
         });
     });
@@ -273,6 +319,9 @@ $(document).ready(function () {
         ShowChartPie();
     });
 
+    //Tampilkan Form Select Option
+    ShowOptionSchoolLevel();
+
     //Menampilkan Tabel Pertama Kali
     ShowTabelGuruByJabatan();
 
@@ -288,6 +337,11 @@ $(document).ready(function () {
         var next_page = page_now - 1;
         $('#page').val(next_page);
         ShowTabelGuruByJabatan(0);
+    });
+
+    //Ketika school_level_by_kab_kot diubah
+    $('#school_level_by_kab_kot').change(function(){
+        ShowTabelGuruByJabatan();
     });
 
 
@@ -370,5 +424,27 @@ $(document).ready(function () {
         var next_page = page_now - 1;
         $('#page_detail_jabatan').val(next_page);
         ShowTabelDetailJabatan(0);
+    });
+
+    //Event ketika 'BtnLihatUraianByJenjang' di click
+    $(document).on('click', '#BtnLihatUraianByJenjang', function() {
+        var school_level = $('#get_school_level_from_detail').html();
+        
+        //Tempelkan school_level ke school_level_by_kab_kot
+        $('#school_level_by_kab_kot').val(school_level);
+
+        //Reset Posisi Halaman
+        $('#page').val("1");
+
+        //Tampilkan Ulang Data
+        ShowTabelGuruByJabatan();
+
+        //Tutup Modal
+        $('#ModalDetailSchoolLevel').modal('hide');
+
+        //Scroll ke konten kebutuhan guru
+        $('html, body').animate({
+            scrollTop: $("#konten_kebutuhan_guru_menurut_jabatan").offset().top - 80 // -80 biar agak turun dikit dari header
+        }, 600); // durasi animasi 600ms
     });
 });

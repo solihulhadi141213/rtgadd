@@ -12,8 +12,28 @@
             //Jika Kosong maka dia Seorang Admin
             echo '<script type="text/javascript" src="_Page/Dashboard/Dashboard.js?V='.$date_version.'"></script>';
         }else{
-            //Jika bukan admin
-            echo '<script type="text/javascript" src="_Page/DashboardClient/DashboardClient.js?V='.$date_version.'"></script>';
+            
+            //Jika bukan admin buka level client
+            $level_client = GetDetailData($Conn, 'access_client', 'id_access', $SessionIdAccess, 'level');
+
+            //Routin Berdasarkan level_client
+            // if($level_client=="National"){
+            //     echo '<script type="text/javascript" src="_Page/Dashboard/Dashboard.js?V='.$date_version.'"></script>';
+            // }else{
+            //     if($level_client=="Province"){
+            //         echo '<script type="text/javascript" src="_Page/DashboardProvince/DashboardProvince.js?V='.$date_version.'"></script>';
+            //     }else{
+            //         if($level_client=="District"){
+            //             echo '<script type="text/javascript" src="_Page/DashboardDistrict/DashboardDistrict.js?V='.$date_version.'"></script>';
+            //         }else{
+            //             echo '<script type="text/javascript" src="_Page/DashboardDistrict/DashboardDistrict.js?V='.$date_version.'"></script>';
+            //         }
+            //     }
+            // }
+
+            //Default
+            echo '<script type="text/javascript" src="_Page/Dashboard/Dashboard.js?V='.$date_version.'"></script>';
+            
         }
         
     }else{

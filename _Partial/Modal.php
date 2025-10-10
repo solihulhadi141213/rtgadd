@@ -10,8 +10,26 @@
             //Jika Kosong maka dia Seorang Admin
             include "_Page/Dashboard/ModalDashboard.php";
         }else{
-            //Jika bukan admin
-            include "_Page/DashboardClient/ModalDashboardClient.php";
+            //Jika bukan admin buka level_client
+            $level_client = GetDetailData($Conn, 'access_client', 'id_access', $SessionIdAccess, 'level');
+
+            //Routin Berdasarkan level_client
+            // if($level_client=="National"){
+            //     include "_Page/Dashboard/ModalDashboard.php";
+            // }else{
+            //     if($level_client=="Province"){
+            //         include "_Page/DashboardProvince/ModalDashboardProvince.php";
+            //     }else{
+            //         if($level_client=="District"){
+            //             include "_Page/DashboardDistrict/ModalDashboardDistrict.php";
+            //         }else{
+            //             include "_Page/DashboardDistrict/ModalDashboardDistrict.php";
+            //         }
+            //     }
+            // }
+
+            //Default
+            include "_Page/Dashboard/ModalDashboard.php";
         }
     }else{
         $Page=$_GET['Page'];

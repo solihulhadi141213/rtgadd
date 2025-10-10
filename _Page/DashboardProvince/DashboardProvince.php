@@ -16,6 +16,13 @@
 
 <?php
     if(empty($_GET['province_code'])){
+        //Jika province_code kosong cari berdasarkan access_client
+        $id_region_client = GetDetailData($Conn, 'access_client', 'id_access', $SessionIdAccess, 'id_region');
+        $province_code = GetDetailData($Conn, 'region', 'id_region', $id_region_client, 'province_code');
+    }else{
+        $province_code = $_GET['province_code'];
+    }
+    if(empty($province_code)){
         echo '
             <section class="section dashboard">
                 <div class="row">
@@ -30,7 +37,6 @@
         ';
         include "_Page/DashboardProvince/FormPilihProvinsi.php";
     }else{
-        $province_code = $_GET['province_code'];
         $province_name = GetDetailData($Conn, 'geo_region', 'province_code', $province_code, 'province_name');
 
         //Jika Data Tidak Ditemukan
@@ -68,8 +74,9 @@
                             <h2 id="show_nominal_kebutuhan_guru">Loading..</h2>
                         </div>
                         <div class="col-6 text-center border-1 border-start">
-                            <b class="card-title">Lulusan PPG Yang Belum Diangkat</b>
+                            <b class="card-title">Lulusan PPG Calon Guru yang Belum Diangkat sebagai ASN</b><br>
                             <h2 id="show_lulusan_ppg_pending">Loading..</h2>
+                            (per 14 Agustus 2025)
                         </div>
                     </div>
                 </div>

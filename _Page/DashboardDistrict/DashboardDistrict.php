@@ -1,10 +1,22 @@
 <?php
     if(empty($_GET['district_code'])){
-       $district_code       = "";
-       $district_name       = "";
-       $province_code       = "";
-       $province_name       = "";
-       $id_region           = "";
+        //Jika province_code kosong cari berdasarkan access_client
+        $id_region_client   = GetDetailData($Conn, 'access_client', 'id_access', $SessionIdAccess, 'id_region');
+        $district_code      = GetDetailData($Conn, 'region', 'id_region', $id_region_client, 'district_code');
+        if(!empty($district_code)){
+            $district_code       = GetDetailData($Conn, 'region', 'id_region', $id_region_client, 'district_code');
+            $district_name       = GetDetailData($Conn, 'region', 'id_region', $id_region_client, 'district_name');
+            $province_code       = GetDetailData($Conn, 'region', 'id_region', $id_region_client, 'province_code');
+            $province_name       = GetDetailData($Conn, 'region', 'id_region', $id_region_client, 'province_name');
+            $id_region           = $id_region_client;
+        }else{
+            $district_code       = "";
+            $district_name       = "";
+            $province_code       = "";
+            $province_name       = "";
+            $id_region           = "";
+        }
+       
     }else{
         $district_code      = $_GET['district_code'];
         $district_name      = GetDetailData($Conn, 'region', 'district_code', $district_code, 'district_name');
@@ -168,7 +180,7 @@
                                 </div>
                                 <div class="rom mb-3 border-bottom border-1">
                                     <div class="col-12 mb-3 text-center">
-                                        <span class="text text-grayish">Lulusan PPG yang Belum Diangkat</span>
+                                        <span class="text text-grayish">Lulusan PPG Calon Guru yang Belum Diangkat sebagai ASN (per 14 Agustus 2025)</span>
                                         <h2>
                                             <b class="text-primary" id="jumlah_ppg_belum_diangkat">Loading...</b>
                                         </h2>
@@ -194,23 +206,27 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" id="konten_kebutuhan_guru_menurut_jabatan">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
                                 <div class="row">
-                                    <div class="col-8">
+                                    <div class="col-6 col-xs-7 col-sm-8 col-md-10">
                                         <b class="card-title"># Guru menurut Jabatan</b>
                                     </div>
-                                    <div class="col-4 text-end">
-                                        <button type="button" class="btn btn-md btn-secondary btn-floating" data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter Data">
-                                            <i class="bi bi-filter"></i>
-                                        </button>
+                                    <div class="col-6 col-xs-5 col-sm-4 col-md-2 text-end">
+                                        <form action="javascript:void(0);" id="ProsesFilter">
+                                            <input type="hidden" name="page" id="page" value="1">
+                                            <input type="hidden" name="district_code" id="district_code_filter" value="">
+                                            <select name="school_level" id="school_level_by_kab_kot" class="form-control">
+                                                <option value="">Semua Jenjang</option>
+                                            </select>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div class="table table-responsive" style="max-height: 400px; overflow-y: auto;">
+                                <div class="table table-responsive">
                                     <table class="table table-striped table-hover">
                                         <thead>
                                             <tr>
