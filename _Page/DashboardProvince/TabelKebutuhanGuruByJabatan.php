@@ -142,6 +142,7 @@
     // Looping data
     $no = 1 + $posisi;
     while ($data = mysqli_fetch_assoc($result)) {
+        $id_position = $data['id_position'];
         $position_name = $data['position_name'];
         $total_abk = number_format($data['total_abk'], 0, ',', '.');
         $total_asn = number_format($data['total_asn'], 0, ',', '.');
@@ -152,7 +153,11 @@
         echo '
             <tr>
                 <td><small>'.$no.'</small></td>
-                <td><small>'.$position_name.'</small></td>
+                <td>
+                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#ModalDetailKebutuhanGuruByJabatan" data-province_code="'.$province_code .'" data-id_position="'.$id_position .'">
+                        <small>'.$position_name.'</small>
+                    </a>
+                </td>
                 <td><small>'.$total_abk.'</small></td>
                 <td><small>'.$total_asn.'</small></td>
                 <td><small>'.$total_pppk2024.'</small></td>

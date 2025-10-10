@@ -1,56 +1,81 @@
 <?php
-    //Inisiasi Type File
+    // Inisiasi Type File
     header('Content-Type: application/json');
 
-    //Koneksi
+    // Koneksi
     include "../../_Config/Connection.php";
     include "../../_Config/GlobalFunction.php";
     include "../../_Config/Session.php";
 
-    //Validasi Sesi akses
+    // Validasi Sesi akses
     if (empty($SessionIdAccess)) {
         $response = [
             "code" => 201,
             "message" => "Sesi akses sudah berakhir. Silahkan <b>login</b> ulang!",
-            "kebutuhan_guru" =>NULL
+            "kebutuhan_guru" => NULL
         ];
         echo json_encode($response, JSON_PRETTY_PRINT);
         exit;
     }
 
-    //Validasi province_code Tidak ada
+    // Validasi province_code Tidak ada
     if(empty($_POST['province_code'])){
         $response = [
             "code" => 201,
             "message" => "Parameter <b>Kode Provinsi</b> tidak boleh kosong!",
-            "kebutuhan_guru" =>NULL
+            "kebutuhan_guru" => NULL
         ];
         echo json_encode($response, JSON_PRETTY_PRINT);
         exit;
     }
 
-    $province_code = $_POST['province_code'];
+    // Sanitize input
+    $province_code = validateAndSanitizeInput($_POST['province_code']);
 
-    // Inisialisasi akumulasi Agar Tidak Error
-    $kurang_guru = 0;
-
-    //Melakukan looping tabel region dengan condition category=District AND province_code
-    $query_region = mysqli_query($Conn, "SELECT id_region FROM region WHERE category='District' AND province_code='$province_code'");
-    while ($data_region = mysqli_fetch_assoc($query_region)) {
-        $id_region = $data_region['id_region'];
-
-        // Loop posisi guru di district
-        $query_position_region = mysqli_query($Conn, "SELECT kurang_guru FROM position_region WHERE id_region='$id_region'");
-        while ($data_position_region = mysqli_fetch_assoc($query_position_region)) {
-            $kurang_guru    += (int)$data_position_region['kurang_guru'];
-        }
+    // Query tunggal untuk menghitung kebutuhan guru
+    $query = "SELECT SUM(ps.KurangGuru) as total_kebutuhan_guru
+              FROM position_school ps
+              INNER JOIN school s ON ps.id_school = s.id_school
+              INNER JOIN region r ON s.id_region = r.id_region
+              WHERE r.category = 'District' AND r.province_code = ?";
+    
+    $stmt = mysqli_prepare($Conn, $query);
+    
+    if (!$stmt) {
+        $response = [
+            "code" => 500,
+            "message" => "Error preparing query: " . mysqli_error($Conn),
+            "kebutuhan_guru" => NULL
+        ];
+        echo json_encode($response, JSON_PRETTY_PRINT);
+        exit;
     }
+    
+    mysqli_stmt_bind_param($stmt, "s", $province_code);
+    
+    if (!mysqli_stmt_execute($stmt)) {
+        $response = [
+            "code" => 500,
+            "message" => "Error executing query: " . mysqli_stmt_error($stmt),
+            "kebutuhan_guru" => NULL
+        ];
+        echo json_encode($response, JSON_PRETTY_PRINT);
+        mysqli_stmt_close($stmt);
+        exit;
+    }
+    
+    mysqli_stmt_bind_result($stmt, $total_kebutuhan_guru);
+    mysqli_stmt_fetch($stmt);
+    mysqli_stmt_close($stmt);
 
-    //Buat Response
+    // Handle NULL result
+    $kurang_guru = $total_kebutuhan_guru ?? 0;
+
+    // Buat Response
     $response = [
         "code" => 200,
         "message" => "Success",
-        "kebutuhan_guru" =>$kurang_guru
+        "kebutuhan_guru" => (int)$kurang_guru
     ];
     echo json_encode($response, JSON_PRETTY_PRINT);
     exit;

@@ -79,19 +79,19 @@
 
 
     <di class="row mb-3">
-        <div class="col-md-6 d-flex mb-3">
+        <div class="col-md-4 d-flex mb-3">
             <div class="card w-100 h-100">
                 <div class="card-body">
                     <div class="row mb-3">
                         <div class="col-12 text-center">
                             <b class="card-title">
-                                Kebutuhan Guru menurut Jenjang di Level Provinsi
+                                Kebutuhan Guru menurut Jenjang
                             </b>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-12 text-center">
-                            <div id="kebutuhan_guru_by_jenjang">
+                            <div id="ChartKebutuhanGuru">
                                 <!-- Menampilkan grafik pie Apexchart -->
                             </div>
                         </div>
@@ -100,7 +100,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 d-flex mb-3">
+        <div class="col-md-8 d-flex mb-3">
             <div class="card w-100 h-100">
                 <div class="card-body">
                     <div class="row mb-3">
@@ -116,6 +116,9 @@
                                 <small>Loading...</small>
                                 <!-- Menampilkan peta interaktif menggunakan leaflet-->
                             </div>
+                            <small>
+                                <b>Keterangan :</b> Garis berwarna <span class="text-danger">Merah</span> pada peta menunjukan daerah Kab/Kota yang menjadii <i>Pilot</i>
+                            </small>
                         </div>
                     </div>
                 </div>
@@ -123,12 +126,12 @@
         </div>
     </di>
 
-    <div class="row">
+    <div class="row" id="KontenKebutuhanGuruMenurutKabupaten">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-8">
+                        <div class="col-6 col-xs-7 col-sm-8 col-md-10">
                             <b class="card-title">
                                 # Kebutuhan Guru menurut kabupaten/Kota 
                                 <span id="TitleKebutuhanGuruByKabKot">
@@ -136,22 +139,27 @@
                                 </span>
                             </b>
                         </div>
-                        <div class="col-4 text-end">
-                            <button type="button" class="btn btn-md btn-secondary btn-floating" data-bs-toggle="modal" data-bs-target="#ModalFilterKebutuhanGuruByKabKot" title="Filter Data">
-                                <i class="bi bi-filter"></i>
-                            </button>
+                        <div class="col-6 col-xs-5 col-sm-4 col-md-2 text-end">
+                            <!-- Form Filter Untuk Menampilkan Data Pada 'TabelKebutuhanGuruByKabKot' -->
+                            <form action="javascript:void(0);" id="ProsesFilterKebutuhanGuruByKabKot">
+                                <input type="hidden" name="page" id="page_kebutuhan_guru_by_kabkot" value="1">
+                                <input type="hidden" name="province_code" id="province_code" value="<?php echo "$province_code"; ?>">
+                                <select name="school_level" id="school_level_by_kab_kot" class="form-control">
+                                    <option value="">Semua Jenjang</option>
+                                    <?php
+                                        $query_school_level = mysqli_query($Conn, "SELECT DISTINCT school_level FROM school ");
+                                        while ($data_school_level = mysqli_fetch_array($query_school_level)) {
+                                            $school_level = $data_school_level['school_level'];
+                                            echo '<option value="'.$school_level.'">'.$school_level.'</option>';
+                                        }
+                                    ?>
+                                </select>
+                            </form>
                         </div>
                     </div>
                     
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <span id="TitleKebutuhanGuruByKabKot">
-                                <!-- Menampilkan Title Jenjang Disini -->
-                            </span>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-12">
                             <div class="table table-responsive">

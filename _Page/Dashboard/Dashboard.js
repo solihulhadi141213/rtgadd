@@ -2,9 +2,6 @@
 function filterAndLoadTable() {
     var ProsesFilter = $('#ProsesFilter').serialize();
 
-    // Simpan posisi scroll saat ini
-    var currentScroll = $(window).scrollTop();
-
     // Efek transisi: fadeOut lembut
     $('#TabelKebutuhanGuru').fadeTo(400, 0.3, function () {
         $.ajax({
@@ -17,9 +14,6 @@ function filterAndLoadTable() {
 
                 // Efek transisi fadeIn lembut
                 $('#TabelKebutuhanGuru').fadeTo(400, 1);
-
-                // Kembalikan posisi scroll agar layar tidak bergerak
-                $(window).scrollTop(currentScroll);
             }
         });
     });

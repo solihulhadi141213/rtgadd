@@ -1,53 +1,59 @@
 <?php
-    //Inisiasi File
     header('Content-Type: application/json');
-
-    //Koneksi
     include "../../_Config/Connection.php";
     include "../../_Config/GlobalFunction.php";
     include "../../_Config/Session.php";
 
-    //Validasi Sesi akses
     if (empty($SessionIdAccess)) {
-        $response_code = 201;
-        $response_msg = "Sesi akses sudah berakhir. Silahkan <b>login</b> ulang!";
-        $response = [
-            "code" => $response_code,
-            "message" => $response_msg
-        ];
-        echo json_encode($response, JSON_PRETTY_PRINT);
+        echo json_encode([
+            "code" => 201,
+            "message" => "Sesi akses sudah berakhir. Silahkan <b>login</b> ulang!"
+        ]);
         exit;
     }
 
-    //Validasi province_code
     if(empty($_POST['province_code'])){
-        $response_code = 201;
-        $response_msg = "Kode Provinsi Tidak Boleh Kosong!";
-        $response = [
-            "code" => $response_code,
-            "message" => $response_msg
-        ];
-        echo json_encode($response, JSON_PRETTY_PRINT);
+        echo json_encode([
+            "code" => 201,
+            "message" => "Kode Provinsi Tidak Boleh Kosong!"
+        ]);
         exit;
     }
 
-    //Buat Variabel
-    $province_code = $_POST['province_code'];
+    $province_code = mysqli_real_escape_string($Conn, $_POST['province_code']);
+    $metadata = [];
 
-    //Looping Semua Sekolah dengan DISTINCT jenjang
-    $query = mysqli_query($Conn, "SELECT DISTINCT school_level FROM school ");
-    while ($data = mysqli_fetch_array($query)) {
-        $school_level = $data['school_level'];
+    /**
+     * Query optimasi:
+     * - Ambil langsung kebutuhan guru per jenjang pendidikan
+     * - JOIN region → school → position_school
+     * - Filter province_code & category=District
+     * - Group by jenjang (school_level)
+     */
+    $sql = "
+        SELECT 
+            s.school_level,
+            COALESCE(SUM(p.KurangGuru), 0) AS kebutuhan_guru
+        FROM school s
+        INNER JOIN region r ON s.id_region = r.id_region
+        LEFT JOIN position_school p ON s.id_school = p.id_school
+        WHERE r.category = 'District' 
+        AND r.province_code = '$province_code'
+        GROUP BY s.school_level
+        ORDER BY s.school_level ASC
+    ";
 
-        //Looping Daftar id_region level kabupaten berdasarkan province_code
-        $query_kab = mysqli_query($Conn, "SELECT id_region FROM region WHERE category='District' AND province_code='$province_code'");
-        while ($data_kab = mysqli_fetch_array($query_kab)) {
-            $id_region = $data_kab['id_region'];
-
-            //Looping Daftar id_region
-            
-        }
-
+    $result = mysqli_query($Conn, $sql);
+    while ($row = mysqli_fetch_assoc($result)) {
+        $metadata[] = [
+            "province_code"  => $province_code,
+            "school_level"   => $row['school_level'],
+            "kebutuhan_guru" => (int)$row['kebutuhan_guru']
+        ];
     }
 
+    echo json_encode([
+        "code" => 200,
+        "data" => $metadata
+    ], JSON_PRETTY_PRINT);
 ?>

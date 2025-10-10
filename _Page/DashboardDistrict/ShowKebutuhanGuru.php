@@ -31,6 +31,9 @@
 
     $district_code = mysqli_real_escape_string($Conn, $_POST['district_code']);
 
+    //Buka id_region
+    $id_region = GetDetailData($Conn, 'region', 'district_code', $district_code, 'id_region');
+
     // Query langsung join + agregasi
     $sql = "
         SELECT SUM(pr.kurang_guru) AS total_kurang

@@ -99,9 +99,6 @@ function ShowNominalLulusanPpg(kode_provinsi) {
 function ShowTableKebutuhanGuruByKabKot() {
     var DataFilter = $('#ProsesFilterKebutuhanGuruByKabKot').serialize();
 
-    // Simpan posisi scroll saat ini
-    var currentScroll = $(window).scrollTop();
-
     // Efek transisi: fadeOut lembut
     $('#TabelKebutuhanGuruByKabKot').fadeTo(400, 0.3, function () {
         $.ajax({
@@ -115,8 +112,7 @@ function ShowTableKebutuhanGuruByKabKot() {
                 // Efek transisi fadeIn lembut
                 $('#TabelKebutuhanGuruByKabKot').fadeTo(400, 1);
 
-                // Kembalikan posisi scroll agar layar tidak bergerak
-                $(window).scrollTop(currentScroll);
+                // ❌ Jangan pakai scrollTop lagi, biar tetap di posisi hasil animasi
             }
         });
     });
@@ -125,9 +121,6 @@ function ShowTableKebutuhanGuruByKabKot() {
 //Fungsi Menampilkan Data Kebutuhan Guru Menurut Jabatan
 function ShowTableKebutuhanGuruByJabatan() {
     var DataFilterJabatan = $('#ProsesFilterKebutuhanGuruByJabatan').serialize();
-
-    // Simpan posisi scroll saat ini
-    var currentScroll = $(window).scrollTop();
 
     // Efek transisi: fadeOut lembut
     $('#TabelKebutuhanGuruByJabatan').fadeTo(400, 0.3, function () {
@@ -141,18 +134,63 @@ function ShowTableKebutuhanGuruByJabatan() {
 
                 // Efek transisi fadeIn lembut
                 $('#TabelKebutuhanGuruByJabatan').fadeTo(400, 1);
-
-                // Kembalikan posisi scroll agar layar tidak bergerak
-                $(window).scrollTop(currentScroll);
             }
         });
     });
 }
 
+//Fungsi Menampilkan Detail Dari Chart Ke Dalam Modal
+function ShowModalDetailContent(province_code,school_level) {
+    $('#ModalDetailContent').html('Loading...');
+    $.ajax({
+        type    : 'POST',
+        url     : '_Page/DashboardProvince/DetailContent.php',
+        data    : {province_code: province_code, school_level:school_level},
+        success : function(response) {
+            $('#ModalDetailContent').html(response);
+        }
+    });
+}
 
+// Debug function untuk memeriksa data Pada Peta Interaktif
+function debugGeoJSON(data) {
+    console.log("Total features:", data.features.length);
+    
+    data.features.forEach((feature, index) => {
+        console.log(`Feature ${index}:`, {
+            properties: feature.properties,
+            geometry_type: feature.geometry.type,
+            coordinates_length: feature.geometry.coordinates ? feature.geometry.coordinates.length : 0
+        });
+    });
+}
+
+//Fungsi Menampilkan Tabel Jabatan
+function ShowTabelDetailJabatan() {
+
+    //Tangkap Data Filter
+    var FilterTabelJabatan = $('#FilterTabelJabatan').serialize();
+
+    // Efek transisi: fadeOut lembut
+    $('#TabelDetailJabatan').fadeTo(400, 0.3, function () {
+        $.ajax({
+            type    : 'POST',
+            url     : '_Page/DashboardProvince/TabelDetailJabatan.php',
+            data    : FilterTabelJabatan,
+            success : function(data) {
+                // Ganti konten
+                $('#TabelDetailJabatan').html(data);
+
+                // Efek transisi fadeIn lembut
+                $('#TabelDetailJabatan').fadeTo(400, 1);
+            }
+        });
+    });
+}
 
 $(document).ready(function () {
     var kode_provinsi = $("#kode_provinsi").val();
+    var province_code = $("#province_code").val();
 
     //Menampilkan Jumlah Angka Kebutuhan Guru Level Provinsi
     ShowNominalKebutuhanGuruProvinsi(kode_provinsi);
@@ -163,8 +201,8 @@ $(document).ready(function () {
     //Load Data Kebutuhan Guru menurut kabupaten/Kota (Pertama Kali)
     ShowTableKebutuhanGuruByKabKot();
 
-    //Event Ketika Filter Kebutuhan Guru Menurut Kab/Kot Disubmit
-    $('#ProsesFilterKebutuhanGuruByKabKot').submit(function(){
+    //Event Ketika 'school_level_by_kab_kot' diubah
+    $('#school_level_by_kab_kot').change(function(){
 
         //Reset Posisi Halaman
         $('#page_kebutuhan_guru_by_kabkot').val("1");
@@ -212,84 +250,66 @@ $(document).ready(function () {
         ShowTableKebutuhanGuruByJabatan(0);
     });
 
-    let timestamp = new Date().getTime();
     // ===================== PIE CHART APEXCHART =====================
-    $.getJSON("_Page/DashboardProvince/kebutuhan_guru_by_jenjang.json?v=" + timestamp, function(data) {
-        let provData = data.find(item => item.province_code === kode_provinsi);
+    // Ambil data dari PHP
+    // Pastikan elemen ada
+    if(!$("#ChartKebutuhanGuru").length){
+        console.error("Elemen #ChartKebutuhanGuru tidak ditemukan!");
+        return;
+    }
 
-        if(provData && provData.kebutuhan_guru_by_jenjang){
-            let seriesData = provData.kebutuhan_guru_by_jenjang.map(item => item.kebutuhan);
-            let labelsData = provData.kebutuhan_guru_by_jenjang.map(item => item.jenjang);
+    $.ajax({
+        type: "POST",
+        url: "_Page/DashboardProvince/kebutuhan_guru_by_jenjang.php",
+        data: { province_code: province_code },
+        dataType: "json",
+        success: function(response) {
+            if(response.code && response.code != 200){
+                alert(response.message);
+                return;
+            }
 
-            var options = {
+            let labels = [];
+            let series = [];
+            let rawData = [];
+
+            $.each(response.data, function(index, item){
+                labels.push(item.school_level);
+                series.push(parseInt(item.kebutuhan_guru));
+                rawData.push(item);
+            });
+
+            // Hapus chart lama kalau ada
+            $("#ChartKebutuhanGuru").empty();
+
+            let options = {
                 chart: {
                     type: 'pie',
-                    height: 400
+                    height: 400,
+                    events: {
+                        dataPointSelection: function(event, chartContext, config) {
+                            let index = config.dataPointIndex;
+                            let selectedData = rawData[index];
+
+                            //Tampilkan Modal
+                            $("#ModalDetailByJenjang").modal("show");
+
+                            //Tamilkan Detaiil Data
+                            ShowModalDetailContent(selectedData.province_code,selectedData.school_level) 
+                        }
+                    }
                 },
-                series: seriesData,
-                labels: labelsData,
+                labels: labels,
+                series: series,
                 legend: {
                     position: 'bottom'
                 }
             };
 
-            var chart = new ApexCharts(document.querySelector("#kebutuhan_guru_by_jenjang"), options);
+            let chart = new ApexCharts(document.querySelector("#ChartKebutuhanGuru"), options);
             chart.render();
-        } else {
-            $("#kebutuhan_guru_by_jenjang").html("<p class='text-center text-muted'>Data tidak tersedia</p>");
         }
     });
-
-    // ===================== LEAFLET MAP =====================
-    var map = L.map('ShowMapProvinsiAndAkbupaten').setView([-2,118], 5);
-    // Basemap
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap'
-    }).addTo(map);
-
-    // Fungsi untuk memberi warna berdasarkan kurang_guru
-    function getColor(value) {
-        return value > 5000 ? '#000000' : // hitam
-            value > 2000 ? '#00008B' : // biru sangat tua
-            value > 1000 ? '#0000CD' : // biru tua
-            value > 500  ? '#4169E1' : // royal blue
-            value > 100  ? '#6495ED' : // cornflower blue
-                            '#ADD8E6';  // biru muda (default)
-    }
-
-    // Ambil data GeoJSON dari API
-    $.getJSON("_Page/DashboardProvince/GetGeoProvince.php?province_code=" + kode_provinsi, function(data){
-        var geoLayer = L.geoJSON(data, {
-            style: function(feature){
-                let kurangGuru = feature.properties.kurang_guru || 0;
-                return {
-                    color: "black",   // garis pinggir
-                    weight: 1,
-                    fillColor: getColor(kurangGuru),
-                    fillOpacity: 0.7
-                };
-            },
-            onEachFeature: function(feature, layer){
-                let id_region = feature.properties.id_region || "-";
-                let prov = feature.properties.province_name || "-";
-                let kabkota_code = feature.properties.district_code || "-";
-                let kabkota = feature.properties.district_name || "-";
-                let kurangGuru = feature.properties.kurang_guru || 0;
-                let popupContent = `
-                    <b>${kabkota}</b><br>
-                    Provinsi: ${prov}<br>
-                    Kurang Guru: <span class="text-danger">${kurangGuru}</span><br>
-                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#ModalDetailKabKot" data-id="${kabkota_code}">Lihat Selengkapnya</a>
-                `;
-                layer.bindPopup(popupContent);
-            }
-        }).addTo(map);
-
-        // Zoom ke batas geojson
-        map.fitBounds(geoLayer.getBounds());
-    });
-
-
 
 
     //Modal Detail Kab/Kota
@@ -304,5 +324,252 @@ $(document).ready(function () {
                 $('#FormDetailKabKot').html(data);
             }
         });
+    });
+
+    //Event ketika 'BtnLihatUraianByJenjang' di click
+    $(document).on('click', '#BtnLihatUraianByJenjang', function() {
+        var school_level = $('#get_school_level_from_detail').html();
+        
+        //Tempelkan school_level ke school_level_by_kab_kot
+        $('#school_level_by_kab_kot').val(school_level);
+
+        //Reset Posisi Halaman
+        $('#page_kebutuhan_guru_by_kabkot').val("1");
+
+        //Tampilkan Ulang Data
+        ShowTableKebutuhanGuruByKabKot();
+
+        //Tutup Modal
+        $('#ModalDetailByJenjang').modal('hide');
+
+        //Scroll ke konten kebutuhan guru
+        $('html, body').animate({
+            scrollTop: $("#KontenKebutuhanGuruMenurutKabupaten").offset().top - 80 // -80 biar agak turun dikit dari header
+        }, 600); // durasi animasi 600ms
+    });
+
+    // ===================== LEAFLET MAP =====================
+    let timestamp = new Date().getTime();
+
+    // Inisialisasi peta dengan view default Indonesia
+    var map = L.map('ShowMapProvinsiAndAkbupaten', {
+        zoomControl: false,
+        scrollWheelZoom: false
+    }).setView([-2, 118], 5);
+
+    // Tambahkan zoom control di pojok kiri atas
+    L.control.zoom({
+        position: 'topleft'
+    }).addTo(map);
+
+    // Basemap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap'
+    }).addTo(map);
+
+    // Fungsi untuk memberi warna berdasarkan kurang_guru
+    function getColor(value) {
+        return value > 5000 ? '#000000' : // hitam
+            value > 2000 ? '#00008B' : // biru sangat tua
+            value > 1000 ? '#0000CD' : // biru tua
+            value > 500  ? '#4169E1' : // royal blue
+            value > 100  ? '#6495ED' : // cornflower blue
+            value > 50   ? '#87CEEB' : // sky blue
+            value > 10   ? '#ADD8E6' : // light blue
+                            '#F8F9FA';  // putih (default)
+    }
+
+    // Tambahkan legenda
+    var legend = L.control({position: 'bottomright'});
+
+    legend.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'legend');
+        div.innerHTML = `
+            <div class="card shadow-sm">
+                <div class="card-header py-2">
+                    <strong class="card-title mb-0" style="font-size: 12px;">Legenda Kekurangan Guru</strong>
+                </div>
+                <div class="card-body py-2">
+                    <div class="d-flex align-items-center mb-1">
+                        <div style="width: 20px; height: 15px; background-color: #F8F9FA; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <small>0-10</small>
+                    </div>
+                    <div class="d-flex align-items-center mb-1">
+                        <div style="width: 20px; height: 15px; background-color: #ADD8E6; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <small>11-50</small>
+                    </div>
+                    <div class="d-flex align-items-center mb-1">
+                        <div style="width: 20px; height: 15px; background-color: #87CEEB; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <small>51-100</small>
+                    </div>
+                    <div class="d-flex align-items-center mb-1">
+                        <div style="width: 20px; height: 15px; background-color: #6495ED; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <small>101-500</small>
+                    </div>
+                    <div class="d-flex align-items-center mb-1">
+                        <div style="width: 20px; height: 15px; background-color: #4169E1; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <small>501-1000</small>
+                    </div>
+                    <div class="d-flex align-items-center mb-1">
+                        <div style="width: 20px; height: 15px; background-color: #0000CD; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <small>1001-2000</small>
+                    </div>
+                    <div class="d-flex align-items-center mb-1">
+                        <div style="width: 20px; height: 15px; background-color: #00008B; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <small>2001-5000</small>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div style="width: 20px; height: 15px; background-color: #000000; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <small>>5000</small>
+                    </div>
+                </div>
+            </div>
+        `;
+        return div;
+    };
+
+    legend.addTo(map);
+
+    // Fungsi untuk mendapatkan bounds dari GeoJSON
+    function getGeoJSONBounds(geoJSON) {
+        var bounds = new L.LatLngBounds();
+        
+        geoJSON.eachLayer(function(layer) {
+            if (layer.getBounds) {
+                bounds.extend(layer.getBounds());
+            }
+        });
+        
+        return bounds.isValid() ? bounds : null;
+    }
+
+    // Ambil data GeoJSON dari API
+    $.getJSON("_Page/DashboardProvince/GetGeoProvince.php?province_code=" + kode_provinsi)
+        .done(function(data){
+            debugGeoJSON(data);
+            console.log("Data GeoJSON diterima:", data);
+            
+            if (data.features && data.features.length > 0) {
+                var geoLayer = L.geoJSON(data, {
+                    style: function(feature){
+                        let kurangGuru = feature.properties.kurang_guru || 0;
+                        let isSample = feature.properties.is_sample || false;
+                        
+                        return {
+                            color: isSample ? "red" : "black", // Garis merah untuk sample district
+                            weight: isSample ? 3 : 1, // Garis lebih tebal untuk sample
+                            fillColor: getColor(kurangGuru),
+                            fillOpacity: 0.7
+                        };
+                    },
+                    onEachFeature: function(feature, layer){
+                        let id_region = feature.properties.id_region || "-";
+                        let prov = feature.properties.province_name || "-";
+                        let kabkota_code = feature.properties.district_code || "-";
+                        let kabkota = feature.properties.district_name || "-";
+                        let kurangGuru = feature.properties.kurang_guru || 0;
+                        let isSample = feature.properties.is_sample || false;
+                        
+                        // Tampilan popup yang lebih menarik dengan Bootstrap
+                        let popupContent = `
+                            <div class="popup-content" style="min-width: 200px;">
+                                <div class="border-bottom pb-2 mb-2">
+                                    <h6 class="mb-1 fw-bold">${kabkota}</h6>
+                                    <small class="text-muted">${prov}</small><br>
+                                    <small class="text-muted">Kekurangan Guru : ${kurangGuru}</small>
+                                </div>
+                                <div class="text-end">
+                                    <button type="button" class="btn btn-sm btn-secondary btn-block" data-bs-toggle="modal" data-bs-target="#ModalDetailKabKot" data-id="${kabkota_code}">
+                                        Lihat Detail
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        layer.bindPopup(popupContent);
+                    }
+                }).addTo(map);
+
+                // Coba dapatkan bounds dan zoom ke peta
+                try {
+                    var bounds = geoLayer.getBounds();
+                    if (bounds.isValid()) {
+                        map.fitBounds(bounds, { padding: [20, 20] });
+                        console.log("Zoom ke bounds berhasil");
+                    } else {
+                        console.warn("Bounds tidak valid, menggunakan view default");
+                        // Tetap di view default Indonesia
+                        map.setView([-2, 118], 5);
+                    }
+                } catch (error) {
+                    console.error("Error saat zoom ke bounds:", error);
+                    map.setView([-2, 118], 5);
+                }
+                
+            } else {
+                $('#ShowMapProvinsiAndAkbupaten').html('<small class="text-danger">Tidak ada data geografis untuk provinsi ini.</small>');
+            }
+        })
+        .fail(function(jqXHR, textStatus, errorThrown){
+            console.error("Error loading GeoJSON:", textStatus, errorThrown);
+            $('#ShowMapProvinsiAndAkbupaten').html('<small class="text-danger">Gagal memuat peta. Silakan refresh halaman.</small>');
+        });
+
+    // Fungsi untuk menampilkan modal detail
+    function showDetailModal(kabkota_code) {
+        // Trigger modal dan set data
+        $('#ModalDetailKabKot').modal('show');
+        // Tambahkan logika untuk load data detail berdasarkan kabkota_code
+        console.log('Loading detail untuk:', kabkota_code);
+    }
+
+    // CSS untuk legenda
+    var style = document.createElement('style');
+    style.innerHTML = `
+        .legend {
+            background: transparent !important;
+            border: none !important;
+        }
+        .legend .card {
+            background: white;
+            border-radius: 8px;
+        }
+        .legend .card-header {
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .legend .card-body {
+            padding: 8px 12px;
+        }
+    `;
+    document.head.appendChild(style);
+
+    //Modal Detail Kebutuhan Guru By Jabatan
+    $('#ModalDetailKebutuhanGuruByJabatan').on('show.bs.modal', function (e) {
+        var province_code = $(e.relatedTarget).data('province_code');
+        var id_position = $(e.relatedTarget).data('id_position');
+
+        //Reset halaman menjadi 1
+        $('#page_detail_jabatan').val('1');
+
+        //Tempelkan province_code dan id_position ke form filter
+        $('#put_province_code').val(province_code);
+        $('#put_id_positiom').val(id_position);
+
+        //Panggil Function
+        ShowTabelDetailJabatan();
+    });
+
+    //Pagging
+    $(document).on('click', '#next_button_school', function() {
+        var page_now = parseInt($('#page_detail_jabatan').val(), 10); // Pastikan nilai diambil sebagai angka
+        var next_page = page_now + 1;
+        $('#page_detail_jabatan').val(next_page);
+        ShowTabelDetailJabatan(0);
+    });
+    $(document).on('click', '#prev_button_school', function() {
+        var page_now = parseInt($('#page_detail_jabatan').val(), 10); // Pastikan nilai diambil sebagai angka
+        var next_page = page_now - 1;
+        $('#page_detail_jabatan').val(next_page);
+        ShowTabelDetailJabatan(0);
     });
 });

@@ -159,6 +159,10 @@
         $jumlah_sekolah = $data['jumlah_sekolah'];
         $kurang_guru    = $data['total_kurang_guru'];
 
+        //Format Angka
+        $jumlah_sekolah_format  = number_format($jumlah_sekolah, 0, ',', '.');
+        $kurang_guru_format     = number_format($kurang_guru, 0, ',', '.');
+
         
         // Hitung Persentase Kurang Guru
         $persen_kurang_guru = 0;
@@ -179,8 +183,8 @@
                         <small class="text text-decoration-underline">'.$district_name.'</small>
                     </a>
                 </td>
-                <td><small>'.$jumlah_sekolah.'</small></td>
-                <td><small>'.$kurang_guru.'</small></td>
+                <td><small>'.$jumlah_sekolah_format.'</small></td>
+                <td><small>'.$kurang_guru_format.'</small></td>
                 <td>
                     <div style="background:#e9ecef; border-radius:5px; width:100%; height:18px; position:relative;">
                         <div style="background:#007bff; height:100%; width:'.$persen_kurang_guru.'%; border-radius:5px;"></div>
