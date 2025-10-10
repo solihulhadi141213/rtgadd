@@ -25,9 +25,11 @@ function filterAndLoadTable() {
     });
 }
 
-let timestamp = new Date().getTime();
+
+
 
 $(document).ready(function() {
+    var timestamp = new Date().getTime();
     //Menampilkan Tabel Pertama Kali
     filterAndLoadTable();
 
@@ -56,6 +58,20 @@ $(document).ready(function() {
 
         //Tutup Modal Filter
         $('#ModalFilter').modal('hide');
+    });
+
+    //Modal Detail
+    $('#ModalDetailMap').on('show.bs.modal', function (e) {
+        var province_code = $(e.relatedTarget).data('id');
+        $('#ShowDetailMap').html("Loading...");
+        $.ajax({
+            type 	    : 'POST',
+            url 	    : '_Page/Dashboard/ShowDetailMap.php',
+            data        : {province_code: province_code},
+            success     : function(data){
+                $('#ShowDetailMap').html(data);
+            }
+        });
     });
 
     // Inisialisasi peta
@@ -277,17 +293,6 @@ $(document).ready(function() {
     function updateInfo(props) {
         // Implementasi update info panel jika diperlukan
     }
+
 });
 
-$('#ModalDetailMap').on('show.bs.modal', function (e) {
-    var province_code = $(e.relatedTarget).data('id');
-    $('#ShowDetailMap').html("Loading...");
-    $.ajax({
-        type 	    : 'POST',
-        url 	    : '_Page/Dashboard/ShowDetailMap.php',
-        data        : {province_code: province_code},
-        success     : function(data){
-            $('#ShowDetailMap').html(data);
-        }
-    });
-});

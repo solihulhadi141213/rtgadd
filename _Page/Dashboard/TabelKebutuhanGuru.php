@@ -45,7 +45,8 @@
     $baseQuery = "
         FROM geo_region gr
         LEFT JOIN region r ON r.province_code = gr.province_code AND r.category='District'
-        LEFT JOIN position_region pr ON pr.id_region = r.id_region
+        LEFT JOIN school s ON s.id_region = r.id_region
+        LEFT JOIN position_school ps ON ps.id_school = s.id_school
         WHERE gr.level_region='Province'
     ";
 
@@ -59,35 +60,34 @@
             gr.id_geo_region,
             gr.province_code,
             gr.province_name,
-            COALESCE(SUM(pr.abk),0) AS total_abk,
-            COALESCE(SUM(pr.asn),0) AS total_asn,
-            COALESCE(SUM(pr.kurang_guru),0) AS total_kurang_guru
+            COALESCE(SUM(ps.abk),0) AS total_abk,
+            COALESCE(SUM(ps.asn),0) AS total_asn,
+            COALESCE(SUM(ps.KurangGuru),0) AS total_kurang_guru
         $baseQuery
         GROUP BY gr.id_geo_region, gr.province_code, gr.province_name
     ";
 
-    //Filter pencarian - PERBAIKAN
+    //Filter pencarian
     $whereFilter = "";
     if(!empty($keyword)){
         if(empty($keyword_by) || !in_array($keyword_by, $allowedSearch)){
-            //Pencarian default di kolom provinsi
+            //Default cari di provinsi
             $whereFilter = " HAVING province_code LIKE '%$keyword%' OR province_name LIKE '%$keyword%' ";
         } else {
             //Validasi kolom pencarian
             if(in_array($keyword_by, ['province_code','province_name'])){
                 $whereFilter = " HAVING $keyword_by LIKE '%$keyword%' ";
             } else {
-                //Untuk kolom agregat (total_abk, total_asn, total_kurang_guru)
+                //Untuk kolom agregat
                 $whereFilter = " HAVING $keyword_by = '$keyword' ";
             }
         }
     }
 
-    //Hitung total data - PERBAIKAN
+    //Hitung total data
     $countQuery = "SELECT COUNT(*) as jml FROM ($selectQuery $whereFilter) as counted_table";
     $resCount = mysqli_query($Conn, $countQuery);
     
-    //DEBUG: Cek error query count
     if(!$resCount){
         echo "
             <tr>
@@ -115,7 +115,7 @@
         exit;
     }
 
-    //Validasi OrderBy - PERBAIKAN
+    //Validasi OrderBy
     if(!in_array($OrderBy, $allowedOrder)){
         $OrderBy = "gr.id_geo_region";
     }
@@ -130,7 +130,6 @@
     
     $result = mysqli_query($Conn, $query);
     
-    //DEBUG: Cek error query utama
     if(!$result){
         echo "
             <tr>

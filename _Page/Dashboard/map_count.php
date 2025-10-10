@@ -18,39 +18,43 @@
 
     $metadata = [];
 
-    // Loop semua provinsi
-    $query_geo_region = mysqli_query($Conn, "SELECT province_code, province_name FROM geo_region WHERE level_region='Province'");
-    while ($data_geo_region = mysqli_fetch_assoc($query_geo_region)) {
-        $province_code  = $data_geo_region['province_code'];
-        $province_name  = $data_geo_region['province_name'];
+    // Query tunggal dengan JOIN untuk menghindari nested loops
+    $query = "
+        SELECT 
+            gr.province_code,
+            gr.province_name,
+            COALESCE(SUM(ps.abk), 0) as total_abk,
+            COALESCE(SUM(ps.JmlGuru), 0) as total_jumlah_guru,
+            COALESCE(SUM(ps.KurangGuru), 0) as total_kurang_guru,
+            COALESCE(SUM(ps.KrngASN), 0) as total_kurang_asn
+        FROM geo_region gr
+        LEFT JOIN region r ON gr.province_code = r.province_code AND r.category = 'District'
+        LEFT JOIN school s ON r.id_region = s.id_region
+        LEFT JOIN position_school ps ON s.id_school = ps.id_school
+        WHERE gr.level_region = 'Province'
+        GROUP BY gr.province_code, gr.province_name
+        ORDER BY gr.province_name
+    ";
 
-        // Inisialisasi akumulasi
-        $abk = $asn = $jumlah_guru = $kurang_guru = $kurang_asn = 0;
+    $result = mysqli_query($Conn, $query);
+    
+    if (!$result) {
+        echo json_encode([
+            "code" => 500,
+            "message" => "Error executing query: " . mysqli_error($Conn),
+            "metadata" => []
+        ], JSON_PRETTY_PRINT);
+        exit;
+    }
 
-        // Loop semua district di provinsi
-        $query_region = mysqli_query($Conn, "SELECT id_region FROM region WHERE category='District' AND province_code='$province_code'");
-        while ($data_region = mysqli_fetch_assoc($query_region)) {
-            $id_region = $data_region['id_region'];
-
-            // Loop posisi guru di district
-            $query_position_region = mysqli_query($Conn, "SELECT abk, asn, jumlah_guru, kurang_guru, kurang_asn FROM position_region WHERE id_region='$id_region'");
-            while ($data_position_region = mysqli_fetch_assoc($query_position_region)) {
-                $abk            += (int)$data_position_region['abk'];
-                $asn            += (int)$data_position_region['asn'];
-                $jumlah_guru    += (int)$data_position_region['jumlah_guru'];
-                $kurang_guru    += (int)$data_position_region['kurang_guru'];
-                $kurang_asn     += (int)$data_position_region['kurang_asn'];
-            }
-        }
-
-        // Push hasil tiap provinsi ke array
+    while ($data = mysqli_fetch_assoc($result)) {
         $metadata[] = [
-            "KODE_PROV"   => $province_code,
-            "PROVINSI"    => $province_name,
-            "ABK"         => $abk,
-            "jumlah_guru" => $jumlah_guru,
-            "kurang_guru" => $kurang_guru,
-            "kurang_asn"  => $kurang_asn
+            "KODE_PROV"         => $data['province_code'],
+            "PROVINSI"          => $data['province_name'],
+            "ABK"               => (int)$data['total_abk'],
+            "jumlah_guru"       => (int)$data['total_jumlah_guru'],
+            "kurang_guru"       => (int)$data['total_kurang_guru'],
+            "kurang_asn"        => (int)$data['total_kurang_asn']
         ];
     }
 
