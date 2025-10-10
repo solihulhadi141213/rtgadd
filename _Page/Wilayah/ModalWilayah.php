@@ -290,36 +290,84 @@
                     <div class="col-12 text-center">
                         <form id="ProsesImport" action="javascript:void(0);">
                             <div class="input-group">
-                                <input type="file" name="data_wilayah" class="form-control" accept=".xlsx,.xls">
-                                <a href="_Page/Wilayah/Template-Wilayah.xlsx" class="btn btn-md btn-info" role="button" aria-label="Unduh Template Excel">
+                                <input type="file" name="data_wilayah" id="data_wilayah" class="form-control" accept=".csv">
+                                <a href="_Page/Wilayah/Template-Wilayah.csv" class="btn btn-md btn-info" role="button" aria-label="Unduh Template Excel">
                                     <i class="bi bi-download"></i> Template
                                 </a>
-                                <button type="submit" class="btn btn-md btn-primary">
+                                <button type="submit" class="btn btn-md btn-primary" id="btnImport">
                                     <i class="bi bi-upload"></i> Import
+                                </button>
+                                <button type="button" disabled class="btn btn-md btn-danger" id="btnStop">
+                                    <i class="bi bi-stop"></i> Stop
                                 </button>
                             </div>
                         </form>
                     </div>
                 </div>
-                <div class="row">
+
+                <!-- Progress Bar Section -->
+                <div class="row mb-3" id="progressSection" style="display: none;">
                     <div class="col-md-12">
-                        <div class="table table-responsive">
-                            <table class="table table-striped table-hover">
-                                <thead>
+                        <div class="progress" style="height: 25px;">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                                 role="progressbar" 
+                                 id="progressBar" 
+                                 style="width: 0%">
+                                <span id="progressText">0%</span>
+                            </div>
+                        </div>
+                        <div class="mt-2 text-center">
+                            <small id="progressDetail">Memproses data...</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Laporan Statistik -->
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-sm">
+                                <thead class="table-light">
                                     <tr>
-                                        <th><b>No</b></th>
-                                        <th><b>Provinsi</b></th>
-                                        <th><b>Kab/Kota</b></th>
-                                        <th><b>Kode Map</b></th>
-                                        <th><b>Keterangan</b></th>
+                                        <th width="5%">No</th>
+                                        <th width="45%">Jenis Proses</th>
+                                        <th width="25%">Status</th>
+                                        <th width="25%">Jumlah</th>
                                     </tr>
                                 </thead>
-                                <tbody id="NotifikasiImport">
+                                <tbody id="reportTableBody">
                                     <tr>
-                                        <td colspan="5" class="text-center">
-                                            <small class="text-danger">Belum Ada Proses Import</small>
+                                        <td colspan="4" class="text-center text-muted">
+                                            <i>Belum ada proses import</i>
                                         </td>
                                     </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr class="table-info">
+                                        <td colspan="3" class="text-end"><strong>Total Data Diproses</strong></td>
+                                        <td><strong id="totalProcessed">0</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detail Error -->
+                <div class="row mt-3" id="errorDetailsSection" style="display: none;">
+                    <div class="col-md-12">
+                        <h6 class="text-danger mb-3">Detail Kesalahan</h6>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-sm">
+                                <thead class="table-danger">
+                                    <tr>
+                                        <th width="10%">No</th>
+                                        <th width="30%">Jenis Error</th>
+                                        <th width="60%">Keterangan</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="errorDetailsBody">
+                                    <!-- Detail error akan diisi oleh JavaScript -->
                                 </tbody>
                             </table>
                         </div>

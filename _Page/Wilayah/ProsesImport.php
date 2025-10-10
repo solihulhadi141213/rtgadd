@@ -1,382 +1,310 @@
 <?php
-    require '../../vendor/autoload.php';
-    use PhpOffice\PhpSpreadsheet\Spreadsheet;
-    use PhpOffice\PhpSpreadsheet\Reader\Csv;
-    use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
-    include "../../_Config/Connection.php";
-    include "../../_Config/GlobalFunction.php";
-    include "../../_Config/Session.php";
-    
-    // Time Zone
-    date_default_timezone_set('Asia/Jakarta');
-    
-    // Time Now Tmp
-    $now = date('Y-m-d H:i:s');
-    
+    header('Content-Type: application/json');
+    include_once "../../_Config/Connection.php";
+    include_once "../../_Config/GlobalFunction.php";
+    include_once "../../_Config/Session.php";
+
     // Validasi Akses
     if (empty($SessionIdAccess)) {
-        echo '
-            <tr>
-                <td colspan="5" class="text-center">
-                    <small class="text-danger">Sesi Akses Sudah Berakhir! Silahkan Login Ulang.</small>
-                </td>
-            </tr>
-        ';
+        echo json_encode([
+            "empty_province_code" => 0,
+            "empty_province_code_dapodik" => 0,
+            "empty_province_name" => 0,
+            "empty_district_code" => 0,
+            "empty_district_code_dapodik" => 0,
+            "empty_district_name" => 0,
+            "insert_province_success" => 0,
+            "insert_province_failed" => 0,
+            "update_province_success" => 0,
+            "update_province_failed" => 0,
+            "insert_district_success" => 0,
+            "insert_district_failed" => 0,
+            "update_district_success" => 0,
+            "update_district_failed" => 0,
+            "error_details" => ["Sesi Akses Sudah Berakhir! Silahkan Login Ulang."]
+        ]);
         exit;
     }
-    
-    // Validasi File
-    if(empty($_FILES['data_wilayah']['name'])) {
-        echo '
-            <tr>
-                <td colspan="5" class="text-center">
-                    <small class="text-danger">Silahkan pilih file untuk di upload</small>
-                </td>
-            </tr>
-        ';
+
+    // Cek jika batch tidak ada
+    if (!isset($_POST['batch']) || empty($_POST['batch'])) {
+        echo json_encode([
+            "empty_province_code" => 0,
+            "empty_province_code_dapodik" => 0,
+            "empty_province_name" => 0,
+            "empty_district_code" => 0,
+            "empty_district_code_dapodik" => 0,
+            "empty_district_name" => 0,
+            "insert_province_success" => 0,
+            "insert_province_failed" => 0,
+            "update_province_success" => 0,
+            "update_province_failed" => 0,
+            "insert_district_success" => 0,
+            "insert_district_failed" => 0,
+            "update_district_success" => 0,
+            "update_district_failed" => 0,
+            "error_details" => []
+        ]);
         exit;
     }
-    
-    $nama_file = $_FILES['data_wilayah']['name'];
-    $file_mimes = array(
-        'application/octet-stream', 
-        'application/vnd.ms-excel', 
-        'application/x-csv', 
-        'text/x-csv', 
-        'text/csv', 
-        'application/csv', 
-        'application/excel', 
-        'application/vnd.msexcel', 
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        'application/vnd.oasis.opendocument.spreadsheet'
-    );
-    
-    if(isset($_FILES['data_wilayah']['name']) && in_array($_FILES['data_wilayah']['type'], $file_mimes)) {
-        $arr_file = explode('.', $_FILES['data_wilayah']['name']);
-        $extension = end($arr_file);
+
+    // Ambil batch data
+    $batch = json_decode($_POST['batch'], true);
+
+    // Validasi jika batch bukan array
+    if (!is_array($batch)) {
+        echo json_encode([
+            "empty_province_code" => 0,
+            "empty_province_code_dapodik" => 0,
+            "empty_province_name" => 0,
+            "empty_district_code" => 0,
+            "empty_district_code_dapodik" => 0,
+            "empty_district_name" => 0,
+            "insert_province_success" => 0,
+            "insert_province_failed" => 0,
+            "update_province_success" => 0,
+            "update_province_failed" => 0,
+            "insert_district_success" => 0,
+            "insert_district_failed" => 0,
+            "update_district_success" => 0,
+            "update_district_failed" => 0,
+            "error_details" => ["Data batch tidak valid"]
+        ]);
+        exit;
+    }
+
+    // Inisialisasi semua counter
+    $response = [
+        // Validasi
+        'empty_province_code' => 0,
+        'empty_province_code_dapodik' => 0,
+        'empty_province_name' => 0,
+        'empty_district_code' => 0,
+        'empty_district_code_dapodik' => 0,
+        'empty_district_name' => 0,
         
-        if('csv' == $extension) {
-            $reader = new Csv();
+        // Operasi Database Province
+        'insert_province_success' => 0,
+        'insert_province_failed' => 0,
+        'update_province_success' => 0,
+        'update_province_failed' => 0,
+        
+        // Operasi Database District
+        'insert_district_success' => 0,
+        'insert_district_failed' => 0,
+        'update_district_success' => 0,
+        'update_district_failed' => 0,
+        
+        // Error details
+        'error_details' => []
+    ];
+
+    foreach ($batch as $rowIndex => $row) {
+        // Pastikan row tidak kosong
+        if (empty($row) || !is_array($row)) {
+            $response['error_details'][] = "Data row kosong";
+            continue;
+        }
+
+        // Extract data dari row (sesuai header CSV)
+        $province_code          = $row['province_code'] ?? '';
+        $province_code_dapodik  = $row['province_code_dapodik'] ?? '';
+        $province_name          = $row['province_name'] ?? '';
+        $district_code          = $row['district_code'] ?? '';
+        $district_code_dapodik  = $row['district_code_dapodik'] ?? '';
+        $district_name          = $row['district_name'] ?? '';
+        $code_map               = $row['code_map'] ?? '';
+
+        // Validasi baris kosong
+        if(empty($province_code) && empty($province_code_dapodik) && empty($province_name) && 
+        empty($district_code) && empty($district_code_dapodik) && empty($district_name)) {
+            continue;
+        }
+
+        // Validasi data wajib untuk Province
+        if(empty($province_code)) {
+            $response['empty_province_code']++;
+            $response['error_details'][] = "Baris " . ($rowIndex + 1) . ": Kode provinsi (BPS) tidak boleh kosong";
+            continue;
+        }
+        
+        if(empty($province_code_dapodik)) {
+            $response['empty_province_code_dapodik']++;
+            $response['error_details'][] = "Baris " . ($rowIndex + 1) . ": Kode provinsi (Dapodik) tidak boleh kosong";
+            continue;
+        }
+
+        if(empty($province_name)) {
+            $response['empty_province_name']++;
+            $response['error_details'][] = "Baris " . ($rowIndex + 1) . ": Nama provinsi tidak boleh kosong";
+            continue;
+        }
+        
+        // Escape data untuk keamanan
+        $province_code          = mysqli_real_escape_string($Conn, $province_code);
+        $province_code_dapodik  = mysqli_real_escape_string($Conn, $province_code_dapodik);
+        $province_name          = mysqli_real_escape_string($Conn, $province_name);
+        $district_code          = mysqli_real_escape_string($Conn, $district_code);
+        $district_code_dapodik  = mysqli_real_escape_string($Conn, $district_code_dapodik);
+        $district_name          = mysqli_real_escape_string($Conn, $district_name);
+        $code_map               = mysqli_real_escape_string($Conn, $code_map);
+        
+        // PROSES PROVINCE (Category = 'Province')
+        // Cek apakah province_code sudah ada sebagai Province
+        $id_region_province = GetDetailData($Conn, 'region', 'province_code', $province_code, 'id_region');
+        
+        if(empty($id_region_province)) {
+            // INSERT PROVINCE BARU
+            $category = "Province";
+            $EntryProvince = "INSERT INTO region (
+                category,
+                province_code,
+                province_code_dapodik,
+                province_name,
+                district_code,
+                district_code_dapodik,
+                district_name,
+                code_map
+            ) VALUES (
+                '$category',
+                '$province_code',
+                '$province_code_dapodik',
+                '$province_name',
+                '',
+                '',
+                '',
+                '$code_map'
+            )";
+            
+            $InputProvince = mysqli_query($Conn, $EntryProvince);
+            if($InputProvince) {
+                $response['insert_province_success']++;
+            } else {
+                $response['insert_province_failed']++;
+                $response['error_details'][] = "Baris " . ($rowIndex + 1) . ": Gagal insert provinsi - " . mysqli_error($Conn);
+            }
         } else {
-            $reader = new Xlsx();
-        }
-        
-        // Mengatasi deprecated function dengan menonaktifkan entity loader secara kondisional
-        if (PHP_VERSION_ID < 80000) {
-            $entityLoaderDisabled = libxml_disable_entity_loader(true);
-        }
-        
-        try {
-            $spreadsheet = $reader->load($_FILES['data_wilayah']['tmp_name']);
-            
-            // Mengembalikan entity loader ke keadaan semula untuk PHP < 8.0
-            if (PHP_VERSION_ID < 80000) {
-                libxml_disable_entity_loader($entityLoaderDisabled);
-            }
-            
-            $sheetData = $spreadsheet->getActiveSheet()->toArray();
-            $JumlahBaris = count($sheetData);
-            $JumlahValidator = $JumlahBaris - 1;
-            
-            if(empty($JumlahValidator)) {
-                echo '
-                    <tr>
-                        <td colspan="5" class="text-center">
-                            <small class="text-danger">Tidak ada data pada file excel yang anda upload</small>
-                        </td>
-                    </tr>
-                ';
-                exit;
-            }
-            
-            $JumlahKodeValid = 0;
-            for($i = 1; $i < $JumlahBaris; $i++) {
-                // Validasi baris kosong
-                if(empty($sheetData[$i][0]) && empty($sheetData[$i][1]) && empty($sheetData[$i][2])) {
-                    continue; // Lewati baris kosong
-                }
-                
-                if(empty($sheetData[$i][0])) {
-                    echo '
-                        <tr>
-                            <td>'.$i.'</td>
-                            <td colspan="4" class="text-center">
-                                <small class="text-danger">Kode provinsi (BPS) tidak boleh kosong</small>
-                            </td>
-                        </tr>
-                    ';
-                    continue;
-                }
-                
-                if(empty($sheetData[$i][1])) {
-                    echo '
-                        <tr>
-                            <td>'.$i.'</td>
-                            <td colspan="4" class="text-center">
-                                <small class="text-danger">Kode provinsi (Dapodik) tidak boleh kosong</small>
-                            </td>
-                        </tr>
-                    ';
-                    continue;
-                }
+            // UPDATE PROVINCE YANG SUDAH ADA
+            $sql = "UPDATE region SET 
+                province_name = ?,
+                province_code_dapodik = ?,
+                code_map = ?
+                WHERE province_code = ? AND category = 'Province'";
+            $stmt = $Conn->prepare($sql);
+            if ($stmt) {
+                $stmt->bind_param(
+                    "ssss",
+                    $province_name,
+                    $province_code_dapodik,
+                    $code_map,
+                    $province_code
+                );
 
-                if(empty($sheetData[$i][2])) {
-                    echo '
-                        <tr>
-                            <td>'.$i.'</td>
-                            <td colspan="4" class="text-center">
-                                <small class="text-danger">Nama provinsi tidak boleh kosong</small>
-                            </td>
-                        </tr>
-                    ';
-                    continue;
-                }
-                
-                if(empty($sheetData[$i][3])) {
-                    echo '
-                        <tr>
-                            <td>'.$i.'</td>
-                            <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'-'.$sheetData[$i][2].'</td>
-                            <td colspan="3" class="text-center">
-                                <small class="text-danger">Kode Kab/Kota (BPS) tidak boleh kosong</small>
-                            </td>
-                        </tr>
-                    ';
-                    continue;
-                }
-
-                if(empty($sheetData[$i][4])) {
-                    echo '
-                        <tr>
-                            <td>'.$i.'</td>
-                            <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'-'.$sheetData[$i][2].'</td>
-                            <td colspan="3" class="text-center">
-                                <small class="text-danger">Kode Kab/Kota (DAPODIK) tidak boleh kosong</small>
-                            </td>
-                        </tr>
-                    ';
-                    continue;
-                }
-                
-                if(empty($sheetData[$i][5])) {
-                    echo '
-                        <tr>
-                            <td>'.$i.'</td>
-                            <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'-'.$sheetData[$i][2].'</td>
-                            <td colspan="3" class="text-center">
-                                <small class="text-danger">Nama Kab/Kota tidak boleh kosong</small>
-                            </td>
-                        </tr>
-                    ';
-                    continue;
-                }
-                
-                $province_code          = mysqli_real_escape_string($Conn, $sheetData[$i][0]);
-                $province_code_dapodik  = mysqli_real_escape_string($Conn, $sheetData[$i][1]);
-                $province_name          = mysqli_real_escape_string($Conn, $sheetData[$i][2]);
-                $district_code          = mysqli_real_escape_string($Conn, $sheetData[$i][3]);
-                $district_code_dapodik  = mysqli_real_escape_string($Conn, $sheetData[$i][4]);
-                $district_name          = mysqli_real_escape_string($Conn, $sheetData[$i][5]);
-                
-                if(empty($sheetData[$i][6])) {
-                    $code_map = "";
+                $Input = $stmt->execute();
+                if ($Input) {
+                    $response['update_province_success']++;
                 } else {
-                    $code_map = mysqli_real_escape_string($Conn, $sheetData[$i][4]);
+                    $response['update_province_failed']++;
+                    $response['error_details'][] = "Baris " . ($rowIndex + 1) . ": Gagal update provinsi - " . $stmt->error;
                 }
+                $stmt->close();
+            } else {
+                $response['update_province_failed']++;
+                $response['error_details'][] = "Baris " . ($rowIndex + 1) . ": Prepare update provinsi gagal - " . $Conn->error;
+            }
+        }
+        
+        // PROSES DISTRICT (Category = 'District') - Hanya jika ada data district
+        if(!empty($district_code) && !empty($district_code_dapodik) && !empty($district_name)) {
+            
+            // Validasi data district
+            if(empty($district_code)) {
+                $response['empty_district_code']++;
+                $response['error_details'][] = "Baris " . ($rowIndex + 1) . ": Kode Kab/Kota (BPS) tidak boleh kosong";
+                // Lanjutkan ke row berikutnya, jangan stop proses
+            }
+            
+            if(empty($district_code_dapodik)) {
+                $response['empty_district_code_dapodik']++;
+                $response['error_details'][] = "Baris " . ($rowIndex + 1) . ": Kode Kab/Kota (Dapodik) tidak boleh kosong";
+                // Lanjutkan ke row berikutnya, jangan stop proses
+            }
+            
+            if(empty($district_name)) {
+                $response['empty_district_name']++;
+                $response['error_details'][] = "Baris " . ($rowIndex + 1) . ": Nama Kab/Kota tidak boleh kosong";
+                // Lanjutkan ke row berikutnya, jangan stop proses
+            }
+            
+            // Cek apakah district_code sudah ada sebagai District
+            $id_region_district = GetDetailData($Conn, 'region', 'district_code', $district_code, 'id_region');
+            
+            if(empty($id_region_district)) {
+                // INSERT DISTRICT BARU
+                $category = "District";
+                $EntryDistrict = "INSERT INTO region (
+                    category,
+                    province_code,
+                    province_code_dapodik,
+                    province_name,
+                    district_code,
+                    district_code_dapodik,
+                    district_name,
+                    code_map
+                ) VALUES (
+                    '$category',
+                    '$province_code',
+                    '$province_code_dapodik',
+                    '$province_name',
+                    '$district_code',
+                    '$district_code_dapodik',
+                    '$district_name',
+                    '$code_map'
+                )";
                 
-                // Cek apakah kode provinsi sudah ada
-                $id_region = GetDetailData($Conn, 'region', 'province_code', $province_code, 'id_region');
-                $id_region2 = GetDetailData($Conn, 'region', 'province_code_dapodik', $province_code_dapodik, 'id_region');
-
-                //Apabila id_region belum ada maka insert sebagai Province
-                if(empty($id_region)||empty($id_region2)) {
-                    // Insert Data Province
-                    $category="Province";
-                    $EntryProvince = "INSERT INTO region (
-                        category,
-                        province_code,
-                        province_code_dapodik,
-                        province_name,
-                        district_code,
-                        district_code_dapodik,
-                        district_name,
-                        code_map
-                    ) VALUES (
-                        '$category',
-                        '$province_code',
-                        '$province_code_dapodik',
-                        '$province_name',
-                        '',
-                        '',
-                        '',
-                        '$code_map'
-                    )";
-                    
-                    $InputProvince = mysqli_query($Conn, $EntryProvince);
-                    if($InputProvince) {
-                        echo '
-                            <tr>
-                                <td>'.$i.'</td>
-                                <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'-'.$sheetData[$i][2].'</td>
-                                <td colspan="3" class="text-center">
-                                    <small class="text-success">Data Provinsi Baru Berhasil Disimpan</small>
-                                </td>
-                            </tr>
-                        ';
-                    }else{
-                        echo '
-                            <tr>
-                                <td>'.$i.'</td>
-                                <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'-'.$sheetData[$i][2].'</td>
-                                <td colspan="3" class="text-center">
-                                    <small class="text-danger">Data Provinsi Baru Gagal Disimpan</small>
-                                </td>
-                            </tr>
-                        ';
-                    }
+                $InputDistrict = mysqli_query($Conn, $EntryDistrict);
+                if($InputDistrict) {
+                    $response['insert_district_success']++;
+                } else {
+                    $response['insert_district_failed']++;
+                    $response['error_details'][] = "Baris " . ($rowIndex + 1) . ": Gagal insert kab/kota - " . mysqli_error($Conn);
                 }
-                
-                //Cek apakah data sudah ada berdasarkan kode provinsi dan kode kabupaten
-                $validasi_duplikat=mysqli_num_rows(mysqli_query($Conn, "SELECT id_region  FROM region WHERE province_code='$province_code' AND district_code='$district_code' AND category='District'"));
-
-                if(!empty($validasi_duplikat)){
-                    
-                    //Jika Sudah Ada Update Kabupaten
-                    $category="District";
-                    $sql = "UPDATE region SET province_name = ?, district_name = ?, code_map = ? WHERE province_code = ? AND district_code = ?";
-                    $stmt = $Conn->prepare($sql);
-                    if (!$stmt) {
-                        echo '
-                            <tr>
-                                <td>'.$i.'</td>
-                                <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'-'.$sheetData[$i][2].'</td>
-                                <td>'.$sheetData[$i][3].'-'.$sheetData[$i][4].'-'.$sheetData[$i][5].'</td>
-                                <td>'.$sheetData[$i][6].'</td>
-                                <td colspan="3" class="text-center">
-                                    <small class="text-danger">Prepare gagal: '.htmlspecialchars($Conn->error).'</small>
-                                </td>
-                            </tr>
-                        ';
-                    }
+            } else {
+                // UPDATE DISTRICT YANG SUDAH ADA
+                $sql = "UPDATE region SET 
+                    district_name = ?,
+                    district_code_dapodik = ?,
+                    province_name = ?,
+                    province_code_dapodik = ?,
+                    code_map = ?
+                    WHERE district_code = ? AND category = 'District'";
+                $stmt = $Conn->prepare($sql);
+                if ($stmt) {
                     $stmt->bind_param(
-                        "sssss",
-                        $province_name,
+                        "ssssss",
                         $district_name,
+                        $district_code_dapodik,
+                        $province_name,
+                        $province_code_dapodik,
                         $code_map,
-                        $province_code,
                         $district_code
                     );
 
                     $Input = $stmt->execute();
-                    $err   = $stmt->error;
-                    $stmt->close();
                     if ($Input) {
-                        echo '
-                            <tr>
-                                <td>'.$i.'</td>
-                                <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'-'.$sheetData[$i][2].'</td>
-                                <td>'.$sheetData[$i][3].'-'.$sheetData[$i][4].'-'.$sheetData[$i][5].'</td>
-                                <td>'.$sheetData[$i][6].'</td>
-                                <td class="text-center">
-                                    <small class="text-success">Update Berhasil</small>
-                                </td>
-                            </tr>
-                        ';
-                    }else{
-                        echo '
-                            <tr>
-                                <td>'.$i.'</td>
-                                <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'-'.$sheetData[$i][2].'</td>
-                                <td>'.$sheetData[$i][3].'-'.$sheetData[$i][4].'-'.$sheetData[$i][5].'</td>
-                                <td>'.$sheetData[$i][6].'</td>
-                                <td class="text-center">
-                                    <small class="text-danger">Update Gagal</small>
-                                </td>
-                            </tr>
-                        ';
+                        $response['update_district_success']++;
+                    } else {
+                        $response['update_district_failed']++;
+                        $response['error_details'][] = "Baris " . ($rowIndex + 1) . ": Gagal update kab/kota - " . $stmt->error;
                     }
-                }else{
-                    $category="District";
-                    $EntryDistrict = "INSERT INTO region (
-                        category,
-                        province_code,
-                        province_code_dapodik,
-                        province_name,
-                        district_code,
-                        district_code_dapodik,
-                        district_name,
-                        code_map
-                    ) VALUES (
-                        '$category',
-                        '$province_code',
-                        '$province_code_dapodik',
-                        '$province_name',
-                        '$district_code',
-                        '$district_code_dapodik',
-                        '$district_name',
-                        '$code_map'
-                    )";
-                    
-                    $InputDistrict = mysqli_query($Conn, $EntryDistrict);
-                    if($InputDistrict) {
-                        echo '
-                            <tr>
-                                <td>'.$i.'</td>
-                                <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'-'.$sheetData[$i][2].'</td>
-                                <td>'.$sheetData[$i][3].'-'.$sheetData[$i][4].'-'.$sheetData[$i][5].'</td>
-                                <td>'.$sheetData[$i][6].'</td>
-                                <td class="text-center">
-                                    <small class="text-primary">Insert Berhasil</small>
-                                </td>
-                            </tr>
-                        ';
-                    }else{
-                        echo '
-                            <tr>
-                                <td>'.$i.'</td>
-                                <td>'.$sheetData[$i][0].'-'.$sheetData[$i][1].'-'.$sheetData[$i][2].'</td>
-                                <td>'.$sheetData[$i][3].'-'.$sheetData[$i][4].'-'.$sheetData[$i][5].'</td>
-                                <td>'.$sheetData[$i][6].'</td>
-                                <td class="text-center">
-                                    <small class="text-danger">Insert Gagal</small>
-                                </td>
-                            </tr>
-                        ';
-                    }
+                    $stmt->close();
+                } else {
+                    $response['update_district_failed']++;
+                    $response['error_details'][] = "Baris " . ($rowIndex + 1) . ": Prepare update kab/kota gagal - " . $Conn->error;
                 }
             }
-            
-            // Tampilkan ringkasan
-            echo '
-                <tr>
-                    <td colspan="5" class="text-center">
-                        <small class="text-info">Proses selesai. '.$JumlahKodeValid.' dari '.$JumlahValidator.' data berhasil diimpor.</small>
-                    </td>
-                </tr>
-            ';
-            
-        } catch (Exception $e) {
-            // Mengembalikan entity loader ke keadaan semula untuk PHP < 8.0 jika terjadi error
-            if (PHP_VERSION_ID < 80000) {
-                libxml_disable_entity_loader($entityLoaderDisabled);
-            }
-            
-            echo '
-                <tr>
-                    <td colspan="5" class="text-center">
-                        <small class="text-danger">Error membaca file: '.$e->getMessage().'</small>
-                    </td>
-                </tr>
-            ';
         }
-        
-    } else {
-        echo '
-            <tr>
-                <td colspan="5" class="text-center">
-                    <small class="text-danger">File tidak valid. Silahkan upload file Excel atau CSV.</small>
-                </td>
-            </tr>
-        ';
     }
+
+    echo json_encode($response);
 ?>

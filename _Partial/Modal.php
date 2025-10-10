@@ -32,6 +32,7 @@
             "Instansi"                  => "_Page/Instansi/ModalInstansi.php",
             "JabatanPerWilayah"         => "_Page/JabatanPerWilayah/ModalJabatanPerWilayah.php",
             "JabatanPerInstansi"        => "_Page/JabatanPerInstansi/ModalJabatanPerInstansi.php",
+            "CalonGuru"                 => "_Page/CalonGuru/ModalCalonGuru.php",
             "AbkPerSekolah"             => "_Page/AbkPerSekolah/ModalAbkPerSekolah.php",
             "GeoJson"                   => "_Page/GeoJson/ModalGeoJson.php",
             "GeoJsonBps"                => "_Page/GeoJsonBps/ModalGeoJsonBps.php",

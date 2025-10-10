@@ -91,9 +91,14 @@
                 <i class="bi bi-table"></i> <span>Jabatan Per Wilayah</span>
             </a>
         </li>
-         <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link <?php if($PageMenu=="JabatanPerInstansi"){echo "";}else{echo "collapsed";} ?>" href="index.php?Page=JabatanPerInstansi">
                 <i class="bi bi-table"></i> <span>Jabatan Per Instansi</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link <?php if($PageMenu=="CalonGuru"){echo "";}else{echo "collapsed";} ?>" href="index.php?Page=CalonGuru">
+                <i class="bi bi-table"></i> <span>PPG-Calon Guru</span>
             </a>
         </li>
         <li class="nav-item">

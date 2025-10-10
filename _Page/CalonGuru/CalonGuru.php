@@ -1,13 +1,13 @@
 <div class="pagetitle">
     <h1>
         <a href="">
-            <i class="bi bi-database"></i> ABK Per Sekolah</a>
+            <i class="bi bi-database"></i> PPG Calon Guru (Lulusan)</a>
         </a>
     </h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-            <li class="breadcrumb-item active">ABK Per Sekolah</li>
+            <li class="breadcrumb-item active">PPG Calon Guru</li>
         </ol>
     </nav>
 </div>
@@ -16,8 +16,8 @@
         <div class="col-md-12">
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <small>
-                    Berikut ini adalah halaman untuk pengelolaan database ABK Per Sekolah. 
-                    Anda bisa mengelola dataset yang ada dengan lebih cepat menggunakan fitur export dan import.
+                    Berikut ini adalah halaman untuk pengelolaan database PPG Calon Guru (Lulusan). 
+                    Gunakan fitur import data untuk menambahkan data ke database.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </small>
             </div>
@@ -29,29 +29,11 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-12 text-end">
-                            <button type="button" class="btn btn-md btn-success btn-floating"  data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-file-earmark-arrow-down"></i>
+                            <button type="button" class="btn btn-md btn-success btn-floating"  data-bs-toggle="modal" data-bs-target="#ModalImportCsv" title="Import Data">
+                                <i class="bi bi-upload"></i>
                             </button>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" style="">
-                                <li class="dropdown-header text-start">
-                                    <h6>Option</h6>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#ModalImportCsv" title="Import Data">
-                                        <i class="bi bi-upload"></i> Import (Csv)
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#ModalExport" title="Export Data">
-                                        <i class="bi bi-download"></i> Export
-                                    </a>
-                                </li>
-                            </ul>
                             <button type="button" class="btn btn-md btn-secondary btn-floating" data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter Data">
                                 <i class="bi bi-filter"></i>
-                            </button>
-                            <button type="button" class="btn btn-md btn-primary btn-floating" data-bs-toggle="modal" data-bs-target="#ModalTambah" title="Tambah Data ABK Per Sekolah">
-                                <i class="bi bi-plus"></i>
                             </button>
                         </div>
                     </div>
@@ -64,23 +46,17 @@
                                     <th><b>No</b></th>
                                     <th><b>Provinsi</b></th>
                                     <th><b>Kabupaten</b></th>
-                                    <th><b>Sekolah</b></th>
-                                    <th><b>Jabatan</b></th>
-                                    <th><b>ABK</b></th>
-                                    <th><b>ASN</b></th>
-                                    <th><b>PPK <br>2024</b></th>
-                                    <th><b>Non ASN <br>< 10/2022</b></th>
-                                    <th><b>Non ASN <br> > 10/2022</b></th>
-                                    <th><b>Jumlah <br> Guru</b></th>
-                                    <th><b>Kurang <br> Guru</b></th>
-                                    <th><b>Jumlah <br> ASN</b></th>
-                                    <th><b>Kurang <br> ASN</b></th>
+                                    <th><b>Perguruan <br>Tinggi</b></th>
+                                    <th><b>Program <br>Studi</b></th>
+                                    <th><b>Bidang <br>Studi</b></th>
+                                    <th><b>LPTK</b></th>
+                                    <th><b>Status <br>ASN</b></th>
                                     <th><b>Opsi</b></th>
                                 </tr>
                             </thead>
-                            <tbody id="TabelAbkPerSekolah">
+                            <tbody id="TabelCalonGuru">
                                 <tr>
-                                    <td class="text-center" colspan="15">
+                                    <td class="text-center" colspan="9">
                                         <small>Loading...</small>
                                     </td>
                                 </tr>
@@ -92,7 +68,7 @@
                     <div class="row">
                         <div class="col-6">
                             <small id="data_count">
-                                Count : 100 Record
+                                Count : 0 Record
                             </small>
                         </div>
                         <div class="col-6 text-end">
@@ -100,7 +76,7 @@
                                 <i class="bi bi-chevron-left"></i>
                             </button>
                             <button type="button" disabled class="btn btn-sm btn-outline-info btn-rounded" id="page_info">
-                                Page 1 / 100
+                                Page 0 / 0
                             </button>
                             <button type="button" class="btn btn-sm btn-outline-info btn-floating" id="next_button">
                                 <i class="bi bi-chevron-right"></i>

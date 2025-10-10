@@ -35,6 +35,7 @@
             "Instansi"              => "_Page/Instansi/Instansi.js",
             "JabatanPerWilayah"     => "_Page/JabatanPerWilayah/JabatanPerWilayah.js",
             "JabatanPerInstansi"    => "_Page/JabatanPerInstansi/JabatanPerInstansi.js",
+            "CalonGuru"             => "_Page/CalonGuru/CalonGuru.js",
             "AbkPerSekolah"         => "_Page/AbkPerSekolah/AbkPerSekolah.js",
             "CornJob"               => "_Page/CornJob/CornJob.js",
             "GeoJson"               => "_Page/GeoJson/GeoJson.js",
