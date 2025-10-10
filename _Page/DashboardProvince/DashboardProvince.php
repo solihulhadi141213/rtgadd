@@ -17,8 +17,12 @@
 <?php
     if(empty($_GET['province_code'])){
         //Jika province_code kosong cari berdasarkan access_client
-        $id_region_client = GetDetailData($Conn, 'access_client', 'id_access', $SessionIdAccess, 'id_region');
-        $province_code = GetDetailData($Conn, 'region', 'id_region', $id_region_client, 'province_code');
+        if(!empty($access_client)){
+            $id_region_client = GetDetailData($Conn, 'access_client', 'id_access', $SessionIdAccess, 'id_region');
+            $province_code = GetDetailData($Conn, 'region', 'id_region', $id_region_client, 'province_code');
+        }else{
+            $province_code ="";
+        }
     }else{
         $province_code = $_GET['province_code'];
     }
