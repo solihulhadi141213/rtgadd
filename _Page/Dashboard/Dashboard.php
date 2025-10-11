@@ -41,22 +41,25 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-12 text-end">
-                            <button type="button" class="btn btn-md btn-secondary btn-floating" data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter Data">
+                        <div class="col-8">
+                            <b class="card-title"># Kebutuhan Guru Di Tingkat Provinsi</b>
+                        </div>
+                        <div class="col-4 text-end">
+                            <!-- <button type="button" class="btn btn-md btn-secondary btn-floating" data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter Data">
                                 <i class="bi bi-filter"></i>
-                            </button>
+                            </button> -->
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table table-responsive">
-                        <table class="table table-striped table-hover">
+                    <div class="table table-responsive" style="max-height: 400px; overflow-y: auto;">
+                        <table class="table table-striped table-hover" >
                             <thead>
                                 <tr>
                                     <th><b>No</b></th>
                                     <th><b>Provinsi</b></th>
                                     <th><b>Analisis Beban Kerja (ABK)</b></th>
-                                    <th><b>ASN</b></th>
+                                    <th><b>Jumlah Guru</b></th>
                                     <th><b>Kebutuhan Guru</b></th>
                                     <th><b>Opt</b></th>
                                 </tr>
@@ -73,21 +76,10 @@
                 </div>
                 <div class="card-footer">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-12">
                             <small id="data_count">
-                                Count : 100 Record
+                                Count : 0 Record
                             </small>
-                        </div>
-                        <div class="col-6 text-end">
-                            <button type="button" class="btn btn-sm btn-outline-info btn-floating" id="prev_button">
-                                <i class="bi bi-chevron-left"></i>
-                            </button>
-                            <button type="button" disabled class="btn btn-sm btn-outline-info btn-rounded" id="page_info">
-                                Page 1 / 100
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-info btn-floating" id="next_button">
-                                <i class="bi bi-chevron-right"></i>
-                            </button>
                         </div>
                     </div>
                 </div>

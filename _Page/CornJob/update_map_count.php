@@ -44,31 +44,43 @@
 
         if ($KODE_PROV != '') {
             //Ambil data agregat dari database
-            $sql = "
-                SELECT 
-                    SUM(pr.abk) as ABK,
-                    SUM(pr.jumlah_guru) as jumlah_guru,
-                    SUM(pr.kurang_guru) as kurang_guru,
-                    SUM(pr.kurang_asn) as kurang_asn
-                FROM region r
-                LEFT JOIN position_region pr ON r.id_region = pr.id_region
-                WHERE r.province_code = ?
-            ";
-            $stmt = $Conn->prepare($sql);
-            $stmt->bind_param("s", $KODE_PROV);
-            $stmt->execute();
-            $result = $stmt->get_result()->fetch_assoc();
-            $stmt->close();
+            $jumlah_abk = 0;
+            $jumlah_guru = 0;
+            $kurang_guru = 0;
+            $kurang_asn = 0;
+            //Looping Tabel region
+            $query_region = mysqli_query($Conn, "SELECT id_region, province_name FROM region WHERE category='District' AND province_code='$KODE_PROV'");
+            while ($data_region = mysqli_fetch_array($query_region)) {
+                $id_region = $data_region['id_region'];
+                $province_name = $data_region['province_name'];
+                
+                //Looping school
+                $query_school = mysqli_query($Conn, "SELECT id_school FROM school WHERE id_region='$id_region'");
+                while ($data_school = mysqli_fetch_array($query_school)) {
+                    $id_school = $data_school['id_school'];
 
-            $ABK          = (int)($result['ABK'] ?? 0);
-            $jumlah_guru  = (int)($result['jumlah_guru'] ?? 0);
-            $kurang_guru  = (int)($result['kurang_guru'] ?? 0);
-            $kurang_asn   = (int)($result['kurang_asn'] ?? 0);
+                    //Looping position_school
+                    $query_position_school = mysqli_query($Conn, "SELECT abk, JmlGuru, KrngASN, KurangGuru FROM position_school WHERE id_school='$id_school'");
+                    while ($data_position_school = mysqli_fetch_array($query_position_school)) {
+                        $abk = $data_position_school['abk'];
+                        $JmlGuru = $data_position_school['JmlGuru'];
+                        $KrngASN = $data_position_school['KrngASN'];
+                        $KurangGuru = $data_position_school['KurangGuru'];
+
+                        //Akumulasi
+                        $jumlah_abk = $jumlah_abk+$abk;
+                        $jumlah_guru = $jumlah_guru+$JmlGuru;
+                        $kurang_guru = $kurang_guru+$KurangGuru;
+                        $kurang_asn = $kurang_asn+$KrngASN;
+                        
+                    }
+                }
+            }
 
             $outputData[] = [
                 "KODE_PROV"   => $KODE_PROV,
                 "PROVINSI"    => $PROVINSI,
-                "ABK"         => $ABK,
+                "ABK"         => $jumlah_abk,
                 "jumlah_guru" => $jumlah_guru,
                 "kurang_guru" => $kurang_guru,
                 "kurang_asn"  => $kurang_asn

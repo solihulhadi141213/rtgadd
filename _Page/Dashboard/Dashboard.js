@@ -1,13 +1,10 @@
 // Fungsi Menampilkan Tabel dengan transisi halus & posisi scroll tetap
 function filterAndLoadTable() {
-    var ProsesFilter = $('#ProsesFilter').serialize();
-
     // Efek transisi: fadeOut lembut
     $('#TabelKebutuhanGuru').fadeTo(400, 0.3, function () {
         $.ajax({
             type    : 'POST',
             url     : '_Page/Dashboard/TabelKebutuhanGuru.php',
-            data    : ProsesFilter,
             success : function(data) {
                 // Ganti konten
                 $('#TabelKebutuhanGuru').html(data);
@@ -27,34 +24,7 @@ $(document).ready(function() {
     //Menampilkan Tabel Pertama Kali
     filterAndLoadTable();
 
-    //Pagging
-    $(document).on('click', '#next_button', function() {
-        var page_now = parseInt($('#page').val(), 10); // Pastikan nilai diambil sebagai angka
-        var next_page = page_now + 1;
-        $('#page').val(next_page);
-        filterAndLoadTable(0);
-    });
-    $(document).on('click', '#prev_button', function() {
-        var page_now = parseInt($('#page').val(), 10); // Pastikan nilai diambil sebagai angka
-        var next_page = page_now - 1;
-        $('#page').val(next_page);
-        filterAndLoadTable(0);
-    });
-
-    //Submit Filter Data
-    $('#ProsesFilter').submit(function(){
-
-        //Reset Halaman Ke halaman 1
-        $('#page').val("1");
-
-        //Tampilkan Ulang Data
-        filterAndLoadTable();
-
-        //Tutup Modal Filter
-        $('#ModalFilter').modal('hide');
-    });
-
-    //Modal Detail
+    //Modal Detail Muncul
     $('#ModalDetailMap').on('show.bs.modal', function (e) {
         var province_code = $(e.relatedTarget).data('id');
         $('#ShowDetailMap').html("Loading...");
@@ -68,6 +38,8 @@ $(document).ready(function() {
         });
     });
 
+    // ==================MENAMPILKAN PETA================================
+    var sample_code = [15,33,12,64,14];
     // Inisialisasi peta
     var map = L.map('indonesia-map').setView([-2.5489, 118.0149], 5);
 
@@ -80,15 +52,11 @@ $(document).ready(function() {
     var provinceData = {};
     var geoJsonLayer;
 
-    // Load data dari map_count.php
-    $.getJSON('_Page/Dashboard/map_count.php?v=1' + timestamp, function(res) {
-        if (res.code !== 200) {
-            console.error(res.message);
-            return;
-        }
-
+    // Load data dari map_count.json
+    $.getJSON('_Page/Dashboard/map_count.json?v=1' + timestamp, function(res) {
+        // Perbaikan: Struktur JSON yang diberikan adalah array langsung, bukan objek dengan property code dan metadata
         // Simpan ke object provinceData
-        res.metadata.forEach(function(province) {
+        res.forEach(function(province) {
             provinceData[province.KODE_PROV] = province;
         });
 
@@ -99,33 +67,53 @@ $(document).ready(function() {
             console.error('Gagal memuat file GeoJSON');
         });
     }).fail(function() {
-        console.error('Gagal memuat map_count.php');
+        console.error('Gagal memuat map_count.json');
     });
 
     function renderMap(geoJsonData) {
         // Fungsi untuk menentukan warna berdasarkan jumlah guru yang kurang
         function getColor(kurangGuru) {
             return kurangGuru > 1000 ? '#020a79ff' :
-                   kurangGuru > 750 ? '#201cffff' :
-                   kurangGuru > 500 ? '#5d5bffff' :
-                   kurangGuru > 200 ? '#7f7dffff' :
-                   kurangGuru > 100 ? '#8e99faff' :
-                   kurangGuru > 50 ? '#a7aff5ff' :
-                   kurangGuru > 10 ? '#ccccf5ff' :
-                                      '#f8f8f8ff';
+                kurangGuru > 750 ? '#201cffff' :
+                kurangGuru > 500 ? '#5d5bffff' :
+                kurangGuru > 200 ? '#7f7dffff' :
+                kurangGuru > 100 ? '#8e99faff' :
+                kurangGuru > 50 ? '#a7aff5ff' :
+                kurangGuru > 10 ? '#ccccf5ff' :
+                                    '#f8f8f8ff';
+        }
+
+        // Fungsi untuk menentukan style border berdasarkan sample_code
+        function getBorderStyle(kodeProv) {
+            // Jika KODE_PROV ada dalam sample_code, berikan border merah
+            if (sample_code.includes(parseInt(kodeProv)) || sample_code.includes(kodeProv.toString())) {
+                return {
+                    weight: 4,
+                    color: '#ff0000',
+                    opacity: 1
+                };
+            } else {
+                return {
+                    weight: 2,
+                    color: '#9e8ff0ff',
+                    opacity: 1,
+                    dashArray: '3'
+                };
+            }
         }
 
         // Fungsi style untuk setiap feature
         function style(feature) {
             var kodeProv = feature.properties.KODE_PROV;
             var data = provinceData[kodeProv];
+            var borderStyle = getBorderStyle(kodeProv);
             
             return {
                 fillColor: data ? getColor(data.kurang_guru) : '#ccc',
-                weight: 2,
-                opacity: 1,
-                color: '#9e8ff0ff',
-                dashArray: '3',
+                weight: borderStyle.weight,
+                opacity: borderStyle.opacity,
+                color: borderStyle.color,
+                dashArray: borderStyle.dashArray,
                 fillOpacity: 0.7
             };
         }
@@ -133,9 +121,11 @@ $(document).ready(function() {
         // Fungsi untuk highlight saat hover
         function highlightFeature(e) {
             var layer = e.target;
+            var kodeProv = layer.feature.properties.KODE_PROV;
+            var borderStyle = getBorderStyle(kodeProv);
 
             layer.setStyle({
-                weight: 3,
+                weight: borderStyle.weight + 1,
                 color: '#666',
                 dashArray: '',
                 fillOpacity: 0.9
@@ -145,7 +135,7 @@ $(document).ready(function() {
                 layer.bringToFront();
             }
 
-            // Update info panel (opsional)
+            // Update info panel
             updateInfo(layer.feature.properties);
         }
 
@@ -155,20 +145,16 @@ $(document).ready(function() {
             updateInfo();
         }
 
-        // Fungsi zoom saat klik
-        function zoomToFeature(e) {
-            map.fitBounds(e.target.getBounds());
-        }
-
         // Fungsi saat klik pada provinsi
         function onFeatureClick(e) {
             var kodeProv = e.target.feature.properties.KODE_PROV;
+            var data = provinceData[kodeProv];
             
-            // Panggil modal dengan data-id
-            // $('#ModalDetailMap').attr('data-id', kodeProv);
-            // $('#ModalDetailMap').modal('show');
+            if (data) {
+                // Tampilkan modal dengan informasi detail yang disederhanakan
+                showProvinceDetailModal(data);
+            }
             
-            // Anda bisa menambahkan logika untuk menampilkan data detail di modal di sini
             console.log('Provinsi diklik:', kodeProv);
         }
 
@@ -177,37 +163,31 @@ $(document).ready(function() {
             var kodeProv = feature.properties.KODE_PROV;
             var data = provinceData[kodeProv];
             
-            // Bind popup dengan informasi provinsi
+            // Bind popup dengan informasi provinsi yang disederhanakan
             if (data) {
                 var popupContent = `
                     <div class="province-popup">
                         <h6><strong>${data.PROVINSI}</strong></h6>
                         <hr>
-                        <table class="table table-sm">
+                        <table class="table table-sm table-borderless mb-2">
                             <tr>
                                 <td>ABK:</td>
-                                <td><strong>${data.ABK.toLocaleString()}</strong></td>
+                                <td class="text-end"><strong>${data.ABK.toLocaleString()}</strong></td>
                             </tr>
                             <tr>
                                 <td>Jumlah Guru:</td>
-                                <td><strong>${data.jumlah_guru.toLocaleString()}</strong></td>
+                                <td class="text-end"><strong>${data.jumlah_guru.toLocaleString()}</strong></td>
                             </tr>
                             <tr>
-                                <td>Kurang Guru:</td>
-                                <td><strong class="text-danger">${data.kurang_guru.toLocaleString()}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Kurang ASN:</td>
-                                <td><strong class="text-warning">${data.kurang_asn.toLocaleString()}</strong></td>
+                                <td>Kebutuhan Guru:</td>
+                                <td class="text-end"><strong class="text-danger">${data.kurang_guru.toLocaleString()}</strong></td>
                             </tr>
                         </table>
-
-                        <div class="row">
-                            <div class="col-12 text-center">
-                                <a href="javascript:void(0);" class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#ModalDetailMap" data-id="${kodeProv}">
-                                    Selengkapnya
-                                </a>
-                            </div>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-sm btn-block btn-primary" data-bs-toggle="modal" data-bs-target="#ModalDetailMap" data-id="${kodeProv}">
+                                Selengkapnya
+                            </button>
+                            <small class="text-muted">Klik untuk detail lengkap</small>
                         </div>
                     </div>
                 `;
@@ -245,13 +225,17 @@ $(document).ready(function() {
                     from + (to ? '&ndash;' + to : '+'));
             }
 
+            // Tambahkan keterangan untuk border merah
+            labels.push('<br><strong>Penanda:</strong>');
+            labels.push('<i style="border: 3px solid #ff0000; background: transparent; width: 12px; height: 12px; display: inline-block;"></i> Provinsi dalam sample_code');
+
             div.innerHTML = labels.join('<br>');
             return div;
         };
 
         legend.addTo(map);
 
-        // Info panel (opsional)
+        // Info panel
         var info = L.control({position: 'topright'});
 
         info.onAdd = function(map) {
@@ -264,28 +248,46 @@ $(document).ready(function() {
             if (props) {
                 var data = provinceData[props.KODE_PROV];
                 if (data) {
+                    var isSampleCode = sample_code.includes(parseInt(props.KODE_PROV)) || sample_code.includes(props.KODE_PROV.toString());
+                    var sampleCodeIndicator = isSampleCode ? '<span style="color: red; font-weight: bold;"> ★</span>' : '';
+                    
                     this._div.innerHTML = `
-                        <h6>${data.PROVINSI}</h6>
-                        <small>Kode: ${props.KODE_PROV}</small><br>
-                        ABK: <b>${data.ABK.toLocaleString()}</b><br>
-                        Jumlah Guru: <b>${data.jumlah_guru.toLocaleString()}</b><br>
-                        Kurang Guru: <b class="text-danger">${data.kurang_guru.toLocaleString()}</b><br>
-                        Kurang ASN: <b class="text-warning">${data.kurang_asn.toLocaleString()}</b>
+                        <h6>${data.PROVINSI}${sampleCodeIndicator}</h6>
+                        <table class="table table-sm table-borderless mb-0">
+                            <tr>
+                                <td>ABK:</td>
+                                <td class="text-end"><strong>${data.ABK.toLocaleString()}</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Jumlah Guru:</td>
+                                <td class="text-end"><strong>${data.jumlah_guru.toLocaleString()}</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Kebutuhan:</td>
+                                <td class="text-end"><strong class="text-danger">${data.kurang_guru.toLocaleString()}</strong></td>
+                            </tr>
+                        </table>
                     `;
                 } else {
                     this._div.innerHTML = "<small>Data tidak tersedia</small>";
                 }
             } else {
-                this._div.innerHTML = "<h6>Informasi Provinsi</h6>Arahkan kursor ke provinsi";
+                this._div.innerHTML = "<h6>Informasi Provinsi</h6><small>Arahkan kursor ke provinsi</small>";
             }
         };
 
         info.addTo(map);
     }
 
-    // Fungsi update info panel
+    // Fungsi untuk menampilkan modal detail (jika diperlukan)
+    function showProvinceDetailModal(data) {
+        // Implementasi fungsi ini sesuai kebutuhan Anda
+        console.log('Menampilkan modal untuk:', data.PROVINSI);
+    }
+
+    // Fungsi update info (jika diperlukan)
     function updateInfo(props) {
-        // Implementasi update info panel jika diperlukan
+        // Fungsi ini akan dipanggil oleh info.update()
     }
 
 });
