@@ -2,7 +2,6 @@
     //Koneksi
     include "../../_Config/Connection.php";
     include "../../_Config/GlobalFunction.php";
-    include "../../_Config/Session.php";
 
     //Inisiasi Variabel Agar Tidak Error
     $jml_data = 0;
@@ -11,18 +10,7 @@
     $curent_page = 0;
     $school_level = 0;
     
-    //Validasi Sesi akses
-    if (empty($SessionIdAccess)) {
-       echo '
-            <tr>
-                <td colspan="6" class="text-center">
-                    <small class="text-danger">Sesi Akses Sudah Berakhir! Silahkan Login Ulang!</small>
-                </td>
-            </tr>
-       ';
-        exit;
-    }
-
+    
     //Validasi province_code
     if(empty($_POST['province_code'])){
         echo '

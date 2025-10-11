@@ -34,18 +34,12 @@
     // Inisialisasi akumulasi Agar Tidak Error
     $ppg_belum_diangkat = 0;
 
-    //Melakukan looping tabel region dengan condition category=District AND district_code
-    $query_region = mysqli_query($Conn, "SELECT id_region FROM region WHERE category='District' AND district_code='$district_code'");
-    while ($data_region = mysqli_fetch_assoc($query_region)) {
-        $id_region = $data_region['id_region'];
-
-        // Loop posisi guru di district
-        $query_position_region = mysqli_query($Conn, "SELECT asn FROM position_region WHERE id_region='$id_region'");
-        while ($data_position_region = mysqli_fetch_assoc($query_position_region)) {
-            $asn    = (int)$data_position_region['asn'];
-            if($asn==0){
-                $ppg_belum_diangkat = $ppg_belum_diangkat+1;
-            }
+    // Loop calon_guru
+    $query_calon_guru  = mysqli_query($Conn, "SELECT ppg_blm_diangkat FROM calon_guru WHERE district_code='$district_code'");
+    while ($data_calon_guru = mysqli_fetch_assoc($query_calon_guru)) {
+        $ppg_blm_diangkat= $data_calon_guru['ppg_blm_diangkat'];
+        if($ppg_blm_diangkat=="Belum"){
+            $ppg_belum_diangkat = $ppg_belum_diangkat+1;
         }
     }
 

@@ -188,76 +188,24 @@ function ShowTabelDetailJabatan() {
     });
 }
 
-$(document).ready(function () {
-    var kode_provinsi = $("#kode_provinsi").val();
-    var province_code = $("#province_code").val();
-
-    //Menampilkan Jumlah Angka Kebutuhan Guru Level Provinsi
-    ShowNominalKebutuhanGuruProvinsi(kode_provinsi);
-
-    //Menampilkan Lulusan PPG Belum Diangkat
-    ShowNominalLulusanPpg(kode_provinsi);
-
-    //Load Data Kebutuhan Guru menurut kabupaten/Kota (Pertama Kali)
-    ShowTableKebutuhanGuruByKabKot();
-
-    //Event Ketika 'school_level_by_kab_kot' diubah
-    $('#school_level_by_kab_kot').change(function(){
-
-        //Reset Posisi Halaman
-        $('#page_kebutuhan_guru_by_kabkot').val("1");
-
-        //Tampilkan Ulang Data
-        ShowTableKebutuhanGuruByKabKot();
-
-        //Tutup Modal
-        $('#ModalFilterKebutuhanGuruByKabKot').modal('hide');
-    });
-
-    //PAGGING Kebutuhan Guru Menurut Kab/Kot
-    $(document).on('click', '#next_button', function() {
-        var page_now = parseInt($('#page_kebutuhan_guru_by_kabkot').val(), 10); // Pastikan nilai diambil sebagai angka
-        var next_page = page_now + 1;
-        $('#page_kebutuhan_guru_by_kabkot').val(next_page);
-        ShowTableKebutuhanGuruByKabKot(0);
-    });
-    $(document).on('click', '#prev_button', function() {
-        var page_now = parseInt($('#page_kebutuhan_guru_by_kabkot').val(), 10); // Pastikan nilai diambil sebagai angka
-        var next_page = page_now - 1;
-        $('#page_kebutuhan_guru_by_kabkot').val(next_page);
-        ShowTableKebutuhanGuruByKabKot(0);
-    });
-
-    //Load Data Kebutuhan Guru menurut Jabatan (Pertama Kali)
-    ShowTableKebutuhanGuruByJabatan();
-
-    //Event ketika school_level_2 change
-    $('#school_level_2').change(function(){
-       ShowTableKebutuhanGuruByJabatan();
-    });
-
-    //PAGGING Kebutuhan Guru Menurut Position (Jabatan)
-    $(document).on('click', '#next_button_2', function() {
-        var page_now = parseInt($('#page_kebutuhan_guru_by_jabatan').val(), 10); // Pastikan nilai diambil sebagai angka
-        var next_page = page_now + 1;
-        $('#page_kebutuhan_guru_by_jabatan').val(next_page);
-        ShowTableKebutuhanGuruByJabatan(0);
-    });
-    $(document).on('click', '#prev_button_2', function() {
-        var page_now = parseInt($('#page_kebutuhan_guru_by_jabatan').val(), 10); // Pastikan nilai diambil sebagai angka
-        var next_page = page_now - 1;
-        $('#page_kebutuhan_guru_by_jabatan').val(next_page);
-        ShowTableKebutuhanGuruByJabatan(0);
-    });
+function loadPieChartKebutuhanGuru(province_code) {
+    // Validasi parameter
+    if (!province_code) {
+        console.error("Parameter province_code diperlukan!");
+        return;
+    }
 
     // ===================== PIE CHART APEXCHART =====================
-    // Ambil data dari PHP
     // Pastikan elemen ada
     if(!$("#ChartKebutuhanGuru").length){
         console.error("Elemen #ChartKebutuhanGuru tidak ditemukan!");
         return;
     }
-
+    
+    // Tampilkan loading state (opsional)
+    $("#ChartKebutuhanGuru").html('<div class="text-center">Loading...</div>');
+    
+    //Ajax Dari PHP
     $.ajax({
         type: "POST",
         url: "_Page/DashboardProvince/kebutuhan_guru_by_jenjang.php",
@@ -266,6 +214,13 @@ $(document).ready(function () {
         success: function(response) {
             if(response.code && response.code != 200){
                 alert(response.message);
+                $("#ChartKebutuhanGuru").html('<div class="text-center text-danger">Error: ' + response.message + '</div>');
+                return;
+            }
+
+            // Validasi data response
+            if (!response.data || response.data.length === 0) {
+                $("#ChartKebutuhanGuru").html('<div class="text-center text-muted">Tidak ada data untuk provinsi ini</div>');
                 return;
             }
 
@@ -308,49 +263,16 @@ $(document).ready(function () {
 
             let chart = new ApexCharts(document.querySelector("#ChartKebutuhanGuru"), options);
             chart.render();
+        },
+        error: function(xhr, status, error) {
+            console.error("Error loading chart data:", error);
+            $("#ChartKebutuhanGuru").html('<div class="text-center text-danger">Gagal memuat data chart</div>');
         }
     });
+}
 
-
-    //Modal Detail Kab/Kota
-    $('#ModalDetailKabKot').on('show.bs.modal', function (e) {
-        var district_code = $(e.relatedTarget).data('id');
-        $('#FormDetailKabKot').html("Loading...");
-        $.ajax({
-            type 	    : 'POST',
-            url 	    : '_Page/DashboardProvince/FormDetailKabKot.php',
-            data        : {district_code: district_code},
-            success     : function(data){
-                $('#FormDetailKabKot').html(data);
-            }
-        });
-    });
-
-    //Event ketika 'BtnLihatUraianByJenjang' di click
-    $(document).on('click', '#BtnLihatUraianByJenjang', function() {
-        var school_level = $('#get_school_level_from_detail').html();
-        
-        //Tempelkan school_level ke school_level_by_kab_kot
-        $('#school_level_by_kab_kot').val(school_level);
-
-        //Reset Posisi Halaman
-        $('#page_kebutuhan_guru_by_kabkot').val("1");
-
-        //Tampilkan Ulang Data
-        ShowTableKebutuhanGuruByKabKot();
-
-        //Tutup Modal
-        $('#ModalDetailByJenjang').modal('hide');
-
-        //Scroll ke konten kebutuhan guru
-        $('html, body').animate({
-            scrollTop: $("#KontenKebutuhanGuruMenurutKabupaten").offset().top - 80 // -80 biar agak turun dikit dari header
-        }, 600); // durasi animasi 600ms
-    });
-
+function TampilkanPetaInteraktif(kode_provinsi) {
     // ===================== LEAFLET MAP =====================
-    let timestamp = new Date().getTime();
-
     // Inisialisasi peta dengan view default Indonesia
     var map = L.map('ShowMapProvinsiAndAkbupaten', {
         zoomControl: false,
@@ -387,7 +309,7 @@ $(document).ready(function () {
         div.innerHTML = `
             <div class="card shadow-sm">
                 <div class="card-header py-2">
-                    <strong class="card-title mb-0" style="font-size: 12px;">Legenda Kekurangan Guru</strong>
+                    <strong class="card-title mb-0" style="font-size: 12px;">Keterangan</strong>
                 </div>
                 <div class="card-body py-2">
                     <div class="d-flex align-items-center mb-1">
@@ -445,74 +367,248 @@ $(document).ready(function () {
 
     // Ambil data GeoJSON dari API
     $.getJSON("_Page/DashboardProvince/GetGeoProvince.php?province_code=" + kode_provinsi)
-        .done(function(data){
-            debugGeoJSON(data);
-            console.log("Data GeoJSON diterima:", data);
-            
-            if (data.features && data.features.length > 0) {
-                var geoLayer = L.geoJSON(data, {
-                    style: function(feature){
-                        let kurangGuru = feature.properties.kurang_guru || 0;
-                        let isSample = feature.properties.is_sample || false;
-                        
-                        return {
-                            color: isSample ? "red" : "black", // Garis merah untuk sample district
-                            weight: isSample ? 3 : 1, // Garis lebih tebal untuk sample
-                            fillColor: getColor(kurangGuru),
-                            fillOpacity: 0.7
-                        };
-                    },
-                    onEachFeature: function(feature, layer){
-                        let id_region = feature.properties.id_region || "-";
-                        let prov = feature.properties.province_name || "-";
-                        let kabkota_code = feature.properties.district_code || "-";
-                        let kabkota = feature.properties.district_name || "-";
-                        let kurangGuru = feature.properties.kurang_guru || 0;
-                        let isSample = feature.properties.is_sample || false;
-                        
-                        // Tampilan popup yang lebih menarik dengan Bootstrap
-                        let popupContent = `
-                            <div class="popup-content" style="min-width: 200px;">
-                                <div class="border-bottom pb-2 mb-2">
-                                    <h6 class="mb-1 fw-bold">${kabkota}</h6>
-                                    <small class="text-muted">${prov}</small><br>
-                                    <small class="text-muted">Kekurangan Guru : ${kurangGuru}</small>
-                                </div>
-                                <div class="text-end">
-                                    <button type="button" class="btn btn-sm btn-secondary btn-block" data-bs-toggle="modal" data-bs-target="#ModalDetailKabKot" data-id="${kabkota_code}">
-                                        Lihat Detail
-                                    </button>
-                                </div>
+    .done(function(data){
+        debugGeoJSON(data);
+        console.log("Data GeoJSON diterima:", data);
+        
+        if (data.features && data.features.length > 0) {
+            var geoLayer = L.geoJSON(data, {
+                style: function(feature){
+                    let kurangGuru = feature.properties.kurang_guru || 0;
+                    let isSample = feature.properties.is_sample || false;
+                    
+                    return {
+                        color: isSample ? "red" : "black", // Garis merah untuk sample district
+                        weight: isSample ? 3 : 1, // Garis lebih tebal untuk sample
+                        fillColor: getColor(kurangGuru),
+                        fillOpacity: 0.7
+                    };
+                },
+                onEachFeature: function(feature, layer){
+                    let id_region = feature.properties.id_region || "-";
+                    let prov = feature.properties.province_name || "-";
+                    let kabkota_code = feature.properties.district_code || "-";
+                    let kabkota = feature.properties.district_name || "-";
+                    let kurangGuru = feature.properties.kurang_guru || 0;
+                    let isSample = feature.properties.is_sample || false;
+                    
+                    // Tampilan popup yang lebih menarik dengan Bootstrap
+                    let popupContent = `
+                        <div class="popup-content" style="min-width: 200px;">
+                            <div class="border-bottom pb-2 mb-2">
+                                <h6 class="mb-1 fw-bold">${kabkota}</h6>
+                                <small class="text-muted">${prov}</small><br>
+                                <small class="text-muted">Kekurangan Guru : ${kurangGuru}</small>
                             </div>
-                        `;
-                        layer.bindPopup(popupContent);
-                    }
-                }).addTo(map);
+                            <div class="text-end">
+                                <button type="button" class="btn btn-sm btn-secondary btn-block" data-bs-toggle="modal" data-bs-target="#ModalDetailKabKot" data-id="${kabkota_code}">
+                                    Lihat Detail
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    layer.bindPopup(popupContent);
+                }
+            }).addTo(map);
 
-                // Coba dapatkan bounds dan zoom ke peta
-                try {
-                    var bounds = geoLayer.getBounds();
-                    if (bounds.isValid()) {
-                        map.fitBounds(bounds, { padding: [20, 20] });
-                        console.log("Zoom ke bounds berhasil");
-                    } else {
-                        console.warn("Bounds tidak valid, menggunakan view default");
-                        // Tetap di view default Indonesia
-                        map.setView([-2, 118], 5);
-                    }
-                } catch (error) {
-                    console.error("Error saat zoom ke bounds:", error);
+            // Coba dapatkan bounds dan zoom ke peta
+            try {
+                var bounds = geoLayer.getBounds();
+                if (bounds.isValid()) {
+                    map.fitBounds(bounds, { padding: [20, 20] });
+                    console.log("Zoom ke bounds berhasil");
+                } else {
+                    console.warn("Bounds tidak valid, menggunakan view default");
+                    // Tetap di view default Indonesia
                     map.setView([-2, 118], 5);
                 }
-                
-            } else {
-                $('#ShowMapProvinsiAndAkbupaten').html('<small class="text-danger">Tidak ada data geografis untuk provinsi ini.</small>');
+            } catch (error) {
+                console.error("Error saat zoom ke bounds:", error);
+                map.setView([-2, 118], 5);
             }
-        })
-        .fail(function(jqXHR, textStatus, errorThrown){
-            console.error("Error loading GeoJSON:", textStatus, errorThrown);
-            $('#ShowMapProvinsiAndAkbupaten').html('<small class="text-danger">Gagal memuat peta. Silakan refresh halaman.</small>');
+            
+        } else {
+            $('#ShowMapProvinsiAndAkbupaten').html('<small class="text-danger">Tidak ada data geografis untuk provinsi ini.</small>');
+        }
+    })
+    .fail(function(jqXHR, textStatus, errorThrown){
+        console.error("Error loading GeoJSON:", textStatus, errorThrown);
+        $('#ShowMapProvinsiAndAkbupaten').html('<small class="text-danger">Gagal memuat peta. Silakan refresh halaman.</small>');
+    });
+
+    // Fungsi untuk menampilkan modal detail
+    function showDetailModal(kabkota_code) {
+        // Trigger modal dan set data
+        $('#ModalDetailKabKot').modal('show');
+        // Tambahkan logika untuk load data detail berdasarkan kabkota_code
+        console.log('Loading detail untuk:', kabkota_code);
+    }
+
+    // CSS untuk legenda
+    var style = document.createElement('style');
+    style.innerHTML = `
+        .legend {
+            background: transparent !important;
+            border: none !important;
+        }
+        .legend .card {
+            background: white;
+            border-radius: 8px;
+        }
+        .legend .card-header {
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .legend .card-body {
+            padding: 8px 12px;
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Fungsi untuk menghapus peta yang sudah ada sebelum membuat yang baru
+function HapusPeta() {
+    if (typeof map !== 'undefined' && map) {
+        map.remove();
+    }
+    // Hapus juga elemen style yang dibuat
+    var existingStyle = document.querySelector('style');
+    if (existingStyle) {
+        existingStyle.remove();
+    }
+}
+
+// Fungsi utama untuk menjalankan semua fungsi secara berurutan
+async function jalankanFungsiBerurutan(kode_provinsi, province_code) {
+    try {
+        console.log("Memulai eksekusi fungsi berurutan...");
+        
+        // 1. Menampilkan Jumlah Angka Kebutuhan Guru Level Provinsi
+        await ShowNominalKebutuhanGuruProvinsi(kode_provinsi);
+        console.log("ShowNominalKebutuhanGuruProvinsi selesai");
+        
+        // 2. Menampilkan Lulusan PPG Belum Diangkat
+        await ShowNominalLulusanPpg(kode_provinsi);
+        console.log("ShowNominalLulusanPpg selesai");
+        
+        // 3. Load Data Kebutuhan Guru menurut kabupaten/Kota
+        await ShowTableKebutuhanGuruByKabKot();
+        console.log("ShowTableKebutuhanGuruByKabKot selesai");
+        
+        // 4. Load Data Kebutuhan Guru menurut Jabatan
+        await ShowTableKebutuhanGuruByJabatan();
+        console.log("ShowTableKebutuhanGuruByJabatan selesai");
+        
+        // 5. Menampiilkan Pie Chart
+        await loadPieChartKebutuhanGuru(province_code);
+        console.log("loadPieChartKebutuhanGuru selesai");
+        
+        // 6. Menampilkan Peta Interaktif
+        await TampilkanPetaInteraktif(province_code);
+        console.log("TampilkanPetaInteraktif selesai");
+        
+        console.log("Semua fungsi telah selesai dijalankan");
+        
+    } catch (error) {
+        console.error("Error dalam menjalankan fungsi:", error);
+    }
+}
+
+$(document).ready(function () {
+    var kode_provinsi = $("#kode_provinsi").val();
+    var province_code = $("#province_code").val();
+
+    // Menjalankan semua fungsi secara berurutan
+    jalankanFungsiBerurutan(kode_provinsi, province_code);
+
+    
+
+    //Event Ketika 'school_level_by_kab_kot' diubah
+    $('#school_level_by_kab_kot').change(function(){
+
+        //Reset Posisi Halaman
+        $('#page_kebutuhan_guru_by_kabkot').val("1");
+
+        //Tampilkan Ulang Data
+        ShowTableKebutuhanGuruByKabKot();
+
+        //Tutup Modal
+        $('#ModalFilterKebutuhanGuruByKabKot').modal('hide');
+    });
+
+    //PAGGING Kebutuhan Guru Menurut Kab/Kot
+    $(document).on('click', '#next_button', function() {
+        var page_now = parseInt($('#page_kebutuhan_guru_by_kabkot').val(), 10); // Pastikan nilai diambil sebagai angka
+        var next_page = page_now + 1;
+        $('#page_kebutuhan_guru_by_kabkot').val(next_page);
+        ShowTableKebutuhanGuruByKabKot(0);
+    });
+    $(document).on('click', '#prev_button', function() {
+        var page_now = parseInt($('#page_kebutuhan_guru_by_kabkot').val(), 10); // Pastikan nilai diambil sebagai angka
+        var next_page = page_now - 1;
+        $('#page_kebutuhan_guru_by_kabkot').val(next_page);
+        ShowTableKebutuhanGuruByKabKot(0);
+    });
+
+    //Event ketika school_level_2 change
+    $('#school_level_2').change(function(){
+       ShowTableKebutuhanGuruByJabatan();
+    });
+
+    //PAGGING Kebutuhan Guru Menurut Position (Jabatan)
+    $(document).on('click', '#next_button_2', function() {
+        var page_now = parseInt($('#page_kebutuhan_guru_by_jabatan').val(), 10); // Pastikan nilai diambil sebagai angka
+        var next_page = page_now + 1;
+        $('#page_kebutuhan_guru_by_jabatan').val(next_page);
+        ShowTableKebutuhanGuruByJabatan(0);
+    });
+    $(document).on('click', '#prev_button_2', function() {
+        var page_now = parseInt($('#page_kebutuhan_guru_by_jabatan').val(), 10); // Pastikan nilai diambil sebagai angka
+        var next_page = page_now - 1;
+        $('#page_kebutuhan_guru_by_jabatan').val(next_page);
+        ShowTableKebutuhanGuruByJabatan(0);
+    });
+
+    //Modal Detail Kab/Kota
+    $('#ModalDetailKabKot').on('show.bs.modal', function (e) {
+        var district_code = $(e.relatedTarget).data('id');
+        $('#FormDetailKabKot').html("Loading...");
+        $.ajax({
+            type 	    : 'POST',
+            url 	    : '_Page/DashboardProvince/FormDetailKabKot.php',
+            data        : {district_code: district_code},
+            success     : function(data){
+                $('#FormDetailKabKot').html(data);
+            }
         });
+    });
+
+    //Event ketika 'BtnLihatUraianByJenjang' di click
+    $(document).on('click', '#BtnLihatUraianByJenjang', function() {
+        var school_level = $('#get_school_level_from_detail').html();
+        
+        //Tempelkan school_level ke school_level_by_kab_kot
+        $('#school_level_by_kab_kot').val(school_level);
+        $('#school_level_2').val(school_level);
+
+        //Reset Posisi Halaman
+        $('#page_kebutuhan_guru_by_kabkot').val("1");
+        $('#page_kebutuhan_guru_by_jabatan').val("1");
+
+        //Tampilkan Ulang Data
+        ShowTableKebutuhanGuruByKabKot();
+        ShowTableKebutuhanGuruByJabatan();
+
+        //Tutup Modal
+        $('#ModalDetailByJenjang').modal('hide');
+
+        //Scroll ke konten kebutuhan guru
+        $('html, body').animate({
+            scrollTop: $("#KontenKebutuhanGuruMenurutKabupaten").offset().top - 80 // -80 biar agak turun dikit dari header
+        }, 600); // durasi animasi 600ms
+    });
+
+    
 
     // Fungsi untuk menampilkan modal detail
     function showDetailModal(kabkota_code) {

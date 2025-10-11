@@ -156,7 +156,7 @@
                                 <input type="hidden" name="page" id="page_kebutuhan_guru_by_kabkot" value="1">
                                 <input type="hidden" name="province_code" id="province_code" value="<?php echo "$province_code"; ?>">
                                 <select name="school_level" id="school_level_by_kab_kot" class="form-control">
-                                    <option value="">Semua Jenjang</option>
+                                    <!-- <option value="">Semua Jenjang</option> -->
                                     <?php
                                         $query_school_level = mysqli_query($Conn, "SELECT DISTINCT school_level FROM school ");
                                         while ($data_school_level = mysqli_fetch_array($query_school_level)) {
@@ -233,7 +233,7 @@
                                 <input type="hidden" name="page" id="page_kebutuhan_guru_by_jabatan" value="1">
                                 <input type="hidden" name="province_code" value="<?php echo "$province_code"; ?>">
                                 <select name="school_level" id="school_level_2" class="form-control">
-                                    <option value="">Semua Jenjang</option>
+                                    <!-- <option value="">Semua Jenjang</option> -->
                                     <?php
                                         //Jenjang Pendidikan
                                         $no_row = 1;

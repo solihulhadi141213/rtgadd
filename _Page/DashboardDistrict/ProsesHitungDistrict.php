@@ -63,14 +63,20 @@
 
                 //Menghitung Kurang Guru
                 $kurang_guru        = $kurang_guru+$kurang_guru_list;
+            }
+        }
 
-                //Menghitung PPG Belum Diangkat
-                if($asn==0){
-                    $ppg_belum_diangkat = $ppg_belum_diangkat+1;
-                }
+        //Hitung PPG Belum Diangkat
+        $query_calon_guru  = mysqli_query($Conn, "SELECT ppg_blm_diangkat FROM calon_guru WHERE id_region='$id_region'");
+        while ($data_calon_guru = mysqli_fetch_assoc($query_calon_guru)) {
+            $ppg_blm_diangkat_list= $data_calon_guru['ppg_blm_diangkat'];
+            if($ppg_blm_diangkat_list=="Belum"){
+                $ppg_belum_diangkat = $ppg_belum_diangkat+1;
             }
         }
     }
+    
+    
 
     //Buat Response
     $response = [

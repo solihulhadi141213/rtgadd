@@ -11,9 +11,7 @@
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 Selamat Datang!
                 <p>
-                    RTGAdd adalah aplikasi berbasis web yang dirancang untuk memadukan RTG dan pengembangan dasbor untuk memudahkan pemerintah pusat dan daerah 
-                    dalam melakukan perencanaan dan pengawasan kebutuhan guru di satuan pendidikan berbasis data. RTGAdd akan diujicobakan penggunaannya di lima kabupaten/kota, 
-                    yaitu: Kabupaten Karo - Sumatera Utara, Kota Dumai - Riau, Kabupaten Muaro Jambi - Jambi, Kota Semarang - Jawa Tengah, dan Kabupaten Kutai Kartanegara - Kalimantan Timur
+                    RTGAdd adalah aplikasi berbasis web yang dirancang sebagai usulan pengembangan dasbor Ruang Talenta Guru (RTG). Tujuan dari pengembangan dasbor usulan ini untuk memudahkan pemerintah pusat dan daerah menggunakan data RTG untuk perencanaan pemenuhan guru di lokasi masing-masing.RTGAdd akan diujicobakan penggunaannya di lima kabupaten/kota, yaitu: Kabupaten Karo - Sumatera Utara, Kota Dumai - Riau, Kabupaten Muaro Jambi - Jambi, Kota Semarang - Jawa Tengah, dan Kabupaten Kutai Kartanegara - Kalimantan Timur
                 </p>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -31,7 +29,9 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <small class="text text-grayis">Update : <?php echo date('d F Y'); ?></small>
+                    <small class="text text-grayis">
+                        Garis merah pada peta menunjukan provinsi yang menjadii <i>Pilot</i>
+                    </small>
                 </div>
             </div>
         </div>
