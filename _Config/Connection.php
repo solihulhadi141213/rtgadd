@@ -3,7 +3,7 @@
     $servername = "localhost";
     $username = "root";
     $password = "arunaparasilvanursari";
-    $db = "rtgadd";
+    $db = "rtgadd_idws";
     
     // Create connection
     $Conn = new mysqli($servername, $username, $password, $db);

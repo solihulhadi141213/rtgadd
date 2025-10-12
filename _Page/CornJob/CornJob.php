@@ -60,10 +60,17 @@
                                     <td><small>1 Jam</small></td>
                                 </tr>
                                  <tr>
-                                    <td><small>2</small></td>
+                                    <td><small>3</small></td>
                                     <td><small>Update kebutuhan_guru_by_jenjang.json</small></td>
                                     <td><small>Update kebutuhan guru berdasarkan jengjang pada provinsi</small></td>
                                     <td><small><a href="_Page/CornJob/update_kbutuhan_guru_by_jenjang.php" target="_blank">_Page/CornJob/update_kbutuhan_guru_by_jenjang.php</a></small></td>
+                                    <td><small>1 Jam</small></td>
+                                </tr>
+                                <tr>
+                                    <td><small>4</small></td>
+                                    <td><small>ABK Sekolah Provinsi</small></td>
+                                    <td><small>Membuat struktur JSON jumlah parameter berdasarkan jenjang pendidikan di tingkat provinsi</small></td>
+                                    <td><small><a href="_Page/CornJob/abk_school_level_province.php" target="_blank">_Page/CornJob/abk_school_level_province.php</a></small></td>
                                     <td><small>1 Jam</small></td>
                                 </tr>
                             </tbody>

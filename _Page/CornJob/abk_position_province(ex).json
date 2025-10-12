@@ -1,0 +1,126 @@
+[
+  {
+    "province_code": "11",
+    "province_name": "Aceh",
+    "aggregate": {
+      "abk": 0,
+      "asn": 0,
+      "pppk_2024": 0,
+      "non_asn_sebelum_oktober_2022": 0,
+      "non_asn_setelah_oktober_2022": 0,
+      "jumlah_guru": 0,
+      "kurang_guru": 0,
+      "jumlah_asn": 0,
+      "kurang_asn": 0
+    },
+    "position": [
+      {
+        "position_code": "JF01000104",
+        "position_name": "GURU AGAMA BUDHA",
+        "aggregate": {
+          "abk": 0,
+          "asn": 0,
+          "pppk_2024": 0,
+          "non_asn_sebelum_oktober_2022": 0,
+          "non_asn_setelah_oktober_2022": 0,
+          "jumlah_guru": 0,
+          "kurang_guru": 0,
+          "jumlah_asn": 0,
+          "kurang_asn": 0
+        }
+      },
+      {
+        "position_code": "JF01000204",
+        "position_name": "GURU AGAMA HINDU",
+        "aggregate": {
+          "abk": 0,
+          "asn": 0,
+          "pppk_2024": 0,
+          "non_asn_sebelum_oktober_2022": 0,
+          "non_asn_setelah_oktober_2022": 0,
+          "jumlah_guru": 0,
+          "kurang_guru": 0,
+          "jumlah_asn": 0,
+          "kurang_asn": 0
+        }
+      },
+      {
+        "position_code": "JF01000304",
+        "position_name": "GURU AGAMA ISLAM",
+        "aggregate": {
+          "abk": 0,
+          "asn": 0,
+          "pppk_2024": 0,
+          "non_asn_sebelum_oktober_2022": 0,
+          "non_asn_setelah_oktober_2022": 0,
+          "jumlah_guru": 0,
+          "kurang_guru": 0,
+          "jumlah_asn": 0,
+          "kurang_asn": 0
+        }
+      }
+    ]
+  },
+  {
+    "position_code": "JF01000404",
+    "position_name": "GURU AGAMA KATOLIK",
+    "aggregate": {
+      "abk": 0,
+      "asn": 0,
+      "pppk_2024": 0,
+      "non_asn_sebelum_oktober_2022": 0,
+      "non_asn_setelah_oktober_2022": 0,
+      "jumlah_guru": 0,
+      "kurang_guru": 0,
+      "jumlah_asn": 0,
+      "kurang_asn": 0
+    },
+    "school_level": [
+      {
+        "position_code": "JF01000504",
+        "position_name": "GURU AGAMA KRISTEN",
+        "aggregate": {
+          "abk": 0,
+          "asn": 0,
+          "pppk_2024": 0,
+          "non_asn_sebelum_oktober_2022": 0,
+          "non_asn_setelah_oktober_2022": 0,
+          "jumlah_guru": 0,
+          "kurang_guru": 0,
+          "jumlah_asn": 0,
+          "kurang_asn": 0
+        }
+      },
+      {
+        "position_code": "JF01000604",
+        "position_name": "GURU AGRIBISNIS PERIKANAN",
+        "aggregate": {
+          "abk": 0,
+          "asn": 0,
+          "pppk_2024": 0,
+          "non_asn_sebelum_oktober_2022": 0,
+          "non_asn_setelah_oktober_2022": 0,
+          "jumlah_guru": 0,
+          "kurang_guru": 0,
+          "jumlah_asn": 0,
+          "kurang_asn": 0
+        }
+      },
+      {
+        "position_code": "JF01000704",
+        "position_name": "GURU AGRIBISNIS TANAMAN",
+        "aggregate": {
+          "abk": 0,
+          "asn": 0,
+          "pppk_2024": 0,
+          "non_asn_sebelum_oktober_2022": 0,
+          "non_asn_setelah_oktober_2022": 0,
+          "jumlah_guru": 0,
+          "kurang_guru": 0,
+          "jumlah_asn": 0,
+          "kurang_asn": 0
+        }
+      }
+    ]
+  }
+]

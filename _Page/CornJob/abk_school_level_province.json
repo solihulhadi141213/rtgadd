@@ -1,0 +1,3436 @@
+[
+    {
+        "province_code": "11",
+        "province_name": "ACEH",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "12",
+        "province_name": "SUMATERA UTARA",
+        "aggregate": {
+            "abk": 239271,
+            "asn": 106209,
+            "pppk_2024": 23601,
+            "non_asn_sebelum_oktober_2022": 58329,
+            "non_asn_setelah_oktober_2022": 22138,
+            "jumlah_guru": 188139,
+            "kurang_guru": 71300,
+            "jumlah_asn": 129810,
+            "kurang_asn": 121639
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 114231,
+                    "asn": 65839,
+                    "pppk_2024": 11368,
+                    "non_asn_sebelum_oktober_2022": 21772,
+                    "non_asn_setelah_oktober_2022": 9254,
+                    "jumlah_guru": 98979,
+                    "kurang_guru": 22534,
+                    "jumlah_asn": 77207,
+                    "kurang_asn": 41318
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 1288,
+                    "asn": 84,
+                    "pppk_2024": 137,
+                    "non_asn_sebelum_oktober_2022": 78,
+                    "non_asn_setelah_oktober_2022": 41,
+                    "jumlah_guru": 299,
+                    "kurang_guru": 1107,
+                    "jumlah_asn": 221,
+                    "kurang_asn": 1171
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 27802,
+                    "asn": 9949,
+                    "pppk_2024": 3867,
+                    "non_asn_sebelum_oktober_2022": 7711,
+                    "non_asn_setelah_oktober_2022": 2539,
+                    "jumlah_guru": 21527,
+                    "kurang_guru": 11117,
+                    "jumlah_asn": 13816,
+                    "kurang_asn": 17210
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 31830,
+                    "asn": 5824,
+                    "pppk_2024": 3385,
+                    "non_asn_sebelum_oktober_2022": 8639,
+                    "non_asn_setelah_oktober_2022": 2560,
+                    "jumlah_guru": 17848,
+                    "kurang_guru": 15984,
+                    "jumlah_asn": 9209,
+                    "kurang_asn": 23848
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 52500,
+                    "asn": 23680,
+                    "pppk_2024": 4741,
+                    "non_asn_sebelum_oktober_2022": 11590,
+                    "non_asn_setelah_oktober_2022": 4513,
+                    "jumlah_guru": 40011,
+                    "kurang_guru": 17276,
+                    "jumlah_asn": 28421,
+                    "kurang_asn": 27361
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 11620,
+                    "asn": 833,
+                    "pppk_2024": 103,
+                    "non_asn_sebelum_oktober_2022": 8539,
+                    "non_asn_setelah_oktober_2022": 3231,
+                    "jumlah_guru": 9475,
+                    "kurang_guru": 3282,
+                    "jumlah_asn": 936,
+                    "kurang_asn": 10731
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "13",
+        "province_name": "SUMATERA BARAT",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "14",
+        "province_name": "RIAU",
+        "aggregate": {
+            "abk": 111012,
+            "asn": 63274,
+            "pppk_2024": 8482,
+            "non_asn_sebelum_oktober_2022": 23636,
+            "non_asn_setelah_oktober_2022": 9858,
+            "jumlah_guru": 95392,
+            "kurang_guru": 26112,
+            "jumlah_asn": 71756,
+            "kurang_asn": 46304
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 53178,
+                    "asn": 34879,
+                    "pppk_2024": 4841,
+                    "non_asn_sebelum_oktober_2022": 8498,
+                    "non_asn_setelah_oktober_2022": 4141,
+                    "jumlah_guru": 48218,
+                    "kurang_guru": 8306,
+                    "jumlah_asn": 39720,
+                    "kurang_asn": 15610
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 1036,
+                    "asn": 145,
+                    "pppk_2024": 39,
+                    "non_asn_sebelum_oktober_2022": 75,
+                    "non_asn_setelah_oktober_2022": 28,
+                    "jumlah_guru": 259,
+                    "kurang_guru": 812,
+                    "jumlah_asn": 184,
+                    "kurang_asn": 869
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 12305,
+                    "asn": 9163,
+                    "pppk_2024": 929,
+                    "non_asn_sebelum_oktober_2022": 1731,
+                    "non_asn_setelah_oktober_2022": 860,
+                    "jumlah_guru": 11823,
+                    "kurang_guru": 3398,
+                    "jumlah_asn": 10092,
+                    "kurang_asn": 4712
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 11865,
+                    "asn": 4760,
+                    "pppk_2024": 472,
+                    "non_asn_sebelum_oktober_2022": 2185,
+                    "non_asn_setelah_oktober_2022": 962,
+                    "jumlah_guru": 7417,
+                    "kurang_guru": 5170,
+                    "jumlah_asn": 5232,
+                    "kurang_asn": 7165
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 23607,
+                    "asn": 13430,
+                    "pppk_2024": 2115,
+                    "non_asn_sebelum_oktober_2022": 3663,
+                    "non_asn_setelah_oktober_2022": 2067,
+                    "jumlah_guru": 19208,
+                    "kurang_guru": 6769,
+                    "jumlah_asn": 15545,
+                    "kurang_asn": 9876
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 9021,
+                    "asn": 897,
+                    "pppk_2024": 86,
+                    "non_asn_sebelum_oktober_2022": 7484,
+                    "non_asn_setelah_oktober_2022": 1800,
+                    "jumlah_guru": 8467,
+                    "kurang_guru": 1657,
+                    "jumlah_asn": 983,
+                    "kurang_asn": 8072
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "15",
+        "province_name": "JAMBI",
+        "aggregate": {
+            "abk": 58979,
+            "asn": 31554,
+            "pppk_2024": 9024,
+            "non_asn_sebelum_oktober_2022": 9812,
+            "non_asn_setelah_oktober_2022": 4951,
+            "jumlah_guru": 50390,
+            "kurang_guru": 14272,
+            "jumlah_asn": 40578,
+            "kurang_asn": 22335
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 28684,
+                    "asn": 18066,
+                    "pppk_2024": 4783,
+                    "non_asn_sebelum_oktober_2022": 3066,
+                    "non_asn_setelah_oktober_2022": 2395,
+                    "jumlah_guru": 25915,
+                    "kurang_guru": 4610,
+                    "jumlah_asn": 22849,
+                    "kurang_asn": 7103
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 746,
+                    "asn": 43,
+                    "pppk_2024": 125,
+                    "non_asn_sebelum_oktober_2022": 17,
+                    "non_asn_setelah_oktober_2022": 6,
+                    "jumlah_guru": 185,
+                    "kurang_guru": 609,
+                    "jumlah_asn": 168,
+                    "kurang_asn": 622
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 6147,
+                    "asn": 3633,
+                    "pppk_2024": 1195,
+                    "non_asn_sebelum_oktober_2022": 711,
+                    "non_asn_setelah_oktober_2022": 326,
+                    "jumlah_guru": 5539,
+                    "kurang_guru": 1947,
+                    "jumlah_asn": 4828,
+                    "kurang_asn": 2477
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 6086,
+                    "asn": 2009,
+                    "pppk_2024": 1325,
+                    "non_asn_sebelum_oktober_2022": 787,
+                    "non_asn_setelah_oktober_2022": 297,
+                    "jumlah_guru": 4121,
+                    "kurang_guru": 2473,
+                    "jumlah_asn": 3334,
+                    "kurang_asn": 3161
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 12120,
+                    "asn": 7124,
+                    "pppk_2024": 1511,
+                    "non_asn_sebelum_oktober_2022": 1484,
+                    "non_asn_setelah_oktober_2022": 1012,
+                    "jumlah_guru": 10119,
+                    "kurang_guru": 3414,
+                    "jumlah_asn": 8635,
+                    "kurang_asn": 4513
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 5196,
+                    "asn": 679,
+                    "pppk_2024": 85,
+                    "non_asn_sebelum_oktober_2022": 3747,
+                    "non_asn_setelah_oktober_2022": 915,
+                    "jumlah_guru": 4511,
+                    "kurang_guru": 1219,
+                    "jumlah_asn": 764,
+                    "kurang_asn": 4459
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "16",
+        "province_name": "SUMATERA SELATAN",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "17",
+        "province_name": "BENGKULU",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "18",
+        "province_name": "LAMPUNG",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "19",
+        "province_name": "KEPULAUAN BANGKA BELITUNG",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "21",
+        "province_name": "KEPULAUAN RIAU",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "31",
+        "province_name": "DKI JAKARTA",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "32",
+        "province_name": "JAWA BARAT",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "33",
+        "province_name": "JAWA TENGAH",
+        "aggregate": {
+            "abk": 461073,
+            "asn": 215243,
+            "pppk_2024": 21489,
+            "non_asn_sebelum_oktober_2022": 94156,
+            "non_asn_setelah_oktober_2022": 19624,
+            "jumlah_guru": 330888,
+            "kurang_guru": 130185,
+            "jumlah_asn": 236732,
+            "kurang_asn": 224341
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 208251,
+                    "asn": 132306,
+                    "pppk_2024": 12324,
+                    "non_asn_sebelum_oktober_2022": 15745,
+                    "non_asn_setelah_oktober_2022": 5804,
+                    "jumlah_guru": 160375,
+                    "kurang_guru": 47876,
+                    "jumlah_asn": 144630,
+                    "kurang_asn": 63621
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 3521,
+                    "asn": 318,
+                    "pppk_2024": 347,
+                    "non_asn_sebelum_oktober_2022": 349,
+                    "non_asn_setelah_oktober_2022": 61,
+                    "jumlah_guru": 1014,
+                    "kurang_guru": 2507,
+                    "jumlah_asn": 665,
+                    "kurang_asn": 2856
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 30964,
+                    "asn": 16881,
+                    "pppk_2024": 2363,
+                    "non_asn_sebelum_oktober_2022": 5403,
+                    "non_asn_setelah_oktober_2022": 1385,
+                    "jumlah_guru": 24647,
+                    "kurang_guru": 6317,
+                    "jumlah_asn": 19244,
+                    "kurang_asn": 11720
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 75794,
+                    "asn": 15760,
+                    "pppk_2024": 3053,
+                    "non_asn_sebelum_oktober_2022": 21026,
+                    "non_asn_setelah_oktober_2022": 4449,
+                    "jumlah_guru": 39839,
+                    "kurang_guru": 35955,
+                    "jumlah_asn": 18813,
+                    "kurang_asn": 56981
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 91729,
+                    "asn": 46866,
+                    "pppk_2024": 3313,
+                    "non_asn_sebelum_oktober_2022": 13412,
+                    "non_asn_setelah_oktober_2022": 4714,
+                    "jumlah_guru": 63591,
+                    "kurang_guru": 28138,
+                    "jumlah_asn": 50179,
+                    "kurang_asn": 41550
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 50814,
+                    "asn": 3112,
+                    "pppk_2024": 89,
+                    "non_asn_sebelum_oktober_2022": 38221,
+                    "non_asn_setelah_oktober_2022": 3211,
+                    "jumlah_guru": 41422,
+                    "kurang_guru": 9392,
+                    "jumlah_asn": 3201,
+                    "kurang_asn": 47613
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "34",
+        "province_name": "DI YOGYAKARTA",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "35",
+        "province_name": "JAWA TIMUR",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "36",
+        "province_name": "BANTEN",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "51",
+        "province_name": "BALI",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "52",
+        "province_name": "NUSA TENGGARA BARAT",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "53",
+        "province_name": "NUSA TENGGARA TIMUR",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "61",
+        "province_name": "KALIMANTAN BARAT",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "62",
+        "province_name": "KALIMANTAN TENGAH",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "63",
+        "province_name": "KALIMANTAN SELATAN",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "64",
+        "province_name": "KALIMANTAN TIMUR",
+        "aggregate": {
+            "abk": 25852,
+            "asn": 14686,
+            "pppk_2024": 2417,
+            "non_asn_sebelum_oktober_2022": 4274,
+            "non_asn_setelah_oktober_2022": 1741,
+            "jumlah_guru": 21377,
+            "kurang_guru": 6133,
+            "jumlah_asn": 17103,
+            "kurang_asn": 9819
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 13131,
+                    "asn": 9283,
+                    "pppk_2024": 1298,
+                    "non_asn_sebelum_oktober_2022": 1222,
+                    "non_asn_setelah_oktober_2022": 768,
+                    "jumlah_guru": 11803,
+                    "kurang_guru": 1917,
+                    "jumlah_asn": 10581,
+                    "kurang_asn": 2890
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 148,
+                    "asn": 11,
+                    "pppk_2024": 18,
+                    "non_asn_sebelum_oktober_2022": 10,
+                    "non_asn_setelah_oktober_2022": 2,
+                    "jumlah_guru": 39,
+                    "kurang_guru": 114,
+                    "jumlah_asn": 29,
+                    "kurang_asn": 120
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 2268,
+                    "asn": 1529,
+                    "pppk_2024": 306,
+                    "non_asn_sebelum_oktober_2022": 176,
+                    "non_asn_setelah_oktober_2022": 126,
+                    "jumlah_guru": 2011,
+                    "kurang_guru": 629,
+                    "jumlah_asn": 1835,
+                    "kurang_asn": 760
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 2538,
+                    "asn": 833,
+                    "pppk_2024": 129,
+                    "non_asn_sebelum_oktober_2022": 412,
+                    "non_asn_setelah_oktober_2022": 163,
+                    "jumlah_guru": 1374,
+                    "kurang_guru": 1257,
+                    "jumlah_asn": 962,
+                    "kurang_asn": 1649
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 5265,
+                    "asn": 2860,
+                    "pppk_2024": 470,
+                    "non_asn_sebelum_oktober_2022": 539,
+                    "non_asn_setelah_oktober_2022": 362,
+                    "jumlah_guru": 3869,
+                    "kurang_guru": 1691,
+                    "jumlah_asn": 3330,
+                    "kurang_asn": 2161
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 2502,
+                    "asn": 170,
+                    "pppk_2024": 196,
+                    "non_asn_sebelum_oktober_2022": 1915,
+                    "non_asn_setelah_oktober_2022": 320,
+                    "jumlah_guru": 2281,
+                    "kurang_guru": 525,
+                    "jumlah_asn": 366,
+                    "kurang_asn": 2239
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "65",
+        "province_name": "KALIMANTAN UTARA",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "71",
+        "province_name": "SULAWESI UTARA",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "72",
+        "province_name": "SULAWESI TENGAH",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "73",
+        "province_name": "SULAWESI SELATAN",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "74",
+        "province_name": "SULAWESI TENGGARA",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "75",
+        "province_name": "GORONTALO",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "76",
+        "province_name": "SULAWESI BARAT",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "81",
+        "province_name": "MALUKU",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "82",
+        "province_name": "MALUKU UTARA",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "91",
+        "province_name": "PAPUA BARAT",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    },
+    {
+        "province_code": "94",
+        "province_name": "PAPUA",
+        "aggregate": {
+            "abk": 0,
+            "asn": 0,
+            "pppk_2024": 0,
+            "non_asn_sebelum_oktober_2022": 0,
+            "non_asn_setelah_oktober_2022": 0,
+            "jumlah_guru": 0,
+            "kurang_guru": 0,
+            "jumlah_asn": 0,
+            "kurang_asn": 0
+        },
+        "school_level": [
+            {
+                "school_level": "SD",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SLB",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMA",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "SMP",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            },
+            {
+                "school_level": "TK",
+                "aggregate": {
+                    "abk": 0,
+                    "asn": 0,
+                    "pppk_2024": 0,
+                    "non_asn_sebelum_oktober_2022": 0,
+                    "non_asn_setelah_oktober_2022": 0,
+                    "jumlah_guru": 0,
+                    "kurang_guru": 0,
+                    "jumlah_asn": 0,
+                    "kurang_asn": 0
+                }
+            }
+        ]
+    }
+]
