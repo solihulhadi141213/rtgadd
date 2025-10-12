@@ -31,19 +31,17 @@ function animateCountUp(element, start, end, duration) {
 
 //Menampilkan Detail School Level
 function ShowDetailSchoolLevel(district_code,school_level) {
-    $('#FormDetailSchoolLevel').fadeTo(400, 0.3, function () {
-        $.ajax({
-            type    : 'POST',
-            url     : '_Page/DashboardDistrict/FormDetailSchoolLevel.php',
-            data    : {district_code: district_code, school_level: school_level},
-            success : function(data) {
-                // Ganti konten
-                $('#FormDetailSchoolLevel').html(data);
-
-                // Efek transisi fadeIn lembut
-                $('#FormDetailSchoolLevel').fadeTo(400, 1);
-            }
-        });
+    $('#BtnLihatUraianByJenjang').prop('disabled', true);
+    $('#FormDetailSchoolLevel').html('<div class="row"><div class="col-12 text-center">Loading...</div></div>');
+    $.ajax({
+        type    : 'POST',
+        url     : '_Page/DashboardDistrict/FormDetailSchoolLevel.php',
+        data    : {district_code: district_code, school_level: school_level},
+        success : function(data) {
+            // Ganti konten
+            $('#FormDetailSchoolLevel').html(data);
+            $('#BtnLihatUraianByJenjang').prop('disabled', false);
+        }
     });
 }
 // Fungsi Untuk Menampilkan Jumlah Kebutuhan Guru
@@ -178,9 +176,7 @@ function ShowChartPie() {
                             $('#ModalDetailSchoolLevel').modal('show');
                             
                             // Panggil fungsi ShowDetailSchoolLevel setelah modal ditampilkan
-                            $('#ModalDetailSchoolLevel').on('shown.bs.modal', function () {
-                                ShowDetailSchoolLevel(district_code, clickedSchoolLevel);
-                            });
+                            ShowDetailSchoolLevel(district_code, clickedSchoolLevel);
                         }
                     }
                 },

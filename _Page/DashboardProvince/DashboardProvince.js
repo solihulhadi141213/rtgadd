@@ -56,27 +56,8 @@ function ShowNominalLulusanPpg(kode_provinsi) {
         dataType: 'json',
         success : function(response) {
             if (response.code === 200) {
-                // Hapus alert lama, ganti ke tempat angka
-                $('#show_lulusan_ppg_pending').html(
-                    '<div>' + 
-                        '<b id="counter_2">0</b>' +
-                    '</div>'
-                );
-
-                // Animasi hitungan
                 let target = response.lulusan_ppg;
-                let counterElement = $('#counter_2');
-                let current = 0;
-                let increment = Math.ceil(target / 100); // jumlah kenaikan per step
-                let interval = setInterval(function() {
-                    current += increment;
-                    if (current >= target) {
-                        current = target;
-                        clearInterval(interval);
-                    }
-                    counterElement.text(current.toLocaleString('id-ID'));
-                }, 20); // kecepatan transisi (20ms per step)
-                
+                $('#show_lulusan_ppg_pending').html(target);
             } else {
                 $('#show_lulusan_ppg_pending').html(
                     '<div class="alert alert-danger p-2 mb-2">' + 

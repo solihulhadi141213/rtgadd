@@ -30,48 +30,22 @@
     }
 
     // Sanitize input
-    $province_code = validateAndSanitizeInput($_POST['province_code']);
+    $province_code = $_POST['province_code'];
+    $lulusan_ppg =0;
+    //Looping kabupaten 
+    $query_region = mysqli_query($Conn, "SELECT id_region FROM region WHERE category='District' AND province_code='$province_code'");
+    while ($data_region = mysqli_fetch_array($query_region)) {
+        $id_region = $data_region['id_region'];
 
-    // Query tunggal untuk menghitung lulusan PPG
-    $query = "SELECT COUNT(cg.id_calon_guru) as total_lulusan_ppg
-              FROM calon_guru cg
-              INNER JOIN region r ON cg.id_region = r.id_region
-              WHERE r.category = 'District' 
-                AND r.province_code = ?
-                AND cg.ppg_blm_diangkat = 'Belum'";
-    
-    $stmt = mysqli_prepare($Conn, $query);
-    
-    if (!$stmt) {
-        $response = [
-            "code" => 500,
-            "message" => "Error preparing query: " . mysqli_error($Conn),
-            "lulusan_ppg" => NULL
-        ];
-        echo json_encode($response, JSON_PRETTY_PRINT);
-        exit;
+        //Looping calon_guru
+        $query_calon_guru = mysqli_query($Conn, "SELECT id_calon_guru FROM calon_guru WHERE id_region='$id_region' AND ppg_blm_diangkat='Belum'");
+        while ($data_calon_guru = mysqli_fetch_array($query_calon_guru)) {
+            $id_calon_guru = $data_calon_guru['id_calon_guru'];
+
+            //Looping untuk menghitung baris
+            $lulusan_ppg=$lulusan_ppg+1;
+        }
     }
-    
-    mysqli_stmt_bind_param($stmt, "s", $province_code);
-    
-    if (!mysqli_stmt_execute($stmt)) {
-        $response = [
-            "code" => 500,
-            "message" => "Error executing query: " . mysqli_stmt_error($stmt),
-            "lulusan_ppg" => NULL
-        ];
-        echo json_encode($response, JSON_PRETTY_PRINT);
-        mysqli_stmt_close($stmt);
-        exit;
-    }
-    
-    mysqli_stmt_bind_result($stmt, $total_lulusan_ppg);
-    mysqli_stmt_fetch($stmt);
-    mysqli_stmt_close($stmt);
-
-    // Handle result
-    $lulusan_ppg = $total_lulusan_ppg ?? 0;
-
     // Buat Response
     $response = [
         "code" => 200,
