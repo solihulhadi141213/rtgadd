@@ -75,16 +75,16 @@ $(document).ready(function() {
         // Fungsi untuk menentukan warna berdasarkan jumlah guru yang kurang
         function getColor(persentase_kebutuhan_guru) {
              return persentase_kebutuhan_guru == 0 ? '#ffffff' :          
-                persentase_kebutuhan_guru <= 10 ? '#d7ecff' :        
-                persentase_kebutuhan_guru <= 20 ? '#b3ddff' :        
-                persentase_kebutuhan_guru <= 30 ? '#8ecbff' :        
-                persentase_kebutuhan_guru <= 40 ? '#69b7ff' :  
-                persentase_kebutuhan_guru <= 50 ? '#449eff' :        
-                persentase_kebutuhan_guru <= 60 ? '#1e82ff' :        
-                persentase_kebutuhan_guru <= 70 ? '#0066ff' :        
-                persentase_kebutuhan_guru <= 80 ? '#004ecc' :        
-                persentase_kebutuhan_guru <= 90 ? '#003a99' :        
-                                '#002266';       
+                persentase_kebutuhan_guru <= 10 ? '#fff4d7ff' :        
+                persentase_kebutuhan_guru <= 20 ? '#fff1b3ff' :        
+                persentase_kebutuhan_guru <= 30 ? '#ffee8eff' :        
+                persentase_kebutuhan_guru <= 40 ? '#ffe469ff' :  
+                persentase_kebutuhan_guru <= 50 ? '#ffdd44ff' :        
+                persentase_kebutuhan_guru <= 60 ? '#ffdd1eff' :        
+                persentase_kebutuhan_guru <= 70 ? '#ffd000ff' :        
+                persentase_kebutuhan_guru <= 80 ? '#ffbb00ff' :        
+                persentase_kebutuhan_guru <= 90 ? '#faab00ff' :        
+                                '#c28400ff';       
         }
 
         // Fungsi untuk menentukan style border berdasarkan sample_code

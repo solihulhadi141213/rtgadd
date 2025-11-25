@@ -69,6 +69,7 @@
                     <input type="hidden" name="page" id="page_detail_jabatan" value="1">
                     <input type="hidden" name="province_code" id="put_province_code" value="">
                     <input type="hidden" name="id_position" id="put_id_positiom" value="">
+                    <input type="hidden" name="school_level" id="put_school_level" value="">
                 </form>
                 <!-- <div class="row mb-3 border-1 border-bottom">
                     <div class="col-12 text-center">

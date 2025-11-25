@@ -142,7 +142,7 @@
             <tr>
                 <td><small>'.$no.'</small></td>
                 <td>
-                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#ModalDetailKebutuhanGuruByJabatan" data-province_code="'.$province_code .'" data-id_position="'.$id_position .'">
+                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#ModalDetailKebutuhanGuruByJabatan" data-province_code="'.$province_code .'" data-id_position="'.$id_position .'" data-school_level="'.$school_level_filter .'">
                         <small>'.$position_name.'</small>
                     </a>
                 </td>

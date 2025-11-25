@@ -286,17 +286,17 @@ function TampilkanPetaInteraktif(kode_provinsi) {
 
     // Fungsi untuk memberi warna berdasarkan kurang_guru
     function getColor(value) {
-        return value == 0 ? '#ffffff' :          // 0 = putih
-            value <= 10 ? '#d7ecff' :        // 1–10 biru muda
-            value <= 20 ? '#b3ddff' :        // 11–20
-            value <= 30 ? '#8ecbff' :        // 21–30
-            value <= 40 ? '#69b7ff' :        // 31–40
-            value <= 50 ? '#449eff' :        // 41–50
-            value <= 60 ? '#1e82ff' :        // 51–60
-            value <= 70 ? '#0066ff' :        // 61–70
-            value <= 80 ? '#004ecc' :        // 71–80
-            value <= 90 ? '#003a99' :        // 81–90
-                            '#002266';        // 91–100 (paling gelap)
+        return value == 0 ? '#ffffff' :          
+            value <= 10 ? '#fff4d7ff' :        
+            value <= 20 ? '#fff1b3ff' :        
+            value <= 30 ? '#ffee8eff' :        
+            value <= 40 ? '#ffe469ff' :       
+            value <= 50 ? '#ffdd44ff' :       
+            value <= 60 ? '#ffdd1eff' :       
+            value <= 70 ? '#ffd000ff' :        
+            value <= 80 ? '#ffbb00ff' :        
+            value <= 90 ? '#faab00ff' :       
+                            '#c28400ff';        
     }
 
     // Tambahkan legenda
@@ -317,52 +317,52 @@ function TampilkanPetaInteraktif(kode_provinsi) {
                     </div>
 
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #d7ecff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <div style="width: 20px; height: 15px; background-color: #fff4d7ff; border: 1px solid #ccc; margin-right: 5px;"></div>
                         <small>1 % – 10 %</small>
                     </div>
 
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #b3ddff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <div style="width: 20px; height: 15px; background-color: #fff1b3ff; border: 1px solid #ccc; margin-right: 5px;"></div>
                         <small>11 % – 20 %</small>
                     </div>
 
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #8ecbff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <div style="width: 20px; height: 15px; background-color: #ffee8eff; border: 1px solid #ccc; margin-right: 5px;"></div>
                         <small>21 % – 30 %</small>
                     </div>
 
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #69b7ff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <div style="width: 20px; height: 15px; background-color: #ffe469ff; border: 1px solid #ccc; margin-right: 5px;"></div>
                         <small>31 % – 40 %</small>
                     </div>
 
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #449eff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <div style="width: 20px; height: 15px; background-color: #ffdd44ff; border: 1px solid #ccc; margin-right: 5px;"></div>
                         <small>41 % – 50 %</small>
                     </div>
 
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #1e82ff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <div style="width: 20px; height: 15px; background-color: #ffdd1eff; border: 1px solid #ccc; margin-right: 5px;"></div>
                         <small>51 % – 60 %</small>
                     </div>
 
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #0066ff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <div style="width: 20px; height: 15px; background-color: #ffd000ff; border: 1px solid #ccc; margin-right: 5px;"></div>
                         <small>61 % – 70 %</small>
                     </div>
 
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #004ecc; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <div style="width: 20px; height: 15px; background-color: #ffbb00ff; border: 1px solid #ccc; margin-right: 5px;"></div>
                         <small>71 % – 80 %</small>
                     </div>
 
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #003a99; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <div style="width: 20px; height: 15px; background-color: #faab00ff; border: 1px solid #ccc; margin-right: 5px;"></div>
                         <small>81 % – 90 %</small>
                     </div>
 
                     <div class="d-flex align-items-center">
-                        <div style="width: 20px; height: 15px; background-color: #002266; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <div style="width: 20px; height: 15px; background-color: #c28400ff; border: 1px solid #ccc; margin-right: 5px;"></div>
                         <small>91 % – 100 %</small>
                     </div>
 
@@ -666,6 +666,7 @@ $(document).ready(function () {
     $('#ModalDetailKebutuhanGuruByJabatan').on('show.bs.modal', function (e) {
         var province_code = $(e.relatedTarget).data('province_code');
         var id_position = $(e.relatedTarget).data('id_position');
+        var school_level = $(e.relatedTarget).data('school_level');
 
         //Reset halaman menjadi 1
         $('#page_detail_jabatan').val('1');
@@ -673,6 +674,7 @@ $(document).ready(function () {
         //Tempelkan province_code dan id_position ke form filter
         $('#put_province_code').val(province_code);
         $('#put_id_positiom').val(id_position);
+        $('#put_school_level').val(school_level);
 
         //Panggil Function
         ShowTabelDetailJabatan();
