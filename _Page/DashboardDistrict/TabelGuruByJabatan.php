@@ -154,7 +154,7 @@
                 <td><small>'.$total_pppk2024.'</small></td>
                 <td><small>'.$total_kurang_guru.'</small></td>
                 <td>
-                    <button type="button" class="btn btn-sm btn-primary btn-floating" data-bs-toggle="modal" data-bs-target="#ModalDetailJabatan" data-id_region="'.$id_region.'" data-id_position="'.$id_position.'">
+                    <button type="button" class="btn btn-sm btn-primary btn-floating" data-bs-toggle="modal" data-bs-target="#ModalDetailJabatan" data-id_region="'.$id_region.'" data-id_position="'.$id_position.'" data-school_level="'.$school_level.'">
                         <i class="bi bi-arrow-up-right"></i>
                     </button>
                 </td>

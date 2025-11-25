@@ -286,17 +286,17 @@ function TampilkanPetaInteraktif(kode_provinsi) {
 
     // Fungsi untuk memberi warna berdasarkan kurang_guru
     function getColor(value) {
-        return value == 0 ? '#ffffff' :          
-            value <= 10 ? '#fff4d7ff' :        
-            value <= 20 ? '#fff1b3ff' :        
-            value <= 30 ? '#ffee8eff' :        
-            value <= 40 ? '#ffe469ff' :       
-            value <= 50 ? '#ffdd44ff' :       
-            value <= 60 ? '#ffdd1eff' :       
-            value <= 70 ? '#ffd000ff' :        
-            value <= 80 ? '#ffbb00ff' :        
-            value <= 90 ? '#faab00ff' :       
-                            '#c28400ff';        
+        return value == 0 ? '#ffffffff' :          
+            value <= 10 ? '#bffad3ff' :        
+            value <= 20 ? '#91f5b3ff' :        
+            value <= 30 ? '#82e2a2ff' :        
+            value <= 40 ? '#53e784ff' :       
+            value <= 50 ? '#31e46cff' :       
+            value <= 60 ? '#22c056ff' :       
+            value <= 70 ? '#058f33ff' :        
+            value <= 80 ? '#045720ff' :        
+            value <= 90 ? '#05531fff' :       
+                            '#023312ff';        
     }
 
     // Tambahkan legenda
@@ -312,57 +312,57 @@ function TampilkanPetaInteraktif(kode_provinsi) {
                 <div class="card-body py-2">
 
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #ffffff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <div style="width: 20px; height: 15px; background-color: #ffffffff; border: 1px solid #ccc; margin-right: 5px;"></div>
                         <small>0 %</small>
                     </div>
 
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #fff4d7ff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <div style="width: 20px; height: 15px; background-color: #bffad3ff; border: 1px solid #ccc; margin-right: 5px;"></div>
                         <small>1 % – 10 %</small>
                     </div>
 
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #fff1b3ff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <div style="width: 20px; height: 15px; background-color: #91f5b3ff; border: 1px solid #ccc; margin-right: 5px;"></div>
                         <small>11 % – 20 %</small>
                     </div>
 
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #ffee8eff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <div style="width: 20px; height: 15px; background-color: #82e2a2ff; border: 1px solid #ccc; margin-right: 5px;"></div>
                         <small>21 % – 30 %</small>
                     </div>
 
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #ffe469ff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <div style="width: 20px; height: 15px; background-color: #53e784ff; border: 1px solid #ccc; margin-right: 5px;"></div>
                         <small>31 % – 40 %</small>
                     </div>
 
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #ffdd44ff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <div style="width: 20px; height: 15px; background-color: #31e46cff; border: 1px solid #ccc; margin-right: 5px;"></div>
                         <small>41 % – 50 %</small>
                     </div>
 
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #ffdd1eff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <div style="width: 20px; height: 15px; background-color: #22c056ff; border: 1px solid #ccc; margin-right: 5px;"></div>
                         <small>51 % – 60 %</small>
                     </div>
 
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #ffd000ff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <div style="width: 20px; height: 15px; background-color: #058f33ff; border: 1px solid #ccc; margin-right: 5px;"></div>
                         <small>61 % – 70 %</small>
                     </div>
 
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #ffbb00ff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <div style="width: 20px; height: 15px; background-color: #045720ff; border: 1px solid #ccc; margin-right: 5px;"></div>
                         <small>71 % – 80 %</small>
                     </div>
 
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #faab00ff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <div style="width: 20px; height: 15px; background-color: #05531fff; border: 1px solid #ccc; margin-right: 5px;"></div>
                         <small>81 % – 90 %</small>
                     </div>
 
                     <div class="d-flex align-items-center">
-                        <div style="width: 20px; height: 15px; background-color: #c28400ff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <div style="width: 20px; height: 15px; background-color: #023312ff; border: 1px solid #ccc; margin-right: 5px;"></div>
                         <small>91 % – 100 %</small>
                     </div>
 

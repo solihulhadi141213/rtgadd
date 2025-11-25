@@ -393,6 +393,7 @@ $(document).ready(function () {
     $('#ModalDetailJabatan').on('show.bs.modal', function (e) {
         var id_region = $(e.relatedTarget).data('id_region');
         var id_position = $(e.relatedTarget).data('id_position');
+        var school_level = $(e.relatedTarget).data('school_level');
 
         //Reset halaman menjadi 1
         $('#page_detail_jabatan').val('1');
@@ -400,6 +401,7 @@ $(document).ready(function () {
         //Tempelkan id_region dan id_position ke form filter
         $('#put_id_region').val(id_region);
         $('#put_id_positiom').val(id_position);
+        $('#put_school_level').val(school_level);
 
         //Panggil Function
         ShowTabelDetailJabatan();

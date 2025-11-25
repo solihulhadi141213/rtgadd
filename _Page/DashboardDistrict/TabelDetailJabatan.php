@@ -43,6 +43,15 @@
     //Buat Variabel
     $id_region   = mysqli_real_escape_string($Conn, $_POST['id_region']);
     $id_position = mysqli_real_escape_string($Conn, $_POST['id_position']);
+    
+    //school_level
+    if(!empty($_POST['school_level'])){
+        $school_level = $_POST['school_level'];
+        $school_level_label = $_POST['school_level'];
+    }else{
+        $school_level = "";
+        $school_level_label = "Semua Jenjang";
+    }
 
     //Buka nama Provinsi dan Kab/Kota
     $province_name = GetDetailData($Conn, 'region', 'id_region', $id_region, 'province_name');
@@ -64,17 +73,25 @@
     }
 
     //ShortBy
-    $ShortBy = !empty($_POST['ShortBy']) ? $_POST['ShortBy'] : "ASC";
+    $ShortBy = !empty($_POST['ShortBy']) ? $_POST['ShortBy'] : "DESC";
 
     //OrderBy
     $OrderBy = !empty($_POST['OrderBy']) ? $_POST['OrderBy'] : "KurangGuru";
+
+    $where_school_level = "";
+    if(!empty($school_level)){
+        $sl = mysqli_real_escape_string($Conn, $school_level);
+        $where_school_level = " AND s.school_level = '$sl' ";
+    }
 
     //================== HITUNG TOTAL DATA ==================//
     $sql_count = "
         SELECT COUNT(*) AS jml
         FROM school s
         INNER JOIN position_school ps ON s.id_school = ps.id_school
-        WHERE s.id_region='$id_region' AND ps.id_position='$id_position'
+        WHERE s.id_region='$id_region' 
+        AND ps.id_position='$id_position'
+        $where_school_level
     ";
     $res_count = mysqli_query($Conn, $sql_count);
     $row_count = mysqli_fetch_assoc($res_count);
@@ -97,7 +114,9 @@
         SELECT s.school_name, ps.*
         FROM school s
         INNER JOIN position_school ps ON s.id_school = ps.id_school
-        WHERE s.id_region='$id_region' AND ps.id_position='$id_position'
+        WHERE s.id_region='$id_region'
+        AND ps.id_position='$id_position'
+        $where_school_level
         ORDER BY ps.$OrderBy $ShortBy
         LIMIT $posisi, $batas
     ";
@@ -140,7 +159,7 @@
     var page_count    = <?php echo $JmlHalaman; ?>;
     var curent_page   = <?php echo $page; ?>;
 
-    $('#title_position_province_name').html('<b>Untuk Jabatan : </b> '+position_name+' | '+district_name+' - '+province_name+'');
+    $('#title_position_province_name').html('<b>Untuk Jabatan : </b> '+position_name+' | '+district_name+' - '+province_name+'<br><b>Jenjang Pendidikan :</b> '+school_level_label+'');
     
     $('#data_count_school').html('Data : ' + data_count + ' Record');
     $('#page_info_school').html('Page ' + curent_page + ' / ' + page_count);

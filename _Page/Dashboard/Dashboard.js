@@ -74,17 +74,17 @@ $(document).ready(function() {
     function renderMap(geoJsonData) {
         // Fungsi untuk menentukan warna berdasarkan jumlah guru yang kurang
         function getColor(persentase_kebutuhan_guru) {
-             return persentase_kebutuhan_guru == 0 ? '#ffffff' :          
-                persentase_kebutuhan_guru <= 10 ? '#fff4d7ff' :        
-                persentase_kebutuhan_guru <= 20 ? '#fff1b3ff' :        
-                persentase_kebutuhan_guru <= 30 ? '#ffee8eff' :        
-                persentase_kebutuhan_guru <= 40 ? '#ffe469ff' :  
-                persentase_kebutuhan_guru <= 50 ? '#ffdd44ff' :        
-                persentase_kebutuhan_guru <= 60 ? '#ffdd1eff' :        
-                persentase_kebutuhan_guru <= 70 ? '#ffd000ff' :        
-                persentase_kebutuhan_guru <= 80 ? '#ffbb00ff' :        
-                persentase_kebutuhan_guru <= 90 ? '#faab00ff' :        
-                                '#c28400ff';       
+             return persentase_kebutuhan_guru == 0 ? '#ffffffff' :          
+                persentase_kebutuhan_guru <= 10 ? '#aff8b5ff' :        
+                persentase_kebutuhan_guru <= 20 ? '#77ff82ff' :        
+                persentase_kebutuhan_guru <= 30 ? '#4dff5cff' :        
+                persentase_kebutuhan_guru <= 40 ? '#08e61aff' :  
+                persentase_kebutuhan_guru <= 50 ? '#18fd2bff' :        
+                persentase_kebutuhan_guru <= 60 ? '#07ff1bff' :        
+                persentase_kebutuhan_guru <= 70 ? '#09ce19ff' :        
+                persentase_kebutuhan_guru <= 80 ? '#1cb629ff' :        
+                persentase_kebutuhan_guru <= 90 ? '#069112ff' :        
+                                '#04700dff';       
         }
 
         // Fungsi untuk menentukan style border berdasarkan sample_code
