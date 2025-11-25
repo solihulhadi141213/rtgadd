@@ -25,7 +25,8 @@
         }
 
         // Array district_code yang menjadi sample (garis merah)
-        $sample_district = [3374, 6403, 1473, 1505, 1211];
+        // $sample_district = [3374, 6403, 1473, 1505, 1211];
+        $sample_district = [];
 
         // Inisialisasi features untuk GeoJSON
         $features = [];
@@ -66,19 +67,40 @@
             }
 
             // Hitung Kurang Guru
+
+            #inisiasi kuarang guru
             $KurangGuru = 0;
+            $nilaiAbk   = 0;
+
+            # Loop 'school'
             $query_school = mysqli_query($Conn, "SELECT id_school FROM school WHERE id_region='$id_region'");
             if ($query_school) {
                 while ($data_school = mysqli_fetch_assoc($query_school)) {
                     $id_school = $data_school['id_school'];
+
+                    # Loop 'KurangGuru' from 'position_school'
                     $query_position = mysqli_query($Conn, "SELECT KurangGuru FROM position_school WHERE id_school='$id_school'");
                     if ($query_position) {
                         while ($data_position = mysqli_fetch_assoc($query_position)) {
                             $KurangGuru += intval($data_position['KurangGuru'] ?? 0);
                         }
                     }
+
+                    # Loop 'KurangGuru' from 'position_school'
+                    $query_position2 = mysqli_query($Conn, "SELECT abk FROM position_school WHERE id_school='$id_school'");
+                    if ($query_position2) {
+                        while ($data_position2 = mysqli_fetch_assoc($query_position2)) {
+                            $nilaiAbk += intval($data_position2['abk'] ?? 0);
+                        }
+                    }
                 }
             }
+            if(empty($nilaiAbk)){
+                $persentase = 0;
+            }else{
+                $persentase = ($KurangGuru/$nilaiAbk)*100;
+            }
+            $persentase_fix = round($persentase);
 
             // Cek apakah district termasuk sample
             $is_sample = in_array(intval($district_code), $sample_district);
@@ -94,7 +116,7 @@
                             "province_name" => $province_name,
                             "district_code" => $district_code,
                             "district_name" => $district_name,
-                            "kurang_guru" => $KurangGuru,
+                            "kurang_guru" => $persentase_fix,
                             "is_sample" => $is_sample
                         ],
                         "geometry" => $feature['geometry']

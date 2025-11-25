@@ -18,8 +18,13 @@
     if(empty($_GET['province_code'])){
         //Jika province_code kosong cari berdasarkan access_client
         if(!empty($access_client)){
-            $id_region_client = GetDetailData($Conn, 'access_client', 'id_access', $SessionIdAccess, 'id_region');
-            $province_code = GetDetailData($Conn, 'region', 'id_region', $id_region_client, 'province_code');
+            $level_client = GetDetailData($Conn, 'access_client', 'id_access', $SessionIdAccess, 'level');
+            if($level_client=="National"){
+                $province_code ="";
+            }else{
+                $id_region_client = GetDetailData($Conn, 'access_client', 'id_access', $SessionIdAccess, 'id_region');
+                $province_code = GetDetailData($Conn, 'region', 'id_region', $id_region_client, 'province_code');
+            }
         }else{
             $province_code ="";
         }
@@ -117,7 +122,7 @@
                     <div class="row mb-3">
                         <div class="col-12 text-center">
                             <b class="card-title">
-                                Sebaran Kebutuhan Guru
+                                Persentase Kebutuhan Guru
                             </b>
                         </div>
                     </div>
@@ -127,9 +132,9 @@
                                 <small>Loading...</small>
                                 <!-- Menampilkan peta interaktif menggunakan leaflet-->
                             </div>
-                            <small>
+                            <!-- <small>
                                 <b>Keterangan :</b> Garis berwarna <span class="text-danger">Merah</span> pada peta menunjukan daerah Kab/Kota yang menjadii <i>Pilot</i>
-                            </small>
+                            </small> -->
                         </div>
                     </div>
                 </div>

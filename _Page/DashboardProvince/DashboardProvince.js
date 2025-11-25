@@ -215,6 +215,22 @@ function loadPieChartKebutuhanGuru(province_code) {
                 rawData.push(item);
             });
 
+            // Mapping warna berdasarkan jenjang
+            let colorMap = {
+                "SD": "#4da3ff",       
+                "TK": "#e9c80fff",       
+                "SMK": "#e704c9ff",       
+                "SLB": "#11b166ff",      
+                "SMA": "#d88304ff", 
+                "SMP": "#830879ff"
+            };
+
+            // Warna sesuai urutan data
+            // Build array warna sesuai urutan data
+            let colors = labels.map(level => {
+                return colorMap[level] ? colorMap[level] : null;  
+            });
+
             // Hapus chart lama kalau ada
             $("#ChartKebutuhanGuru").empty();
 
@@ -227,16 +243,14 @@ function loadPieChartKebutuhanGuru(province_code) {
                             let index = config.dataPointIndex;
                             let selectedData = rawData[index];
 
-                            //Tampilkan Modal
                             $("#ModalDetailByJenjang").modal("show");
-
-                            //Tamilkan Detaiil Data
-                            ShowModalDetailContent(selectedData.province_code,selectedData.school_level) 
+                            ShowModalDetailContent(selectedData.province_code, selectedData.school_level);
                         }
                     }
                 },
                 labels: labels,
                 series: series,
+                colors: colors,
                 legend: {
                     position: 'bottom'
                 }
@@ -272,14 +286,17 @@ function TampilkanPetaInteraktif(kode_provinsi) {
 
     // Fungsi untuk memberi warna berdasarkan kurang_guru
     function getColor(value) {
-        return value > 5000 ? '#000000' : // hitam
-            value > 2000 ? '#00008B' : // biru sangat tua
-            value > 1000 ? '#0000CD' : // biru tua
-            value > 500  ? '#4169E1' : // royal blue
-            value > 100  ? '#6495ED' : // cornflower blue
-            value > 50   ? '#87CEEB' : // sky blue
-            value > 10   ? '#ADD8E6' : // light blue
-                            '#F8F9FA';  // putih (default)
+        return value == 0 ? '#ffffff' :          // 0 = putih
+            value <= 10 ? '#d7ecff' :        // 1–10 biru muda
+            value <= 20 ? '#b3ddff' :        // 11–20
+            value <= 30 ? '#8ecbff' :        // 21–30
+            value <= 40 ? '#69b7ff' :        // 31–40
+            value <= 50 ? '#449eff' :        // 41–50
+            value <= 60 ? '#1e82ff' :        // 51–60
+            value <= 70 ? '#0066ff' :        // 61–70
+            value <= 80 ? '#004ecc' :        // 71–80
+            value <= 90 ? '#003a99' :        // 81–90
+                            '#002266';        // 91–100 (paling gelap)
     }
 
     // Tambahkan legenda
@@ -293,43 +310,68 @@ function TampilkanPetaInteraktif(kode_provinsi) {
                     <strong class="card-title mb-0" style="font-size: 12px;">Keterangan</strong>
                 </div>
                 <div class="card-body py-2">
+
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #F8F9FA; border: 1px solid #ccc; margin-right: 5px;"></div>
-                        <small>0-10</small>
+                        <div style="width: 20px; height: 15px; background-color: #ffffff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <small>0 %</small>
                     </div>
+
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #ADD8E6; border: 1px solid #ccc; margin-right: 5px;"></div>
-                        <small>11-50</small>
+                        <div style="width: 20px; height: 15px; background-color: #d7ecff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <small>1 % – 10 %</small>
                     </div>
+
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #87CEEB; border: 1px solid #ccc; margin-right: 5px;"></div>
-                        <small>51-100</small>
+                        <div style="width: 20px; height: 15px; background-color: #b3ddff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <small>11 % – 20 %</small>
                     </div>
+
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #6495ED; border: 1px solid #ccc; margin-right: 5px;"></div>
-                        <small>101-500</small>
+                        <div style="width: 20px; height: 15px; background-color: #8ecbff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <small>21 % – 30 %</small>
                     </div>
+
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #4169E1; border: 1px solid #ccc; margin-right: 5px;"></div>
-                        <small>501-1000</small>
+                        <div style="width: 20px; height: 15px; background-color: #69b7ff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <small>31 % – 40 %</small>
                     </div>
+
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #0000CD; border: 1px solid #ccc; margin-right: 5px;"></div>
-                        <small>1001-2000</small>
+                        <div style="width: 20px; height: 15px; background-color: #449eff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <small>41 % – 50 %</small>
                     </div>
+
                     <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #00008B; border: 1px solid #ccc; margin-right: 5px;"></div>
-                        <small>2001-5000</small>
+                        <div style="width: 20px; height: 15px; background-color: #1e82ff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <small>51 % – 60 %</small>
                     </div>
+
+                    <div class="d-flex align-items-center mb-1">
+                        <div style="width: 20px; height: 15px; background-color: #0066ff; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <small>61 % – 70 %</small>
+                    </div>
+
+                    <div class="d-flex align-items-center mb-1">
+                        <div style="width: 20px; height: 15px; background-color: #004ecc; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <small>71 % – 80 %</small>
+                    </div>
+
+                    <div class="d-flex align-items-center mb-1">
+                        <div style="width: 20px; height: 15px; background-color: #003a99; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <small>81 % – 90 %</small>
+                    </div>
+
                     <div class="d-flex align-items-center">
-                        <div style="width: 20px; height: 15px; background-color: #000000; border: 1px solid #ccc; margin-right: 5px;"></div>
-                        <small>>5000</small>
+                        <div style="width: 20px; height: 15px; background-color: #002266; border: 1px solid #ccc; margin-right: 5px;"></div>
+                        <small>91 % – 100 %</small>
                     </div>
+
                 </div>
             </div>
         `;
         return div;
     };
+
 
     legend.addTo(map);
 
@@ -379,7 +421,7 @@ function TampilkanPetaInteraktif(kode_provinsi) {
                             <div class="border-bottom pb-2 mb-2">
                                 <h6 class="mb-1 fw-bold">${kabkota}</h6>
                                 <small class="text-muted">${prov}</small><br>
-                                <small class="text-muted">Kekurangan Guru : ${kurangGuru}</small>
+                                <small class="text-muted">Persentase Kebutuhan Guru : ${kurangGuru} %</small>
                             </div>
                             <div class="text-end">
                                 <button type="button" class="btn btn-sm btn-secondary btn-block" data-bs-toggle="modal" data-bs-target="#ModalDetailKabKot" data-id="${kabkota_code}">

@@ -39,7 +39,8 @@ $(document).ready(function() {
     });
 
     // ==================MENAMPILKAN PETA================================
-    var sample_code = [15,33,12,64,14];
+    // var sample_code = [15,33,12,64,14];
+    var sample_code = [];
     // Inisialisasi peta
     var map = L.map('indonesia-map').setView([-2.5489, 118.0149], 5);
 
@@ -72,15 +73,18 @@ $(document).ready(function() {
 
     function renderMap(geoJsonData) {
         // Fungsi untuk menentukan warna berdasarkan jumlah guru yang kurang
-        function getColor(kurangGuru) {
-            return kurangGuru > 1000 ? '#020a79ff' :
-                kurangGuru > 750 ? '#201cffff' :
-                kurangGuru > 500 ? '#5d5bffff' :
-                kurangGuru > 200 ? '#7f7dffff' :
-                kurangGuru > 100 ? '#8e99faff' :
-                kurangGuru > 50 ? '#a7aff5ff' :
-                kurangGuru > 10 ? '#ccccf5ff' :
-                                    '#f8f8f8ff';
+        function getColor(persentase_kebutuhan_guru) {
+             return persentase_kebutuhan_guru == 0 ? '#ffffff' :          
+                persentase_kebutuhan_guru <= 10 ? '#d7ecff' :        
+                persentase_kebutuhan_guru <= 20 ? '#b3ddff' :        
+                persentase_kebutuhan_guru <= 30 ? '#8ecbff' :        
+                persentase_kebutuhan_guru <= 40 ? '#69b7ff' :  
+                persentase_kebutuhan_guru <= 50 ? '#449eff' :        
+                persentase_kebutuhan_guru <= 60 ? '#1e82ff' :        
+                persentase_kebutuhan_guru <= 70 ? '#0066ff' :        
+                persentase_kebutuhan_guru <= 80 ? '#004ecc' :        
+                persentase_kebutuhan_guru <= 90 ? '#003a99' :        
+                                '#002266';       
         }
 
         // Fungsi untuk menentukan style border berdasarkan sample_code
@@ -109,7 +113,7 @@ $(document).ready(function() {
             var borderStyle = getBorderStyle(kodeProv);
             
             return {
-                fillColor: data ? getColor(data.kurang_guru) : '#ccc',
+                fillColor: data ? getColor(data.persentase_kebutuhan_guru) : '#ccc',
                 weight: borderStyle.weight,
                 opacity: borderStyle.opacity,
                 color: borderStyle.color,
@@ -182,6 +186,10 @@ $(document).ready(function() {
                                 <td>Kebutuhan Guru:</td>
                                 <td class="text-end"><strong class="text-danger">${data.kurang_guru.toLocaleString()}</strong></td>
                             </tr>
+                            <tr>
+                                <td>Persentase Kebutuhan Guru:</td>
+                                <td class="text-end"><strong class="text-danger">${data.persentase_kebutuhan_guru.toLocaleString()} %</strong></td>
+                            </tr>
                         </table>
                         <div class="text-center">
                             <button type="button" class="btn btn-sm btn-block btn-primary" data-bs-toggle="modal" data-bs-target="#ModalDetailMap" data-id="${kodeProv}">
@@ -210,28 +218,46 @@ $(document).ready(function() {
         // Tambahkan legend
         var legend = L.control({position: 'bottomright'});
 
-        legend.onAdd = function(map) {
-            var div = L.DomUtil.create('div', 'info legend');
-            var grades = [0, 10, 50, 100, 200, 500, 750, 1000];
-            var labels = ['<strong>Kekurangan Guru</strong>'];
-            var from, to;
+        legend.onAdd = function (map) {
+            var div = L.DomUtil.create('div', 'legend card shadow-sm');
+
+            var grades = [0, 1, 11, 21, 31, 41, 51, 61, 71, 81, 91];
+            var labels = [];
+
+            // Header card
+            var html = `
+                <div class="card-header py-2">
+                    <strong class="card-title mb-0" style="font-size: 12px;">Keterangan</strong>
+                </div>
+                <div class="card-body py-2">
+            `;
 
             for (var i = 0; i < grades.length; i++) {
-                from = grades[i];
-                to = grades[i + 1];
+                var from = grades[i];
+                var to = grades[i + 1] ? grades[i + 1] - 1 : 100;
 
-                labels.push(
-                    '<i style="background:' + getColor(from + 1) + '"></i> ' +
-                    from + (to ? '&ndash;' + to : '+'));
+                var color = getColor(from === 0 ? 0 : from); // 0% tetap putih
+
+                html += `
+                    <div class="d-flex align-items-center mb-1">
+                        <div style="
+                            width: 20px; 
+                            height: 15px; 
+                            background-color: ${color};
+                            border: 1px solid #ccc; 
+                            margin-right: 6px;
+                        "></div>
+                        <small>${from === 0 ? '0 %' : from + ' % – ' + to + ' %'}</small>
+                    </div>
+                `;
             }
 
-            // Tambahkan keterangan untuk border merah
-            labels.push('<br><strong>Penanda:</strong>');
-            labels.push('<i style="border: 3px solid #ff0000; background: transparent; width: 12px; height: 12px; display: inline-block;"></i> Provinsi dalam sample_code');
+            html += `</div>`; // close card-body
 
-            div.innerHTML = labels.join('<br>');
+            div.innerHTML = html;
             return div;
         };
+
 
         legend.addTo(map);
 
@@ -265,6 +291,10 @@ $(document).ready(function() {
                             <tr>
                                 <td>Kebutuhan:</td>
                                 <td class="text-end"><strong class="text-danger">${data.kurang_guru.toLocaleString()}</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Persentase Kebutuhan:</td>
+                                <td class="text-end"><strong class="text-danger">${data.persentase_kebutuhan_guru.toLocaleString()} %</strong></td>
                             </tr>
                         </table>
                     `;

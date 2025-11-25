@@ -105,14 +105,12 @@ function ShowDistrictInformation(district_code) {
 function ShowChartPie() {
     var district_code = $("#district_code").val() || "";
 
-    // Validasi district_code tidak kosong
     if (district_code === "") {
         $('#ShowChartPie').html('<div class="text-muted text-center">District code kosong</div>');
         $('#ShowChartPieDebug').text('');
         return;
     }
 
-    // Loading
     $('#ShowChartPie').html('<div class="text-center">Loading chart...</div>');
     $('#ShowChartPieDebug').text('');
 
@@ -122,19 +120,15 @@ function ShowChartPie() {
         data: { district_code: district_code },
         dataType: 'json',
         success: function(response) {
-            // Tampilkan debug ringkas
             $('#ShowChartPieDebug').text(JSON.stringify(response.debug, null, 2));
 
             if (!response || typeof response.code === 'undefined') {
                 $('#ShowChartPie').html('<div class="text-danger">Response tidak valid (format JSON salah)</div>');
-                console.error('Invalid response:', response);
                 return;
             }
 
             if (response.code !== 200) {
-                // Error / session expired / invalid input
                 $('#ShowChartPie').html('<div class="text-danger text-center">' + response.message + '</div>');
-                console.warn('ShowChartPie warning:', response);
                 return;
             }
 
@@ -145,7 +139,6 @@ function ShowChartPie() {
                 return;
             }
 
-            // Buat series & labels dari KurangGuru
             var labels = metadata.map(function(m){ return m.school_level || 'Unknown'; });
             var series = metadata.map(function(m){ return Number(m.KurangGuru) || 0; });
 
@@ -155,13 +148,28 @@ function ShowChartPie() {
                 return;
             }
 
-            // Buat container chart
             $('#ShowChartPie').html('<div id="chartPie" style="height:300px;"></div>');
 
-            // Clean up chart instance sebelumnya jika ada
             if (window._chartPieInstance) {
                 try { window._chartPieInstance.destroy(); } catch(e) {}
             }
+
+            // ============================
+            // 🎨 Warna Khusus + Default Apex
+            // ============================
+            let colorMap = {
+                "SD": "#4da3ff",       
+                "TK": "#e9c80fff",       
+                "SMK": "#e704c9ff",       
+                "SLB": "#11b166ff",      
+                "SMA": "#d88304ff", 
+                "SMP": "#830879ff"
+            };
+
+            // Jika tidak ada di mapping → gunakan warna default ApexCharts
+            let colors = labels.map(function(level){
+                return colorMap[level] ? colorMap[level] : null;
+            });
 
             var options = {
                 chart: {
@@ -169,19 +177,15 @@ function ShowChartPie() {
                     height: 400,
                     events: {
                         dataPointSelection: function(event, chartContext, config) {
-                            // Dapatkan school_level dari slice yang diklik
                             var clickedSchoolLevel = labels[config.dataPointIndex];
-                            
-                            // Tampilkan modal
                             $('#ModalDetailSchoolLevel').modal('show');
-                            
-                            // Panggil fungsi ShowDetailSchoolLevel setelah modal ditampilkan
                             ShowDetailSchoolLevel(district_code, clickedSchoolLevel);
                         }
                     }
                 },
                 series: series,
                 labels: labels,
+                colors: colors,   // ← warna sudah dimasukkan disini
                 legend: {
                     position: 'bottom'
                 },
@@ -190,14 +194,10 @@ function ShowChartPie() {
                         formatter: function(val) { return val + " guru"; }
                     }
                 },
-                noData: {
-                    text: 'No data to display'
-                },
+                noData: { text: 'No data to display' },
                 plotOptions: {
                     pie: {
-                        donut: {
-                            size: '50%'
-                        },
+                        donut: { size: '50%' },
                         customScale: 1,
                         dataLabels: {
                             offset: -5,
@@ -207,10 +207,7 @@ function ShowChartPie() {
                 },
                 states: {
                     hover: {
-                        filter: {
-                            type: 'darken',
-                            value: 0.1
-                        }
+                        filter: { type: 'darken', value: 0.1 }
                     }
                 }
             };
@@ -220,11 +217,11 @@ function ShowChartPie() {
         },
         error: function(xhr, status, err) {
             $('#ShowChartPieDebug').text('AJAX error: ' + status + '\n' + xhr.responseText);
-            $('#ShowChartPie').html('<div class="text-danger text-center">Terjadi kesalahan saat memuat data. Periksa console / debug.</div>');
-            console.error('AJAX error', status, err, xhr.responseText);
+            $('#ShowChartPie').html('<div class="text-danger text-center">Terjadi kesalahan saat memuat data.</div>');
         }
     });
 }
+
 
 //Fungsi Menampilkan Tabel 
 function ShowTabelGuruByJabatan() {

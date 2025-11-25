@@ -5,7 +5,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "76",
@@ -13,7 +14,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "73",
@@ -21,7 +23,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "91",
@@ -29,7 +32,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "92",
@@ -37,7 +41,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "75",
@@ -45,15 +50,17 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "14",
         "PROVINSI": "Riau",
-        "ABK": 0,
-        "jumlah_guru": 0,
-        "kurang_guru": 0,
-        "kurang_asn": 0
+        "ABK": 111012,
+        "jumlah_guru": 95392,
+        "kurang_guru": 26112,
+        "kurang_asn": 46304,
+        "persentase_kebutuhan_guru": 24
     },
     {
         "KODE_PROV": "91",
@@ -61,7 +68,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "34",
@@ -69,7 +77,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "13",
@@ -77,7 +86,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "31",
@@ -85,7 +95,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "81",
@@ -93,7 +104,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "17",
@@ -101,7 +113,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "18",
@@ -109,7 +122,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "91",
@@ -117,7 +131,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "21",
@@ -125,7 +140,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "52",
@@ -133,15 +149,17 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "15",
         "PROVINSI": "Jambi",
-        "ABK": 6553,
-        "jumlah_guru": 7022,
-        "kurang_guru": 883,
-        "kurang_asn": 1261
+        "ABK": 58979,
+        "jumlah_guru": 50390,
+        "kurang_guru": 14272,
+        "kurang_asn": 22335,
+        "persentase_kebutuhan_guru": 24
     },
     {
         "KODE_PROV": "51",
@@ -149,7 +167,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "35",
@@ -157,7 +176,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "92",
@@ -165,15 +185,17 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "12",
         "PROVINSI": "Sumatera Utara",
-        "ABK": 0,
-        "jumlah_guru": 0,
-        "kurang_guru": 0,
-        "kurang_asn": 0
+        "ABK": 239271,
+        "jumlah_guru": 188139,
+        "kurang_guru": 71300,
+        "kurang_asn": 121639,
+        "persentase_kebutuhan_guru": 30
     },
     {
         "KODE_PROV": "74",
@@ -181,7 +203,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "53",
@@ -189,7 +212,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "63",
@@ -197,7 +221,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "11",
@@ -205,7 +230,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "62",
@@ -213,7 +239,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "91",
@@ -221,7 +248,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "19",
@@ -229,7 +257,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "16",
@@ -237,7 +266,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "36",
@@ -245,7 +275,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "71",
@@ -253,7 +284,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "65",
@@ -261,23 +293,26 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "64",
         "PROVINSI": "Kalimantan Timur",
-        "ABK": 0,
-        "jumlah_guru": 0,
-        "kurang_guru": 0,
-        "kurang_asn": 0
+        "ABK": 25852,
+        "jumlah_guru": 21377,
+        "kurang_guru": 6133,
+        "kurang_asn": 9819,
+        "persentase_kebutuhan_guru": 24
     },
     {
         "KODE_PROV": "33",
         "PROVINSI": "Jawa Tengah",
-        "ABK": 165269,
-        "jumlah_guru": 115903,
-        "kurang_guru": 49366,
-        "kurang_asn": 80485
+        "ABK": 461073,
+        "jumlah_guru": 330888,
+        "kurang_guru": 130185,
+        "kurang_asn": 224341,
+        "persentase_kebutuhan_guru": 28
     },
     {
         "KODE_PROV": "82",
@@ -285,7 +320,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "61",
@@ -293,7 +329,8 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     },
     {
         "KODE_PROV": "32",
@@ -301,6 +338,7 @@
         "ABK": 0,
         "jumlah_guru": 0,
         "kurang_guru": 0,
-        "kurang_asn": 0
+        "kurang_asn": 0,
+        "persentase_kebutuhan_guru": 0
     }
 ]

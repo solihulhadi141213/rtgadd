@@ -76,6 +76,13 @@
                     }
                 }
             }
+            if(empty($jumlah_abk)){
+                $persentase_kebutuhan_guru = 0;
+            }else{
+                $persentase_kebutuhan_guru = ($kurang_guru/$jumlah_abk)*100;
+            }
+            
+            $persentase_kebutuhan_guru_fix = round($persentase_kebutuhan_guru);
 
             $outputData[] = [
                 "KODE_PROV"   => $KODE_PROV,
@@ -83,7 +90,8 @@
                 "ABK"         => $jumlah_abk,
                 "jumlah_guru" => $jumlah_guru,
                 "kurang_guru" => $kurang_guru,
-                "kurang_asn"  => $kurang_asn
+                "kurang_asn"  => $kurang_asn,
+                "persentase_kebutuhan_guru"  => $persentase_kebutuhan_guru_fix,
             ];
         }
     }

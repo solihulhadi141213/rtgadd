@@ -3,19 +3,28 @@
         if(!empty($access_client)){
             //Jika province_code kosong cari berdasarkan access_client
             $id_region_client   = GetDetailData($Conn, 'access_client', 'id_access', $SessionIdAccess, 'id_region');
+            $level_client       = GetDetailData($Conn, 'access_client', 'id_access', $SessionIdAccess, 'level');
             $district_code      = GetDetailData($Conn, 'region', 'id_region', $id_region_client, 'district_code');
-            if(!empty($district_code)){
-                $district_code       = GetDetailData($Conn, 'region', 'id_region', $id_region_client, 'district_code');
-                $district_name       = GetDetailData($Conn, 'region', 'id_region', $id_region_client, 'district_name');
-                $province_code       = GetDetailData($Conn, 'region', 'id_region', $id_region_client, 'province_code');
-                $province_name       = GetDetailData($Conn, 'region', 'id_region', $id_region_client, 'province_name');
-                $id_region           = $id_region_client;
-            }else{
+            if($level_client=="National"){
                 $district_code       = "";
                 $district_name       = "";
                 $province_code       = "";
                 $province_name       = "";
                 $id_region           = "";
+            }else{
+                if(!empty($district_code)){
+                    $district_code       = GetDetailData($Conn, 'region', 'id_region', $id_region_client, 'district_code');
+                    $district_name       = GetDetailData($Conn, 'region', 'id_region', $id_region_client, 'district_name');
+                    $province_code       = GetDetailData($Conn, 'region', 'id_region', $id_region_client, 'province_code');
+                    $province_name       = GetDetailData($Conn, 'region', 'id_region', $id_region_client, 'province_name');
+                    $id_region           = $id_region_client;
+                }else{
+                    $district_code       = "";
+                    $district_name       = "";
+                    $province_code       = "";
+                    $province_name       = "";
+                    $id_region           = "";
+                }
             }
         }else{
             $district_code       = "";

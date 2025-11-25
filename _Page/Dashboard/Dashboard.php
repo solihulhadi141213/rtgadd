@@ -21,7 +21,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header text-center">
-                    <h1 class="card-title">SEBARAN KEBUTUHAN GURU</h1>
+                    <h1 class="card-title">PERSENTASE KEBUTUHAN GURU</h1>
                 </div>
                 <div class="card-body">
                     <div id="indonesia-map">
@@ -29,9 +29,9 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <small class="text text-grayis">
+                    <!-- <small class="text text-grayis">
                         Garis merah pada peta menunjukan provinsi yang menjadii <i>Pilot</i>
-                    </small>
+                    </small> -->
                 </div>
             </div>
         </div>
