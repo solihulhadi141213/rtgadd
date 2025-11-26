@@ -113,12 +113,14 @@
                                                         <th><b>No</b></th>
                                                         <th><b>Provinsi</b></th>
                                                         <th><b>Kab/Kota</b></th>
+                                                        <th><b>Jumlah Sekolah</b></th>
+                                                        <th><b>Kebutuhan Guru</b></th>
                                                         <th><b>Opt</b></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="TabelKabKota">
                                                     <tr>
-                                                        <td colspan="4" class="text-center">
+                                                        <td colspan="6" class="text-center">
                                                             <small>Loading...</small>
                                                         </td>
                                                     </tr>

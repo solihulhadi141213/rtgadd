@@ -83,10 +83,10 @@ $(document).ready(function() {
         // Fungsi untuk menentukan warna berdasarkan jumlah guru yang kurang
         function getColor(v) {
             return v == 0 ? '#ffffffff' :
-                v <= interval ? '#aff8b5ff' :
-                v <= interval * 2 ? '#4dff5cff' :
-                v <= interval * 3 ? '#09ce19ff' :
-                                    '#04700dff';
+                v <= interval ? '#d1fdd5ff' :
+                v <= interval * 2 ? '#91f89aff' :
+                v <= interval * 3 ? '#01a10fff' :
+                                    '#05610dff';
         }
 
         // Fungsi untuk menentukan style border berdasarkan sample_code
@@ -236,14 +236,14 @@ $(document).ready(function() {
             // 👉 GANTI LOOP LAMA DENGAN LOOP BARU DI SINI
             for (var i = 0; i < grades.length - 1; i++) {
                 var from = grades[i];
-                var to = grades[i + 1];
+                var to   = grades[i + 1];
 
                 html += `
                     <div class="d-flex align-items-center mb-1">
                         <div style="
                             width: 20px;
                             height: 15px;
-                            background-color: ${getColor(from === 0 ? 0 : from)};
+                            background-color: ${getColor(to)};
                             border: 1px solid #ccc;
                             margin-right: 6px;
                         "></div>

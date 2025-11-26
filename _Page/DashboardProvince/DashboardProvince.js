@@ -293,10 +293,10 @@ function TampilkanPetaInteraktif(kode_provinsi) {
     // ===================== FUNGSI WARNA =====================
     function getColor(v) {
         return v == 0 ? '#ffffffff' :
-               v <= 25 ? '#bffad3ff' :
-               v <= 50 ? '#82e2a2ff' :
-               v <= 75 ? '#22c056ff' :
-                         '#05531fff';
+               v <= 25 ? '#b0f0c4ff' :
+               v <= 50 ? '#04fd57ff' :
+               v <= 75 ? '#099b39ff' :
+                         '#04471aff';
     }
 
 
@@ -332,7 +332,7 @@ function TampilkanPetaInteraktif(kode_provinsi) {
         ];
 
 
-        // ===================== TAMBAHKAN LEGEND DINAMIS =====================
+        // ===================== TAMBAHKAN LEGEND SESUAI getColor =====================
         var legend = L.control({ position: 'bottomright' });
 
         legend.onAdd = function (map) {
@@ -342,21 +342,30 @@ function TampilkanPetaInteraktif(kode_provinsi) {
                 <div class="legend-card">
                     <div class="legend-header"><strong>Keterangan</strong></div>
                     <div class="legend-body">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color:${getColor(0)}"></div>
+                            <span>0%</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color:${getColor(1)}"></div>
+                            <span>1% – 25%</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color:${getColor(26)}"></div>
+                            <span>26% – 50%</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color:${getColor(51)}"></div>
+                            <span>51% – 75%</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color:${getColor(76)}"></div>
+                            <span>76% – 100%</span>
+                        </div>
+                    </div>
+                </div>
             `;
 
-            for (var i = 0; i < grades.length - 1; i++) {
-                var from = Math.round(grades[i]);
-                var to = Math.round(grades[i + 1]);
-
-                html += `
-                    <div class="legend-item">
-                        <div class="legend-color" style="background-color: ${getColor(from)}"></div>
-                        <span>${from}% – ${to}%</span>
-                    </div>
-                `;
-            }
-
-            html += `</div></div>`;
             div.innerHTML = html;
             return div;
         };
