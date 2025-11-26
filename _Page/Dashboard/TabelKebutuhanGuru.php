@@ -80,9 +80,21 @@
         $badgeClass = $kurangGuru > 0 ? 'badge-danger' : 'badge-secondary';
         
         // Format angka dengan pemisah ribuan
-        $abkFormatted = number_format($abk, 0, ',', '.');
-        $jumlahGuruFormatted = number_format($jumlahGuru, 0, ',', '.');
-        $kurangGuruFormatted = number_format($kurangGuru, 0, ',', '.');
+        if(empty($abk)){
+            $abkFormatted = "n/A";
+        }else{
+            $abkFormatted = number_format($abk, 0, ',', '.');
+        }
+        if(empty($jumlahGuru)){
+            $jumlahGuruFormatted = "n/A";
+        }else{
+            $jumlahGuruFormatted = number_format($jumlahGuru, 0, ',', '.');
+        }
+        if(empty($kurangGuru)){
+            $kurangGuruFormatted = "n/A";
+        }else{
+            $kurangGuruFormatted = number_format($kurangGuru, 0, ',', '.');
+        }
         
         echo '
             <tr>

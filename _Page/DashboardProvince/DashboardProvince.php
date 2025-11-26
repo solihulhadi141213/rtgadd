@@ -79,7 +79,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-6 text-center border-1 border-end">
-                            <b class="card-title">Kebutuhan Guru</b>
+                            <b class="card-title">Jumlah Kebutuhan Guru</b>
                             <h2 id="show_nominal_kebutuhan_guru">Loading..</h2>
                         </div>
                         <div class="col-6 text-center border-1 border-start">
@@ -101,7 +101,7 @@
                     <div class="row mb-3">
                         <div class="col-12 text-center">
                             <b class="card-title">
-                                Kebutuhan Guru menurut Jenjang
+                                Persentase Kebutuhan Guru menurut Jenjang
                             </b>
                         </div>
                     </div>
@@ -185,6 +185,9 @@
                                             <th><b>No</b></th>
                                             <th><b>Kabupaten/Kota</b></th>
                                             <th><b>Jumlah <br>Sekolah</b></th>
+                                            <th><b>ABK</b></th>
+                                            <th><b>ASN</b></th>
+                                            <th><b>PPPK 2024</b></th>
                                             <th><b>Kebutuhan <br> Guru</b></th>
                                             <th><b>%</b></th>
                                         </tr>

@@ -26,11 +26,40 @@
     </div>
 </div>
 
+<!-- Menampilkan 'ModalDetailKabKotByJenjang' -->
+<div class="modal fade" id="ModalDetailKabKotByJenjang" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <form action="index.php" method="GET">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark">Rincian Kebutuhan Guru Menurut Kab/Kota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12" id="FormDetailKabKotByJenjang">
+                            <!-- Menampilkan Detail Kabupaten/Kota -->
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" disabled class="btn btn-primary btn-rounded" id="ButtonSelengkapnyaJenjang">
+                        Selengkapnya <i class="bi bi-arrow-right-circle"></i>
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-rounded" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle"></i> Tutup
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="ModalDetailByJenjang" tabindex="-1">
-    <div class="modal-dialog modal-md">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-dark"><i class="bi bi-funnel"></i> Kebutuhan Guru Berdasarkan Jenjang</h5>
+                <h5 class="modal-title text-dark">Persentase Kebutuhan Guru Berdasarkan Jenjang</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

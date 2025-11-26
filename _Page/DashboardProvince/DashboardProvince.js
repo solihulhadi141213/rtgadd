@@ -1,4 +1,13 @@
-
+//Fungsi Tabel Pilih Provinsi
+function PilihProvinsi() {
+    $.ajax({
+        type    : 'POST',
+        url     : '_Page/DashboardProvince/TabelPilihProvinsi.php',
+        success : function(data) {
+            $('#TabelPilihProvinsi').html(data);
+        }
+    });
+}
 //Fungsi Menampilkan Nominal Kebutuhan Guru
 function ShowNominalKebutuhanGuruProvinsi(kode_provinsi) {
     $.ajax({
@@ -267,227 +276,178 @@ function loadPieChartKebutuhanGuru(province_code) {
 }
 
 function TampilkanPetaInteraktif(kode_provinsi) {
-    // ===================== LEAFLET MAP =====================
-    // Inisialisasi peta dengan view default Indonesia
+
+    // ===================== INISIASI MAP =====================
     var map = L.map('ShowMapProvinsiAndAkbupaten', {
         zoomControl: false,
         scrollWheelZoom: false
     }).setView([-2, 118], 5);
 
-    // Tambahkan zoom control di pojok kiri atas
-    L.control.zoom({
-        position: 'topleft'
-    }).addTo(map);
+    L.control.zoom({ position: 'topleft' }).addTo(map);
 
-    // Basemap
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap'
     }).addTo(map);
 
-    // Fungsi untuk memberi warna berdasarkan kurang_guru
-    function getColor(value) {
-        return value == 0 ? '#ffffffff' :          
-            value <= 10 ? '#bffad3ff' :        
-            value <= 20 ? '#91f5b3ff' :        
-            value <= 30 ? '#82e2a2ff' :        
-            value <= 40 ? '#53e784ff' :       
-            value <= 50 ? '#31e46cff' :       
-            value <= 60 ? '#22c056ff' :       
-            value <= 70 ? '#058f33ff' :        
-            value <= 80 ? '#045720ff' :        
-            value <= 90 ? '#05531fff' :       
-                            '#023312ff';        
+
+    // ===================== FUNGSI WARNA =====================
+    function getColor(v) {
+        return v == 0 ? '#ffffffff' :
+               v <= 25 ? '#bffad3ff' :
+               v <= 50 ? '#82e2a2ff' :
+               v <= 75 ? '#22c056ff' :
+                         '#05531fff';
     }
 
-    // Tambahkan legenda
-    var legend = L.control({position: 'bottomright'});
 
-    legend.onAdd = function (map) {
-        var div = L.DomUtil.create('div', 'legend');
-        div.innerHTML = `
-            <div class="card shadow-sm">
-                <div class="card-header py-2">
-                    <strong class="card-title mb-0" style="font-size: 12px;">Keterangan</strong>
-                </div>
-                <div class="card-body py-2">
-
-                    <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #ffffffff; border: 1px solid #ccc; margin-right: 5px;"></div>
-                        <small>0 %</small>
-                    </div>
-
-                    <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #bffad3ff; border: 1px solid #ccc; margin-right: 5px;"></div>
-                        <small>1 % – 10 %</small>
-                    </div>
-
-                    <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #91f5b3ff; border: 1px solid #ccc; margin-right: 5px;"></div>
-                        <small>11 % – 20 %</small>
-                    </div>
-
-                    <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #82e2a2ff; border: 1px solid #ccc; margin-right: 5px;"></div>
-                        <small>21 % – 30 %</small>
-                    </div>
-
-                    <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #53e784ff; border: 1px solid #ccc; margin-right: 5px;"></div>
-                        <small>31 % – 40 %</small>
-                    </div>
-
-                    <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #31e46cff; border: 1px solid #ccc; margin-right: 5px;"></div>
-                        <small>41 % – 50 %</small>
-                    </div>
-
-                    <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #22c056ff; border: 1px solid #ccc; margin-right: 5px;"></div>
-                        <small>51 % – 60 %</small>
-                    </div>
-
-                    <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #058f33ff; border: 1px solid #ccc; margin-right: 5px;"></div>
-                        <small>61 % – 70 %</small>
-                    </div>
-
-                    <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #045720ff; border: 1px solid #ccc; margin-right: 5px;"></div>
-                        <small>71 % – 80 %</small>
-                    </div>
-
-                    <div class="d-flex align-items-center mb-1">
-                        <div style="width: 20px; height: 15px; background-color: #05531fff; border: 1px solid #ccc; margin-right: 5px;"></div>
-                        <small>81 % – 90 %</small>
-                    </div>
-
-                    <div class="d-flex align-items-center">
-                        <div style="width: 20px; height: 15px; background-color: #023312ff; border: 1px solid #ccc; margin-right: 5px;"></div>
-                        <small>91 % – 100 %</small>
-                    </div>
-
-                </div>
-            </div>
-        `;
-        return div;
-    };
-
-
-    legend.addTo(map);
-
-    // Fungsi untuk mendapatkan bounds dari GeoJSON
-    function getGeoJSONBounds(geoJSON) {
-        var bounds = new L.LatLngBounds();
-        
-        geoJSON.eachLayer(function(layer) {
-            if (layer.getBounds) {
-                bounds.extend(layer.getBounds());
-            }
-        });
-        
-        return bounds.isValid() ? bounds : null;
-    }
-
-    // Ambil data GeoJSON dari API
+    // ===================== LOAD GEOJSON =====================
     $.getJSON("_Page/DashboardProvince/GetGeoProvince.php?province_code=" + kode_provinsi)
-    .done(function(data){
-        debugGeoJSON(data);
-        console.log("Data GeoJSON diterima:", data);
-        
-        if (data.features && data.features.length > 0) {
-            var geoLayer = L.geoJSON(data, {
-                style: function(feature){
-                    let kurangGuru = feature.properties.kurang_guru || 0;
-                    let isSample = feature.properties.is_sample || false;
-                    
-                    return {
-                        color: isSample ? "red" : "black", // Garis merah untuk sample district
-                        weight: isSample ? 3 : 1, // Garis lebih tebal untuk sample
-                        fillColor: getColor(kurangGuru),
-                        fillOpacity: 0.7
-                    };
-                },
-                onEachFeature: function(feature, layer){
-                    let id_region = feature.properties.id_region || "-";
-                    let prov = feature.properties.province_name || "-";
-                    let kabkota_code = feature.properties.district_code || "-";
-                    let kabkota = feature.properties.district_name || "-";
-                    let kurangGuru = feature.properties.kurang_guru || 0;
-                    let isSample = feature.properties.is_sample || false;
-                    
-                    // Tampilan popup yang lebih menarik dengan Bootstrap
-                    let popupContent = `
-                        <div class="popup-content" style="min-width: 200px;">
-                            <div class="border-bottom pb-2 mb-2">
-                                <h6 class="mb-1 fw-bold">${kabkota}</h6>
-                                <small class="text-muted">${prov}</small><br>
-                                <small class="text-muted">Persentase Kebutuhan Guru : ${kurangGuru} %</small>
-                            </div>
-                            <div class="text-end">
-                                <button type="button" class="btn btn-sm btn-secondary btn-block" data-bs-toggle="modal" data-bs-target="#ModalDetailKabKot" data-id="${kabkota_code}">
-                                    Lihat Detail
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                    layer.bindPopup(popupContent);
-                }
-            }).addTo(map);
+    .done(function (data) {
 
-            // Coba dapatkan bounds dan zoom ke peta
-            try {
-                var bounds = geoLayer.getBounds();
-                if (bounds.isValid()) {
-                    map.fitBounds(bounds, { padding: [20, 20] });
-                    console.log("Zoom ke bounds berhasil");
-                } else {
-                    console.warn("Bounds tidak valid, menggunakan view default");
-                    // Tetap di view default Indonesia
-                    map.setView([-2, 118], 5);
-                }
-            } catch (error) {
-                console.error("Error saat zoom ke bounds:", error);
-                map.setView([-2, 118], 5);
-            }
-            
-        } else {
-            $('#ShowMapProvinsiAndAkbupaten').html('<small class="text-danger">Tidak ada data geografis untuk provinsi ini.</small>');
+        if (!(data.features && data.features.length > 0)) {
+            $('#ShowMapProvinsiAndAkbupaten').html(
+                '<small class="text-danger">Tidak ada data geografis.</small>'
+            );
+            return;
         }
+
+        // ===================== CARI NILAI TERBESAR v =====================
+        var maxValue = 0;
+
+        data.features.forEach(function (f) {
+            var v = f.properties.kurang_guru || 0;
+            if (v > maxValue) maxValue = v;
+        });
+
+        // fallback jika maxValue = 0
+        if (maxValue === 0) maxValue = 1;
+
+        var interval = maxValue / 4;
+        var grades = [
+            0,
+            interval,
+            interval * 2,
+            interval * 3,
+            maxValue
+        ];
+
+
+        // ===================== TAMBAHKAN LEGEND DINAMIS =====================
+        var legend = L.control({ position: 'bottomright' });
+
+        legend.onAdd = function (map) {
+            var div = L.DomUtil.create('div', 'legend-box shadow-sm');
+
+            var html = `
+                <div class="legend-card">
+                    <div class="legend-header"><strong>Keterangan</strong></div>
+                    <div class="legend-body">
+            `;
+
+            for (var i = 0; i < grades.length - 1; i++) {
+                var from = Math.round(grades[i]);
+                var to = Math.round(grades[i + 1]);
+
+                html += `
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: ${getColor(from)}"></div>
+                        <span>${from}% – ${to}%</span>
+                    </div>
+                `;
+            }
+
+            html += `</div></div>`;
+            div.innerHTML = html;
+            return div;
+        };
+
+        legend.addTo(map);
+
+
+        // ===================== TAMPILKAN GEOJSON =====================
+        var geoLayer = L.geoJSON(data, {
+            style: function (feature) {
+                let v = feature.properties.kurang_guru || 0;
+                let isSample = feature.properties.is_sample || false;
+
+                return {
+                    color: isSample ? "red" : "black",
+                    weight: isSample ? 3 : 1,
+                    fillColor: getColor(v),
+                    fillOpacity: 0.7
+                };
+            },
+            onEachFeature: function (feature, layer) {
+                let prov = feature.properties.province_name || "-";
+                let kab = feature.properties.district_name || "-";
+                let code = feature.properties.district_code || "-";
+                let v = feature.properties.kurang_guru || 0;
+
+                let popupContent = `
+                    <div style="min-width: 200px;">
+                        <div class="border-bottom pb-2 mb-2">
+                            <h6 class="mb-1 fw-bold">${kab}</h6>
+                            <small class="text-muted">${prov}</small><br>
+                            <small class="text-muted">Persentase Kebutuhan Guru : ${v} %</small>
+                        </div>
+                        <div class="text-end">
+                            <button type="button" class="btn btn-sm btn-secondary"
+                                data-bs-toggle="modal" data-bs-target="#ModalDetailKabKot"
+                                data-id="${code}">
+                                Lihat Detail
+                            </button>
+                        </div>
+                    </div>
+                `;
+                layer.bindPopup(popupContent);
+            }
+        }).addTo(map);
+
+        // FIT BOUNDS
+        map.fitBounds(geoLayer.getBounds(), { padding: [20, 20] });
+
     })
-    .fail(function(jqXHR, textStatus, errorThrown){
-        console.error("Error loading GeoJSON:", textStatus, errorThrown);
-        $('#ShowMapProvinsiAndAkbupaten').html('<small class="text-danger">Gagal memuat peta. Silakan refresh halaman.</small>');
+    .fail(function () {
+        $('#ShowMapProvinsiAndAkbupaten').html(
+            '<small class="text-danger">Gagal memuat peta. Silakan refresh halaman.</small>'
+        );
     });
 
-    // Fungsi untuk menampilkan modal detail
-    function showDetailModal(kabkota_code) {
-        // Trigger modal dan set data
-        $('#ModalDetailKabKot').modal('show');
-        // Tambahkan logika untuk load data detail berdasarkan kabkota_code
-        console.log('Loading detail untuk:', kabkota_code);
-    }
 
-    // CSS untuk legenda
+    // ===================== CSS LEGEND =====================
     var style = document.createElement('style');
     style.innerHTML = `
-        .legend {
-            background: transparent !important;
-            border: none !important;
+        .legend-box {
+            background:white;
+            padding:0;
+            border-radius:8px;
         }
-        .legend .card {
-            background: white;
-            border-radius: 8px;
+        .legend-header {
+            padding:6px 10px;
+            background:#f8f9fa;
+            border-bottom:1px solid #ccc;
+            font-size:12px;
         }
-        .legend .card-header {
-            background: #f8f9fa;
-            border-bottom: 1px solid #dee2e6;
+        .legend-body {
+            padding:8px 10px;
         }
-        .legend .card-body {
-            padding: 8px 12px;
+        .legend-item {
+            display:flex;
+            align-items:center;
+            margin-bottom:4px;
+        }
+        .legend-color {
+            width:20px;
+            height:15px;
+            border:1px solid #ccc;
+            margin-right:6px;
         }
     `;
     document.head.appendChild(style);
 }
+
+
+
 
 // Fungsi untuk menghapus peta yang sudah ada sebelum membuat yang baru
 function HapusPeta() {
@@ -544,7 +504,15 @@ $(document).ready(function () {
     // Menjalankan semua fungsi secara berurutan
     jalankanFungsiBerurutan(kode_provinsi, province_code);
 
-    
+    // Jika Pertama Kali Di perintahkan Memilih Provinsi
+    if ($("#TabelPilihProvinsi").length > 0) {
+        
+        //Loading Table
+        $('#TabelPilihProvinsi').html('<tr><td colspan="6" class="text-center"><small>Loading...</small></td></tr>');
+
+        //Panggil Fungsi
+        PilihProvinsi();
+    }
 
     //Event Ketika 'school_level_by_kab_kot' diubah
     $('#school_level_by_kab_kot').change(function(){
@@ -602,6 +570,27 @@ $(document).ready(function () {
             data        : {district_code: district_code},
             success     : function(data){
                 $('#FormDetailKabKot').html(data);
+            }
+        });
+    });
+
+    //Modal 'ModalDetailKabKotByJenjang'
+    $('#ModalDetailKabKotByJenjang').on('show.bs.modal', function (e) {
+
+        //Tangkap Data Dari Tautan
+        var district_code = $(e.relatedTarget).data('district_code');
+        var school_level = $(e.relatedTarget).data('school_level');
+
+        //Loading Form
+        $('#FormDetailKabKotByJenjang').html("Loading...");
+
+        //Menampilkan data dengan AJAX
+        $.ajax({
+            type 	    : 'POST',
+            url 	    : '_Page/DashboardProvince/FormDetailKabKotByJenjang.php',
+            data        : {district_code: district_code, school_level: school_level},
+            success     : function(data){
+                $('#FormDetailKabKotByJenjang').html(data);
             }
         });
     });

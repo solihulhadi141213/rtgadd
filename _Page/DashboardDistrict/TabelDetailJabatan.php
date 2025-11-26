@@ -150,16 +150,18 @@
     $province_name = ucfirst(strtolower($province_name));
     $district_name = ucfirst(strtolower($district_name));
     $position_name = ucfirst(strtolower($position_name));
+    $school_level_label = ucfirst(strtolower($school_level_label));
 ?>
 <script>
     var province_name = "<?php echo $province_name; ?>";
     var district_name = "<?php echo $district_name; ?>";
     var position_name = "<?php echo $position_name; ?>";
+    var school_level_label = "<?php echo $school_level_label; ?>";
     var data_count    = <?php echo $jml_data; ?>; 
     var page_count    = <?php echo $JmlHalaman; ?>;
     var curent_page   = <?php echo $page; ?>;
 
-    $('#title_position_province_name').html('<b>Untuk Jabatan : </b> '+position_name+' | '+district_name+' - '+province_name+'<br><b>Jenjang Pendidikan :</b> '+school_level_label+'');
+    $('#title_position_province_name').html('<b>Untuk Jabatan : </b> '+position_name+' | '+district_name+' - '+province_name+'<br><b>Jenjang :</b> '+school_level_label+'');
     
     $('#data_count_school').html('Data : ' + data_count + ' Record');
     $('#page_info_school').html('Page ' + curent_page + ' / ' + page_count);

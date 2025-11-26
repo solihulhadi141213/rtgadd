@@ -99,14 +99,9 @@
             <div class="col-6"><small class="text text-grayish" id="get_school_level_from_detail">'.$school_level.'</small></div>
         </div>
         <div class="row mb-2">
-            <div class="col-5"><small>Kebutuhan Guru<br>(Jenjang '.$school_level.')</small></div>
+            <div class="col-5"><small>Kebutuhan Guru</small></div>
             <div class="col-1"><small>:</small></div>
             <div class="col-6"><small class="text text-grayish">'.$kurang_guru_jenjang_format.'</small></div>
-        </div>
-        <div class="row mb-2">
-            <div class="col-5"><small>Kebutuhan Guru<br>(Semua Jenjan)</small></div>
-            <div class="col-1"><small>:</small></div>
-            <div class="col-6"><small class="text text-grayish">'.$kurang_guru_total_format.'</small></div>
         </div>
         <div class="row mb-2">
             <div class="col-5"><small>Persentase</small></div>
@@ -115,3 +110,10 @@
         </div>
     ';
 ?>
+
+<!-- buangan
+<div class="row mb-2">
+    <div class="col-5"><small>Kebutuhan Guru<br>(Semua Jenjan)</small></div>
+    <div class="col-1"><small>:</small></div>
+    <div class="col-6"><small class="text text-grayish">'.$kurang_guru_total_format.'</small></div>
+</div> -->

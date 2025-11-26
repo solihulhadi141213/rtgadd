@@ -72,19 +72,21 @@ $(document).ready(function() {
     });
 
     function renderMap(geoJsonData) {
+
+        // Cari nilai maksimal persentase_kebutuhan_guru
+        var values = Object.values(provinceData).map(d => d.persentase_kebutuhan_guru);
+        var maxValue = Math.max(...values);
+
+        // Hitung interval per kelas
+        var interval = Math.ceil(maxValue / 4);
+
         // Fungsi untuk menentukan warna berdasarkan jumlah guru yang kurang
-        function getColor(persentase_kebutuhan_guru) {
-             return persentase_kebutuhan_guru == 0 ? '#ffffffff' :          
-                persentase_kebutuhan_guru <= 10 ? '#aff8b5ff' :        
-                persentase_kebutuhan_guru <= 20 ? '#77ff82ff' :        
-                persentase_kebutuhan_guru <= 30 ? '#4dff5cff' :        
-                persentase_kebutuhan_guru <= 40 ? '#08e61aff' :  
-                persentase_kebutuhan_guru <= 50 ? '#18fd2bff' :        
-                persentase_kebutuhan_guru <= 60 ? '#07ff1bff' :        
-                persentase_kebutuhan_guru <= 70 ? '#09ce19ff' :        
-                persentase_kebutuhan_guru <= 80 ? '#1cb629ff' :        
-                persentase_kebutuhan_guru <= 90 ? '#069112ff' :        
-                                '#04700dff';       
+        function getColor(v) {
+            return v == 0 ? '#ffffffff' :
+                v <= interval ? '#aff8b5ff' :
+                v <= interval * 2 ? '#4dff5cff' :
+                v <= interval * 3 ? '#09ce19ff' :
+                                    '#04700dff';
         }
 
         // Fungsi untuk menentukan style border berdasarkan sample_code
@@ -221,10 +223,9 @@ $(document).ready(function() {
         legend.onAdd = function (map) {
             var div = L.DomUtil.create('div', 'legend card shadow-sm');
 
-            var grades = [0, 1, 11, 21, 31, 41, 51, 61, 71, 81, 91];
-            var labels = [];
+            // gunakan grades baru 4 kelas
+            var grades = [0, interval, interval * 2, interval * 3, maxValue];
 
-            // Header card
             var html = `
                 <div class="card-header py-2">
                     <strong class="card-title mb-0" style="font-size: 12px;">Keterangan</strong>
@@ -232,27 +233,26 @@ $(document).ready(function() {
                 <div class="card-body py-2">
             `;
 
-            for (var i = 0; i < grades.length; i++) {
+            // 👉 GANTI LOOP LAMA DENGAN LOOP BARU DI SINI
+            for (var i = 0; i < grades.length - 1; i++) {
                 var from = grades[i];
-                var to = grades[i + 1] ? grades[i + 1] - 1 : 100;
-
-                var color = getColor(from === 0 ? 0 : from); // 0% tetap putih
+                var to = grades[i + 1];
 
                 html += `
                     <div class="d-flex align-items-center mb-1">
                         <div style="
-                            width: 20px; 
-                            height: 15px; 
-                            background-color: ${color};
-                            border: 1px solid #ccc; 
+                            width: 20px;
+                            height: 15px;
+                            background-color: ${getColor(from === 0 ? 0 : from)};
+                            border: 1px solid #ccc;
                             margin-right: 6px;
                         "></div>
-                        <small>${from === 0 ? '0 %' : from + ' % – ' + to + ' %'}</small>
+                        <small>${from} % – ${to} %</small>
                     </div>
                 `;
             }
 
-            html += `</div>`; // close card-body
+            html += `</div>`; // menutup card-body
 
             div.innerHTML = html;
             return div;

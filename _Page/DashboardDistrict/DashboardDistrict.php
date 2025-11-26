@@ -211,7 +211,7 @@
                             <div class="card-body text-center">
                                 <div class="row mb-3">
                                     <div class="col-12">
-                                        <h4 class="card-title">Kebutuhan Guru menurut Jenjang Sekolah</h4>
+                                        <h4 class="card-title">Persentase Kebutuhan Guru menurut Jenjang Sekolah</h4>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
