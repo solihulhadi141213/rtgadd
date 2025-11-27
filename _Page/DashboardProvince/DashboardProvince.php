@@ -185,6 +185,7 @@
                                             <th><b>No</b></th>
                                             <th><b>Kabupaten/Kota</b></th>
                                             <th><b>Jumlah <br>Sekolah</b></th>
+                                            <th><b>Jumlah <br>Guru</b></th>
                                             <th><b>ABK</b></th>
                                             <th><b>ASN</b></th>
                                             <th><b>PPPK 2024</b></th>
@@ -194,7 +195,7 @@
                                     </thead>
                                     <tbody id="TabelKebutuhanGuruByKabKot">
                                         <tr>
-                                            <td colspan="5" class="text-center">
+                                            <td colspan="9" class="text-center">
                                                 <small>Loading...</small>
                                             </td>
                                         </tr>
@@ -266,7 +267,7 @@
                                 <tr>
                                     <th><b>No</b></th>
                                     <th><b>Jabatan</b></th>
-                                    <th><b>Analisis Beban Kerja (ABK)</b></th>
+                                    <th><b>ABK</b></th>
                                     <th><b>ASN</b></th>
                                     <th><b>PPPK 2024</b></th>
                                     <th><b>Kebutuhan Guru</b></th>

@@ -290,13 +290,23 @@ function TampilkanPetaInteraktif(kode_provinsi) {
     }).addTo(map);
 
 
-    // ===================== FUNGSI WARNA =====================
-    function getColor(v) {
-        return v == 0 ? '#ffffffff' :
-               v <= 25 ? '#b0f0c4ff' :
-               v <= 50 ? '#04fd57ff' :
-               v <= 75 ? '#099b39ff' :
-                         '#04471aff';
+    // ===================== FUNGSI WARNA YANG LEBIH KONTRAST =====================
+    function getColor(v, ranges) {
+        if (v === 0) return '#ffffff'; // putih untuk nilai 0
+        
+        // Cari range yang sesuai dengan nilai v
+        for (let i = 0; i < ranges.length; i++) {
+            if (v > ranges[i].min && v <= ranges[i].max) {
+                // Warna hijau yang lebih kontras dengan perbedaan jelas
+                switch(i) {
+                    case 0: return '#a8e6a3'; // hijau pastel sangat terang
+                    case 1: return '#4caf50'; // hijau medium-terang
+                    case 2: return '#2e7d32'; // hijau medium-gelap
+                    case 3: return '#1b5e20'; // hijau gelap tegas
+                }
+            }
+        }
+        return '#1b5e20'; // default untuk nilai di atas range tertinggi
     }
 
 
@@ -319,20 +329,23 @@ function TampilkanPetaInteraktif(kode_provinsi) {
             if (v > maxValue) maxValue = v;
         });
 
-        // fallback jika maxValue = 0
         if (maxValue === 0) maxValue = 1;
 
+        // Hitung interval dinamis - pastikan ada 4 kelas
         var interval = maxValue / 4;
-        var grades = [
-            0,
-            interval,
-            interval * 2,
-            interval * 3,
-            maxValue
+
+        // Buat rentang kelas yang jelas dengan 4 interval
+        var ranges = [
+            { min: 0, max: interval },
+            { min: interval, max: interval * 2 },
+            { min: interval * 2, max: interval * 3 },
+            { min: interval * 3, max: maxValue + 1 } // +1 untuk memastikan nilai maksimal termasuk
         ];
 
+        console.log('Klasifikasi Interval:', ranges); // Untuk debugging
 
-        // ===================== TAMBAHKAN LEGEND SESUAI getColor =====================
+
+        // ===================== LEGEND DINAMIS =====================
         var legend = L.control({ position: 'bottomright' });
 
         legend.onAdd = function (map) {
@@ -342,26 +355,40 @@ function TampilkanPetaInteraktif(kode_provinsi) {
                 <div class="legend-card">
                     <div class="legend-header"><strong>Keterangan</strong></div>
                     <div class="legend-body">
+            `;
+
+            // Hanya tampilkan 4 interval tanpa 0% terpisah
+            var classRanges = [
+                { min: 0, max: interval, color: '#a8e6a3' },
+                { min: interval, max: interval * 2, color: '#4caf50' },
+                { min: interval * 2, max: interval * 3, color: '#2e7d32' },
+                { min: interval * 3, max: maxValue, color: '#1b5e20' }
+            ];
+
+            classRanges.forEach(function (range, index) {
+                var minDisplay = Math.ceil(range.min);
+                var maxDisplay = Math.ceil(range.max);
+                
+                // Untuk kelas pertama, tampilkan 0% - X%
+                if (index === 0) {
+                    html += `
                         <div class="legend-item">
-                            <div class="legend-color" style="background-color:${getColor(0)}"></div>
-                            <span>0%</span>
+                            <div class="legend-color" style="background-color:${range.color}"></div>
+                            <span>0% – ${maxDisplay}%</span>
                         </div>
+                    `;
+                } else {
+                    // Untuk kelas lainnya, tampilkan batas min - max
+                    html += `
                         <div class="legend-item">
-                            <div class="legend-color" style="background-color:${getColor(1)}"></div>
-                            <span>1% – 25%</span>
+                            <div class="legend-color" style="background-color:${range.color}"></div>
+                            <span>${minDisplay}% – ${maxDisplay}%</span>
                         </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background-color:${getColor(26)}"></div>
-                            <span>26% – 50%</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background-color:${getColor(51)}"></div>
-                            <span>51% – 75%</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background-color:${getColor(76)}"></div>
-                            <span>76% – 100%</span>
-                        </div>
+                    `;
+                }
+            });
+
+            html += `
                     </div>
                 </div>
             `;
@@ -382,8 +409,8 @@ function TampilkanPetaInteraktif(kode_provinsi) {
                 return {
                     color: isSample ? "red" : "black",
                     weight: isSample ? 3 : 1,
-                    fillColor: getColor(v),
-                    fillOpacity: 0.7
+                    fillColor: getColor(v, ranges),
+                    fillOpacity: 0.8 // Sedikit lebih opaque untuk kontras yang lebih baik
                 };
             },
             onEachFeature: function (feature, layer) {

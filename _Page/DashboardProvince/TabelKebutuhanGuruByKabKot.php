@@ -7,7 +7,7 @@
     if(empty($_POST['province_code'])){
         echo '
         <tr>
-            <td colspan="8" class="text-center">
+            <td colspan="9" class="text-center">
                 <small class="text-danger">Kode Provinsi Tidak Boleh Kosong</small>
             </td>
         </tr>
@@ -61,6 +61,7 @@
         'district_code', 
         'district_name', 
         'jumlah_sekolah',
+        'total_guru',
         'total_abk',
         'total_asn', 
         'total_pppk2024',
@@ -85,6 +86,7 @@
             r.id_region,
             COUNT(DISTINCT s.id_school) as jumlah_sekolah,
             COALESCE(SUM(ps.abk), 0) as total_abk,
+            COALESCE(SUM(ps.JmlGuru), 0) as total_guru,
             COALESCE(SUM(ps.asn), 0) as total_asn,
             COALESCE(SUM(ps.PPPK2024), 0) as total_pppk2024,
             COALESCE(SUM(ps.KurangGuru), 0) as total_kurang_guru
@@ -116,7 +118,7 @@
     if(empty($jml_data)){
         echo '
         <tr>
-            <td colspan="8" class="text-center">
+            <td colspan="9" class="text-center">
                 <small class="text-danger">Tidak Ada Kab/Kota Yang Terdaftar Untuk Provinsi Ini</small>
             </td>
         </tr>
@@ -156,6 +158,7 @@
         $district_name = $data['district_name'];
         $jumlah_sekolah = $data['jumlah_sekolah'];
         $total_abk = $data['total_abk'];
+        $total_guru = $data['total_guru'];
         $total_asn = $data['total_asn'];
         $total_pppk2024 = $data['total_pppk2024'];
         $kurang_guru = $data['total_kurang_guru'];
@@ -163,6 +166,7 @@
         //Format Angka
         $jumlah_sekolah_format = number_format($jumlah_sekolah, 0, ',', '.');
         $total_abk_format = number_format($total_abk, 0, ',', '.');
+        $total_guru_format = number_format($total_guru, 0, ',', '.');
         $total_asn_format = number_format($total_asn, 0, ',', '.');
         $total_pppk2024_format = number_format($total_pppk2024, 0, ',', '.');
         $kurang_guru_format = number_format($kurang_guru, 0, ',', '.');
@@ -187,6 +191,7 @@
                 </a>
             </td>
             <td><small>'.$jumlah_sekolah_format.'</small></td>
+            <td><small>'.$total_guru_format.'</small></td>
             <td><small>'.$total_abk_format.'</small></td>
             <td><small>'.$total_asn_format.'</small></td>
             <td><small>'.$total_pppk2024_format.'</small></td>
