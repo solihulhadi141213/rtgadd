@@ -74,7 +74,10 @@
                 number_format($jumlah_sekolah, 0, ',', '.') : $jumlah_sekolah;
             $total_kebutuhan_guru_format = $total_kebutuhan_guru > 1000 ? 
                 number_format($total_kebutuhan_guru, 0, ',', '.') : $total_kebutuhan_guru;
-            
+            if(empty($total_kebutuhan_guru)&&empty($jumlah_sekolah)){
+                $total_kebutuhan_guru_format = "Bukan Daerah Sasaran";
+                $jumlah_sekolah_format = "Bukan Daerah Sasaran";
+            }
             $buffer .= '
                 <tr>
                     <td><small>' . $no . '</small></td>

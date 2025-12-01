@@ -36,6 +36,9 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-12 text-end">
+                                <button type="button" class="btn btn-md btn-outline-primary btn-floating" data-bs-toggle="modal" data-bs-target="#ModalImport" title="Import Akses Client">
+                                    <i class="bi bi-upload"></i>
+                                </button>
                                 <button type="button" class="btn btn-md btn-secondary btn-floating" data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter Akses Client">
                                     <i class="bi bi-filter"></i>
                                 </button>

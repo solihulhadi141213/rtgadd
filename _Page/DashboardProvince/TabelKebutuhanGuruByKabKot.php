@@ -170,6 +170,7 @@
         $total_asn_format = number_format($total_asn, 0, ',', '.');
         $total_pppk2024_format = number_format($total_pppk2024, 0, ',', '.');
         $kurang_guru_format = number_format($kurang_guru, 0, ',', '.');
+
         
         // Hitung Persentase Kurang Guru
         $persen_kurang_guru = 0;

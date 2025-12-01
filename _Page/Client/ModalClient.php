@@ -1,3 +1,39 @@
+<div class="modal fade" id="ModalImport" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form action="javascript:void(0);" id="ProsesImport">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dak"><i class="bi bi-upload"></i> Import Akses Client</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="file_client"><small>Import File Excel</small></label>
+                            <input type="file" name="file_client" id="file_client" class="form-control" required>
+                            <small>
+                                <small>Tipe File CSV, tidak lebih dari 2 Mb</small>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12" id="NotifikasiImport">
+                            <!-- Notifikasi Tambah Akses Akan Muncul Disini -->
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success btn-rounded">
+                        <i class="bi bi-save"></i> Simpan
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-rounded" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle"></i> Tutup
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="ModalFilter" tabindex="-1">
     <div class="modal-dialog modal-md">
         <div class="modal-content">

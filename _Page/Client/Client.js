@@ -51,6 +51,39 @@ $(document).ready(function() {
         });
     });
 
+    // Ketika Modal Import Muncul
+    $('#ModalImport').on('show.bs.modal', function (e) {
+
+        //Kosongkan Notifikasi
+        $('#NotifikasiImport').html("");
+
+        // Reset Form
+        $("#ProsesImport")[0].reset();
+    });
+
+    //Ketika Proses Import Di Submit
+    $('#ProsesImport').submit(function(){
+
+        //Loading Notifikasi
+        $('#NotifikasiImport').html('Loading...');
+
+        //Tangkap Data Dari Form
+        var form = $('#ProsesImport')[0];
+        var data = new FormData(form);
+        $.ajax({
+            type 	    : 'POST',
+            url 	    : '_Page/Client/ProsesImport.php',
+            data 	    :  data,
+            cache       : false,
+            processData : false,
+            contentType : false,
+            enctype     : 'multipart/form-data',
+            success     : function(data){
+                $('#NotifikasiImport').html(data);
+            }
+        });
+    });
+
     // Hanya izinkan angka untuk kontak
     $(document).on('input', '#kontak_akses', function() {
         this.value = this.value.replace(/[^0-9]/g, ''); 
