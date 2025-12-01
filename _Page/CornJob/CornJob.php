@@ -73,11 +73,18 @@
                                     <td><small><a href="_Page/CornJob/abk_school_level_province.php" target="_blank">_Page/CornJob/abk_school_level_province.php</a></small></td>
                                     <td><small>1 Jam</small></td>
                                 </tr>
-                                 <tr>
-                                    <td><small>54</small></td>
+                                <tr>
+                                    <td><small>5</small></td>
                                     <td><small>Agregator Kabupaten</small></td>
                                     <td><small>Membuat agregator kabupaten</small></td>
                                     <td><small><a href="_Page/CornJob/refresh_cache.php" target="_blank">_Page/CornJob/refresh_cache.php</a></small></td>
+                                    <td><small>1 Jam</small></td>
+                                </tr>
+                                <tr>
+                                    <td><small>6</small></td>
+                                    <td><small>Agregator Provinsi</small></td>
+                                    <td><small>Membuat agregator provinsi</small></td>
+                                    <td><small><a href="_Page/CornJob/cron_update_summary_province.php" target="_blank">_Page/CornJob/cron_update_summary_province.php</a></small></td>
                                     <td><small>1 Jam</small></td>
                                 </tr>
                             </tbody>
