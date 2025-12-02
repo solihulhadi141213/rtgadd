@@ -86,12 +86,12 @@
             $abkFormatted = number_format($abk, 0, ',', '.');
         }
         if(empty($jumlahGuru)){
-            $jumlahGuruFormatted = "n/A";
+            $jumlahGuruFormatted = "Bukan Daerah Sasaran";
         }else{
             $jumlahGuruFormatted = number_format($jumlahGuru, 0, ',', '.');
         }
         if(empty($kurangGuru)){
-            $kurangGuruFormatted = "n/A";
+            $kurangGuruFormatted = "Bukan Daerah Sasaran";
         }else{
             $kurangGuruFormatted = number_format($kurangGuru, 0, ',', '.');
         }
