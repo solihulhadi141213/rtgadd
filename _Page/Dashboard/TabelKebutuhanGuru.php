@@ -81,7 +81,7 @@
         
         // Format angka dengan pemisah ribuan
         if(empty($abk)){
-            $abkFormatted = "n/A";
+            $abkFormatted = "Bukan Daerah Sasaran";
         }else{
             $abkFormatted = number_format($abk, 0, ',', '.');
         }

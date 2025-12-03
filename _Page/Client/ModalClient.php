@@ -52,6 +52,7 @@
                         </div>
                         <div class="col-8">
                             <select name="batas" id="batas" class="form-control">
+                                <option value="3">3</option>
                                 <option value="5">5</option>
                                 <option selected value="10">10</option>
                                 <option value="25">25</option>

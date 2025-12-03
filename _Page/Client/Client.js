@@ -1,12 +1,26 @@
 //Fungsi Menampilkan Data
 function filterAndLoadTable() {
+    // Tangkap data form filter
     var ProsesFilter = $('#ProsesFilter').serialize();
+
+    // Tampilkan loading fade-out tabel lama
+    $('#TabelClient')
+        .css({ opacity: 0, transition: 'opacity 0.3s ease' });
+
+    // Proses AJAX
     $.ajax({
         type: 'POST',
         url: '_Page/Client/TabelClient.php',
         data: ProsesFilter,
         success: function(data) {
+
+            // Masukkan hasil baru
             $('#TabelClient').html(data);
+
+            // Delay sedikit agar transisi berjalan
+            setTimeout(function() {
+                $('#TabelClient').css({ opacity: 1 });
+            }, 30);
         }
     });
 }
@@ -35,7 +49,21 @@ $(document).ready(function() {
         filterAndLoadTable();
 
         //Tutup Modal
-        $('#ModalFilterAkses').modal('hide');
+        $('#ModalFilter').modal('hide');
+    });
+
+    //Pagging
+    $(document).on('click', '#next_button', function() {
+        var page_now = parseInt($('#page').val(), 10); // Pastikan nilai diambil sebagai angka
+        var next_page = page_now + 1;
+        $('#page').val(next_page);
+        filterAndLoadTable(0);
+    });
+    $(document).on('click', '#prev_button', function() {
+        var page_now = parseInt($('#page').val(), 10); // Pastikan nilai diambil sebagai angka
+        var next_page = page_now - 1;
+        $('#page').val(next_page);
+        filterAndLoadTable(0);
     });
 
     //Ketika keyword_by diubah
